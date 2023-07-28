@@ -10,32 +10,126 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
-  /// Добавить в корзину
-  internal static let addToBasket = L10n.tr("Localizable", "addToBasket", fallback: "Добавить в корзину")
-  /// Корзина
-  internal static let basket = L10n.tr("Localizable", "basket", fallback: "Корзина")
-  /// По названию
-  internal static let byName = L10n.tr("Localizable", "byName", fallback: "По названию")
-  /// По количеству NFT
-  internal static let byNFTCount = L10n.tr("Localizable", "byNFTCount", fallback: "По количеству NFT")
-  /// Отменить
-  internal static let cancel = L10n.tr("Localizable", "cancel", fallback: "Отменить")
-  /// Каталог
-  internal static let catalog = L10n.tr("Localizable", "catalog", fallback: "Каталог")
-  /// Удалить
-  internal static let delete = L10n.tr("Localizable", "delete", fallback: "Удалить")
-  /// Цена
-  internal static let price = L10n.tr("Localizable", "price", fallback: "Цена")
-  /// Профиль
-  internal static let profile = L10n.tr("Localizable", "profile", fallback: "Профиль")
-  /// Вернуться
-  internal static let `return` = L10n.tr("Localizable", "return", fallback: "Вернуться")
-  /// Сортировка
-  internal static let sorting = L10n.tr("Localizable", "sorting", fallback: "Сортировка")
-  /// Статистика
-  internal static let statistic = L10n.tr("Localizable", "statistic", fallback: "Статистика")
-  /// К оплате
-  internal static let toPay = L10n.tr("Localizable", "toPay", fallback: "К оплате")
+  internal enum Basket {
+    /// Корзина
+    internal static let title = L10n.tr("Localizable", "basket.title", fallback: "Корзина")
+  }
+  internal enum Cart {
+    internal enum MainScreen {
+      /// Вы уверены, что хотите удалить объект из корзины?
+      internal static let deleteItemAlert = L10n.tr("Localizable", "cart.mainScreen.deleteItemAlert", fallback: "Вы уверены, что хотите удалить объект из корзины?")
+      /// Корзина пуста
+      internal static let emptyCart = L10n.tr("Localizable", "cart.mainScreen.emptyCart", fallback: "Корзина пуста")
+      /// К оплате
+      internal static let toPayButton = L10n.tr("Localizable", "cart.mainScreen.toPayButton", fallback: "К оплате")
+    }
+    internal enum PayScreen {
+      /// Оплатить
+      internal static let payButton = L10n.tr("Localizable", "cart.payScreen.payButton", fallback: "Оплатить")
+      /// Выберите способ оплаты
+      internal static let paymentChoice = L10n.tr("Localizable", "cart.payScreen.paymentChoice", fallback: "Выберите способ оплаты")
+      /// Совершая покупку, вы соглашаетесь с условиями
+      internal static let userTerms = L10n.tr("Localizable", "cart.payScreen.userTerms", fallback: "Совершая покупку, вы соглашаетесь с условиями")
+    }
+    internal enum SuccessfulPayment {
+      /// Успех! Оплата прошла, поздравляем с покупкой!
+      internal static let successful = L10n.tr("Localizable", "cart.successfulPayment.successful", fallback: "Успех! Оплата прошла, поздравляем с покупкой!")
+      /// Вернуться в каталог
+      internal static let toBackCatalogButton = L10n.tr("Localizable", "cart.successfulPayment.toBackCatalogButton", fallback: "Вернуться в каталог")
+    }
+    internal enum UnsuccessfulPayment {
+      /// Попробовать еще раз
+      internal static let tryAgain = L10n.tr("Localizable", "cart.unsuccessfulPayment.tryAgain", fallback: "Попробовать еще раз")
+      /// Упс! Что-то пошло не так :( Попробуйте ещё раз!
+      internal static let unsuccessful = L10n.tr("Localizable", "cart.unsuccessfulPayment.unsuccessful", fallback: "Упс! Что-то пошло не так :( Попробуйте ещё раз!")
+    }
+  }
+  internal enum Catalog {
+    /// Каталог
+    internal static let title = L10n.tr("Localizable", "catalog.title", fallback: "Каталог")
+    internal enum CurrentCollection {
+      /// Автор коллекции
+      internal static let author = L10n.tr("Localizable", "catalog.currentCollection.author", fallback: "Автор коллекции")
+    }
+    internal enum NftCard {
+      internal enum Button {
+        /// Добавить в корзину
+        internal static let addToCart = L10n.tr("Localizable", "catalog.nftCard.button.addToCart", fallback: "Добавить в корзину")
+        /// Перейти на сайт продавца
+        internal static let goToSellerSite = L10n.tr("Localizable", "catalog.nftCard.button.goToSellerSite", fallback: "Перейти на сайт продавца")
+      }
+    }
+  }
+  internal enum General {
+    /// Отменить
+    internal static let cancel = L10n.tr("Localizable", "general.cancel", fallback: "Отменить")
+    /// Закрыть
+    internal static let close = L10n.tr("Localizable", "general.close", fallback: "Закрыть")
+    /// Удалить
+    internal static let delete = L10n.tr("Localizable", "general.delete", fallback: "Удалить")
+    /// Цена
+    internal static let price = L10n.tr("Localizable", "general.price", fallback: "Цена")
+    /// Вернуться
+    internal static let `return` = L10n.tr("Localizable", "general.return", fallback: "Вернуться")
+  }
+  internal enum Profile {
+    /// Профиль
+    internal static let title = L10n.tr("Localizable", "profile.title", fallback: "Профиль")
+    internal enum EditScreen {
+      /// Сменить фото
+      internal static let changePhoto = L10n.tr("Localizable", "profile.editScreen.changePhoto", fallback: "Сменить фото")
+      /// Описание
+      internal static let description = L10n.tr("Localizable", "profile.editScreen.description", fallback: "Описание")
+      /// Имя
+      internal static let name = L10n.tr("Localizable", "profile.editScreen.name", fallback: "Имя")
+      /// Cайт
+      internal static let site = L10n.tr("Localizable", "profile.editScreen.site", fallback: "Cайт")
+    }
+    internal enum FavouritesNFT {
+      /// У Вас еще нет избранных NFT
+      internal static let plug = L10n.tr("Localizable", "profile.favouritesNFT.plug", fallback: "У Вас еще нет избранных NFT")
+    }
+    internal enum MainScreen {
+      /// О разработчике
+      internal static let aboutDeveloper = L10n.tr("Localizable", "profile.mainScreen.aboutDeveloper", fallback: "О разработчике")
+      /// Избранные NFT
+      internal static let favouritesNFT = L10n.tr("Localizable", "profile.mainScreen.favouritesNFT", fallback: "Избранные NFT")
+      /// Мои NFT
+      internal static let myNFT = L10n.tr("Localizable", "profile.mainScreen.myNFT", fallback: "Мои NFT")
+    }
+    internal enum MyNFT {
+      /// От
+      internal static let from = L10n.tr("Localizable", "profile.myNFT.from", fallback: "От")
+      /// У Вас еще нет ТFT
+      internal static let plug = L10n.tr("Localizable", "profile.myNFT.plug", fallback: "У Вас еще нет ТFT")
+    }
+  }
+  internal enum Sorting {
+    /// По названию
+    internal static let byName = L10n.tr("Localizable", "sorting.byName", fallback: "По названию")
+    /// По количеству NFT
+    internal static let byNFTCount = L10n.tr("Localizable", "sorting.byNFTCount", fallback: "По количеству NFT")
+    /// По цене
+    internal static let byPrice = L10n.tr("Localizable", "sorting.byPrice", fallback: "По цене")
+    /// По рейтингу
+    internal static let byRating = L10n.tr("Localizable", "sorting.byRating", fallback: "По рейтингу")
+    /// Сортировка
+    internal static let title = L10n.tr("Localizable", "sorting.title", fallback: "Сортировка")
+  }
+  internal enum Statistic {
+    /// Статистика
+    internal static let title = L10n.tr("Localizable", "statistic.title", fallback: "Статистика")
+    internal enum Profile {
+      internal enum ButtonCollection {
+        /// Коллекция NFT
+        internal static let title = L10n.tr("Localizable", "statistic.profile.buttonCollection.title", fallback: "Коллекция NFT")
+      }
+      internal enum ButtonUser {
+        /// Перейти на сайт пользователя
+        internal static let title = L10n.tr("Localizable", "statistic.profile.buttonUser.title", fallback: "Перейти на сайт пользователя")
+      }
+    }
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

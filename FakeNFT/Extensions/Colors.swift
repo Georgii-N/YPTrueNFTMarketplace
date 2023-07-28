@@ -1,14 +1,15 @@
 //
-//  Resources .swift
+//  Colors.swift
 //  FakeNFT
 //
 //  Created by Евгений on 28.07.2023.
 //
 
+import Foundation
+
 import UIKit
 
-enum Resources {
-    enum Colors {
+extension UIColor {
         static let backgroundUniversal = UIColor(named: "Background Universal") ?? UIColor.black
         static let blackDay = UIColor(named: "Black [day]") ?? UIColor.black
         static let blackUniversal = UIColor(named: "Black Universal") ?? UIColor.black
@@ -20,5 +21,4 @@ enum Resources {
         static let whiteDay = UIColor(named: "White [day]") ?? UIColor.white
         static let whiteUniversal = UIColor(named: "White Universal") ?? UIColor.white
         static let yellowUniversal = UIColor(named: "Yellow Universal") ?? UIColor.yellow
-    }
 }
