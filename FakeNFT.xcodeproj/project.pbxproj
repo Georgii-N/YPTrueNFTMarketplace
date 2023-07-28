@@ -27,8 +27,9 @@
 		3FC8C38B29D242E90081F015 /* ProductDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8C38A29D242E90081F015 /* ProductDetailsTableViewCell.swift */; };
 		3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8C39029D2453B0081F015 /* ExampleRequest.swift */; };
 		3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */; };
-		40CD98082A7395FC0081B233 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40CD98072A7395FB0081B233 /* Localizable.strings */; };
 		7E71E3A62A739CC300B0073D /* Resources .swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E71E3A52A739CC300B0073D /* Resources .swift */; };
+		7E71E3AB2A73BEFA00B0073D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E71E3AD2A73BEFA00B0073D /* Localizable.strings */; };
+		7E71E3B32A73CBF500B0073D /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E71E3B22A73CBF500B0073D /* Strings+Generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,8 +72,9 @@
 		3FC8C38A29D242E90081F015 /* ProductDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		3FC8C39029D2453B0081F015 /* ExampleRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRequest.swift; sourceTree = "<group>"; };
 		3FC8C39229D246BA0081F015 /* DateFormatters+Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatters+Presets.swift"; sourceTree = "<group>"; };
-		40CD98072A7395FB0081B233 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		7E71E3A52A739CC300B0073D /* Resources .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resources .swift"; sourceTree = "<group>"; };
+		7E71E3AC2A73BEFA00B0073D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7E71E3B22A73CBF500B0073D /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +143,7 @@
 				3F6806C929CBBCAF00B4F915 /* Models */,
 				3F6806C729CBBC5B00B4F915 /* Scenes  */,
 				3F6806C629CBBC4E00B4F915 /* Services */,
-				40CD98062A73954E0081B233 /* Supportfiles */,
+				40CD98062A73954E0081B233 /* SupportFiles */,
 				3F68069C29CBBAF100B4F915 /* Main.storyboard */,
 				3F68069F29CBBAF200B4F915 /* Assets.xcassets */,
 				3F6806A129CBBAF200B4F915 /* LaunchScreen.storyboard */,
@@ -235,19 +237,20 @@
 			path = Requests;
 			sourceTree = "<group>";
 		};
-		40CD98062A73954E0081B233 /* Supportfiles */ = {
+		40CD98062A73954E0081B233 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
 				40CD98092A7396080081B233 /* Localizable */,
 				7E71E3A72A739CC700B0073D /* Resources  */,
 			);
-			path = Supportfiles;
+			path = SupportFiles;
 			sourceTree = "<group>";
 		};
 		40CD98092A7396080081B233 /* Localizable */ = {
 			isa = PBXGroup;
 			children = (
-				40CD98072A7395FB0081B233 /* Localizable.strings */,
+				7E71E3B22A73CBF500B0073D /* Strings+Generated.swift */,
+				7E71E3AD2A73BEFA00B0073D /* Localizable.strings */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3F6806BD29CBBAF200B4F915 /* Build configuration list for PBXNativeTarget "FakeNFT" */;
 			buildPhases = (
+				7E71E3B12A73C5EE00B0073D /* SwiftGen */,
 				3FC8C39529D24CDB0081F015 /* Swiftlint */,
 				3F68068F29CBBAF100B4F915 /* Sources */,
 				3F68069029CBBAF100B4F915 /* Frameworks */,
@@ -373,7 +377,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40CD98082A7395FC0081B233 /* Localizable.strings in Resources */,
+				7E71E3AB2A73BEFA00B0073D /* Localizable.strings in Resources */,
 				3F6806A329CBBAF200B4F915 /* LaunchScreen.storyboard in Resources */,
 				3F6806A029CBBAF200B4F915 /* Assets.xcassets in Resources */,
 				3F68069E29CBBAF100B4F915 /* Main.storyboard in Resources */,
@@ -415,6 +419,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --fix && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		7E71E3B12A73C5EE00B0073D /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftgen; then\n    swiftgen\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -427,6 +449,7 @@
 				3F478ED129DB476500F6D39E /* Fonts.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				3F68069B29CBBAF100B4F915 /* ProductDetailsTableViewController.swift in Sources */,
+				7E71E3B32A73CBF500B0073D /* Strings+Generated.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
@@ -485,6 +508,14 @@
 				3F6806A229CBBAF200B4F915 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7E71E3AD2A73BEFA00B0073D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7E71E3AC2A73BEFA00B0073D /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
