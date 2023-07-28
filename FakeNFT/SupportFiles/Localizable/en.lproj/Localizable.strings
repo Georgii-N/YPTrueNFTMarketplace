@@ -1,8 +1,8 @@
 //TabBar
-"profile" = "Профиль";
-"catalog" = "Каталог";
-"basket" = "Корзина";
-"statistic" = "Статистика";
+"profile.title" = "Профиль";
+"catalog.title" = "Каталог";
+"basket.title" = "Корзина";
+"statistic.title" = "Статистика";
 
 //Catalog
 "addToBasket" = "Добавить в корзину";
@@ -14,18 +14,21 @@
 //Profile
 
 //Statistic
-
+"statistic.profile.buttonUser.title" = "Перейти на сайт пользователя"
+"statistic.profile.buttonCollection.title" = "Коллекция NFT"
 
 //Sorting
-"sorting" = "Сортировка";
-"byName" = "По названию";
-"byNFTCount" = "По количеству NFT";
+"sorting.title" = "Сортировка";
+"sorting.byName" = "По названию";
+"sorting.byNFTCount" = "По количеству NFT";
+"sorting.byRating" = "По рейтингу"
 
 
 //General
-"cancel" = "Отменить";
-"delete" = "Удалить";
-"return" = "Вернуться";
+"general.cancel" = "Отменить";
+"general.delete" = "Удалить";
+"general.return" = "Вернуться";
+"general.close" = "Закрыть";
 
 
 "price" = "Цена";
