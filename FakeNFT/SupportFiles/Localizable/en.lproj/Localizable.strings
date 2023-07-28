@@ -1,35 +1,77 @@
-//TabBar
+// MARK: - TabBar
+
 "profile.title" = "Профиль";
 "catalog.title" = "Каталог";
 "basket.title" = "Корзина";
 "statistic.title" = "Статистика";
 
-//Catalog
-"addToBasket" = "Добавить в корзину";
+// MARK: - General
 
-
-//Basket
-"toPay" = "К оплате";
-
-//Profile
-
-//Statistic
-"statistic.profile.buttonUser.title" = "Перейти на сайт пользователя"
-"statistic.profile.buttonCollection.title" = "Коллекция NFT"
-
-//Sorting
-"sorting.title" = "Сортировка";
-"sorting.byName" = "По названию";
-"sorting.byNFTCount" = "По количеству NFT";
-"sorting.byRating" = "По рейтингу"
-
-
-//General
 "general.cancel" = "Отменить";
 "general.delete" = "Удалить";
 "general.return" = "Вернуться";
 "general.close" = "Закрыть";
+"general.price" = "Цена";
+
+// MARK: - Sorting
+
+"sorting.title" = "Сортировка";
+"sorting.byName" = "По названию";
+"sorting.byPrice" = "По цене";
+"sorting.byNFTCount" = "По количеству NFT";
+"sorting.byRating" = "По рейтингу";
+
+// MARK: - Catalog
+"catalog.currentCollection.author" = "Автор коллекции"
+"catalog.nftCard.button.addToCart" = "Добавить в корзину"
+"catalog.nftCard.button.goToSellerSite" = "Перейти на сайт продавца"
+
+// MARK: - Cart
+
+// Main Screen
+"cart.mainScreen.emptyCart" = "Корзина пуста";
+"cart.mainScreen.toPayButton" = "К оплате";
+"cart.mainScreen.deleteItemAlert" = "Вы уверены, что хотите удалить объект из корзины?";
+
+// Pay Screen
+"cart.payScreen.paymentChoice" = "Выберите способ оплаты";
+"cart.payScreen.userTerms" = "Совершая покупку, вы соглашаетесь с условиями";
+"cart.payScreen.payButton" = "Оплатить";
+
+// Successful Payment Screen
+"cart.successfulPayment.successful" = "Успех! Оплата прошла, поздравляем с покупкой!";
+"cart.successfulPayment.toBackCatalogButton" = "Вернуться в каталог";
+
+// Unuccessful Payment Screen
+"cart.unsuccessfulPayment.unsuccessful" = "Упс! Что-то пошло не так :( Попробуйте ещё раз!";
+"cart.unsuccessfulPayment.tryAgain" = "Попробовать еще раз";
+
+// MARK: - Profile
+
+// MainScreen
+"profile.mainScreen.myNFT" = "Мои NFT";
+"profile.mainScreen.favouritesNFT" = "Избранные NFT";
+"profile.mainScreen.aboutDeveloper" = "О разработчике";
+
+// EditScreen
+"profile.editScreen.changePhoto" = "Сменить фото";
+"profile.editScreen.name" = "Имя";
+"profile.editScreen.description" = "Описание";
+"profile.editScreen.site" = "Cайт";
+
+// MyNFTScreen
+"profile.myNFT.plug" = "У Вас еще нет ТFT";
+"profile.myNFT.from" = "От";
+
+// FavouritesScreen
+"profile.favouritesNFT.plug" = "У Вас еще нет избранных NFT";
+
+// MARK: - Statistic
+
+"statistic.profile.buttonUser.title" = "Перейти на сайт пользователя";
+"statistic.profile.buttonCollection.title" = "Коллекция NFT";
 
 
-"price" = "Цена";
+
+
 

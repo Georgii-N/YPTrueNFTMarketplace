@@ -140,6 +140,7 @@
 			children = (
 				3F68069629CBBAF100B4F915 /* AppDelegate.swift */,
 				3F68069829CBBAF100B4F915 /* SceneDelegate.swift */,
+				4005316F2A73E350008CAF3B /* Modules */,
 				3F478ECD29DB473000F6D39E /* DesignSystem */,
 				3F6806CE29CBBD1B00B4F915 /* Foundation */,
 				3F6806C929CBBCAF00B4F915 /* Models */,
@@ -245,6 +246,53 @@
 				4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4005316F2A73E350008CAF3B /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				400531742A73E3BF008CAF3B /* Onboarding */,
+				400531702A73E35E008CAF3B /* Catalog */,
+				400531712A73E36A008CAF3B /* Cart */,
+				400531722A73E37F008CAF3B /* Profile */,
+				400531732A73E38B008CAF3B /* Statistic */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		400531702A73E35E008CAF3B /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Catalog;
+			sourceTree = "<group>";
+		};
+		400531712A73E36A008CAF3B /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		400531722A73E37F008CAF3B /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		400531732A73E38B008CAF3B /* Statistic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Statistic;
+			sourceTree = "<group>";
+		};
+		400531742A73E3BF008CAF3B /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		40CD98062A73954E0081B233 /* SupportFiles */ = {
