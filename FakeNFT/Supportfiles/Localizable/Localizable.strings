@@ -1,0 +1,32 @@
+//TabBar
+"profile" = "Профиль";
+"catalog" = "Каталог";
+"basket" = "Корзина";
+"statistic" = "Статистика";
+
+//Catalog
+"addToBasket" = "Добавить в корзину";
+
+
+//Basket
+"toPay" = "К оплате";
+
+//Profile
+
+//Statistic
+
+
+//Sorting
+"sorting" = "Сортировка";
+"byName" = "По названию";
+"byNFTCount" = "По количеству NFT";
+
+
+//General
+"cancel" = "Отменить";
+"delete" = "Удалить";
+"return" = "Вернуться";
+
+
+"price" = "Цена";
+
