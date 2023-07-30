@@ -1,7 +1,7 @@
 import Foundation
 
 final class DateService {
-    
+
 }
 
 extension DateFormatter {

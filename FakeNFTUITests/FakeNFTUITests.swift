@@ -7,4 +7,5 @@ final class FakeNFTUITests: XCTestCase {
 
         // TODO: - Не забудьте написать UI-тесты
     }
+    
 }

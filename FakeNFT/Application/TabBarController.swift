@@ -36,6 +36,6 @@ final class TabBarController: UITabBarController {
             selectedImage: Resources.Images.TabBar.statisticImageSelected)
 
         self.viewControllers = [profileViewController, catalogViewController,
-                                cartViewController, statisticViewController]
+                                cartViewController, statisticViewController]        
     }
 }

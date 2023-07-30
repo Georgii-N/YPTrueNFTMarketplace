@@ -8,8 +8,8 @@
 import UIKit
 
 final class AlertService {
-
-        func showAlert(title: String?,
+    
+    func showAlert(title: String?,
                    message: String?,
                    preferredStyle: UIAlertController.Style,
                    controller: UIViewController,
@@ -17,12 +17,12 @@ final class AlertService {
         let alert = UIAlertController(title: title ?? nil,
                                       message: message ?? nil,
                                       preferredStyle: preferredStyle)
-            let okAction = UIAlertAction(title: "OK", style: .default)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-
-            alert.addAction(okAction)
-            alert.addAction(cancelAction)
-
-            controller.present(alert, animated: true)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        controller.present(alert, animated: true)
     }
 }
