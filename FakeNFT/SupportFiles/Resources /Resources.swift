@@ -1,10 +1,3 @@
-//
-//  Resources.swift
-//  FakeNFT
-//
-//  Created by Евгений on 28.07.2023.
-//
-
 import UIKit
 
 enum Resources {
