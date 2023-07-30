@@ -30,8 +30,8 @@ internal enum L10n {
       internal static let byNumberOfNFT = L10n.tr("Localizable", "alert.sort.byNumberOfNFT", fallback: "По количеству NFT")
       /// По цене
       internal static let byPrice = L10n.tr("Localizable", "alert.sort.byPrice", fallback: "По цене")
-      /// По Рейтингу
-      internal static let byRating = L10n.tr("Localizable", "alert.sort.byRating", fallback: "По Рейтингу")
+      /// По рейтингу
+      internal static let byRating = L10n.tr("Localizable", "alert.sort.byRating", fallback: "По рейтингу")
     }
   }
   internal enum Authorization {
