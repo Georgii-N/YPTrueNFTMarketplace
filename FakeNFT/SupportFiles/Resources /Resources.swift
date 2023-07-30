@@ -15,5 +15,9 @@ enum Resources {
             static let statisticImage = UIImage(systemName: "flag.2.crossed.fill")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
             static let statisticImageSelected = UIImage(systemName: "flag.2.crossed.fill")?.withTintColor(.blueUniversal, renderingMode: .alwaysOriginal)
         }
+        
+        enum Network {
+            static let defaultStringURL = "https://64c516a6c853c26efada7a11.mockapi.io"
+        }
     }
 }
