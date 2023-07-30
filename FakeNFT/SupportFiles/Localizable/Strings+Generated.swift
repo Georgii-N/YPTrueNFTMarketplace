@@ -10,6 +10,44 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  internal enum Alert {
+    /// Cортировка
+    internal static let sortTitle = L10n.tr("Localizable", "alert.sortTitle", fallback: "Cортировка")
+    internal enum Authorization {
+      /// Не удалось войти в систему
+      internal static let message = L10n.tr("Localizable", "alert.authorization.message", fallback: "Не удалось войти в систему")
+      /// Что-то пошло не так (
+      internal static let title = L10n.tr("Localizable", "alert.authorization.title", fallback: "Что-то пошло не так (")
+    }
+    internal enum Sort {
+      /// По имени
+      internal static let byName = L10n.tr("Localizable", "alert.sort.byName", fallback: "По имени")
+      /// По названию
+      internal static let byNameOfNFT = L10n.tr("Localizable", "alert.sort.byNameOfNFT", fallback: "По названию")
+      /// По имени
+      internal static let byNameOfPerson = L10n.tr("Localizable", "alert.sort.byNameOfPerson", fallback: "По имени")
+      /// По количеству NFT
+      internal static let byNumberOfNFT = L10n.tr("Localizable", "alert.sort.byNumberOfNFT", fallback: "По количеству NFT")
+      /// По цене
+      internal static let byPrice = L10n.tr("Localizable", "alert.sort.byPrice", fallback: "По цене")
+      /// По Рейтингу
+      internal static let byRating = L10n.tr("Localizable", "alert.sort.byRating", fallback: "По Рейтингу")
+    }
+  }
+  internal enum Authorization {
+    /// Демо
+    internal static let demo = L10n.tr("Localizable", "authorization.demo", fallback: "Демо")
+    /// Вход
+    internal static let enter = L10n.tr("Localizable", "authorization.enter", fallback: "Вход")
+    /// Войти
+    internal static let entering = L10n.tr("Localizable", "authorization.entering", fallback: "Войти")
+    /// Забыли пароль?
+    internal static let forgetPassword = L10n.tr("Localizable", "authorization.forgetPassword", fallback: "Забыли пароль?")
+    /// Пароль
+    internal static let password = L10n.tr("Localizable", "authorization.password", fallback: "Пароль")
+    /// Зарегистрироваться
+    internal static let ragistration = L10n.tr("Localizable", "authorization.ragistration", fallback: "Зарегистрироваться")
+  }
   internal enum Basket {
     /// Корзина
     internal static let title = L10n.tr("Localizable", "basket.title", fallback: "Корзина")
@@ -67,6 +105,8 @@ internal enum L10n {
     internal static let close = L10n.tr("Localizable", "general.close", fallback: "Закрыть")
     /// Удалить
     internal static let delete = L10n.tr("Localizable", "general.delete", fallback: "Удалить")
+    /// OK
+    internal static let ok = L10n.tr("Localizable", "general.OK", fallback: "OK")
     /// Цена
     internal static let price = L10n.tr("Localizable", "general.price", fallback: "Цена")
     /// Вернуться

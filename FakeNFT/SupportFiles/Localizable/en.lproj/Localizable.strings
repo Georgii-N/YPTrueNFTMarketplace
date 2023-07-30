@@ -12,6 +12,26 @@
 "general.return" = "Вернуться";
 "general.close" = "Закрыть";
 "general.price" = "Цена";
+"general.OK" = "OK";
+
+// MARK: - Authorization
+"authorization.enter" = "Вход";
+"authorization.password" = "Пароль";
+"authorization.entering" = "Войти";
+"authorization.forgetPassword" = "Забыли пароль?";
+"authorization.demo" = "Демо";
+"authorization.ragistration" = "Зарегистрироваться";
+
+// MARK: - Alerts
+"alert.authorization.title" = "Что-то пошло не так (";
+"alert.authorization.message" = "Не удалось войти в систему";
+"alert.sortTitle" = "Cортировка";
+"alert.sort.byName" = "По имени";
+"alert.sort.byNumberOfNFT" = "По количеству NFT";
+"alert.sort.byPrice" = "По цене";
+"alert.sort.byRating" = "По Рейтингу";
+"alert.sort.byNameOfPerson" = "По имени";
+"alert.sort.byNameOfNFT" = "По названию";
 
 // MARK: - Sorting
 
