@@ -179,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				7EC0B5312A7666C600688EC9 /* Catalog */,
+				7EC0B53E2A766E3400688EC9 /* Cart */,
 				408616C22A76585E004CA07E /* Profile */,
 				408616C32A765882004CA07E /* Statistic */,
 			);
@@ -293,6 +294,14 @@
 			);
 			path = Catalog;
 			sourceTree = "<group>";
+		};
+		7EC0B53E2A766E3400688EC9 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cart;
+			path = "FakeNFT/Scenes /Cart";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
