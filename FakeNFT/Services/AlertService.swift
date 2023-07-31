@@ -38,8 +38,7 @@ class UniversalAlertService: AlertServiceProtocol {
                     completion(option)
                 }
                 alertController.addAction(action)
-            }
-            else {
+            } else {
                 let action = UIAlertAction(title: option.localizedString, style: .default) { _ in
                     completion(option)
                 }

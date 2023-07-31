@@ -31,6 +31,11 @@
 		7E71E3AB2A73BEFA00B0073D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E71E3AD2A73BEFA00B0073D /* Localizable.strings */; };
 		7E71E3B32A73CBF500B0073D /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E71E3B22A73CBF500B0073D /* Strings+Generated.swift */; };
 		7E71E3B52A73F10A00B0073D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E71E3B42A73F10A00B0073D /* TabBarController.swift */; };
+		7EB78A4F2A77873D00BE892B /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78A4E2A77873D00BE892B /* CatalogViewController.swift */; };
+		7EB78A512A77881700BE892B /* CatalogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78A502A77881700BE892B /* CatalogTableViewCell.swift */; };
+		7EB78A532A7788FF00BE892B /* CatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78A522A7788FF00BE892B /* CatalogViewModel.swift */; };
+		7EB78A552A77A01700BE892B /* CatalogViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78A542A77A01700BE892B /* CatalogViewModelProtocol.swift */; };
+		7EB78A582A77CE1500BE892B /* CatalogCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78A572A77CE1500BE892B /* CatalogCollectionViewController.swift */; };
 		7EC0B5352A76678100688EC9 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B5342A76678100688EC9 /* AlertService.swift */; };
 		7EC0B5392A766ABA00688EC9 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B5382A766ABA00688EC9 /* DataProvider.swift */; };
 		7EC0B53B2A766B7800688EC9 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B53A2A766B7800688EC9 /* DateService.swift */; };
@@ -84,6 +89,11 @@
 		7E71E3AC2A73BEFA00B0073D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7E71E3B22A73CBF500B0073D /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 		7E71E3B42A73F10A00B0073D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		7EB78A4E2A77873D00BE892B /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
+		7EB78A502A77881700BE892B /* CatalogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTableViewCell.swift; sourceTree = "<group>"; };
+		7EB78A522A7788FF00BE892B /* CatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewModel.swift; sourceTree = "<group>"; };
+		7EB78A542A77A01700BE892B /* CatalogViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewModelProtocol.swift; sourceTree = "<group>"; };
+		7EB78A572A77CE1500BE892B /* CatalogCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCollectionViewController.swift; sourceTree = "<group>"; };
 		7EC0B5342A76678100688EC9 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertService.swift; path = FakeNFT/Services/AlertService.swift; sourceTree = SOURCE_ROOT; };
 		7EC0B5382A766ABA00688EC9 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		7EC0B53A2A766B7800688EC9 /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
@@ -297,9 +307,22 @@
 			path = "Resources ";
 			sourceTree = "<group>";
 		};
+		7EB78A562A77A01D00BE892B /* CatalogProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				7EB78A542A77A01700BE892B /* CatalogViewModelProtocol.swift */,
+			);
+			path = CatalogProtocols;
+			sourceTree = "<group>";
+		};
 		7EC0B5312A7666C600688EC9 /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
+				7EB78A562A77A01D00BE892B /* CatalogProtocols */,
+				7EB78A522A7788FF00BE892B /* CatalogViewModel.swift */,
+				7EB78A4E2A77873D00BE892B /* CatalogViewController.swift */,
+				7EB78A502A77881700BE892B /* CatalogTableViewCell.swift */,
+				7EB78A572A77CE1500BE892B /* CatalogCollectionViewController.swift */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -492,14 +515,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EB78A4F2A77873D00BE892B /* CatalogViewController.swift in Sources */,
 				7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* UIColor + Extension.swift in Sources */,
+				7EB78A512A77881700BE892B /* CatalogTableViewCell.swift in Sources */,
 				7EF4C5D12A73F86C001E8C67 /* Colors.swift in Sources */,
 				3F478ED129DB476500F6D39E /* UIFont + Extension.swift in Sources */,
 				7EC0B5392A766ABA00688EC9 /* DataProvider.swift in Sources */,
 				400531792A73EC58008CAF3B /* BaseWhiteButton.swift in Sources */,
 				4005316E2A73DDFC008CAF3B /* UIView + Extension.swift in Sources */,
 				7E71E3B32A73CBF500B0073D /* Strings+Generated.swift in Sources */,
+				7EB78A582A77CE1500BE892B /* CatalogCollectionViewController.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */,
 				7E71E3B52A73F10A00B0073D /* TabBarController.swift in Sources */,
@@ -507,6 +533,7 @@
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				40EEA7CF2A768BE700A1AE93 /* AnalyticsService.swift in Sources */,
+				7EB78A532A7788FF00BE892B /* CatalogViewModel.swift in Sources */,
 				7EC0B5352A76678100688EC9 /* AlertService.swift in Sources */,
 				4070B1182A76CADF00CF6E74 /* SortNavBarBaseButton.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
@@ -515,6 +542,7 @@
 				7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
+				7EB78A552A77A01700BE892B /* CatalogViewModelProtocol.swift in Sources */,
 				7EC0B53B2A766B7800688EC9 /* DateService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
