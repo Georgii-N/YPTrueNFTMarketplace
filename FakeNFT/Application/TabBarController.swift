@@ -12,9 +12,18 @@ final class TabBarController: UITabBarController {
 
         tabBar.standardAppearance = appearance
         tabBar.backgroundColor = .whiteDay
+        
+        // Initizialize ViewControllers:
+        let catalogViewController = CatalogViewController()
+        
+        // Initialize dependencies:
+        let catalogViewModel = CatalogViewModel()
+        
+        // Bind dependencies:
+        catalogViewController.viewModel = catalogViewModel
 
         let profileViewController = CustomNavigationController(rootViewController: UIViewController())
-        let catalogViewController = CustomNavigationController(rootViewController: UIViewController())
+        let catalogNavigationController = CustomNavigationController(rootViewController: catalogViewController)
         let cartViewController = CustomNavigationController(rootViewController: UIViewController())
         let statisticViewController = CustomNavigationController(rootViewController: UIViewController())
 
@@ -35,7 +44,7 @@ final class TabBarController: UITabBarController {
             image: Resources.Images.TabBar.statisticImage,
             selectedImage: Resources.Images.TabBar.statisticImageSelected)
 
-        self.viewControllers = [profileViewController, catalogViewController,
+        self.viewControllers = [profileViewController, catalogNavigationController,
                                 cartViewController, statisticViewController]        
     }
 }

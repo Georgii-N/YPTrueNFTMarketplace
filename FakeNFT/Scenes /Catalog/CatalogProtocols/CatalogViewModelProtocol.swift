@@ -5,4 +5,9 @@
 //  Created by Евгений on 31.07.2023.
 //
 
-import Foundation
+import UIKit
+
+protocol CatalogViewModelProtocol: AnyObject {
+    var mockImages: [UIImage?] { get }
+    var mockLabels: [String] { get }
+}
