@@ -17,5 +17,6 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     
     func setCurrentNFTImage(image: UIImage) {
         coverNFTImage = image
+        
     }
 }
