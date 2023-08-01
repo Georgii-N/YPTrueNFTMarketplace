@@ -14,6 +14,7 @@ final class NFTCollectionView: UICollectionView {
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 9
         layout.sectionInset = UIEdgeInsets(top: 24, left: 16, bottom: 0, right: 16)
+        layout.itemSize = CGSize(width: 108, height: 172)
         super.init(frame: .zero, collectionViewLayout: layout)
         
         commonInit()
@@ -26,7 +27,6 @@ final class NFTCollectionView: UICollectionView {
     private func commonInit() {
         self.backgroundColor = .whiteDay
         
-        register(NFTCollectionCell.self, forCellWithReuseIdentifier: "CatalogNFTCollectionViewCell")
-        register(NFTCollectionCell.self, forCellWithReuseIdentifier: "StatisticNFTCollectionViewCell")
+        register(NFTCollectionCell.self, forCellWithReuseIdentifier: "NFTCollectionViewCell")
     }
 }
