@@ -86,8 +86,8 @@ internal enum L10n {
     /// Каталог
     internal static let title = L10n.tr("Localizable", "catalog.title", fallback: "Каталог")
     internal enum CurrentCollection {
-      /// Автор коллекции
-      internal static let author = L10n.tr("Localizable", "catalog.currentCollection.author", fallback: "Автор коллекции")
+      /// Автор коллекции:
+      internal static let author = L10n.tr("Localizable", "catalog.currentCollection.author", fallback: "Автор коллекции:")
     }
     internal enum NftCard {
       internal enum Button {

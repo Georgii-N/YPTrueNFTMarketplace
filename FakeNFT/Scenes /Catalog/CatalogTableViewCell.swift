@@ -8,6 +8,7 @@
 import UIKit
 
 final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
+    
     private lazy var contentNFTImageView = UIImageView()
     private lazy var nameOfNFTCollectionLabel: UILabel = {
         var label = UILabel()

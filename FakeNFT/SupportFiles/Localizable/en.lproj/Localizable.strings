@@ -45,7 +45,7 @@
 "sorting.byRating" = "По рейтингу";
 
 // MARK: - Catalog
-"catalog.currentCollection.author" = "Автор коллекции";
+"catalog.currentCollection.author" = "Автор коллекции:";
 "catalog.nftCard.button.addToCart" = "Добавить в корзину";
 "catalog.nftCard.button.goToSellerSite" = "Перейти на сайт продавца";
 

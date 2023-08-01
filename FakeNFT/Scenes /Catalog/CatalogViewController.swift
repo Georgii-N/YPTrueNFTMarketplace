@@ -45,6 +45,8 @@ final class CatalogViewController: UIViewController {
         default:
             break
         }
+        
+        alertService = nil
     }
     
     // MARK: - Objc Methods:
@@ -58,8 +60,6 @@ final class CatalogViewController: UIViewController {
             guard let self = self else { return }
             self.sortNFT(options)
         })
-        
-        alertService = nil
     }
 }
 
@@ -91,7 +91,14 @@ extension CatalogViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension CatalogViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
+        guard let image = viewModel?.mockImages[indexPath.row] else { return }
+        
+        let catalogCollectionViewModel = CatalogCollectionViewModel()
+        let viewController = CatalogCollectionViewController(viewModel: catalogCollectionViewModel)
+        
+        viewController.setupCoverNFTImage(image: image)
+        
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
