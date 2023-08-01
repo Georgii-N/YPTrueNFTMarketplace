@@ -112,6 +112,10 @@ internal enum L10n {
     /// Вернуться
     internal static let `return` = L10n.tr("Localizable", "general.return", fallback: "Вернуться")
   }
+  internal enum Onboarding {
+    /// Исследуйте
+    internal static let research = L10n.tr("Localizable", "onboarding.research", fallback: "Исследуйте")
+  }
   internal enum Profile {
     /// Профиль
     internal static let title = L10n.tr("Localizable", "profile.title", fallback: "Профиль")

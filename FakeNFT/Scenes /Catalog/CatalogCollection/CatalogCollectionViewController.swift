@@ -56,7 +56,7 @@ final class CatalogCollectionViewController: UIViewController {
     
     private lazy var nftCollection: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        collectionView.register(NFTCollectionViewCell.self)
+        collectionView.register(NFTCollectionCell.self)
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -116,7 +116,9 @@ extension CatalogCollectionViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
         
+        return cell
     }
 }
 

@@ -19,6 +19,15 @@ enum Resources {
         enum NavBar {
             static let sortIcon = UIImage(named: "sort")
         }
+        
+        enum NFTCollectionCell {
+                    static let unlikedButton = UIImage(systemName: "heart.fill")?.withTintColor(.whiteUniversal, renderingMode: .alwaysOriginal)
+                    static let likedButton = UIImage(systemName: "heart.fill")?.withTintColor(.redUniversal, renderingMode: .alwaysOriginal)
+                    static let grayRatingStar = UIImage(systemName: "star.fill")?.withTintColor(.lightGrayDay, renderingMode: .alwaysOriginal)
+                    static let goldRatingStar = UIImage(systemName: "star.fill")?.withTintColor(.yellowUniversal, renderingMode: .alwaysOriginal)
+                    static let putInBasket = UIImage(named: "emptyCart")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
+                    static let removeFromBasket = UIImage(named: "removeBasket")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
+                }
     }
     
     enum Network {
