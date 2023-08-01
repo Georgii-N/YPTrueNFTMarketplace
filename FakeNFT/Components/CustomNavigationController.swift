@@ -6,7 +6,5 @@ final class CustomNavigationController: UINavigationController {
         super.viewDidLoad()
         navigationBar.backgroundColor = .whiteDay
         navigationBar.tintColor = .blackDay
-        
-        UIBarButtonItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
     }
 }

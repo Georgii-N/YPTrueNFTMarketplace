@@ -91,6 +91,7 @@
 		7E71E3AC2A73BEFA00B0073D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7E71E3B22A73CBF500B0073D /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 		7E71E3B42A73F10A00B0073D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		7EB78A4E2A77873D00BE892B /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		7EB78A502A77881700BE892B /* CatalogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTableViewCell.swift; sourceTree = "<group>"; };
 		7EB78A522A7788FF00BE892B /* CatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewModel.swift; sourceTree = "<group>"; };
 		7EB78A542A77A01700BE892B /* CatalogViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -249,10 +250,10 @@
 		400531752A73EAF2008CAF3B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				7EB78A662A78EAB200BE892B /* Buttons */,
+				400531762A73EB4D008CAF3B /* BlackBaseButton.swift */,
+				400531782A73EC58008CAF3B /* BaseWhiteButton.swift */,
+				4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */,
 				7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */,
-				7EB78A672A78EAD000BE892B /* NFTCollectionView.swift */,
-				7EB78A692A78EEC100BE892B /* NFTCollectionCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -550,11 +551,9 @@
 				7EB78A5D2A77D84100BE892B /* CatalogCollectionViewController.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */,
-				7EB78A682A78EAD000BE892B /* NFTCollectionView.swift in Sources */,
 				7E71E3B52A73F10A00B0073D /* TabBarController.swift in Sources */,
 				7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
-				7EB78A6A2A78EEC100BE892B /* NFTCollectionCell.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				40EEA7CF2A768BE700A1AE93 /* AnalyticsService.swift in Sources */,
 				7EB78A532A7788FF00BE892B /* CatalogViewModel.swift in Sources */,
