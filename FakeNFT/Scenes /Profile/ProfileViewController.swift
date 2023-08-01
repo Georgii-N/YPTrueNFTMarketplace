@@ -81,6 +81,7 @@ class ProfileViewController: UIViewController {
         profileTableView.dataSource = self
         profileTableView.separatorStyle = .none
         profileTableView.isScrollEnabled = false
+        profileTableView.backgroundColor = .clear
         profileTableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profileTableView)
         return profileTableView
@@ -121,7 +122,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Actions
     
     @objc func presentEditVC() {
-        
+        present(EditProfileViewController(), animated: true)
     }
 }
 
@@ -136,8 +137,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.accessoryType = .disclosureIndicator
+        cell.accessoryView = UIImageView(image: UIImage(named: "disclosureCell"))
         cell.textLabel?.font = .bodyBold
         cell.selectionStyle = .none
+        cell.backgroundColor = .clear
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = "Мои NFT (112)"
@@ -154,8 +157,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let aqwe = 1
-            // переход 1
+            let myNFTVC = MyNFTViewController()
+            myNFTVC.modalPresentationStyle = .fullScreen
+            present(myNFTVC, animated: true)
         case 1:
             let aqwe = 1
             // переход 2

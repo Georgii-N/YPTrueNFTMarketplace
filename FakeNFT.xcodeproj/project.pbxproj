@@ -38,6 +38,8 @@
 		7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */; };
 		7EF4C5D12A73F86C001E8C67 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D02A73F86C001E8C67 /* Colors.swift */; };
 		7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D22A73FD9A001E8C67 /* Resources.swift */; };
+		E93BBE092A793E80000BEAE0 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93BBE082A793E7F000BEAE0 /* EditProfileViewController.swift */; };
+		E93BBE0B2A7955F6000BEAE0 /* MyNFTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93BBE0A2A7955F6000BEAE0 /* MyNFTViewController.swift */; };
 		E9CA66E22A779D2B00C7A218 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA66E12A779D2B00C7A218 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +94,8 @@
 		7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		7EF4C5D02A73F86C001E8C67 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		7EF4C5D22A73FD9A001E8C67 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		E93BBE082A793E7F000BEAE0 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		E93BBE0A2A7955F6000BEAE0 /* MyNFTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNFTViewController.swift; sourceTree = "<group>"; };
 		E9CA66E12A779D2B00C7A218 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -311,6 +315,8 @@
 			isa = PBXGroup;
 			children = (
 				E9CA66E12A779D2B00C7A218 /* ProfileViewController.swift */,
+				E93BBE082A793E7F000BEAE0 /* EditProfileViewController.swift */,
+				E93BBE0A2A7955F6000BEAE0 /* MyNFTViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -495,6 +501,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E93BBE092A793E80000BEAE0 /* EditProfileViewController.swift in Sources */,
 				7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* UIColor + Extension.swift in Sources */,
 				7EF4C5D12A73F86C001E8C67 /* Colors.swift in Sources */,
@@ -506,6 +513,7 @@
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */,
 				7E71E3B52A73F10A00B0073D /* TabBarController.swift in Sources */,
+				E93BBE0B2A7955F6000BEAE0 /* MyNFTViewController.swift in Sources */,
 				7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
