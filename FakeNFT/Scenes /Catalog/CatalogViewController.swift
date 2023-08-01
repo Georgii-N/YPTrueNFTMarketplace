@@ -70,10 +70,10 @@ extension CatalogViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "CatalogTableViewCell") as? CatalogTableViewCell,
-              let viewModel = viewModel,
+        guard let viewModel = viewModel,
               let image = viewModel.mockImages[indexPath.row] else { return UITableViewCell() }
+        
+        let cell: CatalogTableViewCell = tableView.dequeueReusableCell()
         
         let cellLabel = viewModel.mockLabels[indexPath.row]
         
