@@ -38,6 +38,7 @@
 		7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */; };
 		7EF4C5D12A73F86C001E8C67 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D02A73F86C001E8C67 /* Colors.swift */; };
 		7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D22A73FD9A001E8C67 /* Resources.swift */; };
+		E9CA66E22A779D2B00C7A218 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA66E12A779D2B00C7A218 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		7EF4C5D02A73F86C001E8C67 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		7EF4C5D22A73FD9A001E8C67 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		E9CA66E12A779D2B00C7A218 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,9 +187,9 @@
 		3F6806C729CBBC5B00B4F915 /* Scenes  */ = {
 			isa = PBXGroup;
 			children = (
+				E9CA66E02A779D0600C7A218 /* Profile */,
 				7EC0B5312A7666C600688EC9 /* Catalog */,
 				7EC0B53E2A766E3400688EC9 /* Cart */,
-				408616C22A76585E004CA07E /* Profile */,
 				408616C32A765882004CA07E /* Statistic */,
 			);
 			path = "Scenes ";
@@ -242,13 +244,6 @@
 				7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		408616C22A76585E004CA07E /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Profile;
 			sourceTree = "<group>";
 		};
 		408616C32A765882004CA07E /* Statistic */ = {
@@ -311,6 +306,14 @@
 			name = Cart;
 			path = "FakeNFT/Scenes /Cart";
 			sourceTree = SOURCE_ROOT;
+		};
+		E9CA66E02A779D0600C7A218 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				E9CA66E12A779D2B00C7A218 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -514,6 +517,7 @@
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
+				E9CA66E22A779D2B00C7A218 /* ProfileViewController.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
 				7EC0B53B2A766B7800688EC9 /* DateService.swift in Sources */,
 			);

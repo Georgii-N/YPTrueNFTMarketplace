@@ -13,7 +13,7 @@ final class TabBarController: UITabBarController {
         tabBar.standardAppearance = appearance
         tabBar.backgroundColor = .whiteDay
 
-        let profileViewController = CustomNavigationController(rootViewController: UIViewController())
+        let profileViewController = CustomNavigationController(rootViewController: ProfileViewController())
         let catalogViewController = CustomNavigationController(rootViewController: UIViewController())
         let cartViewController = CustomNavigationController(rootViewController: UIViewController())
         let statisticViewController = CustomNavigationController(rootViewController: UIViewController())
