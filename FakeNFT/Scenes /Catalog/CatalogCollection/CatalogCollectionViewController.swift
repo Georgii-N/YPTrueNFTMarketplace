@@ -124,10 +124,9 @@ final class CatalogCollectionViewController: UIViewController {
 
 // MARK: - UITextViewDelegate
 extension CatalogCollectionViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        guard let viewModel = viewModel else { return false }
-        
-        let webViewController = WebViewViewController(url: URL)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {        
+        let webViewViewModel = WebViewViewModel()
+        let webViewController = WebViewViewController(viewModel: webViewViewModel, url: URL)
         
         navigationController?.pushViewController(webViewController, animated: true)
         

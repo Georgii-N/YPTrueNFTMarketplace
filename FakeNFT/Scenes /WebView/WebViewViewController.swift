@@ -10,10 +10,13 @@ import WebKit
 
 final class WebViewViewController: UIViewController {
     
+    // MARK: - Private Dependencies:
+    private var viewModel: WebViewViewModelProtocol?
+    
     // MARK: - Private Properties:
+    private var progressObserver: NSKeyValueObservation?
+    
     private var url: URL?
-    private var progress: Float?
-    private var observedProgress: Progress?
     
     // MARK: - UI:
     private lazy var webView: WKWebView = {
@@ -25,9 +28,8 @@ final class WebViewViewController: UIViewController {
     
     private lazy var progressView: UIProgressView = {
         let progressView = UIProgressView()
-        progressView.progress = 0.5
         progressView.progressTintColor = .blackDay
-        progressView.trackTintColor = .grayUniversal
+        progressView.trackTintColor = .lightGray
         
         return progressView
     }()
@@ -37,11 +39,15 @@ final class WebViewViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        
+        bind()
+        setupProgressObserver()
         loadWebView()
     }
     
-    init(url: URL?) {
+    init(viewModel: WebViewViewModelProtocol?, url: URL?) {
         super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
         self.url = url
     }
     
@@ -50,8 +56,24 @@ final class WebViewViewController: UIViewController {
     }
     
     // MARK: - Private Methods:
-    private func setProgress() {
-        
+    private func bind() {
+        viewModel?.currentProgressObserver.bind(action: { [weak self] newValue in
+            guard let self = self else { return }
+            setNewProgressValue(newValue)
+        })
+    }
+    
+    private func setNewProgressValue(_ newValue: Float) {
+        progressView.progress = newValue
+    }
+    
+    private func setupProgressObserver() {
+        progressObserver = webView.observe(
+            \.estimatedProgress,
+             changeHandler: { [weak self] _,_  in
+                 guard let self = self else { return }
+                 self.viewModel?.setupProgres(newValue: webView.estimatedProgress)
+             })
     }
     
     private func loadWebView() {
