@@ -31,7 +31,12 @@ enum Resources {
     }
     
     enum Network {
-        static let defaultStringURL = "https://64c516a6c853c26efada7a11.mockapi.io"
-        static let metricaAPIKey = "de532bb8-8a8d-4118-94ad-dbde6f544bf6"
-    }
+            enum MockAPI {
+                static let defaultStringURL = "https://64c516a6c853c26efada7a11.mockapi.io"
+                enum Paths {
+                    static let users = "/api/v1/users"
+                }
+            }
+            static let metricaAPIKey = "de532bb8-8a8d-4118-94ad-dbde6f544bf6"
+        }
 }
