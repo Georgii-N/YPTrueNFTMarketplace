@@ -10,8 +10,10 @@ import UIKit
 final class CatalogViewController: UIViewController {
     
     // MARK: - Public Dependencies:
-    var viewModel: CatalogViewModelProtocol?
     var alertService: AlertServiceProtocol?
+    
+    // MARK: - Private Dependencies:
+    private var viewModel: CatalogViewModelProtocol?
     
     // MARK: - UI:    
     private lazy var catalogNFTTableView: UITableView = {
@@ -34,6 +36,15 @@ final class CatalogViewController: UIViewController {
         setupViews()
         setupConstraints()
         setupTargets()        
+    }
+    
+    init(viewModel: CatalogViewModelProtocol?) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Private Methods:

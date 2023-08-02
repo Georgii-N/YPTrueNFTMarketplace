@@ -13,14 +13,11 @@ final class TabBarController: UITabBarController {
         tabBar.standardAppearance = appearance
         tabBar.backgroundColor = .whiteDay
         
-        // Initizialize ViewControllers:
-        let catalogViewController = CatalogViewController()
-        
         // Initialize dependencies:
         let catalogViewModel = CatalogViewModel()
         
-        // Bind dependencies:
-        catalogViewController.viewModel = catalogViewModel
+        // Initizialize ViewControllers:
+        let catalogViewController = CatalogViewController(viewModel: catalogViewModel)
 
         let profileViewController = CustomNavigationController(rootViewController: UIViewController())
         let catalogNavigationController = CustomNavigationController(rootViewController: catalogViewController)

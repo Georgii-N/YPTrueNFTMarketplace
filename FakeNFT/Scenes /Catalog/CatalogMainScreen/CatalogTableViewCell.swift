@@ -9,6 +9,10 @@ import UIKit
 
 final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
     
+    // MARK: - Public Properties:
+    static var defaultReuseIdentifier = "CatalogTableViewCell"
+
+    // MARK: - UI:
     private lazy var contentNFTImageView = UIImageView()
     private lazy var nameOfNFTCollectionLabel: UILabel = {
         var label = UILabel()
@@ -18,8 +22,7 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
         return label
     }()
     
-    static var defaultReuseIdentifier = "CatalogTableViewCell"
-    
+    // MARK: - lifecycle:
     override func layoutSubviews() {
         super.layoutSubviews()
         selectionStyle = .none
@@ -29,6 +32,7 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
         setupConstraints()
     }
     
+    // MARK: - Public Methods:
     func setupContentImage(_ image: UIImage) {
         contentNFTImageView.image = image
     }
@@ -38,7 +42,7 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
     }
 }
 
-// MARK: Setup Views:
+// MARK: - Setup Views:
 extension CatalogTableViewCell {
     private func setupViews() {
         contentView.setupView(contentNFTImageView)
@@ -46,7 +50,7 @@ extension CatalogTableViewCell {
     }
 }
 
-// MARK: Setup Constraints:
+// MARK: - Setup Constraints:
 extension CatalogTableViewCell {
     private func setupConstraints() {
         NSLayoutConstraint.activate([

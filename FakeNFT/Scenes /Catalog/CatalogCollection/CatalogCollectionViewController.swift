@@ -9,8 +9,8 @@ import UIKit
 
 final class CatalogCollectionViewController: UIViewController {
     
-    // MARK: - Public Dependencies:
-    var viewModel: CatalogCollectionViewModelProtocol?
+    // MARK: - Private Dependencies:
+    private var viewModel: CatalogCollectionViewModelProtocol?
     
     // MARK: - UI:
     private lazy var collectionScrollView: UIScrollView = {
@@ -113,6 +113,13 @@ final class CatalogCollectionViewController: UIViewController {
         aboutAuthorLabel.text = viewModel.aboutAuthor
         collectionInformationLabel.text = viewModel.collectionInformation
     }
+    
+    private func switchToNFTCardViewController() {
+        let nftViewModel = NFTCardViewModel()
+        let viewController = NFTCardViewController(viewModel: nftViewModel)
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 }
 
 // MARK: - UITextViewDelegate
@@ -152,6 +159,12 @@ extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? NFTCollectionCell else { return }
+        
+        switchToNFTCardViewController()
     }
 }
 
