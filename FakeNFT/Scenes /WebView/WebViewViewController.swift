@@ -57,9 +57,16 @@ final class WebViewViewController: UIViewController {
     
     // MARK: - Private Methods:
     private func bind() {
+        // Value of progress view:
         viewModel?.currentProgressObserver.bind(action: { [weak self] newValue in
             guard let self = self else { return }
-            setNewProgressValue(newValue)
+            self.setNewProgressValue(newValue)
+        })
+        
+        // Ready to hide progress view:
+        viewModel?.isReadyToHideProgressViewObservable.bind(action: { [weak self] newValue in
+            guard let self = self else { return }
+            self.progressView.isHidden = newValue
         })
     }
     
