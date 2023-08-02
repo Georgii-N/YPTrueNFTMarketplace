@@ -22,7 +22,7 @@ final class DataProvider: DataProviderProtocol {
     func fetchUsersRating(completion: @escaping (Result<[User], Error>) -> Void) {
         
         let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.users, queryItems: nil)
-        let request = networkRequestModel(endpoint: url, httpMethod: .get, dto: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get, dto: nil)
         networkClient.send(request: request, type: UsersResponse.self) { result in
             switch result {
             case .success(let usersResponse):

@@ -1,6 +1,6 @@
 import Foundation
 
-struct networkRequestModel: NetworkRequest {
+struct NetworkRequestModel: NetworkRequest {
     var endpoint: URL?
     var httpMethod: HttpMethod
     var dto: Encodable?
