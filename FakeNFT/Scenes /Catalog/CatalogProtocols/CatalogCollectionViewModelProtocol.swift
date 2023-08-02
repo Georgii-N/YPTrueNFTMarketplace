@@ -13,5 +13,6 @@ protocol CatalogCollectionViewModelProtocol: AnyObject {
     var aboutAuthor: String { get }
     var author: String { get }
     var collectionInformation: String { get }
+    var aboutAuthorURLString: String { get }
     func setCurrentNFTImage(image: UIImage)
 }
