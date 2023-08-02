@@ -22,11 +22,14 @@
 		3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6806D229CBBE9600B4F915 /* NetworkRequest.swift */; };
 		3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6806D429CBBEC700B4F915 /* NetworkTask.swift */; };
 		3F6806D729CBC50A00B4F915 /* Cells + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6806D629CBC50A00B4F915 /* Cells + Extension.swift */; };
-		3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8C39029D2453B0081F015 /* ExampleRequest.swift */; };
+		3FC8C39129D2453B0081F015 /* networkRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8C39029D2453B0081F015 /* networkRequestModel.swift */; };
 		4005316E2A73DDFC008CAF3B /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */; };
 		400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531762A73EB4D008CAF3B /* BlackBaseButton.swift */; };
 		400531792A73EC58008CAF3B /* BaseWhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531782A73EC58008CAF3B /* BaseWhiteButton.swift */; };
 		4070B1182A76CADF00CF6E74 /* SortNavBarBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */; };
+		409EEFE32A7A707700B23FF8 /* DataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */; };
+		409EEFE72A7A710D00B23FF8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE62A7A710D00B23FF8 /* User.swift */; };
+		409EEFE92A7A711A00B23FF8 /* UsersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE82A7A711A00B23FF8 /* UsersResponse.swift */; };
 		40EEA7CF2A768BE700A1AE93 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EEA7CE2A768BE700A1AE93 /* AnalyticsService.swift */; };
 		7E71E3AB2A73BEFA00B0073D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E71E3AD2A73BEFA00B0073D /* Localizable.strings */; };
 		7E71E3B32A73CBF500B0073D /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E71E3B22A73CBF500B0073D /* Strings+Generated.swift */; };
@@ -88,11 +91,14 @@
 		3F6806D229CBBE9600B4F915 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		3F6806D429CBBEC700B4F915 /* NetworkTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTask.swift; sourceTree = "<group>"; };
 		3F6806D629CBC50A00B4F915 /* Cells + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cells + Extension.swift"; sourceTree = "<group>"; };
-		3FC8C39029D2453B0081F015 /* ExampleRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRequest.swift; sourceTree = "<group>"; };
+		3FC8C39029D2453B0081F015 /* networkRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkRequestModel.swift; sourceTree = "<group>"; };
 		4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		400531762A73EB4D008CAF3B /* BlackBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBaseButton.swift; sourceTree = "<group>"; };
 		400531782A73EC58008CAF3B /* BaseWhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWhiteButton.swift; sourceTree = "<group>"; };
 		4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortNavBarBaseButton.swift; sourceTree = "<group>"; };
+		409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderProtocol.swift; sourceTree = "<group>"; };
+		409EEFE62A7A710D00B23FF8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		409EEFE82A7A711A00B23FF8 /* UsersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersResponse.swift; sourceTree = "<group>"; };
 		40EEA7CE2A768BE700A1AE93 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		7E71E3AC2A73BEFA00B0073D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7E71E3B22A73CBF500B0073D /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
@@ -201,7 +207,7 @@
 			children = (
 				3F6806CF29CBBDB100B4F915 /* NetworkClient */,
 				7EC0B5342A76678100688EC9 /* AlertService.swift */,
-				7EC0B5382A766ABA00688EC9 /* DataProvider.swift */,
+				409EEFE42A7A707D00B23FF8 /* DataProvider */,
 				7EC0B53A2A766B7800688EC9 /* DateService.swift */,
 				40EEA7CE2A768BE700A1AE93 /* AnalyticsService.swift */,
 			);
@@ -221,6 +227,7 @@
 		3F6806C929CBBCAF00B4F915 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				409EEFE52A7A70F700B23FF8 /* Users */,
 				3F6806D829CC979D00B4F915 /* Network */,
 				7EC0B53C2A766C1C00688EC9 /* Observable.swift */,
 			);
@@ -230,7 +237,7 @@
 		3F6806CF29CBBDB100B4F915 /* NetworkClient */ = {
 			isa = PBXGroup;
 			children = (
-				3FC8C39029D2453B0081F015 /* ExampleRequest.swift */,
+				3FC8C39029D2453B0081F015 /* networkRequestModel.swift */,
 				3F6806D029CBBE6B00B4F915 /* NetworkClient.swift */,
 				3F6806D229CBBE9600B4F915 /* NetworkRequest.swift */,
 				3F6806D429CBBEC700B4F915 /* NetworkTask.swift */,
@@ -277,6 +284,24 @@
 				7E71E3B42A73F10A00B0073D /* TabBarController.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		409EEFE42A7A707D00B23FF8 /* DataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				7EC0B5382A766ABA00688EC9 /* DataProvider.swift */,
+				409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */,
+			);
+			path = DataProvider;
+			sourceTree = "<group>";
+		};
+		409EEFE52A7A70F700B23FF8 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				409EEFE62A7A710D00B23FF8 /* User.swift */,
+				409EEFE82A7A711A00B23FF8 /* UsersResponse.swift */,
+			);
+			path = Users;
 			sourceTree = "<group>";
 		};
 		40CD98062A73954E0081B233 /* SupportFiles */ = {
@@ -581,6 +606,8 @@
 				7EB78A5D2A77D84100BE892B /* CatalogCollectionViewController.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */,
+				409EEFE92A7A711A00B23FF8 /* UsersResponse.swift in Sources */,
+				7EB78A682A78EAD000BE892B /* NFTCollectionView.swift in Sources */,
 				7E71E3B52A73F10A00B0073D /* TabBarController.swift in Sources */,
 				7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */,
 				7EB78A9D2A7A730900BE892B /* WebViewViewController.swift in Sources */,
@@ -591,11 +618,13 @@
 				7EB78A8C2A79504800BE892B /* NFTCollectionView.swift in Sources */,
 				7EC0B5352A76678100688EC9 /* AlertService.swift in Sources */,
 				4070B1182A76CADF00CF6E74 /* SortNavBarBaseButton.swift in Sources */,
-				3FC8C39129D2453B0081F015 /* ExampleRequest.swift in Sources */,
+				409EEFE72A7A710D00B23FF8 /* User.swift in Sources */,
+				3FC8C39129D2453B0081F015 /* networkRequestModel.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* Cells + Extension.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				7EB78A622A77E0AC00BE892B /* CatalogCollectionViewModel.swift in Sources */,
 				7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */,
+				409EEFE32A7A707700B23FF8 /* DataProviderProtocol.swift in Sources */,
 				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
 				7EB78A552A77A01700BE892B /* CatalogViewModelProtocol.swift in Sources */,
