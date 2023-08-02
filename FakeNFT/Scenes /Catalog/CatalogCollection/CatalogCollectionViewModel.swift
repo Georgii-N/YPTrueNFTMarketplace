@@ -15,7 +15,6 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     var author = "John Doe"
     var collectionInformation = "Персиковый — как облака над закатным солнцем в океане. В этой коллекции совмещены трогательная нежность и живая игривость сказочных зефирных зверей."
     var aboutAuthorURLString = "https://practicum.yandex.ru/ios-developer/"
-    
     func setCurrentNFTImage(image: UIImage) {
         coverNFTImage = image
         

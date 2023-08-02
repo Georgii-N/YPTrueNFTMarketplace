@@ -12,6 +12,8 @@ final class WebViewViewController: UIViewController {
     
     // MARK: - Private Properties:
     private var url: URL?
+    private var progress: Float?
+    private var observedProgress: Progress?
     
     // MARK: - UI:
     private lazy var webView: WKWebView = {
@@ -19,6 +21,15 @@ final class WebViewViewController: UIViewController {
         webView.backgroundColor = .whiteDay
         
         return webView
+    }()
+    
+    private lazy var progressView: UIProgressView = {
+        let progressView = UIProgressView()
+        progressView.progress = 0.5
+        progressView.progressTintColor = .blackDay
+        progressView.trackTintColor = .grayUniversal
+        
+        return progressView
     }()
     
     // MARK: - Lifecycle:
@@ -39,6 +50,10 @@ final class WebViewViewController: UIViewController {
     }
     
     // MARK: - Private Methods:
+    private func setProgress() {
+        
+    }
+    
     private func loadWebView() {
         guard let url = url else { return }
         let request = URLRequest(url: url)
@@ -52,6 +67,7 @@ extension WebViewViewController {
     private func setupViews() {
         view.backgroundColor = .whiteDay
         view.setupView(webView)
+        view.setupView(progressView)
     }
 }
 
@@ -59,10 +75,16 @@ extension WebViewViewController {
 extension WebViewViewController {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            // WebView:
             webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            // ProgressView:
+            progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 }
