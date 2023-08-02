@@ -8,7 +8,12 @@
 import UIKit
 
 final class CatalogViewController: UIViewController {
-    // MARK: - UI:
+    
+    // MARK: - Public Dependencies:
+    var viewModel: CatalogViewModelProtocol?
+    var alertService: AlertServiceProtocol?
+    
+    // MARK: - UI:    
     private lazy var catalogNFTTableView: UITableView = {
         var tableView = UITableView()
         tableView.register(CatalogTableViewCell.self)
@@ -23,11 +28,7 @@ final class CatalogViewController: UIViewController {
     
     private lazy var sortButton = SortNavBarBaseButton()
     
-    // MARK: - Public Dependencies:
-    var viewModel: CatalogViewModelProtocol?
-    var alertService: AlertServiceProtocol?
-    
-    // MARK: - Override Methods:
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()

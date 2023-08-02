@@ -9,7 +9,17 @@ import UIKit
 
 final class CatalogCollectionViewController: UIViewController {
     
+    // MARK: - Public Dependencies:
+    var viewModel: CatalogCollectionViewModelProtocol?
+    
     // MARK: - UI:
+    private lazy var collectionScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 500)
+        
+        return scrollView
+    }()
+    
     private lazy var coverNFTImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 10
@@ -36,13 +46,20 @@ final class CatalogCollectionViewController: UIViewController {
     }()
     
     private lazy var authorLinkTextView: UITextView = {
-        let text = UITextView()
-        text.isEditable = false
-        text.isSelectable = true
-        text.font = .systemFont(ofSize: 15)
-        text.textColor = .blueUniversal
+        let textView = UITextView()
+        let attributeString = NSMutableAttributedString(string: "John Doe")
+        let link = "https://practicum.yandex.ru/ios-developer/"
+        attributeString.addAttribute(.link, value: link, range: NSRange(location: 0, length: attributeString.length))
+        textView.attributedText = attributeString
+        textView.contentInset = UIEdgeInsets(top: -9, left: 0, bottom: 0, right: 0)
+        textView.dataDetectorTypes = .link
+        textView.delegate = self
+        textView.isEditable = false
+        textView.isSelectable = true
+        textView.font = .systemFont(ofSize: 15)
+        textView.textColor = .blueUniversal
         
-        return text
+        return textView
     }()
     
     private lazy var collectionInformationLabel: UILabel = {
@@ -54,19 +71,16 @@ final class CatalogCollectionViewController: UIViewController {
         return text
     }()
     
-    private lazy var nftCollection: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        collectionView.register(NFTCollectionCell.self)
-        collectionView.dataSource = self
-        collectionView.delegate = self
+    private lazy var nftCollection: NFTCollectionView = {
+        let collection = NFTCollectionView()
+        collection.isScrollEnabled = false
+        collection.dataSource = self
+        collection.delegate = self
         
-        return collectionView
+        return collection
     }()
     
-    // MARK: - Public Dependencies:
-    var viewModel: CatalogCollectionViewModelProtocol?
-    
-    // MARK: - Override Methods:
+    // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -94,14 +108,18 @@ final class CatalogCollectionViewController: UIViewController {
     private func setupNFTInfo() {
         guard let viewModel = viewModel else { return }
         
-        let attributedText = NSMutableAttributedString(string: viewModel.author,
-                                                       attributes: [NSAttributedString.Key.link: URL(string: "https://practicum.yandex.ru")!])
-        
         coverNFTImageView.image = viewModel.coverNFTImage
         nameOfNFTCollectionLabel.text = viewModel.nameOfNFTCollection
         aboutAuthorLabel.text = viewModel.aboutAuthor
-        authorLinkTextView.attributedText = attributedText
         collectionInformationLabel.text = viewModel.collectionInformation
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension CatalogCollectionViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        print("Hello")
+        return false
     }
 }
 
@@ -143,12 +161,13 @@ extension CatalogCollectionViewController {
         view.backgroundColor = .whiteDay
         navigationController?.navigationBar.backgroundColor = .clear
         
-        view.setupView(coverNFTImageView)
-        view.setupView(nameOfNFTCollectionLabel)
-        view.setupView(aboutAuthorLabel)
-        view.setupView(authorLinkTextView)
-        view.setupView(collectionInformationLabel)
-        view.setupView(nftCollection)
+        view.setupView(collectionScrollView)
+        collectionScrollView.setupView(coverNFTImageView)
+        collectionScrollView.setupView(nameOfNFTCollectionLabel)
+        collectionScrollView.setupView(aboutAuthorLabel)
+        collectionScrollView.setupView(authorLinkTextView)
+        collectionScrollView.setupView(collectionInformationLabel)
+        collectionScrollView.setupView(nftCollection)
     }
 }
 
@@ -156,34 +175,44 @@ extension CatalogCollectionViewController {
 extension CatalogCollectionViewController {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            // ScrollView:
+            collectionScrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
             // NFT image:
             coverNFTImageView.heightAnchor.constraint(equalToConstant: 310),
-            coverNFTImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            coverNFTImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            coverNFTImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            coverNFTImageView.topAnchor.constraint(equalTo: collectionScrollView.topAnchor),
+            coverNFTImageView.leadingAnchor.constraint(equalTo: collectionScrollView.leadingAnchor),
+            coverNFTImageView.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor),
             
             // Collection name:
             nameOfNFTCollectionLabel.topAnchor.constraint(equalTo: coverNFTImageView.bottomAnchor, constant: 16),
-            nameOfNFTCollectionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            nameOfNFTCollectionLabel.leadingAnchor.constraint(equalTo: collectionScrollView.leadingAnchor, constant: 16),
             
             // About author label:
             aboutAuthorLabel.topAnchor.constraint(equalTo: nameOfNFTCollectionLabel.bottomAnchor, constant: 13),
-            aboutAuthorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            aboutAuthorLabel.leadingAnchor.constraint(equalTo: collectionScrollView.leadingAnchor, constant: 16),
             
             // Author of collection:
             authorLinkTextView.topAnchor.constraint(equalTo: nameOfNFTCollectionLabel.bottomAnchor, constant: 12),
             authorLinkTextView.leadingAnchor.constraint(equalTo: aboutAuthorLabel.trailingAnchor, constant: 4),
+            authorLinkTextView.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor, constant: 16),
+            authorLinkTextView.bottomAnchor.constraint(equalTo: aboutAuthorLabel.bottomAnchor),
             
             // Information of collection:
             collectionInformationLabel.topAnchor.constraint(equalTo: aboutAuthorLabel.bottomAnchor, constant: 5),
-            collectionInformationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            collectionInformationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            collectionInformationLabel.leadingAnchor.constraint(equalTo: collectionScrollView.leadingAnchor, constant: 16),
+            collectionInformationLabel.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor, constant: -16),
             
             // CollectionView:
+            nftCollection.widthAnchor.constraint(equalToConstant: view.frame.width),
+            nftCollection.heightAnchor.constraint(equalToConstant: 800),
             nftCollection.topAnchor.constraint(equalTo: collectionInformationLabel.bottomAnchor),
-            nftCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            nftCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            nftCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            nftCollection.leadingAnchor.constraint(equalTo: collectionScrollView.leadingAnchor),
+            nftCollection.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor),
+            nftCollection.bottomAnchor.constraint(equalTo: collectionScrollView.bottomAnchor)
         ])
     }
 }
@@ -191,6 +220,5 @@ extension CatalogCollectionViewController {
 // MARK: - Setup Targets:
 extension CatalogCollectionViewController {
     private func setupTargets() {
-        
     }
 }
