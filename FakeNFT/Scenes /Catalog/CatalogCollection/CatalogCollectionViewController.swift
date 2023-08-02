@@ -48,7 +48,7 @@ final class CatalogCollectionViewController: UIViewController {
     private lazy var authorLinkTextView: UITextView = {
         let textView = UITextView()
         let attributeString = NSMutableAttributedString(string: "John Doe")
-        let link = "https://practicum.yandex.ru/ios-developer/"
+        let link = viewModel?.aboutAuthorURLString ?? ""
         attributeString.addAttribute(.link, value: link, range: NSRange(location: 0, length: attributeString.length))
         textView.attributedText = attributeString
         textView.contentInset = UIEdgeInsets(top: -9, left: 0, bottom: 0, right: 0)
@@ -124,8 +124,13 @@ final class CatalogCollectionViewController: UIViewController {
 
 // MARK: - UITextViewDelegate
 extension CatalogCollectionViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        print("Hello")
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        guard let viewModel = viewModel else { return false }
+        
+        let webViewController = WebViewViewController(url: URL)
+        
+        navigationController?.pushViewController(webViewController, animated: true)
+        
         return false
     }
 }
