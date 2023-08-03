@@ -1,10 +1,3 @@
-//
-//  NFTCollectionCell.swift
-//  FakeNFT
-//
-//  Created by Евгений on 01.08.2023.
-//
-
 import UIKit
 
 final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
