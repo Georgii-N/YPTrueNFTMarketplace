@@ -25,8 +25,10 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
     // MARK: - lifecycle:
     override func layoutSubviews() {
         super.layoutSubviews()
+        backgroundColor = .whiteDay
         selectionStyle = .none
         layer.cornerRadius = 12
+        layer.masksToBounds = true
         
         setupViews()
         setupConstraints()

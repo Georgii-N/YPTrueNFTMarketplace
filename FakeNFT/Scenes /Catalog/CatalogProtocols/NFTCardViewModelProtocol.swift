@@ -8,5 +8,7 @@
 import Foundation
 
 protocol NFTCardViewModelProtocol: AnyObject {
-    
+    var mockNFTImages: [String] { get }
+    var mockNFTNames: [String] { get }
+    var mockNFTPrices: [String] { get }
 }

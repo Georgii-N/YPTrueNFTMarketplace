@@ -52,6 +52,7 @@ final class CatalogCollectionViewController: UIViewController {
         attributeString.addAttribute(.link, value: link, range: NSRange(location: 0, length: attributeString.length))
         textView.attributedText = attributeString
         textView.contentInset = UIEdgeInsets(top: -9, left: 0, bottom: 0, right: 0)
+        textView.backgroundColor = .whiteDay
         textView.dataDetectorTypes = .link
         textView.delegate = self
         textView.isEditable = false
@@ -136,10 +137,6 @@ extension CatalogCollectionViewController: UITextViewDelegate {
 
 // MARK: - UICollectionViewDataSource
 extension CatalogCollectionViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         10
     }
@@ -166,7 +163,7 @@ extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? NFTCollectionCell else { return }
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? NFTCollectionCell else { return }
         
         switchToNFTCardViewController()
     }
@@ -192,38 +189,31 @@ extension CatalogCollectionViewController {
 extension CatalogCollectionViewController {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            // ScrollView:
             collectionScrollView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            // NFT image:
             coverNFTImageView.heightAnchor.constraint(equalToConstant: 310),
             coverNFTImageView.topAnchor.constraint(equalTo: collectionScrollView.topAnchor),
             coverNFTImageView.leadingAnchor.constraint(equalTo: collectionScrollView.leadingAnchor),
             coverNFTImageView.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor),
             
-            // Collection name:
             nameOfNFTCollectionLabel.topAnchor.constraint(equalTo: coverNFTImageView.bottomAnchor, constant: 16),
             nameOfNFTCollectionLabel.leadingAnchor.constraint(equalTo: collectionScrollView.leadingAnchor, constant: 16),
             
-            // About author label:
             aboutAuthorLabel.topAnchor.constraint(equalTo: nameOfNFTCollectionLabel.bottomAnchor, constant: 13),
             aboutAuthorLabel.leadingAnchor.constraint(equalTo: collectionScrollView.leadingAnchor, constant: 16),
             
-            // Author of collection:
             authorLinkTextView.topAnchor.constraint(equalTo: nameOfNFTCollectionLabel.bottomAnchor, constant: 12),
             authorLinkTextView.leadingAnchor.constraint(equalTo: aboutAuthorLabel.trailingAnchor, constant: 4),
             authorLinkTextView.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor, constant: 16),
             authorLinkTextView.bottomAnchor.constraint(equalTo: aboutAuthorLabel.bottomAnchor),
             
-            // Information of collection:
             collectionInformationLabel.topAnchor.constraint(equalTo: aboutAuthorLabel.bottomAnchor, constant: 5),
             collectionInformationLabel.leadingAnchor.constraint(equalTo: collectionScrollView.leadingAnchor, constant: 16),
             collectionInformationLabel.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor, constant: -16),
             
-            // CollectionView:
             nftCollection.widthAnchor.constraint(equalToConstant: view.frame.width),
             nftCollection.heightAnchor.constraint(equalToConstant: 800),
             nftCollection.topAnchor.constraint(equalTo: collectionInformationLabel.bottomAnchor),
