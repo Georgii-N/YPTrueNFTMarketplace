@@ -35,7 +35,9 @@ final class CatalogViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        setupTargets()        
+        setupTargets()
+        
+        bind()
     }
     
     init(viewModel: CatalogViewModelProtocol?) {
@@ -48,6 +50,16 @@ final class CatalogViewController: UIViewController {
     }
     
     // MARK: - Private Methods:
+    private func bind() {
+        print("BIND")
+        viewModel?.nftCollectionsObservable.bind(action: { [weak self] newValue in
+            guard let self = self else { return }
+            print("newValue", newValue)
+
+            self.catalogNFTTableView.reloadData()
+        })
+    }
+    
     private func sortNFT(_ sortOptions: SortingOption) {
         switch sortOptions {
         case .byName:
@@ -83,14 +95,15 @@ extension CatalogViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let viewModel = viewModel,
-              let image = viewModel.mockImages[indexPath.row] else { return UITableViewCell() }
+              let image = viewModel.mockImages[indexPath.row],
+              let collections = viewModel.nftCollectionsObservable.wrappedValue?[indexPath.row] else { return UITableViewCell() }
         
         let cell: CatalogTableViewCell = tableView.dequeueReusableCell()
         
-        let cellLabel = viewModel.mockLabels[indexPath.row]
+        let cellLabel = collections.name
         
         cell.setupContentImage(image)
-        cell.setupLabelText(text: cellLabel)
+        cell.setupLabelText(text: 123)
         
         return cell
     }

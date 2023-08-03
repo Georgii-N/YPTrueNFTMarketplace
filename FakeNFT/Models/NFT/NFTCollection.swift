@@ -1,7 +1,7 @@
 import Foundation
 
 struct NFTCollection: Decodable {
-    let createdAt: Date
+    let createdAt: String
     let name: String
     let cover: String
     let nfts: [String]

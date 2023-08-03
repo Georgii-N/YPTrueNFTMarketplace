@@ -14,7 +14,7 @@ final class TabBarController: UITabBarController {
         tabBar.backgroundColor = .whiteDay
         
         // Initialize dependencies:
-        let catalogViewModel = CatalogViewModel()
+        let catalogViewModel = CatalogViewModel(dataProvider: DataProvider())
         
         // Initizialize ViewControllers:
         let catalogViewController = CatalogViewController(viewModel: catalogViewModel)

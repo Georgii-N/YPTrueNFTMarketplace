@@ -8,6 +8,8 @@
 import UIKit
 
 protocol CatalogViewModelProtocol: AnyObject {
+    var dataProvider: DataProviderProtocol? { get }
+    var nftCollectionsObservable: Observable<NFTCollections?> { get }
     var mockImages: [UIImage?] { get }
     var mockLabels: [String] { get }
 }
