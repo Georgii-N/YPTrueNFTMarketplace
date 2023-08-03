@@ -19,4 +19,3 @@ extension UserResponse {
                     id: self.id)
     }
 }
-

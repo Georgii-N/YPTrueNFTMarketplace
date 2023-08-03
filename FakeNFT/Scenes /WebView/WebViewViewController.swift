@@ -1,10 +1,3 @@
-//
-//  WebViewController.swift
-//  FakeNFT
-//
-//  Created by Евгений on 02.08.2023.
-//
-
 import UIKit
 import WebKit
 
@@ -79,7 +72,7 @@ final class WebViewViewController: UIViewController {
             \.estimatedProgress,
              changeHandler: { [weak self] _,_  in
                  guard let self = self else { return }
-                 self.viewModel?.setupProgres(newValue: webView.estimatedProgress)
+                 self.viewModel?.setupProgres(newValue: self.webView.estimatedProgress)
              })
     }
     
