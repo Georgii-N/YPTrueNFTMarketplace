@@ -16,7 +16,7 @@ final class StatisticUserViewController: UIViewController {
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 14
+        imageView.layer.cornerRadius = 35
         return imageView
     }()
     
