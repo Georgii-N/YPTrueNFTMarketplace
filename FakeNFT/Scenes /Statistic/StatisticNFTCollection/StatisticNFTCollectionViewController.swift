@@ -2,6 +2,9 @@ import UIKit
 
 final class StatisticNFTCollectionViewController: UIViewController {
     
+    // MARK: - Private Dependencies
+    private var statisticNFTViewModel: StatisticNFTCollectionViewModel
+    
     // MARK: - UI
     private lazy var collectionView: NFTCollectionView = {
         let collectionView = NFTCollectionView()
@@ -18,10 +21,30 @@ final class StatisticNFTCollectionViewController: UIViewController {
         setupConstraints()
         setupUI()
     }
+    
+    // MARK: - Init
+    init(statisticNFTViewModel: StatisticNFTCollectionViewModel) {
+        self.statisticNFTViewModel = statisticNFTViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 // MARK: - Private Functions
 extension StatisticNFTCollectionViewController {
+    
+    private func bind() {
+        statisticNFTViewModel.$NFTcards.bind { [weak self] _ in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                print("PRINT GOTOVO")
+            }
+        }
+    }
+    
     private func setupViews() {
         view.setupView(collectionView)
     }

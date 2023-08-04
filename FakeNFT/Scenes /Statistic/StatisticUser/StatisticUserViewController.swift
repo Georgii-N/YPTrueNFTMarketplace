@@ -178,8 +178,8 @@ extension StatisticUserViewController: UITableViewDataSource {
 // MARK: - TableViewDelegate
 extension StatisticUserViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let statisticNFTCollectionViewModel = StatisticNFTCollectionViewModel()
-        let statisticNFTCollectionViewController = StatisticNFTCollectionViewController()
+        let statisticNFTCollectionViewModel = StatisticNFTCollectionViewModel(userId: statisticUserViewModel.profile[0].id)
+        let statisticNFTCollectionViewController = StatisticNFTCollectionViewController(statisticNFTViewModel: statisticNFTCollectionViewModel)
         navigationController?.pushViewController(statisticNFTCollectionViewController, animated: true)
         
     }

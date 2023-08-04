@@ -23,7 +23,7 @@ final class StatisticUserViewModel {
         dataProvider.fetchProfileId(userId: profileId) { [weak self] result in
             switch result {
             case .success(let profile):
-                self?.profile = profile
+                self?.profile.append(profile)
             case .failure(let error):
                 assertionFailure(error.localizedDescription)
             }
