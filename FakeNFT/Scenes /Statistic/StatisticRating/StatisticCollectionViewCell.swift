@@ -11,7 +11,7 @@ final class StatisticCollectionViewCell: UICollectionViewCell {
                 avatarImageView.kf.setImage(with: url)
             }
             nameLabel.text = statisticCellModel.name
-            ratingPointsLabel.text = ratingPointsLabel.text
+            ratingPointsLabel.text = statisticCellModel.rating
         }
     }
     
