@@ -33,4 +33,41 @@ final class DataProvider: DataProviderProtocol {
             }
         }
     }
+    
+    func fetchProfileId(userId: String, completion: @escaping (Result<UserResponse, Error>) -> Void) {
+        
+        let path = Resources.Network.MockAPI.Paths.users + "/\(userId)"
+        let url = createURLWithPathAndQueryItems(path: path, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: UserResponse.self) { result in
+            
+            switch result {
+            case .success(let profileId):
+                
+                completion(.success(profileId))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchUsersNFT(userId: String, nftsId: [Int]?, completion: @escaping (Result<NFTCards, Error>) -> Void) {
+        
+        let queryItems = [URLQueryItem(name: "filter", value: userId)]
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.nftCard, queryItems: queryItems)
+        
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: NFTCards.self) { result in
+            switch result {
+            case .success(let result):
+                var result = result.filter { userId.contains($0.author) }
+                if let nftsId {
+                    result = result.filter { nftsId.contains(Int($0.id) ?? 0)}
+                }
+                completion(.success(result))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
