@@ -33,4 +33,18 @@ final class DataProvider: DataProviderProtocol {
             }
         }
     }
+    
+    func fetchProfileId(userId: String, completion: @escaping (Result<UsersResponse, Error>) -> Void) {
+        let queryItems = [URLQueryItem(name: "user_id", value: userId)]
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.users, queryItems: queryItems)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: UsersResponse.self) { result in
+            switch result {
+            case .success(let profileId):
+                completion(.success(profileId))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

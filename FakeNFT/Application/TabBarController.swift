@@ -5,6 +5,7 @@ final class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabBar()
+        selectedIndex = 3
     }
 
     func setTabBar() {
@@ -12,11 +13,13 @@ final class TabBarController: UITabBarController {
 
         tabBar.standardAppearance = appearance
         tabBar.backgroundColor = .whiteDay
+        
+        let statisticViewModel = StatisticViewModel()
 
         let profileViewController = CustomNavigationController(rootViewController: UIViewController())
         let catalogViewController = CustomNavigationController(rootViewController: UIViewController())
         let cartViewController = CustomNavigationController(rootViewController: UIViewController())
-        let statisticViewController = CustomNavigationController(rootViewController: UIViewController())
+        let statisticViewController = CustomNavigationController(rootViewController: StatisticViewController(statisticViewModel: statisticViewModel))
 
         profileViewController.tabBarItem = UITabBarItem(
             title: L10n.Profile.title,

@@ -1,0 +1,61 @@
+import UIKit
+
+final class StatisticNFTCollectionViewController: UIViewController {
+    
+    // MARK: - UI
+    private lazy var collectionView: NFTCollectionView = {
+        let collectionView = NFTCollectionView()
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        return collectionView
+    }()
+    
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupViews()
+        setupConstraints()
+        setupUI()
+    }
+}
+
+// MARK: - Private Functions
+extension StatisticNFTCollectionViewController {
+    private func setupViews() {
+        view.setupView(collectionView)
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    private func setupUI() {
+        view.backgroundColor = .white
+        self.title = L10n.Statistic.Profile.ButtonCollection.title
+    }
+}
+
+// MARK: - DataSource
+extension StatisticNFTCollectionViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+        cell.setNFTImageView(image: Resources.Images.TabBar.profileImageSelected ?? UIImage())
+        cell.setNFTName(name: "GEORGII")
+        return cell
+    }
+}
+
+// MARK: - DelegateFlowLayout
+extension StatisticNFTCollectionViewController: UICollectionViewDelegateFlowLayout {
+    
+}
