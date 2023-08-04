@@ -158,11 +158,12 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let myNFTVC = MyNFTViewController()
-            myNFTVC.modalPresentationStyle = .fullScreen
-            present(myNFTVC, animated: true)
+            myNFTVC.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(myNFTVC, animated: true)
         case 1:
-            let aqwe = 1
-            // переход 2
+            let favouritesNFT = FavouritesNFTViewController()
+            favouritesNFT.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(favouritesNFT, animated: true)
         case 2:
             let aqwe = 1
             // переход 3

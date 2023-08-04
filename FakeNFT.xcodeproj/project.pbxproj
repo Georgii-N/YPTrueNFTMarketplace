@@ -40,7 +40,12 @@
 		7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D22A73FD9A001E8C67 /* Resources.swift */; };
 		E93BBE092A793E80000BEAE0 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93BBE082A793E7F000BEAE0 /* EditProfileViewController.swift */; };
 		E93BBE0B2A7955F6000BEAE0 /* MyNFTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93BBE0A2A7955F6000BEAE0 /* MyNFTViewController.swift */; };
+		E93BBE102A7B3B24000BEAE0 /* MyNFTCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93BBE0F2A7B3B24000BEAE0 /* MyNFTCollectionViewCell.swift */; };
+		E93BBE132A7C31B4000BEAE0 /* MyNFTCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93BBE122A7C31B4000BEAE0 /* MyNFTCellViewModel.swift */; };
+		E93BBE152A7C823F000BEAE0 /* FavouritesNFTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93BBE142A7C823E000BEAE0 /* FavouritesNFTViewController.swift */; };
+		E93BBE172A7C83C5000BEAE0 /* FavouritesNFTCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93BBE162A7C83C5000BEAE0 /* FavouritesNFTCollectionViewCell.swift */; };
 		E9CA66E22A779D2B00C7A218 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA66E12A779D2B00C7A218 /* ProfileViewController.swift */; };
+		E9CFDB0E2A7C88BB006E10DD /* FavouritesNFTCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CFDB0D2A7C88BB006E10DD /* FavouritesNFTCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,7 +101,12 @@
 		7EF4C5D22A73FD9A001E8C67 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		E93BBE082A793E7F000BEAE0 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		E93BBE0A2A7955F6000BEAE0 /* MyNFTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNFTViewController.swift; sourceTree = "<group>"; };
+		E93BBE0F2A7B3B24000BEAE0 /* MyNFTCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNFTCollectionViewCell.swift; sourceTree = "<group>"; };
+		E93BBE122A7C31B4000BEAE0 /* MyNFTCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNFTCellViewModel.swift; sourceTree = "<group>"; };
+		E93BBE142A7C823E000BEAE0 /* FavouritesNFTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesNFTViewController.swift; sourceTree = "<group>"; };
+		E93BBE162A7C83C5000BEAE0 /* FavouritesNFTCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesNFTCollectionViewCell.swift; sourceTree = "<group>"; };
 		E9CA66E12A779D2B00C7A218 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E9CFDB0D2A7C88BB006E10DD /* FavouritesNFTCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesNFTCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,12 +321,33 @@
 			path = "FakeNFT/Scenes /Cart";
 			sourceTree = SOURCE_ROOT;
 		};
+		E93BBE0E2A7B3B0B000BEAE0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E93BBE112A7C319E000BEAE0 /* Models */,
+				E93BBE0F2A7B3B24000BEAE0 /* MyNFTCollectionViewCell.swift */,
+				E93BBE162A7C83C5000BEAE0 /* FavouritesNFTCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E93BBE112A7C319E000BEAE0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E93BBE122A7C31B4000BEAE0 /* MyNFTCellViewModel.swift */,
+				E9CFDB0D2A7C88BB006E10DD /* FavouritesNFTCellViewModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		E9CA66E02A779D0600C7A218 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				E93BBE0E2A7B3B0B000BEAE0 /* Cells */,
 				E9CA66E12A779D2B00C7A218 /* ProfileViewController.swift */,
 				E93BBE082A793E7F000BEAE0 /* EditProfileViewController.swift */,
 				E93BBE0A2A7955F6000BEAE0 /* MyNFTViewController.swift */,
+				E93BBE142A7C823E000BEAE0 /* FavouritesNFTViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -502,9 +533,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E93BBE092A793E80000BEAE0 /* EditProfileViewController.swift in Sources */,
+				E93BBE152A7C823F000BEAE0 /* FavouritesNFTViewController.swift in Sources */,
+				E93BBE102A7B3B24000BEAE0 /* MyNFTCollectionViewCell.swift in Sources */,
 				7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */,
 				3F478ECF29DB474E00F6D39E /* UIColor + Extension.swift in Sources */,
 				7EF4C5D12A73F86C001E8C67 /* Colors.swift in Sources */,
+				E93BBE132A7C31B4000BEAE0 /* MyNFTCellViewModel.swift in Sources */,
 				3F478ED129DB476500F6D39E /* UIFont + Extension.swift in Sources */,
 				7EC0B5392A766ABA00688EC9 /* DataProvider.swift in Sources */,
 				400531792A73EC58008CAF3B /* BaseWhiteButton.swift in Sources */,
@@ -513,9 +547,11 @@
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */,
 				7E71E3B52A73F10A00B0073D /* TabBarController.swift in Sources */,
+				E93BBE172A7C83C5000BEAE0 /* FavouritesNFTCollectionViewCell.swift in Sources */,
 				E93BBE0B2A7955F6000BEAE0 /* MyNFTViewController.swift in Sources */,
 				7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
+				E9CFDB0E2A7C88BB006E10DD /* FavouritesNFTCellViewModel.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				40EEA7CF2A768BE700A1AE93 /* AnalyticsService.swift in Sources */,
 				7EC0B5352A76678100688EC9 /* AlertService.swift in Sources */,

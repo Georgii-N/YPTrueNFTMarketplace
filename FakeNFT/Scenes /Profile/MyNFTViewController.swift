@@ -8,64 +8,80 @@
 import UIKit
 
 class MyNFTViewController: UIViewController {
+    
+    let mockNFTData: [MyNFTCellViewModel] = [
+        (MyNFTCellViewModel(NFTImage: UIImage(named: "NFTcard") ?? UIImage(), NFTName: "Lilo", NFTRateImage: UIImage(named: "rate") ?? UIImage(), NFTFromName: "от John Doe", NFTPrice: "1,78")),
+        (MyNFTCellViewModel(NFTImage: UIImage(named: "NFTcard") ?? UIImage(), NFTName: "Lilo", NFTRateImage: UIImage(named: "rate") ?? UIImage(), NFTFromName: "от John Doe", NFTPrice: "1,78")),
+        (MyNFTCellViewModel(NFTImage: UIImage(named: "NFTcard") ?? UIImage(), NFTName: "Lilo", NFTRateImage: UIImage(named: "rate") ?? UIImage(), NFTFromName: "от John Doe", NFTPrice: "1,78")),
+        (MyNFTCellViewModel(NFTImage: UIImage(named: "NFTcard") ?? UIImage(), NFTName: "Lilo", NFTRateImage: UIImage(named: "rate") ?? UIImage(), NFTFromName: "от John Doe", NFTPrice: "1,78")),
+        (MyNFTCellViewModel(NFTImage: UIImage(named: "NFTcard") ?? UIImage(), NFTName: "Lilo", NFTRateImage: UIImage(named: "rate") ?? UIImage(), NFTFromName: "от John Doe", NFTPrice: "1,78"))
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBackground()
+        setupUI()
+        setupViews()
         setupConstraints()
     }
     
-    private func setupBackground() {
+    private func setupUI() {
         view.backgroundColor = .whiteDay
         view.tintColor = .blackDay
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "goBack"), style: .plain, target: self, action: #selector(goBackButtonTapped))
+        title = "Мои NFT"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(sortButtonTapped))
     }
     
-    private lazy var goBackButton: UIButton = {
-        let goBackButton = UIButton()
-        goBackButton.setImage(UIImage(named: "goBack"), for: .normal)
-        goBackButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(goBackButton)
-        return goBackButton
-    }()
-    
-    private lazy var myNFTTitle: UILabel = {
-        let myNFTTitle = UILabel()
-        myNFTTitle.font = .bodyBold
-        myNFTTitle.text = "Мои NFT"
-        myNFTTitle.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(myNFTTitle)
-        return myNFTTitle
-    }()
-    
-    private lazy var sortButton: UIButton = {
-        let sortButton = UIButton()
-        sortButton.setImage(UIImage(named: "sort"), for: .normal)
-        sortButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(sortButton)
-        return sortButton
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(MyNFTCollectionViewCell.self)
+        return collectionView
     }()
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            // Back Button
-            goBackButton.widthAnchor.constraint(equalToConstant: 24),
-            goBackButton.heightAnchor.constraint(equalToConstant: 24),
-            goBackButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 55),
-            goBackButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            
-            // MyNFT Title
-            myNFTTitle.centerYAnchor.constraint(equalTo: goBackButton.centerYAnchor),
-            myNFTTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            // Sort Button
-            sortButton.centerYAnchor.constraint(equalTo: myNFTTitle.centerYAnchor),
-            sortButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -9)
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 36),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    private func setupViews() {
+        view.setupView(collectionView)
     }
     
     // MARK: - Actions
     
     @objc private func goBackButtonTapped() {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func sortButtonTapped() {
+        self.dismiss(animated: true)
+    }
+}
+
+extension MyNFTViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return mockNFTData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: MyNFTCollectionViewCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+        cell.setupCellData(mockNFTData[indexPath.row])
+        return cell
+    }
+}
+
+extension MyNFTViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: collectionView.frame.width, height: 108)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 32
     }
 }
