@@ -8,6 +8,15 @@
 import UIKit
 
 final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
+    
+    // MARK: - Observable Values:
+    var collectionObservable: Observable<NFTCollection> {
+        $collection
+    }
+    
+    @Observable
+    private(set) var collection: NFTCollection
+    
     // MARK: - Constants and Variables
     var coverNFTImage: UIImage?
     var nameOfNFTCollection = "Peach"
@@ -17,6 +26,9 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     var aboutAuthorURLString = "https://practicum.yandex.ru/ios-developer/"
     func setCurrentNFTImage(image: UIImage) {
         coverNFTImage = image
-        
+    }
+    
+    init(collection: NFTCollection) {
+        self.collection = collection
     }
 }

@@ -21,7 +21,9 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
             let url = URL(string: collection.cover.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
             let processor = DownsamplingImageProcessor(size: size) |> RoundCornerImageProcessor(cornerRadius: 12)
             contentNFTImageView.kf.indicatorType = .activity
-            contentNFTImageView.kf.setImage(with: url, options: [.processor(processor), .transition(.fade(1))])
+            contentNFTImageView.kf.setImage(with: url, options: [.processor(processor),
+                                                                 .transition(.fade(1)),
+                                                                 .cacheOriginalImage])
             nameOfNFTCollectionLabel.text = collection.name + " (\(collection.nfts.count))"
         }
     }
@@ -57,6 +59,10 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
     // MARK: - Public Methods:
     func setupCollectionModel(model: NFTCollection) {
         collection = model
+    }
+    
+    func getCollectionModel() -> NFTCollection {
+        collection ?? NFTCollection(createdAt: "", name: "", cover: "", nfts: [], description: "", author: "", id: "")
     }
 }
 

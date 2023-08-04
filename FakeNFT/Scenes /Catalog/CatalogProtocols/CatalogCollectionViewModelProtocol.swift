@@ -8,6 +8,7 @@
 import UIKit
 
 protocol CatalogCollectionViewModelProtocol: AnyObject {
+    var collectionObservable: Observable<NFTCollection> { get }
     var coverNFTImage: UIImage? { get }
     var nameOfNFTCollection: String { get }
     var aboutAuthor: String { get }

@@ -16,7 +16,7 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     var nftCollectionsObservable: Observable<NFTCollections?> {
         $nftCollections
     }
-    
+
     @Observable
     private(set) var nftCollections: NFTCollections?
         

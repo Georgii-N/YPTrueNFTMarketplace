@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class CatalogCollectionViewController: UIViewController {
     
@@ -107,12 +108,23 @@ final class CatalogCollectionViewController: UIViewController {
     
     // MARK: - Private Methods:
     private func setupNFTInfo() {
-        guard let viewModel = viewModel else { return }
+        guard let collectionModel = viewModel?.collectionObservable.wrappedValue else { return }
+       
+        setNFTCollectionImage(model: collectionModel)
+        nameOfNFTCollectionLabel.text = collectionModel.name
+        aboutAuthorLabel.text = viewModel?.aboutAuthor
+        collectionInformationLabel.text = collectionModel.description
+    }
+    
+    private func setNFTCollectionImage(model: NFTCollection) {
+        guard let urlString = model.cover.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        let url = URL(string: urlString)
+        let size = CGSize(width: collectionScrollView.frame.width, height: 310)
+        let processor = DownsamplingImageProcessor(
+            size: size) |> RoundCornerImageProcessor(cornerRadius: 10)
         
-        coverNFTImageView.image = viewModel.coverNFTImage
-        nameOfNFTCollectionLabel.text = viewModel.nameOfNFTCollection
-        aboutAuthorLabel.text = viewModel.aboutAuthor
-        collectionInformationLabel.text = viewModel.collectionInformation
+        coverNFTImageView.kf.indicatorType = .activity
+        coverNFTImageView.kf.setImage(with: url, options: [.processor(processor), .transition(.fade(1))])
     }
     
     private func switchToNFTCardViewController() {

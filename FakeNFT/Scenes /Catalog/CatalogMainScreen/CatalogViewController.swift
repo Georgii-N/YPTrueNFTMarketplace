@@ -10,11 +10,9 @@ import Kingfisher
 
 final class CatalogViewController: UIViewController {
     
-    // MARK: - Public Dependencies:
-    var alertService: AlertServiceProtocol?
-    
     // MARK: - Private Dependencies:
     private var viewModel: CatalogViewModelProtocol?
+    private var alertService: AlertServiceProtocol?
     
     // MARK: - UI:    
     private lazy var catalogNFTTableView: UITableView = {
@@ -113,7 +111,10 @@ extension CatalogViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension CatalogViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let catalogCollectionViewModel = CatalogCollectionViewModel()
+        guard let cell = tableView.cellForRow(at: indexPath) as? CatalogTableViewCell else { return }
+        
+        let collectionModel = cell.getCollectionModel()
+        let catalogCollectionViewModel = CatalogCollectionViewModel(collection: collectionModel)
         let viewController = CatalogCollectionViewController(viewModel: catalogCollectionViewModel)
         
         navigationController?.pushViewController(viewController, animated: true)
