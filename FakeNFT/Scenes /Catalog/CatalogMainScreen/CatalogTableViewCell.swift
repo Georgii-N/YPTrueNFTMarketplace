@@ -6,14 +6,35 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
     
     // MARK: - Public Properties:
     static var defaultReuseIdentifier = "CatalogTableViewCell"
-
+    
+    // MARK: - Constants and Variables:
+    private var collection: NFTCollection? {
+        didSet {
+            guard let collection = collection else { return }
+            let size = CGSize(width: contentView.frame.width, height: 140)
+            let url = URL(string: collection.cover.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+            let processor = DownsamplingImageProcessor(size: size) |> RoundCornerImageProcessor(cornerRadius: 12)
+            contentNFTImageView.kf.indicatorType = .activity
+            contentNFTImageView.kf.setImage(with: url, options: [.processor(processor), .transition(.fade(1))])
+            nameOfNFTCollectionLabel.text = collection.name + " (\(collection.nfts.count))"
+        }
+    }
+    
     // MARK: - UI:
-    private lazy var contentNFTImageView = UIImageView()
+    private lazy var contentNFTImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 12
+        imageView.backgroundColor = .lightGrayDay
+        
+        return imageView
+    }()
+    
     private lazy var nameOfNFTCollectionLabel: UILabel = {
         var label = UILabel()
         label.numberOfLines = 1
@@ -27,7 +48,6 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
         super.layoutSubviews()
         backgroundColor = .whiteDay
         selectionStyle = .none
-        layer.cornerRadius = 12
         layer.masksToBounds = true
         
         setupViews()
@@ -35,12 +55,8 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     
     // MARK: - Public Methods:
-    func setupContentImage(_ image: UIImage) {
-        contentNFTImageView.image = image
-    }
-    
-    func setupLabelText(text: String) {
-        nameOfNFTCollectionLabel.text = text
+    func setupCollectionModel(model: NFTCollection) {
+        collection = model
     }
 }
 

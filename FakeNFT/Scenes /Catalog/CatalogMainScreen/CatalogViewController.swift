@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class CatalogViewController: UIViewController {
     
@@ -51,12 +52,11 @@ final class CatalogViewController: UIViewController {
     
     // MARK: - Private Methods:
     private func bind() {
-        print("BIND")
-        viewModel?.nftCollectionsObservable.bind(action: { [weak self] newValue in
+        viewModel?.nftCollectionsObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
-            print("newValue", newValue)
-
-            self.catalogNFTTableView.reloadData()
+            DispatchQueue.main.async {
+                self.catalogNFTTableView.reloadData()
+            }
         })
     }
     
@@ -90,20 +90,17 @@ final class CatalogViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension CatalogViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.mockImages.count ?? 0
+        let collections = viewModel?.nftCollectionsObservable.wrappedValue
+        return collections?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let viewModel = viewModel,
-              let image = viewModel.mockImages[indexPath.row],
-              let collections = viewModel.nftCollectionsObservable.wrappedValue?[indexPath.row] else { return UITableViewCell() }
-        
+        guard let viewModel = viewModel else { return UITableViewCell() }
         let cell: CatalogTableViewCell = tableView.dequeueReusableCell()
         
-        let cellLabel = collections.name
-        
-        cell.setupContentImage(image)
-        cell.setupLabelText(text: 123)
+        if let collectionModel = viewModel.nftCollectionsObservable.wrappedValue?[indexPath.row] {
+            cell.setupCollectionModel(model: collectionModel)
+        }
         
         return cell
     }
@@ -116,12 +113,8 @@ extension CatalogViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension CatalogViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let image = viewModel?.mockImages[indexPath.row] else { return }
-        
         let catalogCollectionViewModel = CatalogCollectionViewModel()
         let viewController = CatalogCollectionViewController(viewModel: catalogCollectionViewModel)
-        
-        viewController.setupCoverNFTImage(image: image)
         
         navigationController?.pushViewController(viewController, animated: true)
     }

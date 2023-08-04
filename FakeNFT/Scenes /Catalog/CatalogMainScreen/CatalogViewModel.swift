@@ -9,28 +9,24 @@ import UIKit
 
 final class CatalogViewModel: CatalogViewModelProtocol {
     
+    // MARK: - Public Dependencies:
     var dataProvider: DataProviderProtocol?
     
+    // MARK: - Observable Values:
     var nftCollectionsObservable: Observable<NFTCollections?> {
         $nftCollections
     }
     
     @Observable
     private(set) var nftCollections: NFTCollections?
-    
-    var mockImages = [
-        UIImage(named: "Frame 9430"), UIImage(named: "Frame 9431"),
-        UIImage(named: "Frame 9432"), UIImage(named: "Frame 9433")]
-    
-    var mockLabels = [
-        "Peach (11)", "Blue (6)", "Brown (8)", "Yellow (9)"
-    ]
-    
+        
+    // MARK: - Lifecycle:
     init(dataProvider: DataProviderProtocol?) {
         self.dataProvider = dataProvider
         fetchCollections()
     }
     
+    // MARK: - Private Methods:
     private func fetchCollections() {
         dataProvider?.fetchNFTCollection(completion: { [weak self] result in
             guard let self = self else { return }
