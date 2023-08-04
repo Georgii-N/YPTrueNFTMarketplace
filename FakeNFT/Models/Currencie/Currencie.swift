@@ -1,7 +1,8 @@
 import Foundation
 
 struct Currencie: Decodable {
-    let title, name: String
+    let title: String
+    let name: String
     let image: String
     let id: String
 }

@@ -6,7 +6,8 @@ struct UserResponse: Decodable {
     let description: String
     let website: String
     let nfts: [String]
-    let rating, id: String
+    let rating: String
+    let id: String
 }
 
 typealias UsersResponse = [UserResponse]
