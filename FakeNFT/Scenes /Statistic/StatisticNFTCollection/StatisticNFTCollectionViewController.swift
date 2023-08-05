@@ -72,8 +72,6 @@ extension StatisticNFTCollectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        cell.setNFTImageView(image: Resources.Images.TabBar.profileImageSelected ?? UIImage())
-        cell.setNFTName(name: "GEORGII")
         return cell
     }
 }
