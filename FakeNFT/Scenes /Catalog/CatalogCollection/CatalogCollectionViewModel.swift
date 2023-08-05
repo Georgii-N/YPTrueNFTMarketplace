@@ -13,14 +13,14 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     
     // MARK: - Observable Values:
     var collectionObservable: Observable<NFTCollection> {
-        return $collection
+        $collection
     }
     
-    var nftCollectionObservable: Observable<NFTCards?> {
+    var nftsObservable: Observable<NFTCards?> {
         $nftCollection
     }
     
-    var authorCollectionObservable: Observable<String?> {
+    var authorCollectionObservable: Observable<UserResponse?> {
         $authorCollection
     }
     
@@ -31,29 +31,39 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     private(set) var nftCollection: NFTCards?
     
     @Observable
-    private(set) var authorCollection: String?
-    
-    // MARK: - Constants and Variables
-    var coverNFTImage: UIImage?
-    var nameOfNFTCollection = "Peach"
-    var aboutAuthor = L10n.Catalog.CurrentCollection.author
-    var collectionInformation = "Персиковый — как облака над закатным солнцем в океане. В этой коллекции совмещены трогательная нежность и живая игривость сказочных зефирных зверей."
-    var aboutAuthorURLString = "https://practicum.yandex.ru/ios-developer/"
-    func setCurrentNFTImage(image: UIImage) {
-        coverNFTImage = image
+    private(set) var authorCollection: UserResponse? {
+        didSet {
+            fetchNFTs()
+        }
     }
     
     init(collection: NFTCollection) {
         self.collection = collection
         self.dataProvider = DataProvider()
+        fetchAuthor()
     }
     
-    func fetchNFT() {
-        let nftsID = collectionObservable.wrappedValue.nfts
-        dataProvider?.fetchUsersNFT(userName: "Cole Edwards", nftsId: [], completion: { result in
+    private func fetchAuthor() {
+        let authorID = collectionObservable.wrappedValue.author
+        dataProvider?.fetchProfileId(userId: authorID, completion: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let author):
+                authorCollection = author
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
+    private func fetchNFTs() {
+        guard let authorID = authorCollection?.id else { return }
+        
+        dataProvider?.fetchUsersNFT(userId: authorID, nftsId: collection.nfts, completion: { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let nfts):
-                print(nfts)
+                self.nftCollection = nfts
             case .failure(let error):
                 print(error)
             }

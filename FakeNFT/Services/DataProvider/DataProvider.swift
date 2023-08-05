@@ -64,4 +64,25 @@ final class DataProvider: DataProviderProtocol {
             }
         }
     }
+    
+    func fetchUsersNFT(userId: String, nftsId: [String]?, completion: @escaping (Result<NFTCards, Error>) -> Void) {
+            
+            let queryItems = [URLQueryItem(name: "filter", value: userId)]
+            let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.nftCard, queryItems: queryItems)
+            
+            let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+            networkClient.send(request: request, type: NFTCards.self) { result in
+                switch result {
+                case .success(let result):
+                    var result = result.filter { userId.contains($0.author) }
+                    if let nftsId {
+                        result = result.filter { nftsId.contains($0.id) }
+                    }
+                    completion(.success(result))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+
 }

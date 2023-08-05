@@ -42,17 +42,15 @@ final class CatalogCollectionViewController: UIViewController {
         let label = UILabel()
         label.textColor = .blackDay
         label.font = .systemFont(ofSize: 13)
+        label.text = L10n.Catalog.CurrentCollection.author
         
         return label
     }()
     
     private lazy var authorLinkTextView: UITextView = {
         let textView = UITextView()
-        let attributeString = NSMutableAttributedString(string: "John Doe")
-        let link = viewModel?.aboutAuthorURLString ?? ""
-        attributeString.addAttribute(.link, value: link, range: NSRange(location: 0, length: attributeString.length))
-        textView.attributedText = attributeString
-        textView.contentInset = UIEdgeInsets(top: -9, left: 0, bottom: 0, right: 0)
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
+        textView.textAlignment = .center
         textView.backgroundColor = .whiteDay
         textView.dataDetectorTypes = .link
         textView.delegate = self
@@ -89,8 +87,8 @@ final class CatalogCollectionViewController: UIViewController {
         setupConstraints()
         setupTargets()
         
-        setupNFTInfo()
-        viewModel?.fetchNFT()
+        setupCollectionInfo()
+        bind()
     }
     
     init(viewModel: CatalogCollectionViewModelProtocol?) {
@@ -102,19 +100,43 @@ final class CatalogCollectionViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public Methods
-    func setupCoverNFTImage(image: UIImage) {
-        viewModel?.setCurrentNFTImage(image: image)
+    // MARK: - Private Methods:
+    private func bind() {
+        viewModel?.collectionObservable.bind(action: { [weak self] _ in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.setupCollectionInfo()
+            }
+        })
+        
+        viewModel?.authorCollectionObservable.bind(action: { [weak self] author in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.setupAuthorInfo(authorModel: author)
+            }
+        })
+        
+        viewModel?.nftsObservable.bind(action: { [weak self] _ in
+            guard let self = self else { return }
+            self.nftCollection.reloadData()
+        })
     }
     
-    // MARK: - Private Methods:
-    private func setupNFTInfo() {
+    // Setup NFT's info:
+    private func setupCollectionInfo() {
+
         guard let collectionModel = viewModel?.collectionObservable.wrappedValue else { return }
        
         setNFTCollectionImage(model: collectionModel)
         nameOfNFTCollectionLabel.text = collectionModel.name
-        aboutAuthorLabel.text = viewModel?.aboutAuthor
         collectionInformationLabel.text = collectionModel.description
+    }
+    
+    private func setupAuthorInfo(authorModel: UserResponse?) {
+        guard let author = authorModel else { return }
+        let attributeString = NSMutableAttributedString(string: author.name)
+        attributeString.addAttribute(.link, value: link, range: NSRange(location: 0, length: attributeString.length))
+        authorLinkTextView.attributedText = attributeString
     }
     
     private func setNFTCollectionImage(model: NFTCollection) {
@@ -176,9 +198,7 @@ extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
         10
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? NFTCollectionCell else { return }
-        
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {        
         switchToNFTCardViewController()
     }
 }
@@ -226,7 +246,7 @@ extension CatalogCollectionViewController {
             authorLinkTextView.topAnchor.constraint(equalTo: nameOfNFTCollectionLabel.bottomAnchor, constant: 12),
             authorLinkTextView.leadingAnchor.constraint(equalTo: aboutAuthorLabel.trailingAnchor, constant: 4),
             authorLinkTextView.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor, constant: 16),
-            authorLinkTextView.bottomAnchor.constraint(equalTo: aboutAuthorLabel.bottomAnchor),
+            authorLinkTextView.bottomAnchor.constraint(equalTo: aboutAuthorLabel.bottomAnchor, constant: 1),
             
             collectionInformationLabel.topAnchor.constraint(equalTo: aboutAuthorLabel.bottomAnchor, constant: 5),
             collectionInformationLabel.leadingAnchor.constraint(equalTo: collectionScrollView.leadingAnchor, constant: 16),
@@ -245,5 +265,6 @@ extension CatalogCollectionViewController {
 // MARK: - Setup Targets:
 extension CatalogCollectionViewController {
     private func setupTargets() {
+        
     }
 }
