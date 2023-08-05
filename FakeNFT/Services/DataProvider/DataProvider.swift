@@ -7,6 +7,7 @@ final class DataProvider: DataProviderProtocol {
     
     // MARK: - Private Functions
     private func createURLWithPathAndQueryItems(path: String, queryItems: [URLQueryItem]?) -> URL? {
+        
         let baseUrlString = Resources.Network.MockAPI.defaultStringURL
         
         guard var components = URLComponents(string: baseUrlString) else {
@@ -51,7 +52,7 @@ final class DataProvider: DataProviderProtocol {
         }
     }
     
-    func fetchUsersNFT(userId: String, nftsId: [Int]?, completion: @escaping (Result<NFTCards, Error>) -> Void) {
+    func fetchUsersNFT(userId: String, nftsId: [String]?, completion: @escaping (Result<NFTCards, Error>) -> Void) {
         
         let queryItems = [URLQueryItem(name: "filter", value: userId)]
         let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.nftCard, queryItems: queryItems)
@@ -62,7 +63,7 @@ final class DataProvider: DataProviderProtocol {
             case .success(let result):
                 var result = result.filter { userId.contains($0.author) }
                 if let nftsId {
-                    result = result.filter { nftsId.contains(Int($0.id) ?? 0)}
+                    result = result.filter { nftsId.contains($0.id)}
                 }
                 completion(.success(result))
             case .failure(let error):
