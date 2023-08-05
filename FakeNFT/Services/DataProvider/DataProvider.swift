@@ -20,9 +20,11 @@ final class DataProvider: DataProviderProtocol {
     }
     
     // MARK: - Public Functions
-    func fetchUsersRating(completion: @escaping (Result<[User], Error>) -> Void) {
+    func fetchUsersRating(page: Int, completion: @escaping (Result<[User], Error>) -> Void) {
+        let queryItems = [URLQueryItem(name: "p", value: "\(page)"),
+                          URLQueryItem(name: "l", value: "10")]
         
-        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.users, queryItems: nil)
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.users, queryItems: queryItems)
         let request = NetworkRequestModel(endpoint: url, httpMethod: .get, dto: nil)
         networkClient.send(request: request, type: UsersResponse.self) { result in
             switch result {
@@ -71,4 +73,18 @@ final class DataProvider: DataProviderProtocol {
             }
         }
     }
+    
+    func fetchCurrencies(completion: @escaping (Result<Currencies, Error>) -> Void) {
+          
+          let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.currencies, queryItems: nil)
+          let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+          networkClient.send(request: request, type: Currencies.self) { result in
+              switch result {
+              case .success(let currencies):
+                  completion(.success(currencies))
+              case .failure(let error):
+                  completion(.failure(error))
+              }
+          }
+      } 
 }
