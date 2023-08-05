@@ -14,7 +14,7 @@ final class DataProvider: DataProviderProtocol {
         }
         components.path = path
         components.queryItems = queryItems
-
+        
         return components.url
     }
     
@@ -42,6 +42,23 @@ final class DataProvider: DataProviderProtocol {
             switch result {
             case .success(let collections):
                 completion(.success(collections))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchProfileId(userId: String, completion: @escaping (Result<UserResponse, Error>) -> Void) {
+        
+        let path = Resources.Network.MockAPI.Paths.users + "/\(userId)"
+        let url = createURLWithPathAndQueryItems(path: path, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: UserResponse.self) { result in
+            
+            switch result {
+            case .success(let profileId):
+                
+                completion(.success(profileId))
             case .failure(let error):
                 completion(.failure(error))
             }
