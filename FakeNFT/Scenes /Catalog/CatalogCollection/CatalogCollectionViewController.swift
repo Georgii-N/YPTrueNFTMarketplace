@@ -182,6 +182,10 @@ extension CatalogCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
         
+        if let nftModel = viewModel?.nftsObservable.wrappedValue?[indexPath.row] {
+            cell.setupNFTModel(model: nftModel)
+        }
+        
         return cell
     }
 }
