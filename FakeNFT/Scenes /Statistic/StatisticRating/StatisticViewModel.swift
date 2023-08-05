@@ -5,10 +5,13 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     // MARK: - Private classes
     private let dataProvider = DataProvider()
     
-    // MARK: - Private constants
+    // MARK: - Private properties
     private var currentPage = 1
     
-    // MARK: - Property Wrappers
+    // MARK: - Observable Properties
+    var usersRatingObservable: Observable<[User]> {
+            $usersRating
+        }
     @Observable
     private(set) var usersRating: [User] = []
     
@@ -17,12 +20,18 @@ final class StatisticViewModel: StatisticViewModelProtocol {
         fetchUsersRating()
     }
     
+    // MARK: - Public Functions
+    func fetchNextPage() {
+        currentPage += 1
+        fetchUsersRating()
+    }
+    
     // MARK: - Private Functions
     private func fetchUsersRating() {
         dataProvider.fetchUsersRating(page: currentPage) { [weak self] result in
             switch result {
             case .success(let users):
-                self?.usersRating = users
+                self?.usersRating.append(contentsOf: users)
             case .failure(let error):
                 assertionFailure(error.localizedDescription)
             }

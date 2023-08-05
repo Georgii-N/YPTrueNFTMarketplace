@@ -4,7 +4,7 @@ final class StatisticViewController: UIViewController {
     
     // MARK: - Private Dependencies
     private var alertService: AlertServiceProtocol?
-    private var statisticViewModel: StatisticViewModel
+    private var statisticViewModel: StatisticViewModelProtocol
     
     // MARK: - UI
     private lazy var collectionView: UICollectionView = {
@@ -26,7 +26,7 @@ final class StatisticViewController: UIViewController {
     }
     
     // MARK: - Init
-    init(statisticViewModel: StatisticViewModel) {
+    init(statisticViewModel: StatisticViewModelProtocol) {
         self.statisticViewModel = statisticViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -39,14 +39,14 @@ final class StatisticViewController: UIViewController {
 // MARK: - DataSource
 extension StatisticViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        statisticViewModel.usersRating.count
+        statisticViewModel.usersRatingObservable.wrappedValue.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: StatisticCollectionViewCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-       
+        
         cell.setupNumberLabelText(text: String(indexPath.row + 1))
-        cell.setupCellUI(model: statisticViewModel.usersRating[indexPath.row])
+        cell.setupCellUI(model: statisticViewModel.usersRatingObservable.wrappedValue[indexPath.row])
         return cell
     }
 }
@@ -62,9 +62,15 @@ extension StatisticViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let statisticUserViewModel = StatisticUserViewModel(profileId: statisticViewModel.usersRating[indexPath.row].id)
+        let statisticUserViewModel = StatisticUserViewModel(profileId: statisticViewModel.usersRatingObservable.wrappedValue[indexPath.row].id)
         let statisticUserViewController = StatisticUserViewController(statisticUserViewModel: statisticUserViewModel)
         navigationController?.pushViewController(statisticUserViewController, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row + 1 == statisticViewModel.usersRatingObservable.wrappedValue.count {
+            self.statisticViewModel.fetchNextPage()
+        }
     }
 }
 
@@ -98,7 +104,7 @@ extension StatisticViewController {
     }
     
     private func bind() {
-        statisticViewModel.$usersRating.bind { [weak self] _ in
+        statisticViewModel.usersRatingObservable.bind { [weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
