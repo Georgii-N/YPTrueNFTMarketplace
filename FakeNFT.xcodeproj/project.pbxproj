@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F478ECF29DB474E00F6D39E /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F478ECE29DB474E00F6D39E /* UIColor + Extension.swift */; };
 		3F478ED129DB476500F6D39E /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F478ED029DB476500F6D39E /* UIFont + Extension.swift */; };
 		3F603CCD29DB4A53000C43D7 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 3F603CCC29DB4A53000C43D7 /* ProgressHUD */; };
 		3F603CD029DB4A74000C43D7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3F603CCF29DB4A74000C43D7 /* Kingfisher */; };
@@ -60,7 +59,8 @@
 		7EC0B53B2A766B7800688EC9 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B53A2A766B7800688EC9 /* DateService.swift */; };
 		7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B53C2A766C1C00688EC9 /* Observable.swift */; };
 		7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */; };
-		7EF4C5D12A73F86C001E8C67 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D02A73F86C001E8C67 /* Colors.swift */; };
+		7EE68CF42A7E6CFA00CAE2AC /* UIActivityIndicatorView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68CF32A7E6CFA00CAE2AC /* UIActivityIndicatorView + Extension.swift */; };
+		7EF4C5D12A73F86C001E8C67 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */; };
 		7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D22A73FD9A001E8C67 /* Resources.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,7 +82,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3F478ECE29DB474E00F6D39E /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor + Extension.swift"; path = "../DesignSystem/UIColor + Extension.swift"; sourceTree = "<group>"; };
 		3F478ED029DB476500F6D39E /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		3F68069329CBBAF100B4F915 /* FakeNFT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FakeNFT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F68069629CBBAF100B4F915 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,7 +136,8 @@
 		7EC0B53A2A766B7800688EC9 /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		7EC0B53C2A766C1C00688EC9 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
-		7EF4C5D02A73F86C001E8C67 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		7EE68CF32A7E6CFA00CAE2AC /* UIActivityIndicatorView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView + Extension.swift"; sourceTree = "<group>"; };
+		7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		7EF4C5D22A73FD9A001E8C67 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -267,11 +267,11 @@
 		4005316C2A73DDC2008CAF3B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */,
 				3F6806D629CBC50A00B4F915 /* Cells + Extension.swift */,
-				3F478ECE29DB474E00F6D39E /* UIColor + Extension.swift */,
+				7EE68CF32A7E6CFA00CAE2AC /* UIActivityIndicatorView + Extension.swift */,
+				7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */,
 				3F478ED029DB476500F6D39E /* UIFont + Extension.swift */,
-				7EF4C5D02A73F86C001E8C67 /* Colors.swift */,
+				4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -300,8 +300,8 @@
 		409EEFE42A7A707D00B23FF8 /* DataProvider */ = {
 			isa = PBXGroup;
 			children = (
-				7EC0B5382A766ABA00688EC9 /* DataProvider.swift */,
 				409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */,
+				7EC0B5382A766ABA00688EC9 /* DataProvider.swift */,
 			);
 			path = DataProvider;
 			sourceTree = "<group>";
@@ -648,9 +648,8 @@
 				7EB78A952A7A56C000BE892B /* NFTCardViewModelProtocol.swift in Sources */,
 				7EB78A4F2A77873D00BE892B /* CatalogViewController.swift in Sources */,
 				7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */,
-				3F478ECF29DB474E00F6D39E /* UIColor + Extension.swift in Sources */,
+				7EF4C5D12A73F86C001E8C67 /* UIColor + Extension.swift in Sources */,
 				7EB78A512A77881700BE892B /* CatalogTableViewCell.swift in Sources */,
-				7EF4C5D12A73F86C001E8C67 /* Colors.swift in Sources */,
 				7EB78AE12A7BFBC300BE892B /* NFTCollection.swift in Sources */,
 				3F478ED129DB476500F6D39E /* UIFont + Extension.swift in Sources */,
 				7EB78A8B2A79504800BE892B /* NFTCollectionCell.swift in Sources */,
@@ -671,6 +670,9 @@
 				7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */,
 				7EB78A9D2A7A730900BE892B /* WebViewViewController.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
+				7EE68CF42A7E6CFA00CAE2AC /* UIActivityIndicatorView + Extension.swift in Sources */,
+				7EB78AD12A7AB4F800BE892B /* WebViewViewModel.swift in Sources */,
+				7EB78A6A2A78EEC100BE892B /* NFTCollectionCell.swift in Sources */,
 				7EB78AD72A7ABE1300BE892B /* WebViewViewModelProtocol.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				40EEA7CF2A768BE700A1AE93 /* AnalyticsService.swift in Sources */,

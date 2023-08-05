@@ -118,7 +118,9 @@ final class CatalogCollectionViewController: UIViewController {
         
         viewModel?.nftsObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
-            self.nftCollection.reloadData()
+            DispatchQueue.main.async {
+                self.nftCollection.reloadData()
+            }
         })
     }
     
