@@ -135,7 +135,8 @@ final class CatalogCollectionViewController: UIViewController {
     }
     
     private func setupAuthorInfo(authorModel: UserResponse?) {
-        guard let author = authorModel else { return }
+        guard let author = authorModel,
+              let link = author.website.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         let attributeString = NSMutableAttributedString(string: author.name)
         attributeString.addAttribute(.link, value: link, range: NSRange(location: 0, length: attributeString.length))
         authorLinkTextView.attributedText = attributeString
@@ -162,7 +163,7 @@ final class CatalogCollectionViewController: UIViewController {
 
 // MARK: - UITextViewDelegate
 extension CatalogCollectionViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {        
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         let webViewViewModel = WebViewViewModel()
         let webViewController = WebViewViewController(viewModel: webViewViewModel, url: URL)
         
