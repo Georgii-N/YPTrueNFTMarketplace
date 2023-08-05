@@ -153,8 +153,11 @@ final class CatalogCollectionViewController: UIViewController {
         coverNFTImageView.kf.setImage(with: url, options: [.processor(processor), .transition(.fade(1))])
     }
     
-    private func switchToNFTCardViewController() {
-        let nftViewModel = NFTCardViewModel()
+    private func switchToNFTCardViewController(nftModel: NFTCard) {
+        guard let collection = viewModel?.collectionObservable.wrappedValue,
+              let nfts = viewModel?.nftsObservable.wrappedValue else { return }
+    
+        let nftViewModel = NFTCardViewModel(nfts: nfts, nftModel: nftModel, nftCollection: collection)
         let viewController = NFTCardViewController(viewModel: nftViewModel)
         
         navigationController?.pushViewController(viewController, animated: true)
@@ -205,8 +208,9 @@ extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
         10
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {        
-        switchToNFTCardViewController()
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let nftModel = viewModel?.nftsObservable.wrappedValue?[indexPath.row] else { return }
+        switchToNFTCardViewController(nftModel: nftModel)
     }
 }
 

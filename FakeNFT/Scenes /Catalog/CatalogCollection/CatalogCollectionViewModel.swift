@@ -9,7 +9,8 @@ import UIKit
 
 final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     
-    var dataProvider: DataProviderProtocol?
+    // MARK: Private Dependencies:
+    private var dataProvider: DataProviderProtocol?
     
     // MARK: - Observable Values:
     var collectionObservable: Observable<NFTCollection> {
@@ -37,12 +38,14 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
         }
     }
     
+    // MARK: - Lifecycle:
     init(collection: NFTCollection) {
         self.collection = collection
         self.dataProvider = DataProvider()
         fetchAuthor()
     }
     
+    // MARK: Private Methods:
     private func fetchAuthor() {
         let authorID = collectionObservable.wrappedValue.author
         dataProvider?.fetchProfileId(userId: authorID, completion: { [weak self] result in

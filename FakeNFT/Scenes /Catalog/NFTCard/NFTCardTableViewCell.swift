@@ -6,8 +6,28 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class NFTCardTableViewCell: UITableViewCell, ReuseIdentifying {
+    
+    // MARK: - Constant and Variables:
+    private var currencie: Currencie? {
+        didSet {
+            let size = CGSize(width: 32, height: contentView.frame.height - 36)
+            let processor = DownsamplingImageProcessor(size: size)
+            
+            if let url = URL(string: currencie?.image ?? "") {
+                nftImageView.kf.indicatorType = .activity
+                nftImageView.kf.setImage(with: url,
+                                         options: [.processor(processor),
+                                                   .transition(.fade(1))])
+                let name = currencie?.name ?? ""
+                let title = currencie?.title ?? ""
+                nftNameLabel.text = title + " \(name)"
+                nftDepositLabel.text = "0.1 (\(name)"
+            }
+        }
+    }
     
     // MARK: - UI:
     private lazy var mainCellImageView = UIImageView()
@@ -65,16 +85,8 @@ final class NFTCardTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     
     // MARK: - Public Methods:
-    func setupNFTImage(image: UIImage) {
-        nftImageView.image = image
-    }
-    
-    func setupNFTName(name: String) {
-        nftNameLabel.text = name
-    }
-    
-    func setupNFTDeposit(value: String) {
-        nftDepositLabel.text = value
+    func setupCurrencieModel(model: Currencie) {
+        currencie = model
     }
 }
 

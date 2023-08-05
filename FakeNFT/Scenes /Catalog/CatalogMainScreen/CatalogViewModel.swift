@@ -9,8 +9,8 @@ import UIKit
 
 final class CatalogViewModel: CatalogViewModelProtocol {
     
-    // MARK: - Public Dependencies:
-    var dataProvider: DataProviderProtocol?
+    // MARK: - Private Dependencies:
+    private var dataProvider: DataProviderProtocol?
     
     // MARK: - Observable Values:
     var nftCollectionsObservable: Observable<NFTCollections?> {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class NFTCardViewController: UIViewController {
     
@@ -20,14 +21,10 @@ final class NFTCardViewController: UIViewController {
         return scrollView
     }()
     
-    private lazy var contentView: UIView = {
-        let view = UIView()
-        
-        return view
-    }()
+    private lazy var contentView = UIView()
     
     private lazy var coverNFTScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
+        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         scrollView.contentSize = CGSize(width: view.frame.width*3, height: 375)
         scrollView.isPagingEnabled = true
         scrollView.backgroundColor = .gray
@@ -49,7 +46,6 @@ final class NFTCardViewController: UIViewController {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 22)
         label.textColor = .blackDay
-        label.text = "Daisy"
         
         return label
     }()
@@ -76,7 +72,6 @@ final class NFTCardViewController: UIViewController {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 17)
         label.textColor = .blackDay
-        label.text = "1,78 ETH"
         
         return label
     }()
@@ -85,7 +80,6 @@ final class NFTCardViewController: UIViewController {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 17)
         label.textColor = .blackDay
-        label.text = "Peach"
         
         return label
     }()
@@ -124,6 +118,9 @@ final class NFTCardViewController: UIViewController {
         setupViews()
         setupConstraints()
         setupTargets()
+        
+        setupNFTInfo()
+        bind()
     }
     
     init(viewModel: NFTCardViewModelProtocol?) {
@@ -136,12 +133,65 @@ final class NFTCardViewController: UIViewController {
     }
     
     // MARK: - Private Methods:
-    private func setupNFTRatingStackView() {
-        (1...5).forEach { [weak self] _ in
+    private func bind() {
+        viewModel?.nftCollectionObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
-            let imageView = UIImageView(image: Resources.Images.NFTCollectionCell.goldRatingStar)
+            DispatchQueue.main.async {
+                self.setupNFTInfo()
+            }
+        })
+        
+        viewModel?.currenciesObservable.bind(action: { [weak self] _ in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.nftTableView.reloadData()
+            }
+        })
+    }
+        
+    private func setupNFTInfo() {
+        guard let viewModel = viewModel else { return }
+        
+        let nftModel = viewModel.currentNFTObservable.wrappedValue
+        let collection = viewModel.nftCollectionObservable.wrappedValue
+        
+        nftCollectionNameLabel.text = collection.name
+        setupNFTRatingStackView(rating: nftModel.rating)
+        nftNameLabel.text = nftModel.name
+        priceValueLabel.text = "\(nftModel.price) ETH"
+        
+        setupCoverScrollView(imagesURL: nftModel.images)
+    }
+    
+    private func setupCoverScrollView(imagesURL: [String]) {
+        let imageWidht = view.frame.width
+        var images = [UIImageView]()
+
+        for (index, imageURLString) in imagesURL.enumerated() {
+            guard let url = URL(string: imageURLString) else { return }
+            let size = CGRect(x: 0, y: 0, width: view.frame.width, height: 375)
+            let imageView = UIImageView(frame: CGRect(x: imageWidht * CGFloat(index), y: 0, width: view.frame.width, height: 375))
+            let processor = DownsamplingImageProcessor(size: CGSize(width: size.width, height: size.height))
+
+            images.append(imageView)
+            coverNFTScrollView.addSubview(images[index])
+
+            images[index].kf.indicatorType = .activity
+            images[index].kf.setImage(with: url, options: [.processor(processor), .transition(.fade(1))])
+        }
+    }
+    
+    private func setupNFTRatingStackView(rating: Int) {
+        (1...5).forEach { [weak self] number in
+            guard let self = self else { return }
             
-            self.nftRatingStackView.addArrangedSubview(imageView)
+            if number <= rating {
+                let goldStar = UIImageView(image: Resources.Images.NFTCollectionCell.goldRatingStar)
+                self.nftRatingStackView.addArrangedSubview(goldStar)
+            } else {
+                let grayStar = UIImageView(image: Resources.Images.NFTCollectionCell.grayRatingStar)
+                self.nftRatingStackView.addArrangedSubview(grayStar)
+            }
         }
     }
     
@@ -158,21 +208,17 @@ final class NFTCardViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension NFTCardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        8
+        viewModel?.currenciesObservable.wrappedValue?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let viewModel = viewModel,
-              let nftImage = UIImage(named: viewModel.mockNFTImages[indexPath.row]) else { return UITableViewCell() }
-        
-        let nftName = viewModel.mockNFTNames[indexPath.row]
-        let nftDepositValues = viewModel.mockNFTPrices[indexPath.row]
+        guard let viewModel = viewModel else { return UITableViewCell() }
         
         let cell: NFTCardTableViewCell = tableView.dequeueReusableCell()
         
-        cell.setupNFTImage(image: nftImage)
-        cell.setupNFTName(name: nftName)
-        cell.setupNFTDeposit(value: nftDepositValues)
+        if let currencie = viewModel.currenciesObservable.wrappedValue?[indexPath.row] {
+            cell.setupCurrencieModel(model: currencie)
+        }
         
         return cell
     }
@@ -188,11 +234,15 @@ extension NFTCardViewController: UITableViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension NFTCardViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        viewModel?.nftsObservable.wrappedValue.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+
+        if let nft = viewModel?.nftsObservable.wrappedValue[indexPath.row] {
+            cell.setupNFTModel(model: nft)
+        }
         
         return cell
     }
@@ -223,9 +273,7 @@ extension NFTCardViewController {
         contentView.setupView(coverNFTPageControl)
         contentView.setupView(nftNameLabel)
         contentView.setupView(nftRatingStackView)
-        
-        setupNFTRatingStackView()
-        
+                
         contentView.setupView(priceLabel)
         contentView.setupView(priceValueLabel)
         contentView.setupView(nftCollectionNameLabel)

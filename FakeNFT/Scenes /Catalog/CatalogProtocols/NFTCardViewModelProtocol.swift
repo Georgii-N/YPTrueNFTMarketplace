@@ -8,7 +8,8 @@
 import Foundation
 
 protocol NFTCardViewModelProtocol: AnyObject {
-    var mockNFTImages: [String] { get }
-    var mockNFTNames: [String] { get }
-    var mockNFTPrices: [String] { get }
+    var currentNFTObservable: Observable<NFTCard> { get }
+    var nftCollectionObservable: Observable<NFTCollection> { get }
+    var currenciesObservable: Observable<Currencies?> { get }
+    var nftsObservable: Observable<NFTCards> { get }
 }
