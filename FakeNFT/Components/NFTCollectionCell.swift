@@ -18,6 +18,7 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
                                                    .cacheOriginalImage])
                 nftNameLabel.text = nftModel.name
                 nftPriceLabel.text = "(\(nftModel.price) ETH)"
+                setupRatingStackView(rating: nftModel.rating)
             }
         }
     }
@@ -108,15 +109,14 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
     // MARK: - Private Methods:
     private func setupRatingStackView(rating: Int) {
-        let goldStar = UIImageView(image: Resources.Images.NFTCollectionCell.goldRatingStar)
-        let grayStar = UIImageView(image: Resources.Images.NFTCollectionCell.grayRatingStar)
-        
         (1...5).forEach { [weak self] number in
             guard let self = self else { return }
             
             if number <= rating {
+                let goldStar = UIImageView(image: Resources.Images.NFTCollectionCell.goldRatingStar)
                 self.ratingStackView.addArrangedSubview(goldStar)
             } else {
+                let grayStar = UIImageView(image: Resources.Images.NFTCollectionCell.grayRatingStar)
                 self.ratingStackView.addArrangedSubview(grayStar)
             }
         }
@@ -135,9 +135,7 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
 extension NFTCollectionCell {
     private func setupViews() {
         backgroundColor = .whiteDay
-        
-        setupRatingStackView(rating: nftModel?.rating ?? 0)
-        
+                
         [nftImageView, nftLikeButton, ratingStackView, nftNameLabel,
          nftPriceLabel, cartImageView, cartButton].forEach(contentView.setupView)
         
