@@ -16,7 +16,7 @@ final class CatalogCollectionViewController: UIViewController {
     // MARK: - UI:
     private lazy var collectionScrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height + 500)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height)
         
         return scrollView
     }()
@@ -90,6 +90,7 @@ final class CatalogCollectionViewController: UIViewController {
         setupTargets()
         
         setupNFTInfo()
+        viewModel?.fetchNFT()
     }
     
     init(viewModel: CatalogCollectionViewModelProtocol?) {
@@ -150,7 +151,8 @@ extension CatalogCollectionViewController: UITextViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension CatalogCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        guard let collection = viewModel?.collectionObservable.wrappedValue else { return 0 }
+        return collection.nfts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -200,6 +202,10 @@ extension CatalogCollectionViewController {
 // MARK: - Setup Constraints:
 extension CatalogCollectionViewController {
     private func setupConstraints() {
+        
+        let collectionItems = viewModel?.collectionObservable.wrappedValue.nfts.count ?? 0
+        let collectionHeight = collectionItems % 3 == 0 ? (collectionItems / 3 * 182) + 24 : (collectionItems / 3 * 182) + 204
+        
         NSLayoutConstraint.activate([
             collectionScrollView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -227,7 +233,7 @@ extension CatalogCollectionViewController {
             collectionInformationLabel.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor, constant: -16),
             
             nftCollection.widthAnchor.constraint(equalToConstant: view.frame.width),
-            nftCollection.heightAnchor.constraint(equalToConstant: 800),
+            nftCollection.heightAnchor.constraint(equalToConstant: CGFloat(collectionHeight)),
             nftCollection.topAnchor.constraint(equalTo: collectionInformationLabel.bottomAnchor),
             nftCollection.leadingAnchor.constraint(equalTo: collectionScrollView.leadingAnchor),
             nftCollection.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor),
