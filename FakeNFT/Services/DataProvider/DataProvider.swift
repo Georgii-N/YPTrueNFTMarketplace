@@ -71,4 +71,18 @@ final class DataProvider: DataProviderProtocol {
             }
         }
     }
+    
+    func fetchCurrencies(completion: @escaping (Result<Currencies, Error>) -> Void) {
+          
+          let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.currencies, queryItems: nil)
+          let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+          networkClient.send(request: request, type: Currencies.self) { result in
+              switch result {
+              case .success(let currencies):
+                  completion(.success(currencies))
+              case .failure(let error):
+                  completion(.failure(error))
+              }
+          }
+      } 
 }
