@@ -20,6 +20,7 @@ final class StatisticNFTCollectionViewController: UIViewController {
         setupViews()
         setupConstraints()
         setupUI()
+        bind()
     }
     
     // MARK: - Init
@@ -40,7 +41,7 @@ extension StatisticNFTCollectionViewController {
         statisticNFTViewModel.$NFTcards.bind { [weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                print("PRINT GOTOVO")
+                self.collectionView.reloadData()
             }
         }
     }
@@ -67,11 +68,12 @@ extension StatisticNFTCollectionViewController {
 // MARK: - DataSource
 extension StatisticNFTCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        statisticNFTViewModel.NFTcards.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+        cell.setupNFTModel(model: statisticNFTViewModel.NFTcards[indexPath.row])
         return cell
     }
 }

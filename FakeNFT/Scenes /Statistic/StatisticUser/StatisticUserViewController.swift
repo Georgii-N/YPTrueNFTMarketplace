@@ -138,7 +138,7 @@ extension StatisticUserViewController {
     }
     
     private func setupUI() {
-        sleep(5)
+        sleep(3)
         view.backgroundColor = .whiteDay
         
         if let url = URL(string: statisticUserViewModel.profile[0].avatar) {
@@ -165,7 +165,7 @@ extension StatisticUserViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: StatisticUserTableViewCell = tableView.dequeueReusableCell()
-        cell.titleLabel.text = L10n.Statistic.Profile.ButtonCollection.title
+        cell.titleLabel.text = L10n.Statistic.Profile.ButtonCollection.title + " (\(statisticUserViewModel.profile[0].rating))"
         cell.accessoryView = disclosureImageView
         return cell
     }
@@ -181,6 +181,6 @@ extension StatisticUserViewController: UITableViewDelegate {
         let statisticNFTCollectionViewModel = StatisticNFTCollectionViewModel(userId: statisticUserViewModel.profile[0].id)
         let statisticNFTCollectionViewController = StatisticNFTCollectionViewController(statisticNFTViewModel: statisticNFTCollectionViewModel)
         navigationController?.pushViewController(statisticNFTCollectionViewController, animated: true)
-        
+            tableView.deselectRow(at: indexPath, animated: true)
     }
 }
