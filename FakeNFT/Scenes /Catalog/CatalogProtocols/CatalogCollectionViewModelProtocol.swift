@@ -8,8 +8,10 @@
 import UIKit
 
 protocol CatalogCollectionViewModelProtocol: AnyObject {
-    var likedNFTID: [String]? { get }
+    var profile: Profile? { get }
     var collectionObservable: Observable<NFTCollection> { get }
     var nftsObservable: Observable<[NFTCell]?> { get }
     var authorCollectionObservable: Observable<UserResponse?> { get }
+    var likeStatusDidChangeObservable: Observable<Bool> { get }
+    func changeNFTFavouriteStatus(isLiked: Bool, id: String)
 }

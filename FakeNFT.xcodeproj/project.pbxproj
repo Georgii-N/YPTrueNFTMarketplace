@@ -651,7 +651,6 @@
 				7EB78A952A7A56C000BE892B /* NFTCardViewModelProtocol.swift in Sources */,
 				7EB78A4F2A77873D00BE892B /* CatalogViewController.swift in Sources */,
 				7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */,
-				7EB78A972A7A5C7D00BE892B /* WebViewViewController.swift in Sources */,
 				7EE68CFA2A7FCB8A00CAE2AC /* NFTCell.swift in Sources */,
 				7EF4C5D12A73F86C001E8C67 /* UIColor + Extension.swift in Sources */,
 				7EB78A512A77881700BE892B /* CatalogTableViewCell.swift in Sources */,

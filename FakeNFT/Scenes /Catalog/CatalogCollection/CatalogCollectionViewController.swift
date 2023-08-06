@@ -13,6 +13,9 @@ final class CatalogCollectionViewController: UIViewController {
     // MARK: - Private Dependencies:
     private var viewModel: CatalogCollectionViewModelProtocol?
     
+    // MARK: - Constant and Variables:
+    private var indexPathToUpdateNFTCell: IndexPath?
+    
     // MARK: - UI:
     private lazy var collectionScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -85,7 +88,6 @@ final class CatalogCollectionViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        setupTargets()
         
         setupCollectionInfo()
         bind()
@@ -120,6 +122,26 @@ final class CatalogCollectionViewController: UIViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.nftCollection.reloadData()
+            }
+        })
+        
+        viewModel?.likeStatusDidChangeObservable.bind(action: { [weak self] _ in
+            DispatchQueue.main.async {
+            guard let self = self,
+                  let indexPathToUpdateNFTCell = self.indexPathToUpdateNFTCell,
+                  let cell = self.nftCollection.cellForItem(at: indexPathToUpdateNFTCell) as? NFTCollectionCell,
+                  let nftModel = cell.getNFTModel() else { return }
+            let newModel = NFTCell(name: nftModel.name,
+                                   images: nftModel.images,
+                                   rating: nftModel.rating,
+                                   price: nftModel.price,
+                                   author: nftModel.author,
+                                   id: nftModel.id,
+                                   isLiked: !nftModel.isLiked,
+                                   isAddedToCard: false)
+                cell.setupNFTModel(model: newModel)
+                
+                self.indexPathToUpdateNFTCell = nil
             }
         })
     }
@@ -164,6 +186,19 @@ final class CatalogCollectionViewController: UIViewController {
     }
 }
 
+// MARK: - NFTCollectionCellDelegate:
+extension CatalogCollectionViewController: NFTCollectionCellDelegate {
+    func likeButtonDidTapped(cell: NFTCollectionCell) {
+        guard let model = cell.getNFTModel(),
+              let indexPath = nftCollection.indexPath(for: cell) else { return }
+        
+        let modelID = model.id
+        
+        viewModel?.changeNFTFavouriteStatus(isLiked: model.isLiked, id: modelID)
+        indexPathToUpdateNFTCell = indexPath
+    }
+}
+
 // MARK: - UITextViewDelegate
 extension CatalogCollectionViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
@@ -185,6 +220,7 @@ extension CatalogCollectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+        cell.delegate = self
         
         if let nftModel = viewModel?.nftsObservable.wrappedValue?[indexPath.row] {
             cell.setupNFTModel(model: nftModel)
@@ -270,12 +306,5 @@ extension CatalogCollectionViewController {
             nftCollection.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor),
             nftCollection.bottomAnchor.constraint(equalTo: collectionScrollView.bottomAnchor)
         ])
-    }
-}
-
-// MARK: - Setup Targets:
-extension CatalogCollectionViewController {
-    private func setupTargets() {
-        
     }
 }
