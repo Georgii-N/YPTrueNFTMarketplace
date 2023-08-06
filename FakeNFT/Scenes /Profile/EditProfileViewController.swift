@@ -9,11 +9,15 @@ import UIKit
 
 class EditProfileViewController: UIViewController {
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBackground()
         setupConstrains()
     }
+    
+    // MARK: - SetupUI
     
     private func setupBackground() {
         view.backgroundColor = .whiteDay
@@ -206,6 +210,8 @@ class EditProfileViewController: UIViewController {
             siteTextField.centerYAnchor.constraint(equalTo: siteUnderView.centerYAnchor)
         ])
     }
+    
+    // MARK: - Actions
     
     @objc private func closeButtonTapped() {
         dismiss(animated: true)

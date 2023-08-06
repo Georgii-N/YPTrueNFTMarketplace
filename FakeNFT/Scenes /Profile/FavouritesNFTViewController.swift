@@ -16,12 +16,16 @@ class FavouritesNFTViewController: UIViewController {
         (FavouritesNFTCellViewModel(NFTImage: UIImage(named: "NFTcard") ?? UIImage(), NFTName: "Lilo", NFTRateImage: UIImage(named: "rate") ?? UIImage(), NFTPrice: "1,78"))
     ]
 
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupViews() 
         setupConstraints()
     }
+    
+    // MARK: - SetupUI
 
     private func setupUI() {
         view.backgroundColor = .whiteDay
@@ -32,6 +36,7 @@ class FavouritesNFTViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(FavouritesNFTCollectionViewCell.self)
@@ -63,6 +68,7 @@ extension FavouritesNFTViewController: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: FavouritesNFTCollectionViewCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+        cell.backgroundColor = .clear
         cell.setupCellData(mockNFTData[indexPath.row])
         return cell
     }

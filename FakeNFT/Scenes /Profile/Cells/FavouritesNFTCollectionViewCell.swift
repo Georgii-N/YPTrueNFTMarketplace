@@ -11,6 +11,18 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
     static var defaultReuseIdentifier: String = "FavouritesNFTCell"
     
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        setupViews()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - SetupUI
+    
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12
@@ -59,16 +71,6 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
             priceLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 12),
             priceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-        setupViews()
-        setupConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func setupCellData(_ model: FavouritesNFTCellViewModel) {
