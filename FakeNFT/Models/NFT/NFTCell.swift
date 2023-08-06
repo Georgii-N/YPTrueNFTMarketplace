@@ -1,10 +1,3 @@
-//
-//  NFTCell.swift
-//  FakeNFT
-//
-//  Created by Евгений on 06.08.2023.
-//
-
 import Foundation
 
 struct NFTCell {
@@ -14,7 +7,7 @@ struct NFTCell {
     let price: Double
     let author: String
     let id: String
-    let isLiked: Bool?
+    let isLiked: Bool
     let isAddedToCard: Bool?
 }
 
