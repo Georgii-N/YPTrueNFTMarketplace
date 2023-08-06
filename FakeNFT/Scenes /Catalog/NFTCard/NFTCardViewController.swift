@@ -27,6 +27,8 @@ final class NFTCardViewController: UIViewController {
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
         scrollView.contentSize = CGSize(width: view.frame.width*3, height: 375)
         scrollView.isPagingEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.delegate = self
         scrollView.backgroundColor = .gray
         
         return scrollView
@@ -166,6 +168,8 @@ final class NFTCardViewController: UIViewController {
     private func setupCoverScrollView(imagesURL: [String]) {
         let imageWidht = view.frame.width
         var images = [UIImageView]()
+        
+        coverNFTPageControl.numberOfPages = imagesURL.count
 
         for (index, imageURLString) in imagesURL.enumerated() {
             guard let url = URL(string: imageURLString) else { return }
@@ -202,6 +206,14 @@ final class NFTCardViewController: UIViewController {
         let webViewController = WebViewViewController(viewModel: webViewViewModel, url: url)
         
         navigationController?.pushViewController(webViewController, animated: true)
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension NFTCardViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let page = round(scrollView.contentOffset.x / view.frame.width)
+        coverNFTPageControl.currentPage = Int(page)
     }
 }
 
@@ -269,18 +281,9 @@ extension NFTCardViewController {
         view.setupView(allScreenScrollView)
         allScreenScrollView.setupView(contentView)
         
-        contentView.setupView(coverNFTScrollView)
-        contentView.setupView(coverNFTPageControl)
-        contentView.setupView(nftNameLabel)
-        contentView.setupView(nftRatingStackView)
-                
-        contentView.setupView(priceLabel)
-        contentView.setupView(priceValueLabel)
-        contentView.setupView(nftCollectionNameLabel)
-        contentView.setupView(addToCartButton)
-        contentView.setupView(nftTableView)
-        contentView.setupView(sellerWebsiteButton)
-        contentView.setupView(nftColectionView)
+        [coverNFTScrollView, coverNFTPageControl, nftNameLabel, nftRatingStackView,
+         priceLabel, priceValueLabel, nftCollectionNameLabel, addToCartButton,
+         nftTableView, sellerWebsiteButton, nftColectionView].forEach(contentView.setupView)
     }
 }
 
@@ -304,10 +307,10 @@ extension NFTCardViewController {
             coverNFTScrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             coverNFTScrollView.heightAnchor.constraint(equalToConstant: 375),
             
-            coverNFTPageControl.topAnchor.constraint(equalTo: coverNFTScrollView.bottomAnchor),
+            coverNFTPageControl.topAnchor.constraint(equalTo: coverNFTScrollView.bottomAnchor, constant: 12),
             coverNFTPageControl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            coverNFTPageControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 16),
-            coverNFTPageControl.heightAnchor.constraint(equalToConstant: 28),
+            coverNFTPageControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            coverNFTPageControl.heightAnchor.constraint(equalToConstant: 4),
             
             nftNameLabel.topAnchor.constraint(equalTo: coverNFTPageControl.bottomAnchor, constant: 16),
             nftNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
