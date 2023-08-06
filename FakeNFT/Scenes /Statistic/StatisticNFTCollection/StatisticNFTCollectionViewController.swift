@@ -73,7 +73,15 @@ extension StatisticNFTCollectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        cell.setupNFTModel(model: statisticNFTViewModel.NFTcards[indexPath.row])
+        // TODO: - Сделать красиво
+        let NFTCellModel = NFTCell(name: statisticNFTViewModel.NFTcards[indexPath.row].name,
+                                   images: statisticNFTViewModel.NFTcards[indexPath.row].images,
+                                   rating: Int(statisticNFTViewModel.NFTcards[indexPath.row].rating),
+                                   price: statisticNFTViewModel.NFTcards[indexPath.row].price,
+                                   author: statisticNFTViewModel.NFTcards[indexPath.row].author,
+                                   id: statisticNFTViewModel.NFTcards[indexPath.row].id,
+                                   isLiked: false, isAddedToCard: false)
+        cell.setupNFTModel(model: NFTCellModel)
         return cell
     }
 }
