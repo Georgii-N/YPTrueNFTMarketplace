@@ -3,32 +3,39 @@ import Kingfisher
 
 final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
+    // MARK: Public Dependencies:
+      weak var delegate: NFTCollectionCellDelegate?
+    
     // MARK: - Constants and Variables:
     private var nftModel: NFTCell? {
-        didSet {
-            guard let nftModel = nftModel else { return }
-            let urlString = nftModel.images[0]
-            let size = CGSize(width: contentView.frame.width, height: 108)
-            let processor = DownsamplingImageProcessor(size: size) |> RoundCornerImageProcessor(cornerRadius: 12)
-            if let url = URL(string: urlString) {
-                nftImageView.kf.indicatorType = .activity
-                nftImageView.kf.setImage(with: url,
-                                         options: [.processor(processor),
-                                                   .transition(.fade(1)),
-                                                   .cacheOriginalImage])
-                nftNameLabel.text = nftModel.name
-                nftPriceLabel.text = "(\(nftModel.price) ETH)"
-                setupRatingStackView(rating: nftModel.rating)
-                nftLikeButton.imageView?.image = nftModel.isLiked == true ? Resources.Images.NFTCollectionCell.likedButton : Resources.Images.NFTCollectionCell.unlikedButton
+            didSet {
+                guard let nftModel = nftModel else { return }
+                let urlString = nftModel.images[0]
+                let size = CGSize(width: contentView.frame.width, height: 108)
+                let processor = DownsamplingImageProcessor(size: size) |> RoundCornerImageProcessor(cornerRadius: 12)
+                nftLikeButton.layer.removeAllAnimations()
+                if let url = URL(string: urlString) {
+                    nftImageView.kf.indicatorType = .activity
+                    nftImageView.kf.setImage(with: url,
+                                             options: [.processor(processor),
+                                                       .transition(.fade(1)),
+                                                       .cacheOriginalImage])
+                    nftNameLabel.text = nftModel.name
+                    nftPriceLabel.text = "(\(nftModel.price) ETH)"
+                    
+                    nftLikeButton.imageView?.image = nftModel.isLiked == true ? Resources.Images.NFTCollectionCell.likedButton : Resources.Images.NFTCollectionCell.unlikedButton
+                    if ratingStackView.subviews.count == 0 {
+                        setupRatingStackView(rating: nftModel.rating)
+                    }
+                }
             }
         }
-    }
     
     // MARK: UI:
     private lazy var nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12
-        imageView.backgroundColor = .systemBlue
+        imageView.backgroundColor = .lightGrayDay
         
         return imageView
     }()
@@ -108,6 +115,10 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
         nftModel = model
     }
     
+    func getNFTModel() -> NFTCell? {
+          nftModel
+      }
+    
     // MARK: - Private Methods:
     private func setupRatingStackView(rating: Int) {
         (1...5).forEach { [weak self] number in
@@ -123,14 +134,24 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
         }
     }
     
-    // MARK: - Objc Methods:
-    @objc private func likeButtonDidTapped() {
-        let baseImage = Resources.Images.NFTCollectionCell.unlikedButton
-        let image = nftLikeButton.imageView?.image == baseImage ? Resources.Images.NFTCollectionCell.likedButton : Resources.Images.NFTCollectionCell.unlikedButton
-        
-        nftLikeButton.setImage(image, for: .normal)
-    }
-}
+    private func setLikeButtonImageWithAnimate() {
+           UIView.animateKeyframes(withDuration: 1, delay: 0, options: [.repeat]) {
+               UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.25) {
+                   self.nftLikeButton.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+               }
+               UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5) {
+                   self.nftLikeButton.transform = CGAffineTransform(scaleX: 1, y: 1)
+               }
+           }
+       }
+    
+    
+   // MARK: - Objc Methods:
+      @objc private func likeButtonDidTapped() {
+          delegate?.likeButtonDidTapped(cell: self)
+          setLikeButtonImageWithAnimate()
+      }
+  }
 
 // MARK: - Setup Views:
 extension NFTCollectionCell {

@@ -61,6 +61,7 @@
 		7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B53C2A766C1C00688EC9 /* Observable.swift */; };
 		7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */; };
 		7EE68CFA2A7FCB8A00CAE2AC /* NFTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68CF92A7FCB8A00CAE2AC /* NFTCell.swift */; };
+		7EE68CFF2A80099B00CAE2AC /* NFTCollectionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68CFE2A80099B00CAE2AC /* NFTCollectionCellDelegate.swift */; };
 		7EF4C5D12A73F86C001E8C67 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */; };
 		7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D22A73FD9A001E8C67 /* Resources.swift */; };
 /* End PBXBuildFile section */
@@ -139,6 +140,7 @@
 		7EC0B53C2A766C1C00688EC9 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		7EE68CF92A7FCB8A00CAE2AC /* NFTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCell.swift; sourceTree = "<group>"; };
+		7EE68CFE2A80099B00CAE2AC /* NFTCollectionCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionCellDelegate.swift; sourceTree = "<group>"; };
 		7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		7EF4C5D22A73FD9A001E8C67 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -283,6 +285,7 @@
 		400531752A73EAF2008CAF3B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7EE68D002A8009A300CAE2AC /* Protocols */,
 				7EB78A662A78EAB200BE892B /* Buttons */,
 				7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */,
 				7EB78A672A78EAD000BE892B /* NFTCollectionView.swift */,
@@ -474,6 +477,14 @@
 			name = Cart;
 			path = "FakeNFT/Scenes /Cart";
 			sourceTree = SOURCE_ROOT;
+		};
+		7EE68D002A8009A300CAE2AC /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7EE68CFE2A80099B00CAE2AC /* NFTCollectionCellDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -692,6 +703,7 @@
 				4070B1182A76CADF00CF6E74 /* SortNavBarBaseButton.swift in Sources */,
 				409EEFE72A7A710D00B23FF8 /* User.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* NetworkRequestModel.swift in Sources */,
+				7EE68CFF2A80099B00CAE2AC /* NFTCollectionCellDelegate.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* Cells + Extension.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */,

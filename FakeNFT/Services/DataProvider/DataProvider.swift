@@ -116,5 +116,18 @@ final class DataProvider: DataProviderProtocol {
                 completion(.failure(error))
             }
         }
-    } 
+    }
+    
+    func putNewProfile(profile: Profile, completion: @escaping (Result<Void, Error>) -> Void) {
+            let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.profile, queryItems: nil)
+            let request = NetworkRequestModel(endpoint: url, httpMethod: .put, dto: profile)
+            networkClient.send(request: request) { result in
+                switch result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
 }
