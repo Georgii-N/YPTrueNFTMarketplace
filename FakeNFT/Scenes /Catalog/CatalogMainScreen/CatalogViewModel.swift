@@ -26,6 +26,24 @@ final class CatalogViewModel: CatalogViewModelProtocol {
         fetchCollections()
     }
     
+    // MARK: Public Methods:
+    func sortNFTCollection(option: SortingOption) {
+        guard let nftCollections = nftCollections else { return }
+                
+        var collection = NFTCollections()
+        
+        switch option {
+        case .byName:
+            collection = nftCollections.sorted(by: { $0.name < $1.name })
+        case .byQuantity:
+            collection = nftCollections.sorted(by: { $0.nfts.count > $1.nfts.count })
+        default:
+            break
+        }
+        
+        self.nftCollections = collection
+    }
+    
     // MARK: - Private Methods:
     private func fetchCollections() {
         dataProvider?.fetchNFTCollection(completion: { [weak self] result in

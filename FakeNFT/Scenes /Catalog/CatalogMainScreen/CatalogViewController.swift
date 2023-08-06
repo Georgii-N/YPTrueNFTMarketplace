@@ -61,9 +61,9 @@ final class CatalogViewController: UIViewController {
     private func sortNFT(_ sortOptions: SortingOption) {
         switch sortOptions {
         case .byName:
-            print("SORT BY NAME")
+            viewModel?.sortNFTCollection(option: .byName)
         case .byQuantity:
-            print("SORT BY QUANTITY")
+            viewModel?.sortNFTCollection(option: .byQuantity)
         default:
             break
         }
