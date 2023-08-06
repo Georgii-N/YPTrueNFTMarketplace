@@ -28,17 +28,16 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     }
     
     func sortUsers(by type: SortingOption) {
-        sortingOption = type
-        
+        if sortingOption == type {
+            return
+        }
+        usersRating = []
         switch type {
         case .byName:
-            usersRating.sort { (user1, user2) -> Bool in
-                return user1.name < user2.name
-            }
+           fetchNextPage()
+           
         case .byRating:
-            usersRating.sort { (user1, user2) -> Bool in
-                return user1.rating > user2.rating
-            }
+            fetchNextPage()
         default:
             break
         }
@@ -50,7 +49,6 @@ final class StatisticViewModel: StatisticViewModelProtocol {
             switch result {
             case .success(let users):
                 self?.usersRating.append(contentsOf: users)
-                self?.sortUsers(by: self?.sortingOption ?? .byRating)
             case .failure(let error):
                 assertionFailure(error.localizedDescription)
             }

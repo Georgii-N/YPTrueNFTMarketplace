@@ -92,9 +92,9 @@ extension StatisticViewController {
     private func performSorting(_ selectedOptions: SortingOption) {
         switch selectedOptions {
         case .byName:
-            statisticViewModel.sortUsers(by: .byName)
+            statisticViewModel.sortUsers(by: selectedOptions)
         case .byRating:
-            statisticViewModel.sortUsers(by: .byRating)
+            statisticViewModel.sortUsers(by: selectedOptions)
         default:
             break
         }
