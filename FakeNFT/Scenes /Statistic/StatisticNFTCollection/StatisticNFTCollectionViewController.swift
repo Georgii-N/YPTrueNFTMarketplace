@@ -21,6 +21,7 @@ final class StatisticNFTCollectionViewController: UIViewController {
         setupConstraints()
         setupUI()
         bind()
+        blockUI()
     }
     
     // MARK: - Init
@@ -41,6 +42,7 @@ extension StatisticNFTCollectionViewController {
         statisticNFTViewModel.$NFTcards.bind { [weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
+                self.unblockUI()
                 self.collectionView.reloadData()
             }
         }

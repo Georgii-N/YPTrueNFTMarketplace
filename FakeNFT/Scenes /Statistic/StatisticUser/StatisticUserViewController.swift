@@ -6,6 +6,17 @@ final class StatisticUserViewController: UIViewController {
     // MARK: - Private Dependencies
     private var statisticUserViewModel: StatisticUserViewModel
     
+    private var statisticUserModel: UserResponse? {
+        didSet {
+            guard let statisticUserModel = statisticUserModel else { return }
+            if let url = URL(string: statisticUserModel.avatar) {
+                avatarImageView.kf.setImage(with: url)
+            }
+            nameLabel.text = statisticUserModel.name
+            bioLabel.text = statisticUserModel.description
+        }
+    }
+    
     // MARK: - UI
     private lazy var stackProfileView: UIStackView = {
         let stackView = UIStackView()
@@ -57,9 +68,11 @@ final class StatisticUserViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupViews()
         setupConstraints()
         setupUI()
+        blockUI()
         bind()
     }
     
@@ -84,17 +97,22 @@ extension StatisticUserViewController {
         let webView = WebViewViewController(viewModel: webViewModel, url: url)
         navigationController?.pushViewController(webView, animated: true)
     }
-
+    
     // MARK: - Private Functions
     private func bind() {
         statisticUserViewModel.$profile.bind { [weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.setupUI()
+                
+                self.unblockUI()
+                if self.statisticUserViewModel.profile.count > 0 {
+                    self.statisticUserModel = self.statisticUserViewModel.profile.first
+                }
+                self.tableView.reloadData()
             }
         }
     }
-
+    
     private func setupViews() {
         [stackProfileView,
          bioLabel,
@@ -138,18 +156,9 @@ extension StatisticUserViewController {
     }
     
     private func setupUI() {
-        sleep(3)
         view.backgroundColor = .whiteDay
         
-        if let url = URL(string: statisticUserViewModel.profile[0].avatar) {
-            avatarImageView.kf.setImage(with: url)
-        }
-        
-        nameLabel.text = statisticUserViewModel.profile[0].name
-        bioLabel.text = statisticUserViewModel.profile[0].description
-        
         addTargets()
-        
     }
     
     private func addTargets() {
@@ -160,7 +169,7 @@ extension StatisticUserViewController {
 // MARK: - TableViewDataSource
 extension StatisticUserViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        statisticUserViewModel.profile.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -181,6 +190,6 @@ extension StatisticUserViewController: UITableViewDelegate {
         let statisticNFTCollectionViewModel = StatisticNFTCollectionViewModel(userId: statisticUserViewModel.profile[0].id)
         let statisticNFTCollectionViewController = StatisticNFTCollectionViewController(statisticNFTViewModel: statisticNFTCollectionViewModel)
         navigationController?.pushViewController(statisticNFTCollectionViewController, animated: true)
-            tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

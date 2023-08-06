@@ -22,6 +22,7 @@ final class StatisticViewController: UIViewController {
         setupConstraints()
         setupUI()
         setupNavBar()
+        blockUI()
         bind()
     }
     
@@ -105,6 +106,7 @@ extension StatisticViewController {
         statisticViewModel.usersRatingObservable.bind { [weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
+                self.unblockUI()
                 self.collectionView.reloadData()
             }
         }
