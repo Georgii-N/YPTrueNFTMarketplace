@@ -8,7 +8,7 @@ struct NFTCell {
     let author: String
     let id: String
     let isLiked: Bool
-    let isAddedToCard: Bool?
+    let isAddedToCard: Bool
 }
 
 typealias NFTCells = [NFTCell]

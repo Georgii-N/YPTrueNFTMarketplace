@@ -144,8 +144,8 @@ internal enum L10n {
     internal enum MyNFT {
       /// От
       internal static let from = L10n.tr("Localizable", "profile.myNFT.from", fallback: "От")
-      /// У Вас еще нет ТFT
-      internal static let plug = L10n.tr("Localizable", "profile.myNFT.plug", fallback: "У Вас еще нет ТFT")
+      /// У Вас еще нет NFT
+      internal static let plug = L10n.tr("Localizable", "profile.myNFT.plug", fallback: "У Вас еще нет NFT")
     }
   }
   internal enum Sorting {
@@ -171,6 +171,10 @@ internal enum L10n {
       internal enum ButtonUser {
         /// Перейти на сайт пользователя
         internal static let title = L10n.tr("Localizable", "statistic.profile.buttonUser.title", fallback: "Перейти на сайт пользователя")
+      }
+      internal enum UserCollection {
+        /// У пользователя еще нет NFT
+        internal static let stub = L10n.tr("Localizable", "statistic.profile.userCollection.stub", fallback: "У пользователя еще нет NFT")
       }
     }
   }

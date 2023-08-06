@@ -83,7 +83,7 @@
 "profile.editScreen.site" = "Cайт";
 
 // MyNFTScreen
-"profile.myNFT.plug" = "У Вас еще нет ТFT";
+"profile.myNFT.plug" = "У Вас еще нет NFT";
 "profile.myNFT.from" = "От";
 
 // FavouritesScreen
@@ -93,6 +93,7 @@
 
 "statistic.profile.buttonUser.title" = "Перейти на сайт пользователя";
 "statistic.profile.buttonCollection.title" = "Коллекция NFT";
+"statistic.profile.userCollection.stub" = "У пользователя еще нет NFT";
 
 
 

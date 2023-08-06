@@ -123,20 +123,22 @@ final class CatalogCollectionViewController: UIViewController {
         })
         
         viewModel?.likeStatusDidChangeObservable.bind(action: { [weak self] _ in
-            guard let self = self,
-                  let indexPathToUpdateNFTCell = self.indexPathToUpdateNFTCell,
-                  let cell = self.nftCollection.cellForItem(at: indexPathToUpdateNFTCell) as? NFTCollectionCell,
-                  let nftModel = cell.getNFTModel() else { return }
-            let newModel = NFTCell(name: nftModel.name,
-                                   images: nftModel.images,
-                                   rating: nftModel.rating,
-                                   price: nftModel.price,
-                                   author: nftModel.author,
-                                   id: nftModel.id,
-                                   isLiked: !nftModel.isLiked,
-                                   isAddedToCard: false)
-            cell.setupNFTModel(model: newModel)
-            self.indexPathToUpdateNFTCell = nil
+            DispatchQueue.main.async {
+                guard let self = self,
+                      let indexPathToUpdateNFTCell = self.indexPathToUpdateNFTCell,
+                      let cell = self.nftCollection.cellForItem(at: indexPathToUpdateNFTCell) as? NFTCollectionCell,
+                      let nftModel = cell.getNFTModel() else { return }
+                let newModel = NFTCell(name: nftModel.name,
+                                       images: nftModel.images,
+                                       rating: nftModel.rating,
+                                       price: nftModel.price,
+                                       author: nftModel.author,
+                                       id: nftModel.id,
+                                       isLiked: !nftModel.isLiked,
+                                       isAddedToCard: false)
+                cell.setupNFTModel(model: newModel)
+                self.indexPathToUpdateNFTCell = nil
+            }
         })
         
         viewModel?.cartStatusDidChangeObservable.bind(action: { [weak self] _ in
