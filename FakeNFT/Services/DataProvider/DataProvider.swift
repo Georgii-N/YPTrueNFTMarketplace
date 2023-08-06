@@ -20,12 +20,25 @@ final class DataProvider: DataProviderProtocol {
     }
     
     // MARK: - Public Functions
-    func fetchUsersRating(page: Int, completion: @escaping (Result<[User], Error>) -> Void) {
-        let queryItems = [URLQueryItem(name: "p", value: "\(page)"),
-                          URLQueryItem(name: "l", value: "10")]
+    func fetchUsersRating(sortingOption: SortingOption, page: Int, completion: @escaping (Result<[User], Error>) -> Void) {
         
-        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.users, queryItems: queryItems)
-        let request = NetworkRequestModel(endpoint: url, httpMethod: .get, dto: nil)
+        var queryItems = [URLQueryItem(name: "p", value: "\(page)"),
+                          URLQueryItem(name: "l", value: "10")]
+     
+        switch sortingOption {
+        case .byName:
+            queryItems.append(contentsOf: [URLQueryItem(name: "sortBy", value: "name"),
+                               URLQueryItem(name: "order", value: "asc")])
+        default:
+            break
+        }
+        
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.users,
+                                                 queryItems: queryItems)
+        
+        let request = NetworkRequestModel(endpoint: url,
+                                          httpMethod: .get,
+                                          dto: nil)
         networkClient.send(request: request, type: UsersResponse.self) { result in
             switch result {
             case .success(let usersResponse):
@@ -54,7 +67,7 @@ final class DataProvider: DataProviderProtocol {
         }
     }
     
-    func fetchUsersNFT(userId: String, nftsId: [String]?, completion: @escaping (Result<NFTCards, Error>) -> Void) {
+    func fetchUsersNFT(userId: String?, nftsId: [String]?, completion: @escaping (Result<NFTCards, Error>) -> Void) {
         
         let queryItems = [URLQueryItem(name: "filter", value: userId)]
         let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.nftCard, queryItems: queryItems)
@@ -63,9 +76,12 @@ final class DataProvider: DataProviderProtocol {
         networkClient.send(request: request, type: NFTCards.self) { result in
             switch result {
             case .success(let result):
-                var result = result.filter { userId.contains($0.author) }
+                var result = result
+                if let userId {
+                    result.filter { userId.contains($0.author) }
+                }
                 if let nftsId {
-                    result = result.filter { nftsId.contains($0.id)}
+                    result.filter { nftsId.contains($0.id)}
                 }
                 completion(.success(result))
             case .failure(let error):
