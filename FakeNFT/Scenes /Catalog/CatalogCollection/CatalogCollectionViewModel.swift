@@ -12,6 +12,9 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     // MARK: Private Dependencies:
     private var dataProvider: DataProviderProtocol?
     
+    // MARK: Constants and Variables:
+    var likedNFTID: [String]?
+    
     // MARK: - Observable Values:
     var collectionObservable: Observable<NFTCollection> {
         $collection
@@ -42,6 +45,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     init(collection: NFTCollection) {
         self.collection = collection
         self.dataProvider = DataProvider()
+        fetchProfile()
         fetchAuthor()
     }
     
@@ -53,6 +57,19 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
             switch result {
             case .success(let author):
                 authorCollection = author
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
+    private func fetchProfile() {
+        dataProvider?.fetchProfile(completion: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let profile):
+                let arrayID = profile.likes.map({ $0 })
+                self.likedNFTID = arrayID
             case .failure(let error):
                 print(error)
             }

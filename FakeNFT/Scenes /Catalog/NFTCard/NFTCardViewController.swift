@@ -25,7 +25,7 @@ final class NFTCardViewController: UIViewController {
     
     private lazy var coverNFTScrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        scrollView.contentSize = CGSize(width: view.frame.width*3, height: 375)
+        scrollView.contentSize = CGSize(width: view.frame.width * 3, height: 375)
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = self
