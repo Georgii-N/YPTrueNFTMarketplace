@@ -20,7 +20,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
         $collection
     }
     
-    var nftsObservable: Observable<NFTCards?> {
+    var nftsObservable: Observable<[NFTCell]?> {
         $nftCollection
     }
     
@@ -32,7 +32,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     private(set) var collection: NFTCollection
     
     @Observable
-    private(set) var nftCollection: NFTCards?
+    private(set) var nftCollection: [NFTCell]?
     
     @Observable
     private(set) var authorCollection: UserResponse? {
@@ -52,7 +52,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     // MARK: Private Methods:
     private func fetchAuthor() {
         let authorID = collectionObservable.wrappedValue.author
-        dataProvider?.fetchProfileId(userId: authorID, completion: { [weak self] result in
+        dataProvider?.fetchUserID(userId: authorID, completion: { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let author):
@@ -79,14 +79,24 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     private func fetchNFTs() {
         guard let authorID = authorCollection?.id else { return }
         
-        dataProvider?.fetchUsersNFT(userId: authorID, nftsId: collection.nfts, completion: { [weak self] result in
+        dataProvider?.fetchUsersNFT(userId: authorID, nftsId: collection.nfts) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let nfts):
-                self.nftCollection = nfts
+                nftCollection = nfts.map({
+                    let isLiked = self.likedNFTID?.contains($0.id)
+                    return NFTCell(name: $0.name,
+                                   images: $0.images,
+                                   rating: $0.rating,
+                                   price: $0.price,
+                                   author: $0.author,
+                                   id: $0.id,
+                                   isLiked: isLiked,
+                                   isAddedToCard: false)
+                })
             case .failure(let error):
                 print(error)
             }
-        })
+        }
     }
 }

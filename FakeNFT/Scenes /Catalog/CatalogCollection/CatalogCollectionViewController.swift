@@ -153,7 +153,7 @@ final class CatalogCollectionViewController: UIViewController {
         coverNFTImageView.kf.setImage(with: url, options: [.processor(processor), .transition(.fade(1))])
     }
     
-    private func switchToNFTCardViewController(nftModel: NFTCard) {
+    private func switchToNFTCardViewController(nftModel: NFTCell) {
         guard let collection = viewModel?.collectionObservable.wrappedValue,
               let nfts = viewModel?.nftsObservable.wrappedValue else { return }
     

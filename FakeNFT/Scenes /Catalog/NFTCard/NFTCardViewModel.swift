@@ -13,7 +13,7 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
     private var dataProvider: DataProviderProtocol?
     
     // MARK: Observable Values:
-    var currentNFTObservable: Observable<NFTCard> {
+    var currentNFTObservable: Observable<NFTCell> {
         $currentNFT
     }
     
@@ -25,12 +25,12 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
         $currencies
     }
     
-    var nftsObservable: Observable<NFTCards> {
+    var nftsObservable: Observable<[NFTCell]> {
         $nfts
     }
     
     @Observable
-    private(set) var currentNFT: NFTCard 
+    private(set) var currentNFT: NFTCell
     
     @Observable
     private(set) var nftCollection: NFTCollection
@@ -39,10 +39,10 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
     private(set) var currencies: Currencies?
     
     @Observable
-    private(set) var nfts: NFTCards
+    private(set) var nfts: [NFTCell]
     
     // MARK: - Lifecycle:
-    init(nfts: NFTCards, nftModel: NFTCard, nftCollection: NFTCollection) {
+    init(nfts: [NFTCell], nftModel: NFTCell, nftCollection: NFTCollection) {
         self.currentNFT = nftModel
         self.nfts = nfts
         self.nftCollection = nftCollection
