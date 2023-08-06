@@ -106,16 +106,13 @@ final class CatalogCollectionViewController: UIViewController {
     private func bind() {
         viewModel?.collectionObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.setupCollectionInfo()
-            }
+            
+            self.setupCollectionInfo()
         })
         
         viewModel?.authorCollectionObservable.bind(action: { [weak self] author in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.setupAuthorInfo(authorModel: author)
-            }
+            self.setupAuthorInfo(authorModel: author)
         })
         
         viewModel?.nftsObservable.bind(action: { [weak self] _ in
@@ -126,7 +123,6 @@ final class CatalogCollectionViewController: UIViewController {
         })
         
         viewModel?.likeStatusDidChangeObservable.bind(action: { [weak self] _ in
-            DispatchQueue.main.async {
             guard let self = self,
                   let indexPathToUpdateNFTCell = self.indexPathToUpdateNFTCell,
                   let cell = self.nftCollection.cellForItem(at: indexPathToUpdateNFTCell) as? NFTCollectionCell,
@@ -139,29 +135,49 @@ final class CatalogCollectionViewController: UIViewController {
                                    id: nftModel.id,
                                    isLiked: !nftModel.isLiked,
                                    isAddedToCard: false)
+            cell.setupNFTModel(model: newModel)
+            self.indexPathToUpdateNFTCell = nil
+        })
+        
+        viewModel?.cartStatusDidChangeObservable.bind(action: { [weak self] _ in
+            DispatchQueue.main.async {
+                guard let self = self,
+                      let indexPathToUpdateNFTCell = self.indexPathToUpdateNFTCell,
+                      let cell = self.nftCollection.cellForItem(at: indexPathToUpdateNFTCell) as? NFTCollectionCell,
+                      let nftModel = cell.getNFTModel() else { return }
+                let newModel = NFTCell(name: nftModel.name,
+                                       images: nftModel.images,
+                                       rating: nftModel.rating,
+                                       price: nftModel.price,
+                                       author: nftModel.author,
+                                       id: nftModel.id,
+                                       isLiked: nftModel.isLiked,
+                                       isAddedToCard: !nftModel.isAddedToCard)
                 cell.setupNFTModel(model: newModel)
-                
                 self.indexPathToUpdateNFTCell = nil
             }
         })
     }
-    
+
     // Setup NFT's info:
     private func setupCollectionInfo() {
-
-        guard let collectionModel = viewModel?.collectionObservable.wrappedValue else { return }
-       
-        setNFTCollectionImage(model: collectionModel)
-        nameOfNFTCollectionLabel.text = collectionModel.name
-        collectionInformationLabel.text = collectionModel.description
+        DispatchQueue.main.async {
+            guard let collectionModel = self.viewModel?.collectionObservable.wrappedValue else { return }
+            
+            self.setNFTCollectionImage(model: collectionModel)
+            self.nameOfNFTCollectionLabel.text = collectionModel.name
+            self.collectionInformationLabel.text = collectionModel.description
+        }
     }
     
     private func setupAuthorInfo(authorModel: UserResponse?) {
-        guard let author = authorModel,
-              let link = author.website.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-        let attributeString = NSMutableAttributedString(string: author.name)
-        attributeString.addAttribute(.link, value: link, range: NSRange(location: 0, length: attributeString.length))
-        authorLinkTextView.attributedText = attributeString
+        DispatchQueue.main.async {
+            guard let author = authorModel,
+                  let link = author.website.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+            let attributeString = NSMutableAttributedString(string: author.name)
+            attributeString.addAttribute(.link, value: link, range: NSRange(location: 0, length: attributeString.length))
+            self.authorLinkTextView.attributedText = attributeString
+        }
     }
     
     private func setNFTCollectionImage(model: NFTCollection) {
@@ -195,6 +211,16 @@ extension CatalogCollectionViewController: NFTCollectionCellDelegate {
         let modelID = model.id
         
         viewModel?.changeNFTFavouriteStatus(isLiked: model.isLiked, id: modelID)
+        indexPathToUpdateNFTCell = indexPath
+    }
+    
+    func addToCardButtonDidTapped(cell: NFTCollectionCell) {
+        guard let model = cell.getNFTModel(),
+        let indexPath = nftCollection.indexPath(for: cell) else { return }
+        
+        let modelID = model.id
+        
+        viewModel?.changeNFTCartStatus(isAddedToCart: model.isAddedToCard, id: modelID)
         indexPathToUpdateNFTCell = indexPath
     }
 }

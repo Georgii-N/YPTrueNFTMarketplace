@@ -13,7 +13,8 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     private var dataProvider: DataProviderProtocol?
     
     // MARK: Constants and Variables:
-    var profile: Profile?
+    private var profile: Profile?
+    private var order: Order?
     
     // MARK: - Observable Values:
     var collectionObservable: Observable<NFTCollection> {
@@ -32,6 +33,10 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
         $likeStatusDidChange
     }
     
+    var cartStatusDidChangeObservable: Observable<Bool> {
+        $cartStatusDidChange
+    }
+    
     @Observable
     private(set) var collection: NFTCollection
     
@@ -48,11 +53,15 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     @Observable
     private(set) var likeStatusDidChange = false
     
+    @Observable
+    private(set) var cartStatusDidChange = false
+    
     // MARK: - Lifecycle:
     init(collection: NFTCollection) {
         self.collection = collection
         self.dataProvider = DataProvider()
         fetchProfile()
+        fetchOrder()
         fetchAuthor()
     }
     
@@ -88,6 +97,31 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
         })
     }
     
+    func changeNFTCartStatus(isAddedToCart: Bool, id: String) {
+        guard var newOrderID = order?.nfts else { return }
+        
+        if !isAddedToCart {
+            newOrderID.append(id)
+        } else {
+            guard let index = newOrderID.firstIndex(where: { $0 == id }) else { return }
+            newOrderID.remove(at: index)
+        }
+        
+        guard var order = order else { return }
+        order = Order(nfts: newOrderID, id: "1")
+        
+        dataProvider?.putNewOrder(order: order, completion: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                self.cartStatusDidChange = true
+                self.order = order
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
     // MARK: - Private Methods:
     private func fetchAuthor() {
         let authorID = collectionObservable.wrappedValue.author
@@ -114,6 +148,18 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
         })
     }
     
+    private func fetchOrder() {
+        dataProvider?.fetchOrder(completion: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let order):
+                self.order = order
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
     private func fetchNFTs() {
         guard let authorID = authorCollection?.id else { return }
         
@@ -123,6 +169,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
             case .success(let nfts):
                 nftCollection = nfts.map({
                     let isLiked = self.profile?.likes.contains($0.id)
+                    let isAddedToCart = self.order?.nfts.contains($0.id)
                     return NFTCell(name: $0.name,
                                    images: $0.images,
                                    rating: $0.rating,
@@ -130,7 +177,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
                                    author: $0.author,
                                    id: $0.id,
                                    isLiked: isLiked ?? false,
-                                   isAddedToCard: false)
+                                   isAddedToCard: isAddedToCart ?? false)
                 })
             case .failure(let error):
                 print(error)
