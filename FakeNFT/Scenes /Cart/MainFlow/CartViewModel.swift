@@ -38,5 +38,4 @@ final class CartViewModel {
     func additionPriceNFT() -> Float {
         Float(cartNFT.reduce(0) {$0 + $1.price})
     }
-    
 }

@@ -12,12 +12,13 @@ final class CartViewControler: UIViewController {
     
     var cartViewModel: CartViewModel
     
-// MARK: UI constants and variables
+    // MARK: UI constants and variables
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private lazy var totalView: UIView = {
         let totalView = UIView()
         totalView.backgroundColor = .lightGray
+        totalView.isHidden = false
         return totalView
     }()
     
@@ -25,18 +26,22 @@ final class CartViewControler: UIViewController {
         let totalNFT = UILabel()
         totalNFT.textColor = .blackDay
         totalNFT.font = UIFont.systemFont(ofSize: 15)
-       // totalNFT.text = "3 NFT"
-       // totalNFT.text = "\(cartViewModel.additionNFT()) NFT"
         return totalNFT
     }()
     
     private lazy var totalCost: UILabel = {
         let totalCost = UILabel()
         totalCost.textColor = .greenUniversal
-      //  totalCost.text = "5,34 ETH"
-      //  totalCost.text = "\(cartViewModel.additionPriceNFT()) ETH"
         totalCost.font = UIFont.boldSystemFont(ofSize: 17)
         return totalCost
+    }()
+    
+    private let emptyLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.text = L10n.Cart.MainScreen.emptyCart
+        label.isHidden = true
+        return label
     }()
     
     private lazy var toPayButton: UIButton = {
@@ -47,29 +52,33 @@ final class CartViewControler: UIViewController {
         toPayButton.layer.cornerRadius = 16
         toPayButton.titleLabel?.textAlignment = .center
         toPayButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        toPayButton.isHidden = false
         return toPayButton
     }()
-
+    
+    // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
+        chekEmptyNFT()
         setUpViews()
         setupConstraints()
         setTargets()
         makeCollectionView()
-        makeSortButton()
         bind()
-           }
+    }
     
     private func bind() {
         cartViewModel.$cartNFT.bind {[weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                self.chekEmptyNFT()
                 self.totalNFT.text = "\(self.cartViewModel.additionNFT()) NFT"
                 self.totalCost.text = "\(self.cartViewModel.additionPriceNFT()) ETH"
             }
         }
     }
+    
     init(cartViewModel: CartViewModel) {
         self.cartViewModel = cartViewModel
         super.init(nibName: nil, bundle: nil)
@@ -82,13 +91,15 @@ final class CartViewControler: UIViewController {
 
 // MARK: Set Up UI
 extension CartViewControler {
-   private func setUpViews() {
+    private func setUpViews() {
         view.backgroundColor = .whiteDay
-        [totalView, totalNFT, totalCost, toPayButton, collectionView].forEach(view.setupView)
+        [totalView, totalNFT, totalCost, toPayButton, collectionView, emptyLabel].forEach(view.setupView)
     }
     
-   private func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
+            emptyLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 351),
+            emptyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             totalView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             totalView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             totalView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -109,28 +120,44 @@ extension CartViewControler {
         ])
     }
     
-   private func setTargets() {
+    private func setTargets() {
         toPayButton.addTarget(self, action: #selector(goPayment), for: .touchUpInside)
     }
     
+    private func chekEmptyNFT() {
+        if cartViewModel.cartNFT.isEmpty {
+            emptyLabel.isHidden = false
+            totalView.isHidden = true
+            toPayButton.isHidden = true
+            self.navigationItem.rightBarButtonItem = nil
+            
+        } else {
+            emptyLabel.isHidden = true
+            totalView.isHidden = false
+            toPayButton.isHidden = false
+            makeSortButton()
+        }
+    }
+    
     @objc
-   private func goPayment() {
-        let paymentViewController = PaymentViewController()
+    private func goPayment() {
+        let paymentViewModel = PaymentViewModel()
+        let paymentViewController = PaymentViewController(paymentViewModel: paymentViewModel)
         paymentViewController.hidesBottomBarWhenPushed = true
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.pushViewController(paymentViewController, animated: true)
     }
     
-   private func makeCollectionView() {
+    private func makeCollectionView() {
         collectionView.register(CartMainCell.self)
         collectionView.backgroundColor = .whiteDay
         collectionView.delegate = self
         collectionView.dataSource = self
     }
     
-   private func makeSortButton() {
+    private func makeSortButton() {
         let sortButton = SortNavBarBaseButton()
-       navigationItem.rightBarButtonItem = UIBarButtonItem(customView: sortButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: sortButton)
     }
 }
 
@@ -168,7 +195,7 @@ extension CartViewControler: CartMainCellDelegate {
     func didTapDeleteButton(in cell: CartMainCell) {
         guard let imageCell = cell.imageNFT.image else { return }
         let deleteAlert = DeleteItemViewControler(itemImage: imageCell)
-            deleteAlert.modalPresentationStyle = .overFullScreen
+        deleteAlert.modalPresentationStyle = .overFullScreen
         present(deleteAlert, animated: true, completion: nil)
     }
 }

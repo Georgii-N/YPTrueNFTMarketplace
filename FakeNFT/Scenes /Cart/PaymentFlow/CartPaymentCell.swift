@@ -17,28 +17,28 @@ final class CartPaymentCell: UICollectionViewCell {
         return backgroundView
     }()
     
-    private lazy var nameCoin: UILabel = {
+     lazy var nameCoin: UILabel = {
         let nameCoin = UILabel()
         nameCoin.textColor = .blackDay
         nameCoin.font = UIFont.boldSystemFont(ofSize: 13)
-        nameCoin.text = "Bitcoin"
         return nameCoin
     }()
     
-    private lazy var imageCoin: UIImageView = {
+     lazy var imageCoin: UIImageView = {
         let imageCoin = UIImageView()
-        imageCoin.image = UIImage(named: "mokCoin")
+         imageCoin.backgroundColor = .blackUniversal
+         imageCoin.layer.cornerRadius = 6
         return imageCoin
     }()
     
-    private lazy var shortNameCoin: UILabel = {
+     lazy var shortNameCoin: UILabel = {
         let shortNameCoin = UILabel()
         shortNameCoin.textColor = .greenUniversal
         shortNameCoin.font = UIFont.systemFont(ofSize: 13)
-        shortNameCoin.text = "BTC"
         return shortNameCoin
     }()
     
+    // MARK: - Lifecycle:
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpViews()
@@ -64,6 +64,8 @@ extension CartPaymentCell {
             backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageCoin.topAnchor.constraint(equalTo: backView.topAnchor, constant: 5),
             imageCoin.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 12),
+            imageCoin.widthAnchor.constraint(equalToConstant: 36),
+            imageCoin.heightAnchor.constraint(equalToConstant: 36),
             nameCoin.topAnchor.constraint(equalTo: backView.topAnchor, constant: 5),
             nameCoin.leadingAnchor.constraint(equalTo: imageCoin.trailingAnchor, constant: 4),
             shortNameCoin.topAnchor.constraint(equalTo: nameCoin.bottomAnchor),

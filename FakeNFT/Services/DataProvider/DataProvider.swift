@@ -86,5 +86,28 @@ final class DataProvider: DataProviderProtocol {
                   completion(.failure(error))
               }
           }
-      } 
+      }
+    struct GetNFTRequest: NetworkRequest {
+             var nftID: Int
+             var endpoint: URL? {
+                 URL(string: "https://648cbc238620b8bae7ed51a1.mockapi.io/api/v1/nft/\(nftID)")
+             }
+             var httpMethod: HttpMethod {
+                 .get
+             }
+         }
+        
+        func fetchNFTs(nftId: Int, completion: @escaping (Result<[NFTCard], Error>) -> Void) {
+            var nfts: [NFTCard] = []
+            let request = GetNFTRequest(nftID: nftId)
+            networkClient.send(request: request, type: NFTCard.self) { result in
+                switch result {
+                case .success(let data):
+                    nfts.append(data)
+                    completion(.success(nfts))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
 }

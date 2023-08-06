@@ -54,6 +54,7 @@ final class DeleteItemViewControler: UIViewController {
         return returnToCartButton
     }()
     
+    // MARK: - Lifecycle:
     init(itemImage: UIImage) {
         self.itemImage = itemImage
         super.init(nibName: nil, bundle: nil)
@@ -103,6 +104,7 @@ extension DeleteItemViewControler {
        returnToCartButton.addTarget(self, action: #selector(returnToCart), for: .touchUpInside)
     }
     
+    // MARK: Private Methods
     @objc
     private func returnToCart() {
         dismiss(animated: true)

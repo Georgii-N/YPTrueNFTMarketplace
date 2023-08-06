@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class PaymentViewController: UIViewController {
     
+    // MARK: Dependencies
+   private var paymentViewModel: PaymentViewModel
+    
 // MARK: UI constants and variables
     private let payButton = BaseBlackButton(with: L10n.Cart.PayScreen.payButton)
+    private let url = URL(string: "https://yandex.ru/legal/practicum_termsofuse/")
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private lazy var bottomView: UIView = {
@@ -27,20 +32,40 @@ final class PaymentViewController: UIViewController {
         return userTerms
     }()
     
-    private lazy var userTermsLink: UILabel = {
-        let userTermsLink = UILabel()
-        userTermsLink.textColor = .blackDay
-        userTermsLink.font = UIFont.systemFont(ofSize: 13)
-        userTermsLink.text = L10n.Cart.PayScreen.userTermsLink
+    private lazy var userTermsLink: UIButton = {
+        let userTermsLink = UIButton()
+        userTermsLink.setTitle(L10n.Cart.PayScreen.userTermsLink, for: .normal)
+        userTermsLink.setTitleColor(.blueUniversal, for: .normal)
+        userTermsLink.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         return userTermsLink
     }()
     
+    // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
         setupConstraints()
         makeCollectionView()
         setTargets()
+        bind()
+    }
+    
+    func bind() {
+        paymentViewModel.$currencieNFT.bind {[weak self] _ in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    init(paymentViewModel: PaymentViewModel){
+        self.paymentViewModel = paymentViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -75,6 +100,7 @@ extension PaymentViewController {
     
    private func setTargets() {
         payButton.addTarget(self, action: #selector(goToSuccessScreen), for: .touchUpInside)
+       userTermsLink.addTarget(self, action: #selector(openUserTerms), for: .touchUpInside)
     }
     
    private func makeCollectionView() {
@@ -84,22 +110,37 @@ extension PaymentViewController {
         collectionView.dataSource = self
     }
     
+    
+    // MARK: Private Methods
     @objc
    private func goToSuccessScreen() {
         let successViewController = UnsuccessfulPaymentViewController()
             navigationController?.setNavigationBarHidden(true, animated: true)
             navigationController?.pushViewController(successViewController, animated: true)
     }
+    
+    @objc
+   private func openUserTerms() {
+        let webViewModel = WebViewViewModel()
+        let webViewController = WebViewViewController(viewModel: webViewModel, url: url)
+        navigationController?.pushViewController(webViewController, animated: true)
+    }
 }
 
 // MARK: Collection View
 extension PaymentViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        8
+        paymentViewModel.currencieNFT.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let imageUrl = URL(string: paymentViewModel.currencieNFT[indexPath.row].image)
+        let size = CGSize(width: 31.5, height: 31.5)
+        let resizingProcessor = ResizingImageProcessor(referenceSize: size)
         let cell: CartPaymentCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+        cell.nameCoin.text = paymentViewModel.currencieNFT[indexPath.row].title
+        cell.shortNameCoin.text = paymentViewModel.currencieNFT[indexPath.row].name
+        cell.imageCoin.kf.setImage(with: imageUrl, options: [.processor(resizingProcessor)])
         return cell
     }
     

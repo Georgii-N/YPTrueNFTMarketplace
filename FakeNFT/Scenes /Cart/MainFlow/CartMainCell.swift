@@ -58,6 +58,7 @@ final class CartMainCell: UICollectionViewCell {
         return deleteCartButton
     }()
     
+    // MARK: - Lifecycle:
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpViews()
@@ -97,6 +98,7 @@ extension CartMainCell {
         deleteCartButton.addTarget(self, action: #selector(openDeleteAlert), for: .touchUpInside)
     }
     
+    // MARK: Methods
      func setRating(rating: Int) {
         switch rating {
         case 0: ratingNFT.image = UIImage(named: "rating_0")

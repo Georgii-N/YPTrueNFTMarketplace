@@ -28,6 +28,7 @@ final class SuccessfulPaymentViewController: UIViewController {
         return successefulLabel
     }()
     
+    // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()

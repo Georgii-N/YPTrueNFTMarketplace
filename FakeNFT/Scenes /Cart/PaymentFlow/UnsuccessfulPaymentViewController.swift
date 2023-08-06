@@ -29,6 +29,7 @@ final class UnsuccessfulPaymentViewController: UIViewController {
         return unsuccessefulLabel
     }()
     
+    // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
