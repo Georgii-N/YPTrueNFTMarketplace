@@ -1,3 +1,6 @@
+// MARK: - Onboarding
+"onboarding.research" = "Исследуйте";
+
 // MARK: - TabBar
 
 "profile.title" = "Профиль";
@@ -52,10 +55,13 @@
 "cart.mainScreen.emptyCart" = "Корзина пуста";
 "cart.mainScreen.toPayButton" = "К оплате";
 "cart.mainScreen.deleteItemAlert" = "Вы уверены, что хотите удалить объект из корзины?";
+"cart.mainScreen.deleteItemButton" = "Удалить";
+"cart.mainScreen.returnButton" = "Вернуться";
 
 // Pay Screen
 "cart.payScreen.paymentChoice" = "Выберите способ оплаты";
 "cart.payScreen.userTerms" = "Совершая покупку, вы соглашаетесь с условиями";
+"cart.payScreen.userTermsLink" = "Пользовательского соглашения";
 "cart.payScreen.payButton" = "Оплатить";
 
 // Successful Payment Screen
@@ -63,7 +69,7 @@
 "cart.successfulPayment.toBackCatalogButton" = "Вернуться в каталог";
 
 // Unuccessful Payment Screen
-"cart.unsuccessfulPayment.unsuccessful" = "Упс! Что-то пошло не так :( Попробуйте ещё раз!";
+"cart.unsuccessfulPayment.unsuccessful" = "Упс! Что-то пошло не так :(\n Попробуйте ещё раз!";
 "cart.unsuccessfulPayment.tryAgain" = "Попробовать еще раз";
 
 // MARK: - Profile

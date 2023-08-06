@@ -15,7 +15,6 @@ final class BaseWhiteButton: UIButton {
 
     private func setupUI() {
         self.backgroundColor = .whiteDay
-
         self.setTitle(labelText, for: .normal)
         self.setTitleColor(.blackDay, for: .normal)
 

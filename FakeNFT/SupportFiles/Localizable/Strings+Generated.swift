@@ -56,8 +56,12 @@ internal enum L10n {
     internal enum MainScreen {
       /// Вы уверены, что хотите удалить объект из корзины?
       internal static let deleteItemAlert = L10n.tr("Localizable", "cart.mainScreen.deleteItemAlert", fallback: "Вы уверены, что хотите удалить объект из корзины?")
+      /// Удалить
+      internal static let deleteItemButton = L10n.tr("Localizable", "cart.mainScreen.deleteItemButton", fallback: "Удалить")
       /// Корзина пуста
       internal static let emptyCart = L10n.tr("Localizable", "cart.mainScreen.emptyCart", fallback: "Корзина пуста")
+      /// Вернуться
+      internal static let returnButton = L10n.tr("Localizable", "cart.mainScreen.returnButton", fallback: "Вернуться")
       /// К оплате
       internal static let toPayButton = L10n.tr("Localizable", "cart.mainScreen.toPayButton", fallback: "К оплате")
     }
@@ -68,6 +72,8 @@ internal enum L10n {
       internal static let paymentChoice = L10n.tr("Localizable", "cart.payScreen.paymentChoice", fallback: "Выберите способ оплаты")
       /// Совершая покупку, вы соглашаетесь с условиями
       internal static let userTerms = L10n.tr("Localizable", "cart.payScreen.userTerms", fallback: "Совершая покупку, вы соглашаетесь с условиями")
+      /// Пользовательского соглашения
+      internal static let userTermsLink = L10n.tr("Localizable", "cart.payScreen.userTermsLink", fallback: "Пользовательского соглашения")
     }
     internal enum SuccessfulPayment {
       /// Успех! Оплата прошла, поздравляем с покупкой!
@@ -78,8 +84,9 @@ internal enum L10n {
     internal enum UnsuccessfulPayment {
       /// Попробовать еще раз
       internal static let tryAgain = L10n.tr("Localizable", "cart.unsuccessfulPayment.tryAgain", fallback: "Попробовать еще раз")
-      /// Упс! Что-то пошло не так :( Попробуйте ещё раз!
-      internal static let unsuccessful = L10n.tr("Localizable", "cart.unsuccessfulPayment.unsuccessful", fallback: "Упс! Что-то пошло не так :( Попробуйте ещё раз!")
+      /// Упс! Что-то пошло не так :(
+      ///  Попробуйте ещё раз!
+      internal static let unsuccessful = L10n.tr("Localizable", "cart.unsuccessfulPayment.unsuccessful", fallback: "Упс! Что-то пошло не так :(\n Попробуйте ещё раз!")
     }
   }
   internal enum Catalog {
@@ -111,6 +118,10 @@ internal enum L10n {
     internal static let price = L10n.tr("Localizable", "general.price", fallback: "Цена")
     /// Вернуться
     internal static let `return` = L10n.tr("Localizable", "general.return", fallback: "Вернуться")
+  }
+  internal enum Onboarding {
+    /// Исследуйте
+    internal static let research = L10n.tr("Localizable", "onboarding.research", fallback: "Исследуйте")
   }
   internal enum Profile {
     /// Профиль
