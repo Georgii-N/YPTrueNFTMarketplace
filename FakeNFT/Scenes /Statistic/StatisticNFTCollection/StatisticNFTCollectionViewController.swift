@@ -13,6 +13,16 @@ final class StatisticNFTCollectionViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var stubLabel: UILabel = {
+        let stubLabel = UILabel()
+        stubLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        stubLabel.textColor = .blackDay
+        stubLabel.textAlignment = .center
+        stubLabel.text = "У пользователя еще нет NFT"
+        stubLabel.isHidden = true
+        return stubLabel
+    }()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +54,20 @@ extension StatisticNFTCollectionViewController {
             DispatchQueue.main.async {
                 self.unblockUI()
                 self.collectionView.reloadData()
+                self.showStub()
             }
+        }
+    }
+    
+    private func showStub() {
+        if statisticNFTViewModel.NFTcards.count == 0 {
+            stubLabel.isHidden = false
         }
     }
     
     private func setupViews() {
         view.setupView(collectionView)
+        view.setupView(stubLabel)
     }
     
     private func setupConstraints() {
@@ -57,7 +75,10 @@ extension StatisticNFTCollectionViewController {
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            stubLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stubLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
