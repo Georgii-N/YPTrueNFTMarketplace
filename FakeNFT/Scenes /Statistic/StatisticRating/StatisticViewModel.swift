@@ -11,8 +11,8 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     
     // MARK: - Observable Properties
     var usersRatingObservable: Observable<[User]> {
-            $usersRating
-        }
+        $usersRating
+    }
     @Observable
     private(set) var usersRating: [User] = []
     
@@ -30,12 +30,15 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     func sortUsers(by type: SortingOption) {
         if sortingOption == type {
             return
+        } else {
+            sortingOption = type
         }
         usersRating = []
+        currentPage = 0
         switch type {
         case .byName:
-           fetchNextPage()
-           
+            fetchNextPage()
+            
         case .byRating:
             fetchNextPage()
         default:
@@ -45,7 +48,7 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     
     // MARK: - Private Functions
     private func fetchUsersRating() {
-        dataProvider.fetchUsersRating(page: currentPage) { [weak self] result in
+        dataProvider.fetchUsersRating(sortingOption: sortingOption, page: currentPage) { [weak self] result in
             switch result {
             case .success(let users):
                 self?.usersRating.append(contentsOf: users)
