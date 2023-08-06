@@ -4,7 +4,7 @@ import Kingfisher
 final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
     // MARK: - Constants and Variables:
-    private var nftModel: NFTCard? {
+    private var nftModel: NFTCell? {
         didSet {
             guard let nftModel = nftModel else { return }
             let urlString = nftModel.images[0]
@@ -19,6 +19,7 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
                 nftNameLabel.text = nftModel.name
                 nftPriceLabel.text = "(\(nftModel.price) ETH)"
                 setupRatingStackView(rating: nftModel.rating)
+                nftLikeButton.imageView?.image = nftModel.isLiked == true ? Resources.Images.NFTCollectionCell.likedButton : Resources.Images.NFTCollectionCell.unlikedButton
             }
         }
     }
@@ -103,7 +104,7 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
     }
     
     // MARK: - Public Methods:
-    func setupNFTModel(model: NFTCard) {
+    func setupNFTModel(model: NFTCell) {
         nftModel = model
     }
     
