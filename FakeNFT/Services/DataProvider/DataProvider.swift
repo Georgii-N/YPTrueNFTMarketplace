@@ -20,9 +20,11 @@ final class DataProvider: DataProviderProtocol {
     }
     
     // MARK: - Public Functions
-    func fetchUsersRating(completion: @escaping (Result<[User], Error>) -> Void) {
+    func fetchUsersRating(page: Int, completion: @escaping (Result<[User], Error>) -> Void) {
+        let queryItems = [URLQueryItem(name: "p", value: "\(page)"),
+                          URLQueryItem(name: "l", value: "10")]
         
-        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.users, queryItems: nil)
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.users, queryItems: queryItems)
         let request = NetworkRequestModel(endpoint: url, httpMethod: .get, dto: nil)
         networkClient.send(request: request, type: UsersResponse.self) { result in
             switch result {
