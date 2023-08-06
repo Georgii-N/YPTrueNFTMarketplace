@@ -15,7 +15,7 @@ final class DataProvider: DataProviderProtocol {
         }
         components.path = path
         components.queryItems = queryItems
-
+        
         return components.url
     }
     
@@ -24,11 +24,11 @@ final class DataProvider: DataProviderProtocol {
         
         var queryItems = [URLQueryItem(name: "p", value: "\(page)"),
                           URLQueryItem(name: "l", value: "10")]
-     
+        
         switch sortingOption {
         case .byName:
             queryItems.append(contentsOf: [URLQueryItem(name: "sortBy", value: "name"),
-                               URLQueryItem(name: "order", value: "asc")])
+                                           URLQueryItem(name: "order", value: "asc")])
         default:
             break
         }
@@ -50,7 +50,7 @@ final class DataProvider: DataProviderProtocol {
         }
     }
     
-    func fetchProfileId(userId: String, completion: @escaping (Result<UserResponse, Error>) -> Void) {
+    func fetchUserID(userId: String, completion: @escaping (Result<UserResponse, Error>) -> Void) {
         
         let path = Resources.Network.MockAPI.Paths.users + "/\(userId)"
         let url = createURLWithPathAndQueryItems(path: path, queryItems: nil)
@@ -90,17 +90,31 @@ final class DataProvider: DataProviderProtocol {
         }
     }
     
+    func fetchProfile(completion: @escaping (Result<Profile, Error>) -> Void) {
+        
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.profile, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: Profile.self) { result in
+            switch result {
+            case .success(let profile):
+                completion(.success(profile))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func fetchCurrencies(completion: @escaping (Result<Currencies, Error>) -> Void) {
-          
-          let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.currencies, queryItems: nil)
-          let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
-          networkClient.send(request: request, type: Currencies.self) { result in
-              switch result {
-              case .success(let currencies):
-                  completion(.success(currencies))
-              case .failure(let error):
-                  completion(.failure(error))
-              }
-          }
-      } 
+        
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.currencies, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: Currencies.self) { result in
+            switch result {
+            case .success(let currencies):
+                completion(.success(currencies))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    } 
 }

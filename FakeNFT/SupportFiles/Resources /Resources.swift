@@ -40,7 +40,7 @@ enum Resources {
                     static let nftCard = "/api/v1/nft"
                     static let orders = "/api/v1/orders"
                     static let orderPayment = "/api/v1/orders/1/payment"
-                    static let profile = "/api/v1/profile"
+                    static let profile = "/api/v1/profile/1"
                     static let users = "/api/v1/users"
                 }
             }
