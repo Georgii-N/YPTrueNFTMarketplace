@@ -78,10 +78,10 @@ final class DataProvider: DataProviderProtocol {
             case .success(let result):
                 var result = result
                 if let userId {
-                    result.filter { userId.contains($0.author) }
+                    result = result.filter { userId.contains($0.author) }
                 }
                 if let nftsId {
-                    result.filter { nftsId.contains($0.id)}
+                    result = result.filter { nftsId.contains($0.id)}
                 }
                 completion(.success(result))
             case .failure(let error):
