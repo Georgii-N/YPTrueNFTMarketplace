@@ -35,7 +35,7 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
     private lazy var nftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12
-        imageView.backgroundColor = .systemBlue
+        imageView.backgroundColor = .lightGrayDay
         
         return imageView
     }()
