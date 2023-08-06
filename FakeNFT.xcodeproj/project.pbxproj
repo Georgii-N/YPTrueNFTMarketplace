@@ -24,6 +24,7 @@
 		4005316E2A73DDFC008CAF3B /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */; };
 		400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531762A73EB4D008CAF3B /* BlackBaseButton.swift */; };
 		400531792A73EC58008CAF3B /* BaseWhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531782A73EC58008CAF3B /* BaseWhiteButton.swift */; };
+		406DEE2B2A7FED5D008E2227 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */; };
 		4070B1182A76CADF00CF6E74 /* SortNavBarBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */; };
 		4071F5C42A7CFF8400ADA546 /* StatisticViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5C02A7CFF8400ADA546 /* StatisticViewModelProtocol.swift */; };
 		4071F5C52A7CFF8400ADA546 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5C12A7CFF8400ADA546 /* StatisticViewController.swift */; };
@@ -101,6 +102,7 @@
 		4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		400531762A73EB4D008CAF3B /* BlackBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBaseButton.swift; sourceTree = "<group>"; };
 		400531782A73EC58008CAF3B /* BaseWhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWhiteButton.swift; sourceTree = "<group>"; };
+		406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortNavBarBaseButton.swift; sourceTree = "<group>"; };
 		4071F5C02A7CFF8400ADA546 /* StatisticViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewModelProtocol.swift; sourceTree = "<group>"; };
 		4071F5C12A7CFF8400ADA546 /* StatisticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */,
 				3F478ED029DB476500F6D39E /* UIFont + Extension.swift */,
 				4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */,
+				406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -698,6 +701,7 @@
 				7EB78AE52A7BFDB200BE892B /* Currencie.swift in Sources */,
 				7EB78AEB2A7BFEEE00BE892B /* Profile.swift in Sources */,
 				7EB78AE32A7BFCFF00BE892B /* NFTCard.swift in Sources */,
+				406DEE2B2A7FED5D008E2227 /* UIViewController + Extension.swift in Sources */,
 				7EC0B53B2A766B7800688EC9 /* DateService.swift in Sources */,
 				4071F5C62A7CFF8400ADA546 /* StatisticViewModel.swift in Sources */,
 			);
