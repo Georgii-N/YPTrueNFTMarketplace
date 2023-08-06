@@ -110,13 +110,26 @@ extension PaymentViewController {
         collectionView.dataSource = self
     }
     
-    
     // MARK: Private Methods
     @objc
    private func goToSuccessScreen() {
-        let successViewController = UnsuccessfulPaymentViewController()
-            navigationController?.setNavigationBarHidden(true, animated: true)
-            navigationController?.pushViewController(successViewController, animated: true)
+       
+       
+       navigationController?.setNavigationBarHidden(true, animated: true)
+       paymentViewModel.makePay() { result in
+           switch result {
+           case true:
+               DispatchQueue.main.async {
+                   let successViewController = SuccessfulPaymentViewController()
+                   self.navigationController?.pushViewController(successViewController, animated: true)
+               }
+           case false:
+               DispatchQueue.main.async {
+                   let unsuccessViewController = UnsuccessfulPaymentViewController()
+                   self.navigationController?.pushViewController(unsuccessViewController, animated: true)
+               }
+           }
+       }
     }
     
     @objc
@@ -163,6 +176,8 @@ extension PaymentViewController: UICollectionViewDelegateFlowLayout {
         cell.layer.borderColor = UIColor.blackDay.cgColor
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 12
+        let id = Int(paymentViewModel.currencieNFT[indexPath.row].id)
+        paymentViewModel.currencieID = id
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

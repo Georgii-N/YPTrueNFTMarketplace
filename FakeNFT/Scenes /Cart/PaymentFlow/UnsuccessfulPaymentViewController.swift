@@ -41,12 +41,12 @@ final class UnsuccessfulPaymentViewController: UIViewController {
 // MARK: Set Up UI
 extension UnsuccessfulPaymentViewController {
     
-    func setUpViews() {
+   private func setUpViews() {
         view.backgroundColor = .whiteDay
         [unsuccessefulImage, unsuccessefulLabel, tryButton].forEach(view.setupView)
     }
     
-    func setupConstraints() {
+   private func setupConstraints() {
         NSLayoutConstraint.activate([
             unsuccessefulImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 152),
             unsuccessefulImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -59,7 +59,13 @@ extension UnsuccessfulPaymentViewController {
         ])
     }
     
-    func setTargets() {
-        // to do
+   private func setTargets() {
+        tryButton.addTarget(self, action: #selector(tryLoadOrderPay), for: .touchUpInside)
+    }
+    
+    @objc
+    func tryLoadOrderPay() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.popViewController(animated: true)
     }
 }

@@ -59,6 +59,12 @@ extension SuccessfulPaymentViewController {
     }
     
    private func setTargets() {
-        // to do
+       returnInCatalogButton.addTarget(self, action: #selector(backToCatalog), for: .touchUpInside)
+    }
+    
+    @objc
+    func backToCatalog() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.popViewController(animated: true)
     }
 }

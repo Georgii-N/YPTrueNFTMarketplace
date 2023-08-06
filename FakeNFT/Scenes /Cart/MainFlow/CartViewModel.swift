@@ -10,7 +10,7 @@ import Foundation
 final class CartViewModel {
     
     private let dataProvider = DataProvider()
-    private let idNfts: [Int] = [1, 2, 3]
+    private let idNfts: [String] = ["1", "2", "3"]
     
     @Observable
     private(set) var cartNFT: [NFTCard] = []
@@ -20,15 +20,24 @@ final class CartViewModel {
     }
     
     func getData () {
-        idNfts.forEach {dataProvider.fetchNFTs(nftId: $0) { result in
+//        idNfts.forEach {dataProvider.fetchNFTs(nftId: $0) { result in
+//            switch result {
+//            case .success(let data):
+//                data.forEach{ self.cartNFT.append($0)}
+//            case .failure(let error):
+//                assertionFailure(error.localizedDescription)
+//            }
+//          }
+//        }
+        dataProvider.fetchUsersNFT(userId: nil, nftsId: idNfts) {result in
             switch result {
-            case .success(let data):
-                data.forEach{ self.cartNFT.append($0)}
-            case .failure(let error):
-                assertionFailure(error.localizedDescription)
-            }
-          }
+                        case .success(let data):
+                            data.forEach{ self.cartNFT.append($0)}
+                        case .failure(let error):
+                            assertionFailure(error.localizedDescription)
+                        }
         }
+        
     }
     
     func additionNFT() -> Int {

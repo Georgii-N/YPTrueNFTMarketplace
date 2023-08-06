@@ -14,6 +14,8 @@ final class PaymentViewModel {
     @Observable
     private(set) var currencieNFT: [Currencie] = []
     
+    var currencieID: Int?
+    
     init() {
         getData()
     }
@@ -23,6 +25,18 @@ final class PaymentViewModel {
             switch result {
             case .success(let currencie):
                 self.currencieNFT.append(contentsOf: currencie)
+            case .failure(let error):
+                assertionFailure(error.localizedDescription)
+            }
+        }
+    }
+    
+    func makePay(completion: @escaping (Bool) -> Void) {
+        guard let id = currencieID else { return }
+        dataProvider.fetchPaymentCurrency(currencyId: id) { result in
+            switch result {
+            case .success(let data):
+                completion(data.success)
             case .failure(let error):
                 assertionFailure(error.localizedDescription)
             }

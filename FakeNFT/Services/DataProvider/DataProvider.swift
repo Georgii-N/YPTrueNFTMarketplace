@@ -126,4 +126,27 @@ final class DataProvider: DataProviderProtocol {
                 }
             }
         }
+    
+    struct GetOrderPaymentRequest: NetworkRequest {
+             var currencyId: Int
+             var endpoint: URL? {
+                 URL(string: "https://64858e8ba795d24810b71189.mockapi.io/api/v1/orders/1/payment/\(currencyId)")
+             }
+             var httpMethod: HttpMethod {
+                 .get
+             }
+         }
+    
+    func fetchPaymentCurrency(currencyId: Int, completion: @escaping (Result<OrderPayment, Error>) -> Void) {
+         
+          let request = GetOrderPaymentRequest(currencyId: currencyId)
+          networkClient.send(request: request, type: OrderPayment.self) { result in
+              switch result {
+              case .success(let orderPayment):
+                  completion(.success(orderPayment))
+              case .failure(let error):
+                  completion(.failure(error))
+              }
+          }
+      }
 }
