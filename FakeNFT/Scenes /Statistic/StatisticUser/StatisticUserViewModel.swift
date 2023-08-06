@@ -20,7 +20,7 @@ final class StatisticUserViewModel {
     
     // MARK: - Private Functions
     private func fetchProfileId() {
-        dataProvider.fetchProfileId(userId: profileId) { [weak self] result in
+        dataProvider.fetchUserID(userId: profileId) { [weak self] result in
             switch result {
             case .success(let profile):
                 self?.profile.append(profile)
