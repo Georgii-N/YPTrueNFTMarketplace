@@ -19,6 +19,7 @@ final class CartMainCell: UICollectionViewCell {
     // MARK: UI constants and variables
      lazy var imageNFT: UIImageView = {
         let imageNFT = UIImageView()
+         imageNFT.layer.masksToBounds = true
          imageNFT.layer.cornerRadius = 12
         return imageNFT
     }()
@@ -32,7 +33,7 @@ final class CartMainCell: UICollectionViewCell {
     
      lazy var ratingNFT: UIImageView = {
         let ratingNFT = UIImageView()
-        ratingNFT.image = UIImage(named: "mokRatingNFT")
+       // ratingNFT.image = UIImage(named: "mokRatingNFT")
         return ratingNFT
     }()
     
@@ -53,7 +54,7 @@ final class CartMainCell: UICollectionViewCell {
     
      lazy var deleteCartButton: UIButton = {
         let deleteCartButton = UIButton()
-        deleteCartButton.setImage(UIImage(named: "deleteCart"), for: .normal)
+        deleteCartButton.setImage(UIImage(named: "deleteButton"), for: .normal)
         return deleteCartButton
     }()
     
@@ -94,6 +95,18 @@ extension CartMainCell {
     
   private  func setTargets() {
         deleteCartButton.addTarget(self, action: #selector(openDeleteAlert), for: .touchUpInside)
+    }
+    
+     func setRating(rating: Int) {
+        switch rating {
+        case 0: ratingNFT.image = UIImage(named: "rating_0")
+        case 1: ratingNFT.image = UIImage(named: "rating_1")
+        case 2: ratingNFT.image = UIImage(named: "rating_2")
+        case 3: ratingNFT.image = UIImage(named: "rating_3")
+        case 4: ratingNFT.image = UIImage(named: "rating_4")
+        case 5: ratingNFT.image = UIImage(named: "rating_5")
+        default: break
+        }
     }
     
     @objc

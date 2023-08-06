@@ -25,14 +25,16 @@ final class CartViewControler: UIViewController {
         let totalNFT = UILabel()
         totalNFT.textColor = .blackDay
         totalNFT.font = UIFont.systemFont(ofSize: 15)
-        totalNFT.text = "3 NFT"
+       // totalNFT.text = "3 NFT"
+       // totalNFT.text = "\(cartViewModel.additionNFT()) NFT"
         return totalNFT
     }()
     
     private lazy var totalCost: UILabel = {
         let totalCost = UILabel()
         totalCost.textColor = .greenUniversal
-        totalCost.text = "5,34 ETH"
+      //  totalCost.text = "5,34 ETH"
+      //  totalCost.text = "\(cartViewModel.additionPriceNFT()) ETH"
         totalCost.font = UIFont.boldSystemFont(ofSize: 17)
         return totalCost
     }()
@@ -63,6 +65,8 @@ final class CartViewControler: UIViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                self.totalNFT.text = "\(self.cartViewModel.additionNFT()) NFT"
+                self.totalCost.text = "\(self.cartViewModel.additionPriceNFT()) ETH"
             }
         }
     }
@@ -142,8 +146,9 @@ extension CartViewControler: UICollectionViewDataSource {
         let size = CGSize(width: 115, height: 115)
         let resizingProcessor = ResizingImageProcessor(referenceSize: size)
         cell.nameNFT.text = cartViewModel.cartNFT[indexPath.row].name
-        cell.priceCountNFT.text = String(cartViewModel.cartNFT[indexPath.row].price)
+        cell.priceCountNFT.text = "\(String(cartViewModel.cartNFT[indexPath.row].price)) ETH"
         cell.imageNFT.kf.setImage(with: imageUrl, options: [.processor(resizingProcessor)])
+        cell.setRating(rating: cartViewModel.cartNFT[indexPath.row].rating)
         cell.delegate = self
         return cell
     }
@@ -161,7 +166,8 @@ extension CartViewControler: UICollectionViewDelegateFlowLayout {
 
 extension CartViewControler: CartMainCellDelegate {
     func didTapDeleteButton(in cell: CartMainCell) {
-        let deleteAlert = DeleteItemViewControler()
+        guard let imageCell = cell.imageNFT.image else { return }
+        let deleteAlert = DeleteItemViewControler(itemImage: imageCell)
             deleteAlert.modalPresentationStyle = .overFullScreen
         present(deleteAlert, animated: true, completion: nil)
     }

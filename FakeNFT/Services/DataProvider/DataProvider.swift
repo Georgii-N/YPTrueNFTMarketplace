@@ -34,25 +34,4 @@ final class DataProvider: DataProviderProtocol {
         }
     }
     
-    func fetchNFTs(nftId: Int, completion: @escaping (Result<[ModelCartNFT], Error>) -> Void) {
-        
-        var nfts: [ModelCartNFT] = []
-        let queryItems = [URLQueryItem(name: "nft_id", value: String(nftId))]
-        
-        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.nftCard, queryItems: queryItems)
-        print("------------\(url)")
-        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
-        
-        networkClient.send(request: request, type: ModelCartNFTRespone.self) { result in
-            switch result {
-            case .success(let data):
-                print("-------------------------\(data)")
-                nfts.append(data.convert())
-                completion(.success(nfts))
-            case .failure(let error):
-                print("-------------------------\(error)")
-                completion(.failure(error))
-            }
-        }
-    }
 }

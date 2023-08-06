@@ -13,55 +13,30 @@ final class CartViewModel {
     private let idNfts: [Int] = [1, 2, 3]
     
     @Observable
-    private(set) var cartNFT: [ModelCartNFT] = []
+    private(set) var cartNFT: [NFTCard] = []
     
     init() {
         getData()
     }
     
     func getData () {
-//        dataProvider.fetchCartList {result in
-//            switch result {
-//            case .success(let data):
-//               // data.forEach {self.cartNFT.append($0)}
-//                print("----------------------\(self.cartNFT)")
-//            case .failure(let error):
-//                assertionFailure(error.localizedDescription)
-//            }
-//        }
-//        
-//        dataProvider.fetchCurrencies {result in
-//            switch result {
-//            case .success(let data):
-//               // data.forEach {self.cartNFT.append($0)}
-//                print("----------------------\(self.cartNFT)")
-//            case .failure(let error):
-//                assertionFailure(error.localizedDescription)
-//            }
-//        }
-        
         idNfts.forEach {dataProvider.fetchNFTs(nftId: $0) { result in
             switch result {
             case .success(let data):
-               // data.forEach {self.cartNFT.append($0)}
-               data.forEach{self.cartNFT.append($0)}
-                print("----------------------\(self.cartNFT)")
+                data.forEach{ self.cartNFT.append($0)}
             case .failure(let error):
                 assertionFailure(error.localizedDescription)
             }
+          }
         }
-        }
-        
-//        dataProvider.fetchNFTs(nftId: 1) { result in
-//            switch result {
-//            case .success(let data):
-//               // data.forEach {self.cartNFT.append($0)}
-//               data.forEach{self.cartNFT.append($0)}
-//                print("----------------------\(self.cartNFT)")
-//            case .failure(let error):
-//                assertionFailure(error.localizedDescription)
-//            }
-//        }
+    }
+    
+    func additionNFT() -> Int {
+        return cartNFT.count
+    }
+    
+    func additionPriceNFT() -> Float {
+        Float(cartNFT.reduce(0) {$0 + $1.price})
     }
     
 }

@@ -14,7 +14,7 @@ final class SuccessfulPaymentViewController: UIViewController {
    
     private lazy var successefulImage: UIImageView = {
         let successefulImage = UIImageView()
-        successefulImage.image = UIImage(named: "successfulPayment")
+        successefulImage.image = UIImage(named: "success")
         return successefulImage
     }()
     

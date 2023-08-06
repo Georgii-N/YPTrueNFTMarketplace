@@ -14,7 +14,7 @@ final class UnsuccessfulPaymentViewController: UIViewController {
    
     private lazy var unsuccessefulImage: UIImageView = {
         let unsuccessefulImage = UIImageView()
-        unsuccessefulImage.image = UIImage(named: "unsuccessfulPayment")
+        unsuccessefulImage.image = UIImage(named: "unsuccess")
         return unsuccessefulImage
     }()
     

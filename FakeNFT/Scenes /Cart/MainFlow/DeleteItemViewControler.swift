@@ -12,11 +12,15 @@ final class DeleteItemViewControler: UIViewController {
 // MARK: UI constants and variables
     private let blurEffect = UIBlurEffect(style: .light)
     
-    private lazy var itemImage: UIImageView = {
-        let itemImage = UIImageView()
-        itemImage.image = UIImage(named: "mokImageNFT")
-        return itemImage
+    private lazy var itemImageView: UIImageView = {
+        let itemImageView = UIImageView()
+        itemImageView.image = itemImage
+        itemImageView.layer.masksToBounds = true
+        itemImageView.layer.cornerRadius = 12
+        return itemImageView
     }()
+    
+     var itemImage: UIImage
     
     private lazy var alertlLabel: UILabel = {
         let alertlLabel = UILabel()
@@ -50,6 +54,15 @@ final class DeleteItemViewControler: UIViewController {
         return returnToCartButton
     }()
     
+    init(itemImage: UIImage) {
+        self.itemImage = itemImage
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
@@ -65,14 +78,14 @@ extension DeleteItemViewControler {
         let blurEffectView = UIVisualEffectView(effect: self.blurEffect)
                 blurEffectView.frame = view.bounds
                 blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        [blurEffectView, itemImage, alertlLabel, deleteItemButton, returnToCartButton].forEach(view.setupView)
+        [blurEffectView, itemImageView, alertlLabel, deleteItemButton, returnToCartButton].forEach(view.setupView)
     }
     
    private func setupConstraints() {
         NSLayoutConstraint.activate([
-            itemImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 244),
-            itemImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            alertlLabel.topAnchor.constraint(equalTo: itemImage.bottomAnchor, constant: 12),
+            itemImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 244),
+            itemImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            alertlLabel.topAnchor.constraint(equalTo: itemImageView.bottomAnchor, constant: 12),
             alertlLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 97),
             alertlLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -98),
             deleteItemButton.topAnchor.constraint(equalTo: alertlLabel.bottomAnchor, constant: 20),
@@ -80,7 +93,7 @@ extension DeleteItemViewControler {
             deleteItemButton.widthAnchor.constraint(equalToConstant: 127),
             deleteItemButton.heightAnchor.constraint(equalToConstant: 44),
             returnToCartButton.topAnchor.constraint(equalTo: alertlLabel.bottomAnchor, constant: 20),
-            returnToCartButton.leadingAnchor.constraint(equalTo: deleteItemButton.trailingAnchor, constant: 8),
+            returnToCartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -57),
             returnToCartButton.widthAnchor.constraint(equalToConstant: 127),
             returnToCartButton.heightAnchor.constraint(equalToConstant: 44),
         ])
