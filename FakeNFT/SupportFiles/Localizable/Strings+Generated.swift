@@ -95,6 +95,8 @@ internal enum L10n {
         internal static let addToCart = L10n.tr("Localizable", "catalog.nftCard.button.addToCart", fallback: "Добавить в корзину")
         /// Перейти на сайт продавца
         internal static let goToSellerSite = L10n.tr("Localizable", "catalog.nftCard.button.goToSellerSite", fallback: "Перейти на сайт продавца")
+        /// Удалить из корзины
+        internal static let removeFromCart = L10n.tr("Localizable", "catalog.nftCard.button.removeFromCart", fallback: "Удалить из корзины")
       }
     }
   }
