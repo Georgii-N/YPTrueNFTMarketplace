@@ -5,6 +5,9 @@ final class StatisticNFTCollectionViewController: UIViewController {
     // MARK: - Private Dependencies
     private var statisticNFTViewModel: StatisticNFTCollectionViewModel
     
+    // MARK: - Private Properties
+    private var indexPathToUpdateNFTCell: IndexPath?
+    
     // MARK: - UI
     private lazy var collectionView: NFTCollectionView = {
         let collectionView = NFTCollectionView()
@@ -96,14 +99,16 @@ extension StatisticNFTCollectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        // TODO: - Сделать красиво
+        cell.delegate = self
         let NFTCellModel = NFTCell(name: statisticNFTViewModel.NFTcards[indexPath.row].name,
                                    images: statisticNFTViewModel.NFTcards[indexPath.row].images,
                                    rating: Int(statisticNFTViewModel.NFTcards[indexPath.row].rating),
                                    price: statisticNFTViewModel.NFTcards[indexPath.row].price,
                                    author: statisticNFTViewModel.NFTcards[indexPath.row].author,
                                    id: statisticNFTViewModel.NFTcards[indexPath.row].id,
-                                   isLiked: false, isAddedToCard: false)
+                                   isLiked: statisticNFTViewModel.NFTcards[indexPath.row].isLiked,
+                                   isAddedToCard: statisticNFTViewModel.NFTcards[indexPath.row].isLiked)
+        
         cell.setupNFTModel(model: NFTCellModel)
         return cell
     }
@@ -111,5 +116,18 @@ extension StatisticNFTCollectionViewController: UICollectionViewDataSource {
 
 // MARK: - DelegateFlowLayout
 extension StatisticNFTCollectionViewController: UICollectionViewDelegateFlowLayout {
+    
+}
+
+// MARK: - NFTCollectionCellDelegate
+extension StatisticNFTCollectionViewController: NFTCollectionCellDelegate {
+    func likeButtonDidTapped(cell: NFTCollectionCell) {
+        //
+    }
+    
+    func addToCardButtonDidTapped(cell: NFTCollectionCell) {
+        //
+    }
+    
     
 }
