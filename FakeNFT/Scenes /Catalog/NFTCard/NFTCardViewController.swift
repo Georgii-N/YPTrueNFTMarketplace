@@ -103,7 +103,14 @@ final class NFTCardViewController: UIViewController {
         return tableView
     }()
     
-    private lazy var addToCartButton = UIButton(type: .system)
+    private lazy var addToCartButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.layer.cornerRadius = 16
+        button.backgroundColor = .blackDay
+        
+        return button
+    }()
+    
     private lazy var sellerWebsiteButton = BaseWhiteButton(with: L10n.Catalog.NftCard.Button.goToSellerSite)
     
     private lazy var nftColectionView: UICollectionView = {
@@ -129,6 +136,11 @@ final class NFTCardViewController: UIViewController {
         
         setupNFTInfo()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnSwipe = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -160,11 +172,13 @@ final class NFTCardViewController: UIViewController {
         
         viewModel?.likeStatusDidChangeObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: true)
         })
         
         viewModel?.cartStatusDidChangeObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
         })
     }
@@ -234,9 +248,6 @@ final class NFTCardViewController: UIViewController {
     }
     
     private func setupCartButton() {
-        addToCartButton.layer.cornerRadius = 16
-        addToCartButton.backgroundColor = .blackDay
-        
         if let isAddedToCard = viewModel?.currentNFT.isAddedToCard {
             let title = isAddedToCard ? L10n.Catalog.NftCard.Button.removeFromCart : L10n.Catalog.NftCard.Button.addToCart
             addToCartButton.setTitle(title, for: .normal)
@@ -253,11 +264,19 @@ final class NFTCardViewController: UIViewController {
     
     // MARK: Objc Methods:
     @objc private func goToSellerWebSite() {
-        guard let url = URL(string: "https://practicum.yandex.ru/ios-developer/") else { return }
+        guard let url = URL(string: viewModel?.authorCollection?.website ?? "") else { return }
         let webViewViewModel = WebViewViewModel()
         let webViewController = WebViewViewController(viewModel: webViewViewModel, url: url)
         
         navigationController?.pushViewController(webViewController, animated: true)
+    }
+    
+    @objc private func changeNFTCartStatus() {
+        guard let isAddedToCard = viewModel?.currentNFT.isAddedToCard,
+              let index = viewModel?.nftsObservable.wrappedValue?.firstIndex(
+                where: { $0.id == viewModel?.currentNFT.id }) else { return }
+        
+        delegate?.addIndexToUpdateCell(index: IndexPath(row: index, section: 0), isAddedToCart: !isAddedToCard)
     }
 }
 
@@ -266,6 +285,7 @@ extension NFTCardViewController: NFTCollectionCellDelegate {
     func likeButtonDidTapped(cell: NFTCollectionCell) {
         guard let model = cell.getNFTModel(),
               let indexPath = nftColectionView.indexPath(for: cell) else { return }
+        blockUI()
         
         let modelID = model.id
         
@@ -277,7 +297,8 @@ extension NFTCardViewController: NFTCollectionCellDelegate {
     func addToCardButtonDidTapped(cell: NFTCollectionCell) {
         guard let model = cell.getNFTModel(),
         let indexPath = nftColectionView.indexPath(for: cell) else { return }
-        
+        blockUI()
+
         let modelID = model.id
         
         viewModel?.changeNFTCartStatus(isAddedToCart: model.isAddedToCard, id: modelID)
@@ -440,5 +461,6 @@ extension NFTCardViewController {
 extension NFTCardViewController {
     private func setupTargets() {
         sellerWebsiteButton.addTarget(self, action: #selector(goToSellerWebSite), for: .touchUpInside)
+        addToCartButton.addTarget(self, action: #selector(changeNFTCartStatus), for: .touchUpInside)
     }
 }

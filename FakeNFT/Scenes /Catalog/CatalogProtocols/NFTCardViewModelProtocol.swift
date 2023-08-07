@@ -10,6 +10,7 @@ import Foundation
 protocol NFTCardViewModelProtocol: AnyObject {
     var currentNFT: NFTCell { get }
     var nftCollection: NFTCollection { get }
+    var authorCollection: UserResponse? { get }
     var currenciesObservable: Observable<Currencies?> { get }
     var nftsObservable: Observable<[NFTCell]?> { get }
     var likeStatusDidChangeObservable: Observable<Bool> { get }

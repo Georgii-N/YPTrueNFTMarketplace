@@ -15,14 +15,14 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
     // MARK: - Constants and Variables:
     var currentNFT: NFTCell
     var nftCollection: NFTCollection
-    
-    private var profile: Profile?
-    private var order: Order?
-    private var authorCollection: UserResponse? {
+    var authorCollection: UserResponse? {
         didSet {
             fetchNFTs()
         }
     }
+    
+    private var profile: Profile?
+    private var order: Order?
     
     // MARK: - Observable Values:
     var currenciesObservable: Observable<Currencies?> {

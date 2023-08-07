@@ -129,11 +129,13 @@ final class CatalogCollectionViewController: UIViewController {
         
         viewModel?.likeStatusDidChangeObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: true)
         })
         
         viewModel?.cartStatusDidChangeObservable.bind(action: { [weak self] _ in
                 guard let self = self else { return }
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
         })
     }
@@ -203,6 +205,7 @@ extension CatalogCollectionViewController: NFTCollectionCellDelegate {
     func likeButtonDidTapped(cell: NFTCollectionCell) {
         guard let model = cell.getNFTModel(),
               let indexPath = nftCollection.indexPath(for: cell) else { return }
+        blockUI()
         
         let modelID = model.id
         
@@ -212,7 +215,8 @@ extension CatalogCollectionViewController: NFTCollectionCellDelegate {
     
     func addToCardButtonDidTapped(cell: NFTCollectionCell) {
         guard let model = cell.getNFTModel(),
-        let indexPath = nftCollection.indexPath(for: cell) else { return }
+              let indexPath = nftCollection.indexPath(for: cell) else { return }
+        blockUI()
         
         let modelID = model.id
         
@@ -226,6 +230,13 @@ extension CatalogCollectionViewController: NFTCardViewControllerDelegate {
     func addIndexToUpdateCell(index: IndexPath, isLike: Bool) {
         indexPathToUpdateNFTCell = index
         changeCellStatus(isLike: isLike)
+    }
+    
+    func addIndexToUpdateCell(index: IndexPath, isAddedToCart: Bool) {
+        guard let cell = nftCollection.cellForItem(at: index) as? NFTCollectionCell else { return }
+                
+        indexPathToUpdateNFTCell = index
+        addToCardButtonDidTapped(cell: cell)
     }
 }
 
@@ -256,8 +267,6 @@ extension CatalogCollectionViewController: UICollectionViewDataSource {
             unblockUI()
             cell.setupNFTModel(model: nftModel)
         }
-        
-        
         
         return cell
     }
