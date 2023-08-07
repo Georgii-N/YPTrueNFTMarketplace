@@ -18,7 +18,7 @@ final class StatisticNFTCollectionViewController: UIViewController {
         stubLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         stubLabel.textColor = .blackDay
         stubLabel.textAlignment = .center
-        stubLabel.text = "У пользователя еще нет NFT"
+        stubLabel.text = L10n.Statistic.Profile.UserCollection.stub
         stubLabel.isHidden = true
         return stubLabel
     }()
