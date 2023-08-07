@@ -9,9 +9,13 @@ import UIKit
 import Kingfisher
 
 final class NFTCardViewController: UIViewController {
-    
+
     // MARK: - Private Dependencies:
+    weak private var delegate: NFTCardViewControllerDelegate?
     private var viewModel: NFTCardViewModelProtocol?
+    
+    // MARK: - Constant and Variables:
+    private var indexPathToUpdateNFTCell: IndexPath?
     
     // MARK: - UI:
     private lazy var allScreenScrollView: UIScrollView = {
@@ -99,7 +103,7 @@ final class NFTCardViewController: UIViewController {
         return tableView
     }()
     
-    private lazy var addToCartButton = BaseBlackButton(with: L10n.Catalog.NftCard.Button.addToCart)
+    private lazy var addToCartButton = UIButton(type: .system)
     private lazy var sellerWebsiteButton = BaseWhiteButton(with: L10n.Catalog.NftCard.Button.goToSellerSite)
     
     private lazy var nftColectionView: UICollectionView = {
@@ -117,6 +121,7 @@ final class NFTCardViewController: UIViewController {
     // MARK: Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
+        blockUI()
         setupViews()
         setupConstraints()
         setupTargets()
@@ -125,8 +130,9 @@ final class NFTCardViewController: UIViewController {
         bind()
     }
     
-    init(viewModel: NFTCardViewModelProtocol?) {
+    init(delegate: NFTCardViewControllerDelegate?, viewModel: NFTCardViewModelProtocol?) {
         super.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
         self.viewModel = viewModel
     }
     
@@ -136,26 +142,32 @@ final class NFTCardViewController: UIViewController {
     
     // MARK: - Private Methods:
     private func bind() {
-        viewModel?.nftCollectionObservable.bind(action: { [weak self] _ in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.setupNFTInfo()
-            }
-        })
-        
         viewModel?.currenciesObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.nftTableView.reloadData()
-            }
+            self.resumeMethodOnMainThread(self.nftTableView.reloadData, with: ())
+        })
+        
+        viewModel?.nftsObservable.bind(action: { [weak self] _ in
+            guard let self = self else { return }
+            self.resumeMethodOnMainThread(self.nftColectionView.reloadData, with: ())
+        })
+        
+        viewModel?.likeStatusDidChangeObservable.bind(action: { [weak self] _ in
+            guard let self = self else { return }
+            self.resumeMethodOnMainThread(self.changeCellStatus, with: true)
+        })
+        
+        viewModel?.cartStatusDidChangeObservable.bind(action: { [weak self] _ in
+            guard let self = self else { return }
+            self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
         })
     }
         
     private func setupNFTInfo() {
         guard let viewModel = viewModel else { return }
         
-        let nftModel = viewModel.currentNFTObservable.wrappedValue
-        let collection = viewModel.nftCollectionObservable.wrappedValue
+        let nftModel = viewModel.currentNFT
+        let collection = viewModel.nftCollection
         
         nftCollectionNameLabel.text = collection.name
         setupNFTRatingStackView(rating: nftModel.rating)
@@ -163,6 +175,22 @@ final class NFTCardViewController: UIViewController {
         priceValueLabel.text = "\(nftModel.price) ETH"
         
         setupCoverScrollView(imagesURL: nftModel.images)
+    }
+    
+    private func changeCellStatus(isLike: Bool) {
+            guard let indexPathToUpdateNFTCell = self.indexPathToUpdateNFTCell,
+                  let cell = self.nftColectionView.cellForItem(at: indexPathToUpdateNFTCell) as? NFTCollectionCell,
+                  let nftModel = cell.getNFTModel() else { return }
+            let newModel = NFTCell(name: nftModel.name,
+                                   images: nftModel.images,
+                                   rating: nftModel.rating,
+                                   price: nftModel.price,
+                                   author: nftModel.author,
+                                   id: nftModel.id,
+                                   isLiked: isLike ? !nftModel.isLiked : nftModel.isLiked,
+                                   isAddedToCard: isLike ? nftModel.isAddedToCard : !nftModel.isAddedToCard)
+            cell.setupNFTModel(model: newModel)
+            self.indexPathToUpdateNFTCell = nil
     }
     
     private func setupCoverScrollView(imagesURL: [String]) {
@@ -199,6 +227,24 @@ final class NFTCardViewController: UIViewController {
         }
     }
     
+    private func setupCartButton() {
+        addToCartButton.layer.cornerRadius = 16
+        addToCartButton.backgroundColor = .blackDay
+        
+        if let isAddedToCard = viewModel?.currentNFT.isAddedToCard {
+            let title = isAddedToCard ? L10n.Catalog.NftCard.Button.removeFromCart : L10n.Catalog.NftCard.Button.addToCart
+            addToCartButton.setTitle(title, for: .normal)
+            addToCartButton.titleLabel?.font = .boldSystemFont(ofSize: 17)
+            addToCartButton.setTitleColor(.whiteDay, for: .normal)
+        }
+    }
+    
+    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
+        DispatchQueue.main.async {
+            method(argument)
+        }
+    }
+    
     // MARK: Objc Methods:
     @objc private func goToSellerWebSite() {
         guard let url = URL(string: "https://practicum.yandex.ru/ios-developer/") else { return }
@@ -206,6 +252,31 @@ final class NFTCardViewController: UIViewController {
         let webViewController = WebViewViewController(viewModel: webViewViewModel, url: url)
         
         navigationController?.pushViewController(webViewController, animated: true)
+    }
+}
+
+// MARK: - NFTCollectionCellDelegate:
+extension NFTCardViewController: NFTCollectionCellDelegate {
+    func likeButtonDidTapped(cell: NFTCollectionCell) {
+        guard let model = cell.getNFTModel(),
+              let indexPath = nftColectionView.indexPath(for: cell) else { return }
+        
+        let modelID = model.id
+        
+        viewModel?.changeNFTFavouriteStatus(isLiked: model.isLiked, id: modelID)
+        indexPathToUpdateNFTCell = indexPath
+        delegate?.addIndexToUpdateCell(index: indexPath, isLike: true)
+    }
+    
+    func addToCardButtonDidTapped(cell: NFTCollectionCell) {
+        guard let model = cell.getNFTModel(),
+        let indexPath = nftColectionView.indexPath(for: cell) else { return }
+        
+        let modelID = model.id
+        
+        viewModel?.changeNFTCartStatus(isAddedToCart: model.isAddedToCard, id: modelID)
+        indexPathToUpdateNFTCell = indexPath
+        delegate?.addIndexToUpdateCell(index: indexPath, isLike: false)
     }
 }
 
@@ -246,13 +317,15 @@ extension NFTCardViewController: UITableViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension NFTCardViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel?.nftsObservable.wrappedValue.count ?? 0
+        viewModel?.nftsObservable.wrappedValue?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-
-        if let nft = viewModel?.nftsObservable.wrappedValue[indexPath.row] {
+        cell.delegate = self
+        
+        if let nft = viewModel?.nftsObservable.wrappedValue?[indexPath.row] {
+            unblockUI()
             cell.setupNFTModel(model: nft)
         }
         
@@ -284,6 +357,8 @@ extension NFTCardViewController {
         [coverNFTScrollView, coverNFTPageControl, nftNameLabel, nftRatingStackView,
          priceLabel, priceValueLabel, nftCollectionNameLabel, addToCartButton,
          nftTableView, sellerWebsiteButton, nftColectionView].forEach(contentView.setupView)
+        
+        setupCartButton()
     }
 }
 

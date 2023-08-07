@@ -86,6 +86,8 @@ final class CatalogCollectionViewController: UIViewController {
     // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
+        blockUI()
+        
         setupViews()
         setupConstraints()
         
@@ -106,80 +108,45 @@ final class CatalogCollectionViewController: UIViewController {
     private func bind() {
         viewModel?.collectionObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
-            
-            self.setupCollectionInfo()
+            self.resumeMethodOnMainThread(self.setupCollectionInfo, with: ())
         })
         
-        viewModel?.authorCollectionObservable.bind(action: { [weak self] author in
+        self.viewModel?.authorCollectionObservable.bind(action: { [weak self] author in
             guard let self = self else { return }
-            self.setupAuthorInfo(authorModel: author)
+            self.resumeMethodOnMainThread(self.setupAuthorInfo, with: author)
         })
         
         viewModel?.nftsObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.nftCollection.reloadData()
-            }
+            self.resumeMethodOnMainThread(self.nftCollection.reloadData, with: ())
         })
         
         viewModel?.likeStatusDidChangeObservable.bind(action: { [weak self] _ in
-            DispatchQueue.main.async {
-                guard let self = self,
-                      let indexPathToUpdateNFTCell = self.indexPathToUpdateNFTCell,
-                      let cell = self.nftCollection.cellForItem(at: indexPathToUpdateNFTCell) as? NFTCollectionCell,
-                      let nftModel = cell.getNFTModel() else { return }
-                let newModel = NFTCell(name: nftModel.name,
-                                       images: nftModel.images,
-                                       rating: nftModel.rating,
-                                       price: nftModel.price,
-                                       author: nftModel.author,
-                                       id: nftModel.id,
-                                       isLiked: !nftModel.isLiked,
-                                       isAddedToCard: false)
-                cell.setupNFTModel(model: newModel)
-                self.indexPathToUpdateNFTCell = nil
-            }
+            guard let self = self else { return }
+            self.resumeMethodOnMainThread(self.changeCellStatus, with: true)
         })
         
         viewModel?.cartStatusDidChangeObservable.bind(action: { [weak self] _ in
-            DispatchQueue.main.async {
-                guard let self = self,
-                      let indexPathToUpdateNFTCell = self.indexPathToUpdateNFTCell,
-                      let cell = self.nftCollection.cellForItem(at: indexPathToUpdateNFTCell) as? NFTCollectionCell,
-                      let nftModel = cell.getNFTModel() else { return }
-                let newModel = NFTCell(name: nftModel.name,
-                                       images: nftModel.images,
-                                       rating: nftModel.rating,
-                                       price: nftModel.price,
-                                       author: nftModel.author,
-                                       id: nftModel.id,
-                                       isLiked: nftModel.isLiked,
-                                       isAddedToCard: !nftModel.isAddedToCard)
-                cell.setupNFTModel(model: newModel)
-                self.indexPathToUpdateNFTCell = nil
-            }
+                guard let self = self else { return }
+            self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
         })
     }
-
+    
     // Setup NFT's info:
     private func setupCollectionInfo() {
-        DispatchQueue.main.async {
-            guard let collectionModel = self.viewModel?.collectionObservable.wrappedValue else { return }
-            
-            self.setNFTCollectionImage(model: collectionModel)
-            self.nameOfNFTCollectionLabel.text = collectionModel.name
-            self.collectionInformationLabel.text = collectionModel.description
-        }
+        guard let collectionModel = self.viewModel?.collectionObservable.wrappedValue else { return }
+        
+        setNFTCollectionImage(model: collectionModel)
+        nameOfNFTCollectionLabel.text = collectionModel.name
+        collectionInformationLabel.text = collectionModel.description
     }
     
     private func setupAuthorInfo(authorModel: UserResponse?) {
-        DispatchQueue.main.async {
             guard let author = authorModel,
                   let link = author.website.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
             let attributeString = NSMutableAttributedString(string: author.name)
             attributeString.addAttribute(.link, value: link, range: NSRange(location: 0, length: attributeString.length))
             self.authorLinkTextView.attributedText = attributeString
-        }
     }
     
     private func setNFTCollectionImage(model: NFTCollection) {
@@ -194,13 +161,34 @@ final class CatalogCollectionViewController: UIViewController {
     }
     
     private func switchToNFTCardViewController(nftModel: NFTCell) {
-        guard let collection = viewModel?.collectionObservable.wrappedValue,
-              let nfts = viewModel?.nftsObservable.wrappedValue else { return }
+        guard let collection = viewModel?.collectionObservable.wrappedValue else { return }
     
-        let nftViewModel = NFTCardViewModel(nfts: nfts, nftModel: nftModel, nftCollection: collection)
-        let viewController = NFTCardViewController(viewModel: nftViewModel)
-        
+        let nftViewModel = NFTCardViewModel(nftModel: nftModel, nftCollection: collection)
+        let viewController = NFTCardViewController(delegate: self, viewModel: nftViewModel)
+                
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func changeCellStatus(isLike: Bool) {
+        guard let indexPathToUpdateNFTCell = indexPathToUpdateNFTCell,
+              let cell = nftCollection.cellForItem(at: indexPathToUpdateNFTCell) as? NFTCollectionCell,
+              let nftModel = cell.getNFTModel() else { return }
+        let newModel = NFTCell(name: nftModel.name,
+                               images: nftModel.images,
+                               rating: nftModel.rating,
+                               price: nftModel.price,
+                               author: nftModel.author,
+                               id: nftModel.id,
+                               isLiked: isLike ? !nftModel.isLiked : nftModel.isLiked,
+                               isAddedToCard: isLike ? nftModel.isAddedToCard : !nftModel.isAddedToCard)
+        cell.setupNFTModel(model: newModel)
+        self.indexPathToUpdateNFTCell = nil
+    }
+    
+    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
+        DispatchQueue.main.async {
+            method(argument)
+        }
     }
 }
 
@@ -227,6 +215,14 @@ extension CatalogCollectionViewController: NFTCollectionCellDelegate {
     }
 }
 
+// MARK: - NFTCardViewControllerDelegate:
+extension CatalogCollectionViewController: NFTCardViewControllerDelegate {
+    func addIndexToUpdateCell(index: IndexPath, isLike: Bool) {
+        indexPathToUpdateNFTCell = index
+        changeCellStatus(isLike: isLike)
+    }
+}
+
 // MARK: - UITextViewDelegate
 extension CatalogCollectionViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
@@ -249,8 +245,9 @@ extension CatalogCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
         cell.delegate = self
-        
+    
         if let nftModel = viewModel?.nftsObservable.wrappedValue?[indexPath.row] {
+            unblockUI()
             cell.setupNFTModel(model: nftModel)
         }
         
@@ -258,7 +255,7 @@ extension CatalogCollectionViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - UICollectionViewDelegate
+// MARK: - UICollectionViewDelegateFlowLayout
 extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: 108, height: 172)
@@ -273,8 +270,10 @@ extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let nftModel = viewModel?.nftsObservable.wrappedValue?[indexPath.row] else { return }
-        switchToNFTCardViewController(nftModel: nftModel)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? NFTCollectionCell,
+        let model = cell.getNFTModel() else { return }
+        
+        switchToNFTCardViewController(nftModel: model)
     }
 }
 
@@ -285,12 +284,9 @@ extension CatalogCollectionViewController {
         navigationController?.navigationBar.backgroundColor = .clear
         
         view.setupView(collectionScrollView)
-        collectionScrollView.setupView(coverNFTImageView)
-        collectionScrollView.setupView(nameOfNFTCollectionLabel)
-        collectionScrollView.setupView(aboutAuthorLabel)
-        collectionScrollView.setupView(authorLinkTextView)
-        collectionScrollView.setupView(collectionInformationLabel)
-        collectionScrollView.setupView(nftCollection)
+        
+        [coverNFTImageView, nameOfNFTCollectionLabel, aboutAuthorLabel, authorLinkTextView,
+         collectionInformationLabel, nftCollection].forEach(collectionScrollView.setupView)
     }
 }
 

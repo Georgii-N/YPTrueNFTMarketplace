@@ -15,4 +15,5 @@ protocol CatalogCollectionViewModelProtocol: AnyObject {
     var cartStatusDidChangeObservable: Observable<Bool> { get }
     func changeNFTFavouriteStatus(isLiked: Bool, id: String)
     func changeNFTCartStatus(isAddedToCart: Bool, id: String)
+    func updateNFTCardModels()
 }

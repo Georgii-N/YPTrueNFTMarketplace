@@ -32,6 +32,7 @@ final class CatalogViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        blockUI()
         setupViews()
         setupConstraints()
         setupTargets()
@@ -97,6 +98,7 @@ extension CatalogViewController: UITableViewDataSource {
         let cell: CatalogTableViewCell = tableView.dequeueReusableCell()
         
         if let collectionModel = viewModel.nftCollectionsObservable.wrappedValue?[indexPath.row] {
+            unblockUI()
             cell.setupCollectionModel(model: collectionModel)
         }
         
