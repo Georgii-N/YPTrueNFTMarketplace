@@ -60,6 +60,38 @@ extension StatisticNFTCollectionViewController {
                 self.showStub()
             }
         }
+        
+        statisticNFTViewModel.likeStatusDidChangeObservable.bind { [weak self] _ in
+            guard let self = self else { return }
+            self.resumeMethodOnMainThread(self.changeCellStatus, with: true)
+        }
+        
+        statisticNFTViewModel.cartStatusDidChangeObservable.bind { [weak self] _ in
+            guard let self = self else { return }
+            self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
+        }
+    }
+    
+    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
+        DispatchQueue.main.async {
+            method(argument)
+        }
+    }
+    
+    private func changeCellStatus(isLike: Bool) {
+        guard let indexPathToUpdateNFTCell = self.indexPathToUpdateNFTCell,
+              let cell = self.collectionView.cellForItem(at: indexPathToUpdateNFTCell) as? NFTCollectionCell,
+              let nftModel = cell.getNFTModel() else { return }
+        let newModel = NFTCell(name: nftModel.name,
+                               images: nftModel.images,
+                               rating: nftModel.rating,
+                               price: nftModel.price,
+                               author: nftModel.author,
+                               id: nftModel.id,
+                               isLiked: isLike ? !nftModel.isLiked : nftModel.isLiked,
+                               isAddedToCard: isLike ? nftModel.isAddedToCard : !nftModel.isAddedToCard)
+        cell.setupNFTModel(model: newModel)
+        self.indexPathToUpdateNFTCell = nil
     }
     
     private func showStub() {
@@ -122,12 +154,22 @@ extension StatisticNFTCollectionViewController: UICollectionViewDelegateFlowLayo
 // MARK: - NFTCollectionCellDelegate
 extension StatisticNFTCollectionViewController: NFTCollectionCellDelegate {
     func likeButtonDidTapped(cell: NFTCollectionCell) {
-        //
+        guard let model = cell.getNFTModel(),
+              let indexPath = collectionView.indexPath(for: cell) else { return }
+        
+        let modelID = model.id
+        
+        statisticNFTViewModel.changeNFTFavouriteStatus(isLiked: model.isLiked, id: modelID)
+        indexPathToUpdateNFTCell = indexPath
     }
     
     func addToCardButtonDidTapped(cell: NFTCollectionCell) {
-        //
+        guard let model = cell.getNFTModel(),
+              let indexPath = collectionView.indexPath(for: cell) else { return }
+        
+        let modelID = model.id
+        
+        statisticNFTViewModel.changeNFTCartStatus(isAddedToCart: model.isAddedToCard, id: modelID)
+        indexPathToUpdateNFTCell = indexPath
     }
-    
-    
 }
