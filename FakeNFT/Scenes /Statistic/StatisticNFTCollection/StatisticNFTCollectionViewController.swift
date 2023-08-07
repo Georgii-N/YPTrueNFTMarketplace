@@ -139,7 +139,7 @@ extension StatisticNFTCollectionViewController: UICollectionViewDataSource {
                                    author: statisticNFTViewModel.NFTcards[indexPath.row].author,
                                    id: statisticNFTViewModel.NFTcards[indexPath.row].id,
                                    isLiked: statisticNFTViewModel.NFTcards[indexPath.row].isLiked,
-                                   isAddedToCard: statisticNFTViewModel.NFTcards[indexPath.row].isLiked)
+                                   isAddedToCard: statisticNFTViewModel.NFTcards[indexPath.row].isAddedToCard)
         
         cell.setupNFTModel(model: NFTCellModel)
         return cell

@@ -5,12 +5,12 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
     // MARK: - Private classes
     private let dataProvider = DataProvider()
     
-    // MARK: - Private Constants andVaria
+    // MARK: - Private Constants and Variables
     private let nftsId: [String]
     private var profile: Profile?
     private var order: Order?
     
-    // MARK: - Property Wrappers
+    // MARK: - Observable Properties
     var nftsObservable: Observable<NFTCells> {
         $NFTcards
     }
@@ -103,6 +103,7 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
         
         dataProvider.putNewOrder(order: order, completion: { [weak self] result in
             guard let self = self else { return }
+            print("PRINT сработал пут запрос")
             switch result {
             case .success:
                 self.cartStatusDidChange = true
