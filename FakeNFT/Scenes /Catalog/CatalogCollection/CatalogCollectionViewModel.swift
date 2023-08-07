@@ -15,7 +15,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     // MARK: Constants and Variables:
     private var profile: Profile?
     private var order: Order?
-    
+        
     // MARK: - Observable Values:
     var collectionObservable: Observable<NFTCollection> {
         $collection
@@ -60,12 +60,10 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     init(collection: NFTCollection) {
         self.collection = collection
         self.dataProvider = DataProvider()
-        fetchProfile()
-        fetchOrder()
-        fetchAuthor()
+        updateNFTCardModels()
     }
     
-    // MARK: Public Methods:
+    // MARK: - Public Methods:
     func changeNFTFavouriteStatus(isLiked: Bool, id: String) {
         guard var newLikes = profile?.likes else { return }
         
@@ -120,6 +118,12 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
                 print(error)
             }
         })
+    }
+    
+    func updateNFTCardModels() {
+        fetchProfile()
+        fetchOrder()
+        fetchAuthor()
     }
     
     // MARK: - Private Methods:
