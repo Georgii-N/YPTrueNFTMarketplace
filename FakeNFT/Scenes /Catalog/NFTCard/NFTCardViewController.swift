@@ -122,12 +122,18 @@ final class NFTCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         blockUI()
+        
         setupViews()
         setupConstraints()
         setupTargets()
         
         setupNFTInfo()
         bind()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationController?.hidesBarsOnSwipe = false
     }
     
     init(delegate: NFTCardViewControllerDelegate?, viewModel: NFTCardViewModelProtocol?) {

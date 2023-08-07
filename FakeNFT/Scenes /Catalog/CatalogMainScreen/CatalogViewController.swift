@@ -18,6 +18,7 @@ final class CatalogViewController: UIViewController {
     private lazy var catalogNFTTableView: UITableView = {
         var tableView = UITableView()
         tableView.register(CatalogTableViewCell.self)
+        tableView.isHidden = true
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .whiteDay
@@ -99,6 +100,7 @@ extension CatalogViewController: UITableViewDataSource {
         
         if let collectionModel = viewModel.nftCollectionsObservable.wrappedValue?[indexPath.row] {
             unblockUI()
+            tableView.isHidden = false
             cell.setupCollectionModel(model: collectionModel)
         }
         

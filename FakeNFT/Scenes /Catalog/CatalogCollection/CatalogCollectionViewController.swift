@@ -19,6 +19,7 @@ final class CatalogCollectionViewController: UIViewController {
     // MARK: - UI:
     private lazy var collectionScrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height)
         
         return scrollView
@@ -93,6 +94,11 @@ final class CatalogCollectionViewController: UIViewController {
         
         setupCollectionInfo()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnSwipe = true
     }
     
     init(viewModel: CatalogCollectionViewModelProtocol?) {
@@ -250,6 +256,8 @@ extension CatalogCollectionViewController: UICollectionViewDataSource {
             unblockUI()
             cell.setupNFTModel(model: nftModel)
         }
+        
+        
         
         return cell
     }
