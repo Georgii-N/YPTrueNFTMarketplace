@@ -118,16 +118,42 @@ final class DataProvider: DataProviderProtocol {
         }
     }
     
-    func putNewProfile(profile: Profile, completion: @escaping (Result<Void, Error>) -> Void) {
-            let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.profile, queryItems: nil)
-            let request = NetworkRequestModel(endpoint: url, httpMethod: .put, dto: profile)
-            networkClient.send(request: request) { result in
-                switch result {
-                case .success:
-                    completion(.success(()))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
+    func fetchOrder(completion: @escaping (Result<Order, Error>) -> Void) {
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.orders, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: Order.self) { result in
+            switch result {
+            case .success(let order):
+                completion(.success(order))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
+    }
+    
+    func putNewProfile(profile: Profile, completion: @escaping (Result<Void, Error>) -> Void) {
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.profile, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .put, dto: profile)
+        networkClient.send(request: request) { result in
+            switch result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func putNewOrder(order: Order, completion: @escaping (Result<Void, Error>) -> Void) {
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.orders, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .put, dto: order)
+        networkClient.send(request: request) { result in
+            switch result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
