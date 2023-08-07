@@ -7,9 +7,18 @@
 
 import UIKit
 
+protocol DeleteViewControllerDelegate: AnyObject {
+    func deleteNft(itemId: String)
+}
+
 final class DeleteItemViewControler: UIViewController {
     
-// MARK: UI constants and variables
+    // MARK: Public dependencies
+    weak var delegate: DeleteViewControllerDelegate?
+    var itemImage: UIImage
+    var itemId: String
+    
+    // MARK: UI constants and variables
     private let blurEffect = UIBlurEffect(style: .light)
     
     private lazy var itemImageView: UIImageView = {
@@ -19,8 +28,6 @@ final class DeleteItemViewControler: UIViewController {
         itemImageView.layer.cornerRadius = 12
         return itemImageView
     }()
-    
-     var itemImage: UIImage
     
     private lazy var alertlLabel: UILabel = {
         let alertlLabel = UILabel()
@@ -55,8 +62,9 @@ final class DeleteItemViewControler: UIViewController {
     }()
     
     // MARK: - Lifecycle:
-    init(itemImage: UIImage) {
+    init(itemImage: UIImage, itemId: String) {
         self.itemImage = itemImage
+        self.itemId = itemId
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -75,14 +83,14 @@ final class DeleteItemViewControler: UIViewController {
 // MARK: Set Up UI
 extension DeleteItemViewControler {
     
-   private func setUpViews() {
+    private func setUpViews() {
         let blurEffectView = UIVisualEffectView(effect: self.blurEffect)
-                blurEffectView.frame = view.bounds
-                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         [blurEffectView, itemImageView, alertlLabel, deleteItemButton, returnToCartButton].forEach(view.setupView)
     }
     
-   private func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             itemImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 244),
             itemImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -100,13 +108,20 @@ extension DeleteItemViewControler {
         ])
     }
     
-   private func setTargets() {
-       returnToCartButton.addTarget(self, action: #selector(returnToCart), for: .touchUpInside)
+    private func setTargets() {
+        returnToCartButton.addTarget(self, action: #selector(returnToCart), for: .touchUpInside)
+        deleteItemButton.addTarget(self, action: #selector(deleteItem), for: .touchUpInside)
     }
     
     // MARK: Private Methods
     @objc
     private func returnToCart() {
         dismiss(animated: true)
+    }
+    
+    @objc
+    private func deleteItem() {
+        dismiss(animated: true)
+        delegate?.deleteNft(itemId: itemId)
     }
 }

@@ -9,35 +9,69 @@ import Foundation
 
 final class CartViewModel {
     
+    // MARK: constants and variables
     private let dataProvider = DataProvider()
-    private let idNfts: [String] = ["1", "2", "3"]
+    private var idNfts: [String] = []
     
+    // MARK: Dependencies
+    private var orderID: String?
+    
+    // MARK: Observable constants and variables
     @Observable
     private(set) var cartNFT: [NFTCard] = []
     
+    // MARK: Init
     init() {
-        getData()
+        getOrder()
     }
     
-    func getData () {
-//        idNfts.forEach {dataProvider.fetchNFTs(nftId: $0) { result in
-//            switch result {
-//            case .success(let data):
-//                data.forEach{ self.cartNFT.append($0)}
-//            case .failure(let error):
-//                assertionFailure(error.localizedDescription)
-//            }
-//          }
-//        }
+    // MARK: Methods
+    func getOrder () {
+        dataProvider.fetchOrder() { result in
+            switch result {
+            case .success(let data):
+                data.nfts.forEach { self.idNfts.append($0) }
+                self.orderID = data.id
+                self.getNfts()
+            case .failure(let error):
+                assertionFailure(error.localizedDescription)
+            }
+        }
+    }
+    
+    func sendDeleteNft(id: String, completion: @escaping (Bool) -> Void) {
+        guard let orderId = orderID else { return }
+        var newNftId: [String] = []
+        let newNft = cartNFT.filter {nft in
+            nft.id != id
+        }.forEach {nft in
+            newNftId.append(nft.id)
+        }
+        let newOrder = Order(nfts: newNftId, id: orderId)
+        dataProvider.putNewOrder(order: newOrder) { result in
+            switch result {
+            case .success(let data):
+                self.idNfts = []
+                self.cartNFT = []
+                data.nfts.forEach { self.idNfts.append($0) }
+                self.orderID = data.id
+                self.getNfts()
+                completion(true)
+            case .failure(let error):
+                assertionFailure(error.localizedDescription)
+            }
+        }
+    }
+    
+    func getNfts() {
         dataProvider.fetchUsersNFT(userId: nil, nftsId: idNfts) {result in
             switch result {
-                        case .success(let data):
-                            data.forEach{ self.cartNFT.append($0)}
-                        case .failure(let error):
-                            assertionFailure(error.localizedDescription)
-                        }
+            case .success(let data):
+                data.forEach{ self.cartNFT.append($0)}
+            case .failure(let error):
+                assertionFailure(error.localizedDescription)
+            }
         }
-        
     }
     
     func additionNFT() -> Int {

@@ -10,6 +10,7 @@ import Kingfisher
 
 final class CartViewControler: UIViewController {
     
+    // MARK: Public dependencies
     var cartViewModel: CartViewModel
     
     // MARK: UI constants and variables
@@ -176,6 +177,7 @@ extension CartViewControler: UICollectionViewDataSource {
         cell.priceCountNFT.text = "\(String(cartViewModel.cartNFT[indexPath.row].price)) ETH"
         cell.imageNFT.kf.setImage(with: imageUrl, options: [.processor(resizingProcessor)])
         cell.setRating(rating: cartViewModel.cartNFT[indexPath.row].rating)
+        cell.idNft = cartViewModel.cartNFT[indexPath.row].id
         cell.delegate = self
         return cell
     }
@@ -192,10 +194,26 @@ extension CartViewControler: UICollectionViewDelegateFlowLayout {
 }
 
 extension CartViewControler: CartMainCellDelegate {
-    func didTapDeleteButton(in cell: CartMainCell) {
+    func didTapDeleteButton(in cell: CartMainCell, idNft: String) {
         guard let imageCell = cell.imageNFT.image else { return }
-        let deleteAlert = DeleteItemViewControler(itemImage: imageCell)
+        let deleteAlert = DeleteItemViewControler(itemImage: imageCell, itemId: idNft)
+        deleteAlert.delegate = self
         deleteAlert.modalPresentationStyle = .overFullScreen
         present(deleteAlert, animated: true, completion: nil)
+    }
+}
+
+extension CartViewControler: DeleteViewControllerDelegate {
+    func deleteNft(itemId: String) {
+        cartViewModel.sendDeleteNft(id: itemId) {result in
+            if result {
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    self.chekEmptyNFT()
+                    self.totalNFT.text = "\(self.cartViewModel.additionNFT()) NFT"
+                    self.totalCost.text = "\(self.cartViewModel.additionPriceNFT()) ETH"
+                }
+            }
+        }
     }
 }

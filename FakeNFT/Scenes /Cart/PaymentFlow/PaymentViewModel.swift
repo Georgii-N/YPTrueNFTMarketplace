@@ -9,17 +9,22 @@ import Foundation
 
 final class PaymentViewModel {
     
+    // MARK: Constants
     private let dataProvider = DataProvider()
     
+    // MARK: Observable constants and variables
     @Observable
     private(set) var currencieNFT: [Currencie] = []
     
+    // MARK:  Dependencies
     var currencieID: Int?
     
+    // MARK: Init
     init() {
         getData()
     }
     
+    // MARK: Methods
     func getData () {
         dataProvider.fetchCurrencies {result in
             switch result {

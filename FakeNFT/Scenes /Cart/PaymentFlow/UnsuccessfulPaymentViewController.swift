@@ -11,7 +11,7 @@ final class UnsuccessfulPaymentViewController: UIViewController {
     
     // MARK: UI constants and variables
     let tryButton = BaseBlackButton(with: L10n.Cart.UnsuccessfulPayment.tryAgain)
-   
+    
     private lazy var unsuccessefulImage: UIImageView = {
         let unsuccessefulImage = UIImageView()
         unsuccessefulImage.image = UIImage(named: "unsuccess")
@@ -41,12 +41,12 @@ final class UnsuccessfulPaymentViewController: UIViewController {
 // MARK: Set Up UI
 extension UnsuccessfulPaymentViewController {
     
-   private func setUpViews() {
+    private func setUpViews() {
         view.backgroundColor = .whiteDay
         [unsuccessefulImage, unsuccessefulLabel, tryButton].forEach(view.setupView)
     }
     
-   private func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             unsuccessefulImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 152),
             unsuccessefulImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -59,7 +59,7 @@ extension UnsuccessfulPaymentViewController {
         ])
     }
     
-   private func setTargets() {
+    private func setTargets() {
         tryButton.addTarget(self, action: #selector(tryLoadOrderPay), for: .touchUpInside)
     }
     

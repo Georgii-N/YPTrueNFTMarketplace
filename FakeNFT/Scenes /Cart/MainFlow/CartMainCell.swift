@@ -8,36 +8,37 @@
 import UIKit
 
 protocol CartMainCellDelegate: AnyObject {
-    func didTapDeleteButton(in cell: CartMainCell)
+    func didTapDeleteButton(in cell: CartMainCell, idNft: String)
 }
 
 final class CartMainCell: UICollectionViewCell {
     
     // MARK: Public dependencies
     weak var delegate: CartMainCellDelegate?
+    var idNft: String?
     
     // MARK: UI constants and variables
-     lazy var imageNFT: UIImageView = {
+    lazy var imageNFT: UIImageView = {
         let imageNFT = UIImageView()
-         imageNFT.layer.masksToBounds = true
-         imageNFT.layer.cornerRadius = 12
+        imageNFT.layer.masksToBounds = true
+        imageNFT.layer.cornerRadius = 12
         return imageNFT
     }()
     
-     lazy var nameNFT: UILabel = {
+    lazy var nameNFT: UILabel = {
         let nameNFT = UILabel()
         nameNFT.textColor = .blackDay
         nameNFT.font = UIFont.boldSystemFont(ofSize: 17)
         return nameNFT
     }()
     
-     lazy var ratingNFT: UIImageView = {
+    lazy var ratingNFT: UIImageView = {
         let ratingNFT = UIImageView()
-       // ratingNFT.image = UIImage(named: "mokRatingNFT")
+        // ratingNFT.image = UIImage(named: "mokRatingNFT")
         return ratingNFT
     }()
     
-     lazy var priceNFT: UILabel = {
+    lazy var priceNFT: UILabel = {
         let priceNFT = UILabel()
         priceNFT.textColor = .blackDay
         priceNFT.font = UIFont.systemFont(ofSize: 13)
@@ -45,14 +46,14 @@ final class CartMainCell: UICollectionViewCell {
         return priceNFT
     }()
     
-     lazy var priceCountNFT: UILabel = {
+    lazy var priceCountNFT: UILabel = {
         let priceCountNFT = UILabel()
         priceCountNFT.textColor = .blackDay
         priceCountNFT.font = UIFont.boldSystemFont(ofSize: 17)
         return priceCountNFT
     }()
     
-     lazy var deleteCartButton: UIButton = {
+    lazy var deleteCartButton: UIButton = {
         let deleteCartButton = UIButton()
         deleteCartButton.setImage(UIImage(named: "deleteButton"), for: .normal)
         return deleteCartButton
@@ -73,11 +74,11 @@ final class CartMainCell: UICollectionViewCell {
 
 // MARK: Set Up UI
 extension CartMainCell {
-   private func setUpViews() {
+    private func setUpViews() {
         [imageNFT, nameNFT, ratingNFT, priceNFT, priceCountNFT, deleteCartButton].forEach(contentView.setupView)
     }
     
-   private func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             imageNFT.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             imageNFT.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -94,12 +95,12 @@ extension CartMainCell {
         ])
     }
     
-  private  func setTargets() {
+    private  func setTargets() {
         deleteCartButton.addTarget(self, action: #selector(openDeleteAlert), for: .touchUpInside)
     }
     
     // MARK: Methods
-     func setRating(rating: Int) {
+    func setRating(rating: Int) {
         switch rating {
         case 0: ratingNFT.image = UIImage(named: "rating_0")
         case 1: ratingNFT.image = UIImage(named: "rating_1")
@@ -112,8 +113,9 @@ extension CartMainCell {
     }
     
     @objc
-   private func openDeleteAlert() {
-        delegate?.didTapDeleteButton(in: self)
+    private func openDeleteAlert() {
+        guard let id = idNft else { return }
+        delegate?.didTapDeleteButton(in: self, idNft: id)
     }
 }
 

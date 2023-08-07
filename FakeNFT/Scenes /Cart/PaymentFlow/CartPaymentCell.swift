@@ -17,21 +17,21 @@ final class CartPaymentCell: UICollectionViewCell {
         return backgroundView
     }()
     
-     lazy var nameCoin: UILabel = {
+    lazy var nameCoin: UILabel = {
         let nameCoin = UILabel()
         nameCoin.textColor = .blackDay
         nameCoin.font = UIFont.boldSystemFont(ofSize: 13)
         return nameCoin
     }()
     
-     lazy var imageCoin: UIImageView = {
+    lazy var imageCoin: UIImageView = {
         let imageCoin = UIImageView()
-         imageCoin.backgroundColor = .blackUniversal
-         imageCoin.layer.cornerRadius = 6
+        imageCoin.backgroundColor = .blackUniversal
+        imageCoin.layer.cornerRadius = 6
         return imageCoin
     }()
     
-     lazy var shortNameCoin: UILabel = {
+    lazy var shortNameCoin: UILabel = {
         let shortNameCoin = UILabel()
         shortNameCoin.textColor = .greenUniversal
         shortNameCoin.font = UIFont.systemFont(ofSize: 13)
@@ -52,11 +52,11 @@ final class CartPaymentCell: UICollectionViewCell {
 
 // MARK: Set Up UI
 extension CartPaymentCell {
-   private func setUpViews() {
+    private func setUpViews() {
         [backView, nameCoin, imageCoin, shortNameCoin].forEach(contentView.setupView)
     }
     
-   private func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             backView.topAnchor.constraint(equalTo: contentView.topAnchor),
             backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

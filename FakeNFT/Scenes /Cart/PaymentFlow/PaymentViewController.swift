@@ -11,9 +11,9 @@ import Kingfisher
 final class PaymentViewController: UIViewController {
     
     // MARK: Dependencies
-   private var paymentViewModel: PaymentViewModel
+    private var paymentViewModel: PaymentViewModel
     
-// MARK: UI constants and variables
+    // MARK: UI constants and variables
     private let payButton = BaseBlackButton(with: L10n.Cart.PayScreen.payButton)
     private let url = URL(string: "https://yandex.ru/legal/practicum_termsofuse/")
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -78,13 +78,13 @@ final class PaymentViewController: UIViewController {
 // MARK: Set Up UI
 extension PaymentViewController {
     
-   private func setUpViews() {
+    private func setUpViews() {
         view.backgroundColor = .whiteDay
         self.title = L10n.Cart.PayScreen.paymentChoice
         [bottomView, userTerms, userTermsLink, payButton, collectionView].forEach(view.setupView)
     }
     
-   private func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             bottomView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -104,12 +104,12 @@ extension PaymentViewController {
         ])
     }
     
-   private func setTargets() {
+    private func setTargets() {
         payButton.addTarget(self, action: #selector(goToSuccessScreen), for: .touchUpInside)
-       userTermsLink.addTarget(self, action: #selector(openUserTerms), for: .touchUpInside)
+        userTermsLink.addTarget(self, action: #selector(openUserTerms), for: .touchUpInside)
     }
     
-   private func makeCollectionView() {
+    private func makeCollectionView() {
         collectionView.register(CartPaymentCell.self)
         collectionView.backgroundColor = .whiteDay
         collectionView.delegate = self
@@ -118,26 +118,26 @@ extension PaymentViewController {
     
     // MARK: Private Methods
     @objc
-   private func goToSuccessScreen() {
-       paymentViewModel.makePay() { result in
-           switch result {
-           case true:
-               DispatchQueue.main.async {
-                   let successViewController = SuccessfulPaymentViewController()
-                   self.navigationController?.pushViewController(successViewController, animated: true)
-               }
-           case false:
-               DispatchQueue.main.async {
-                   let unsuccessViewController = UnsuccessfulPaymentViewController()
-                   self.navigationController?.pushViewController(unsuccessViewController, animated: true)
-               }
-           }
-       }
-       navigationController?.setNavigationBarHidden(true, animated: true)
+    private func goToSuccessScreen() {
+        paymentViewModel.makePay() { result in
+            switch result {
+            case true:
+                DispatchQueue.main.async {
+                    let successViewController = SuccessfulPaymentViewController()
+                    self.navigationController?.pushViewController(successViewController, animated: true)
+                }
+            case false:
+                DispatchQueue.main.async {
+                    let unsuccessViewController = UnsuccessfulPaymentViewController()
+                    self.navigationController?.pushViewController(unsuccessViewController, animated: true)
+                }
+            }
+        }
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     @objc
-   private func openUserTerms() {
+    private func openUserTerms() {
         let webViewModel = WebViewViewModel()
         let webViewController = WebViewViewController(viewModel: webViewModel, url: url)
         navigationController?.pushViewController(webViewController, animated: true)
@@ -187,5 +187,5 @@ extension PaymentViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CartPaymentCell else { return }
         cell.layer.borderWidth = 0
-        }
+    }
 }

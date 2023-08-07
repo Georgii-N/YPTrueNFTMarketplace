@@ -1,6 +1,6 @@
 import Foundation
 
-final class DataProvider: DataProviderProtocol {
+final class DataProvider {
     
     // MARK: - Private classes
     let networkClient = DefaultNetworkClient()
@@ -15,7 +15,7 @@ final class DataProvider: DataProviderProtocol {
         }
         components.path = path
         components.queryItems = queryItems
-
+        
         return components.url
     }
     
@@ -24,11 +24,11 @@ final class DataProvider: DataProviderProtocol {
         
         var queryItems = [URLQueryItem(name: "p", value: "\(page)"),
                           URLQueryItem(name: "l", value: "10")]
-     
+        
         switch sortingOption {
         case .byName:
             queryItems.append(contentsOf: [URLQueryItem(name: "sortBy", value: "name"),
-                               URLQueryItem(name: "order", value: "asc")])
+                                           URLQueryItem(name: "order", value: "asc")])
         default:
             break
         }
@@ -50,7 +50,7 @@ final class DataProvider: DataProviderProtocol {
         }
     }
     
-    func fetchProfileId(userId: String, completion: @escaping (Result<UserResponse, Error>) -> Void) {
+    func fetchUserID(userId: String, completion: @escaping (Result<UserResponse, Error>) -> Void) {
         
         let path = Resources.Network.MockAPI.Paths.users + "/\(userId)"
         let url = createURLWithPathAndQueryItems(path: path, queryItems: nil)
@@ -90,63 +90,94 @@ final class DataProvider: DataProviderProtocol {
         }
     }
     
-    func fetchCurrencies(completion: @escaping (Result<Currencies, Error>) -> Void) {
-          
-          let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.currencies, queryItems: nil)
-          let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
-          networkClient.send(request: request, type: Currencies.self) { result in
-              switch result {
-              case .success(let currencies):
-                  completion(.success(currencies))
-              case .failure(let error):
-                  completion(.failure(error))
-              }
-          }
-      }
-    struct GetNFTRequest: NetworkRequest {
-             var nftID: Int
-             var endpoint: URL? {
-                 URL(string: "https://648cbc238620b8bae7ed51a1.mockapi.io/api/v1/nft/\(nftID)")
-             }
-             var httpMethod: HttpMethod {
-                 .get
-             }
-         }
+    func fetchProfile(completion: @escaping (Result<Profile, Error>) -> Void) {
         
-        func fetchNFTs(nftId: Int, completion: @escaping (Result<[NFTCard], Error>) -> Void) {
-            var nfts: [NFTCard] = []
-            let request = GetNFTRequest(nftID: nftId)
-            networkClient.send(request: request, type: NFTCard.self) { result in
-                switch result {
-                case .success(let data):
-                    nfts.append(data)
-                    completion(.success(nfts))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.profile, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: Profile.self) { result in
+            switch result {
+            case .success(let profile):
+                completion(.success(profile))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
+    }
+    
+    func fetchCurrencies(completion: @escaping (Result<Currencies, Error>) -> Void) {
+        
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.currencies, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: Currencies.self) { result in
+            switch result {
+            case .success(let currencies):
+                completion(.success(currencies))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchOrder(completion: @escaping (Result<Order, Error>) -> Void) {
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.orders, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: Order.self) { result in
+            switch result {
+            case .success(let order):
+                completion(.success(order))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func putNewProfile(profile: Profile, completion: @escaping (Result<Void, Error>) -> Void) {
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.profile, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .put, dto: profile)
+        networkClient.send(request: request) { result in
+            switch result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func putNewOrder(order: Order, completion: @escaping (Result<Order, Error>) -> Void) {
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.orders, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .put, dto: order)
+        networkClient.send(request: request, type: Order.self) { result in
+            switch result {
+            case .success(let order):
+                completion(.success(order))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     
     struct GetOrderPaymentRequest: NetworkRequest {
-             var currencyId: Int
-             var endpoint: URL? {
-                 URL(string: "https://64858e8ba795d24810b71189.mockapi.io/api/v1/orders/1/payment/\(currencyId)")
+                 var currencyId: Int
+                 var endpoint: URL? {
+                     URL(string: "https://64858e8ba795d24810b71189.mockapi.io/api/v1/orders/1/payment/\(currencyId)")
+                 }
+                 var httpMethod: HttpMethod {
+                     .get
+                 }
              }
-             var httpMethod: HttpMethod {
-                 .get
-             }
-         }
-    
-    func fetchPaymentCurrency(currencyId: Int, completion: @escaping (Result<OrderPayment, Error>) -> Void) {
-         
-          let request = GetOrderPaymentRequest(currencyId: currencyId)
-          networkClient.send(request: request, type: OrderPayment.self) { result in
-              switch result {
-              case .success(let orderPayment):
-                  completion(.success(orderPayment))
-              case .failure(let error):
-                  completion(.failure(error))
+        
+        func fetchPaymentCurrency(currencyId: Int, completion: @escaping (Result<OrderPayment, Error>) -> Void) {
+             
+              let request = GetOrderPaymentRequest(currencyId: currencyId)
+              networkClient.send(request: request, type: OrderPayment.self) { result in
+                  switch result {
+                  case .success(let orderPayment):
+                      completion(.success(orderPayment))
+                  case .failure(let error):
+                      completion(.failure(error))
+                  }
               }
           }
-      }
+
 }

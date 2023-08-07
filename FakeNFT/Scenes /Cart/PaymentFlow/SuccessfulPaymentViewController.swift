@@ -11,7 +11,7 @@ final class SuccessfulPaymentViewController: UIViewController {
     
     // MARK: UI constants and variables
     private let returnInCatalogButton = BaseBlackButton(with: L10n.Cart.SuccessfulPayment.toBackCatalogButton)
-   
+    
     private lazy var successefulImage: UIImageView = {
         let successefulImage = UIImageView()
         successefulImage.image = UIImage(named: "success")
@@ -40,12 +40,12 @@ final class SuccessfulPaymentViewController: UIViewController {
 // MARK: Set Up UI
 extension SuccessfulPaymentViewController {
     
-   private func setUpViews() {
+    private func setUpViews() {
         view.backgroundColor = .whiteDay
         [successefulImage, successefulLabel, returnInCatalogButton].forEach(view.setupView)
     }
     
-   private func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             successefulImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 152),
             successefulImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -58,13 +58,13 @@ extension SuccessfulPaymentViewController {
         ])
     }
     
-   private func setTargets() {
-       returnInCatalogButton.addTarget(self, action: #selector(backToCatalog), for: .touchUpInside)
+    private func setTargets() {
+        returnInCatalogButton.addTarget(self, action: #selector(backToCatalog), for: .touchUpInside)
     }
     
     @objc
     func backToCatalog() {
-    //    navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        //    navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.popViewController(animated: true)
     }
 }
