@@ -38,6 +38,11 @@ final class WebViewViewController: UIViewController {
         loadWebView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
+         navigationController?.isNavigationBarHidden = false
+     }
+    
     init(viewModel: WebViewViewModelProtocol?, url: URL?) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
