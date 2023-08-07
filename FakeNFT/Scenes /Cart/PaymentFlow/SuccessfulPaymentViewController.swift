@@ -64,7 +64,7 @@ extension SuccessfulPaymentViewController {
     
     @objc
     func backToCatalog() {
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    //    navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.popViewController(animated: true)
     }
 }

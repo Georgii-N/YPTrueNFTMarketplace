@@ -50,6 +50,12 @@ final class PaymentViewController: UIViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+    }
+    
     func bind() {
         paymentViewModel.$currencieNFT.bind {[weak self] _ in
             guard let self = self else { return }
@@ -113,9 +119,6 @@ extension PaymentViewController {
     // MARK: Private Methods
     @objc
    private func goToSuccessScreen() {
-       
-       
-       navigationController?.setNavigationBarHidden(true, animated: true)
        paymentViewModel.makePay() { result in
            switch result {
            case true:
@@ -130,6 +133,7 @@ extension PaymentViewController {
                }
            }
        }
+       navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     @objc
