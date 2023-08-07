@@ -4,14 +4,14 @@ import Kingfisher
 final class StatisticCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Private Vars
-    private var statisticCellModel: User? {
+    private var statisticCellModel: UserResponse? {
         didSet {
             guard let statisticCellModel = statisticCellModel else { return }
             if let url = URL(string: statisticCellModel.avatar) {
                 avatarImageView.kf.setImage(with: url)
             }
             nameLabel.text = statisticCellModel.name
-            ratingPointsLabel.text = statisticCellModel.rating
+            ratingPointsLabel.text = String(statisticCellModel.nfts.count)
         }
     }
     
@@ -78,7 +78,7 @@ extension StatisticCollectionViewCell {
     func setupNumberLabelText(text: String) {
         numberLabel.text = text
     }
-    func setupCellUI(model: User) {
+    func setupCellUI(model: UserResponse) {
         self.statisticCellModel = model
     }
     

@@ -7,14 +7,16 @@ final class StatisticUserViewModel {
     
     // MARK: - Private constants
     private let profileId: String
+    private let userNFTs: [String]
     
     // MARK: - Property Wrappers
     @Observable
     private(set) var profile: UsersResponse = []
     
     // MARK: - Init
-    init(profileId: String) {
+    init(profileId: String, userNFTs: [String]) {
         self.profileId = profileId
+        self.userNFTs = userNFTs
         fetchProfileId()
     }
     

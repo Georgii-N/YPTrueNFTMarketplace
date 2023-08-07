@@ -1,8 +1,7 @@
 import Foundation
 
 protocol StatisticViewModelProtocol {
-    var usersRatingObservable: Observable<[User]> { get }
+    var usersRatingObservable: Observable<UsersResponse> { get }
     
-    func fetchNextPage()
     func sortUsers(by type: SortingOption)
 }

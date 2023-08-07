@@ -6,15 +6,14 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     private let dataProvider = DataProvider()
     
     // MARK: - Private properties
-    private var currentPage = 1
     private var sortingOption: SortingOption = .byRating
     
     // MARK: - Observable Properties
-    var usersRatingObservable: Observable<[User]> {
+    var usersRatingObservable: Observable<UsersResponse> {
         $usersRating
     }
     @Observable
-    private(set) var usersRating: [User] = []
+    private(set) var usersRating: UsersResponse = []
     
     // MARK: - Init
     init() {
@@ -22,25 +21,18 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     }
     
     // MARK: - Public Functions
-    func fetchNextPage() {
-        currentPage += 1
-        fetchUsersRating()
-    }
-    
     func sortUsers(by type: SortingOption) {
         if sortingOption == type {
             return
         } else {
             sortingOption = type
         }
-        usersRating = []
-        currentPage = 0
+        
         switch type {
         case .byName:
-            fetchNextPage()
-            
+            usersRating.sort { $1.name > $0.name }
         case .byRating:
-            fetchNextPage()
+            usersRating.sort { (Int($1.rating) ?? 0) > (Int($0.rating) ?? 0) }
         default:
             break
         }
@@ -48,10 +40,10 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     
     // MARK: - Private Functions
     private func fetchUsersRating() {
-        dataProvider.fetchUsersRating(sortingOption: sortingOption, page: currentPage) { [weak self] result in
+        dataProvider.fetchUsersRating { [weak self] result in
             switch result {
             case .success(let users):
-                self?.usersRating.append(contentsOf: users)
+                self?.usersRating = users
             case .failure(let error):
                 assertionFailure(error.localizedDescription)
             }
