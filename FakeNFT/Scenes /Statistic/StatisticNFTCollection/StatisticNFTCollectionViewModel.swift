@@ -6,21 +6,21 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
     private let dataProvider = DataProvider()
     
     // MARK: - Private constants
-    private let userId: String
+    private let nftsId: [String]
     
     // MARK: - Property Wrappers
     @Observable
     private(set) var NFTcards: NFTCards = []
     
     // MARK: - Init
-    init(userId: String) {
-        self.userId = userId
+    init(nftsId: [String]) {
+        self.nftsId = nftsId
         fetchUsersNFT()
     }
     
     // MARK: - Private Functions
     private func fetchUsersNFT() {
-        dataProvider.fetchUsersNFT(userId: userId, nftsId: nil) { [weak self] result in
+        dataProvider.fetchUsersNFT(userId: nil, nftsId: nftsId) { [weak self] result in
             switch result {
             case .success(let result):
                 self?.NFTcards = result

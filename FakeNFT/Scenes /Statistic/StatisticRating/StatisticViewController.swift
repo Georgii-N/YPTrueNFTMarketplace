@@ -64,8 +64,9 @@ extension StatisticViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let statisticUserViewModel = StatisticUserViewModel(
-            profileId: statisticViewModel.usersRatingObservable.wrappedValue[indexPath.row].id,
-            userNFTs: statisticViewModel.usersRatingObservable.wrappedValue[indexPath.row].nfts)
+     //       profileId: statisticViewModel.usersRatingObservable.wrappedValue[indexPath.row].id,
+     //       userNFTs: statisticViewModel.usersRatingObservable.wrappedValue[indexPath.row].nfts)
+            profile: statisticViewModel.usersRatingObservable.wrappedValue[indexPath.row])
         
         let statisticUserViewController = StatisticUserViewController(statisticUserViewModel: statisticUserViewModel)
         navigationController?.pushViewController(statisticUserViewController, animated: true)

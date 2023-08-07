@@ -69,11 +69,10 @@ final class StatisticUserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        statisticUserModel = statisticUserViewModel.profile
         setupViews()
         setupConstraints()
         setupUI()
-        blockUI()
-        bind()
     }
     
     // MARK: - Init
@@ -92,26 +91,13 @@ extension StatisticUserViewController {
     // MARK: - Objc Functions
     @objc func didTapProfileButton() {
         let webViewModel = WebViewViewModel()
-        
-        let url = URL(string: statisticUserViewModel.profile[0].website)
+        guard let statisticUserModel = statisticUserModel else { return }
+        let url = URL(string: statisticUserModel.website)
         let webView = WebViewViewController(viewModel: webViewModel, url: url)
         navigationController?.pushViewController(webView, animated: true)
     }
     
     // MARK: - Private Functions
-    private func bind() {
-        statisticUserViewModel.$profile.bind { [weak self] _ in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                
-                self.unblockUI()
-                if self.statisticUserViewModel.profile.count > 0 {
-                    self.statisticUserModel = self.statisticUserViewModel.profile.first
-                }
-                self.tableView.reloadData()
-            }
-        }
-    }
     
     private func setupViews() {
         [stackProfileView,
@@ -157,7 +143,6 @@ extension StatisticUserViewController {
     
     private func setupUI() {
         view.backgroundColor = .whiteDay
-        
         addTargets()
     }
     
@@ -169,12 +154,12 @@ extension StatisticUserViewController {
 // MARK: - TableViewDataSource
 extension StatisticUserViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        statisticUserViewModel.profile.count
+        1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: StatisticUserTableViewCell = tableView.dequeueReusableCell()
-        cell.titleLabel.text = L10n.Statistic.Profile.ButtonCollection.title + " (\(statisticUserViewModel.profile[0].rating))"
+        cell.titleLabel.text = L10n.Statistic.Profile.ButtonCollection.title + " (\(statisticUserViewModel.profile.nfts.count))"
         cell.accessoryView = disclosureImageView
         return cell
     }
@@ -187,7 +172,7 @@ extension StatisticUserViewController: UITableViewDataSource {
 // MARK: - TableViewDelegate
 extension StatisticUserViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let statisticNFTCollectionViewModel = StatisticNFTCollectionViewModel(userId: statisticUserViewModel.profile[0].id)
+        let statisticNFTCollectionViewModel = StatisticNFTCollectionViewModel(nftsId: statisticUserViewModel.profile.nfts)
         let statisticNFTCollectionViewController = StatisticNFTCollectionViewController(statisticNFTViewModel: statisticNFTCollectionViewModel)
         navigationController?.pushViewController(statisticNFTCollectionViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
