@@ -48,6 +48,7 @@ final class PaymentViewController: UIViewController {
         makeCollectionView()
         setTargets()
         bind()
+        blockUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +62,7 @@ final class PaymentViewController: UIViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                self.unblockUI()
             }
         }
     }

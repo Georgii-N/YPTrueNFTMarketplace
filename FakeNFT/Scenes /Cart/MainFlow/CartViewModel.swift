@@ -81,4 +81,15 @@ final class CartViewModel {
     func additionPriceNFT() -> Float {
         Float(cartNFT.reduce(0) {$0 + $1.price})
     }
+    
+    func sortNFT(_ sortOptions: SortingOption) {
+        var newNftCart: [NFTCard] = []
+        switch sortOptions {
+        case .byPrice: newNftCart = cartNFT.sorted(by: {$0.price < $1.price})
+        case .byRating: newNftCart = cartNFT.sorted(by: {$0.rating < $1.rating})
+        case .byName: newNftCart = cartNFT.sorted(by: {$0.name < $1.name})
+        default: break
+        }
+        cartNFT = newNftCart
+    }
 }

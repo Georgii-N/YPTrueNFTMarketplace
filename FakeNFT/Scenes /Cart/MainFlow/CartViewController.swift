@@ -15,6 +15,7 @@ final class CartViewControler: UIViewController {
     
     // MARK: UI constants and variables
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private let sortButton = SortNavBarBaseButton()
     
     private lazy var totalView: UIView = {
         let totalView = UIView()
@@ -66,6 +67,7 @@ final class CartViewControler: UIViewController {
         setTargets()
         makeCollectionView()
         bind()
+        blockUI()
     }
     
     private func bind() {
@@ -76,6 +78,7 @@ final class CartViewControler: UIViewController {
                 self.chekEmptyNFT()
                 self.totalNFT.text = "\(self.cartViewModel.additionNFT()) NFT"
                 self.totalCost.text = "\(self.cartViewModel.additionPriceNFT()) ETH"
+                self.unblockUI()
             }
         }
     }
@@ -123,6 +126,7 @@ extension CartViewControler {
     
     private func setTargets() {
         toPayButton.addTarget(self, action: #selector(goPayment), for: .touchUpInside)
+        sortButton.addTarget(self, action: #selector(makeSort), for: .touchUpInside)
     }
     
     private func chekEmptyNFT() {
@@ -149,6 +153,17 @@ extension CartViewControler {
         navigationController?.pushViewController(paymentViewController, animated: true)
     }
     
+    @objc
+    private func makeSort() {
+        let alert = UniversalAlertService()
+        
+        alert.showActionSheet(title: L10n.Alert.sortTitle, sortingOptions: [.byPrice, .byRating, .byName, .close], on: self) { [weak self] options in
+            guard let self = self else { return }
+            self.cartViewModel.sortNFT(options)
+            
+        }
+    }
+    
     private func makeCollectionView() {
         collectionView.register(CartMainCell.self)
         collectionView.backgroundColor = .whiteDay
@@ -157,7 +172,6 @@ extension CartViewControler {
     }
     
     private func makeSortButton() {
-        let sortButton = SortNavBarBaseButton()
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: sortButton)
     }
 }
