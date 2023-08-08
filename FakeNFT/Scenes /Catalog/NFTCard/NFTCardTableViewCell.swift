@@ -79,7 +79,7 @@ final class NFTCardTableViewCell: UITableViewCell, ReuseIdentifying {
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.backgroundColor = .lightGrayDay
-
+        
         setupViews()
         setupConstraints()
     }

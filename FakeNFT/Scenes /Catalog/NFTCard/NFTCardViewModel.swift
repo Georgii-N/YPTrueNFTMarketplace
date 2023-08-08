@@ -13,9 +13,9 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
     private var dataProvider: DataProviderProtocol?
     
     // MARK: - Constants and Variables:
-    var currentNFT: NFTCell
-    var nftCollection: NFTCollection
-    var authorCollection: UserResponse? {
+    private var currentNFT: NFTCell
+    private var nftCollection: NFTCollection
+    private var authorCollection: UserResponse? {
         didSet {
             fetchNFTs()
         }
@@ -63,8 +63,9 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
         fetchOrder()
         fetchCurrencies()
     }
-
+    
     // MARK: - Public Methods:
+    // Network
     func fetchCurrencies() {
         dataProvider?.fetchCurrencies(completion: { [weak self] result in
             guard let self = self else { return }
@@ -138,7 +139,38 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
         fetchOrder()
         fetchAuthor()
     }
- 
+    
+    // Actions with info:
+    func getCurrentNFTModel() -> NFTCell {
+        currentNFT
+    }
+    
+    func getNFTCollection() -> NFTCollection {
+        nftCollection
+    }
+    
+    func getAuthorCollection() -> UserResponse {
+        authorCollection ?? UserResponse(name: "",
+                                         avatar: "",
+                                         description: "",
+                                         website: "",
+                                         nfts: [],
+                                         rating: "",
+                                         id: "")
+    }
+    
+    func setNewCurrentModel() {
+        let newModel = NFTCell(name: currentNFT.name,
+                               images: currentNFT.images,
+                               rating: currentNFT.rating,
+                               price: currentNFT.price,
+                               author: currentNFT.author,
+                               id: currentNFT.id,
+                               isLiked: currentNFT.isLiked,
+                               isAddedToCard: !currentNFT.isAddedToCard)
+        currentNFT = newModel
+    }
+    
     // MARK: - Private func:
     private func fetchProfile() {
         dataProvider?.fetchProfile(completion: { [weak self] result in

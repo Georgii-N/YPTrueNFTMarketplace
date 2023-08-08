@@ -15,7 +15,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     // MARK: Constants and Variables:
     private var profile: Profile?
     private var order: Order?
-        
+    
     // MARK: - Observable Values:
     var collectionObservable: Observable<NFTCollection> {
         $collection

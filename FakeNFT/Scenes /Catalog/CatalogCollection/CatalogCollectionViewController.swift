@@ -155,9 +155,9 @@ final class CatalogCollectionViewController: UIViewController {
               let link = author.website.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         
         let attributes: [NSAttributedString.Key: Any] = [
-                .link: link,
-                .font: UIFont.systemFont(ofSize: 15)
-            ]
+            .link: link,
+            .font: UIFont.systemFont(ofSize: 15)
+        ]
         let attributeString = NSMutableAttributedString(string: author.name, attributes: attributes)
         self.authorLinkTextView.attributedText = attributeString
     }

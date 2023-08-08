@@ -79,9 +79,9 @@ final class CatalogViewController: UIViewController {
         alertService = UniversalAlertService()
         
         alertService?.showActionSheet(title: L10n.Alert.sortTitle,
-                                                sortingOptions: [.byName, .byQuantity, .close],
-                                                on: self,
-                                                completion: { [weak self] options in
+                                      sortingOptions: [.byName, .byQuantity, .close],
+                                      on: self,
+                                      completion: { [weak self] options in
             guard let self = self else { return }
             self.sortNFT(options)
         })
@@ -135,7 +135,7 @@ extension CatalogViewController: UITableViewDelegate {
 extension CatalogViewController {
     private func setupViews() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: sortButton)
-
+        
         view.backgroundColor = .whiteDay
         view.setupView(catalogNFTTableView)
         

@@ -8,9 +8,6 @@
 import Foundation
 
 protocol NFTCardViewModelProtocol: AnyObject {
-    var currentNFT: NFTCell { get }
-    var nftCollection: NFTCollection { get }
-    var authorCollection: UserResponse? { get }
     var currenciesObservable: Observable<Currencies?> { get }
     var nftsObservable: Observable<[NFTCell]?> { get }
     var likeStatusDidChangeObservable: Observable<Bool> { get }
@@ -19,4 +16,8 @@ protocol NFTCardViewModelProtocol: AnyObject {
     func changeNFTFavouriteStatus(isLiked: Bool, id: String)
     func changeNFTCartStatus(isAddedToCart: Bool, id: String)
     func updateNFTCardModels()
+    func getCurrentNFTModel() -> NFTCell
+    func getNFTCollection() -> NFTCollection
+    func getAuthorCollection() -> UserResponse
+    func setNewCurrentModel()
 }

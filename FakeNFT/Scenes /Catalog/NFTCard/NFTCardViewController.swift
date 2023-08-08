@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 final class NFTCardViewController: UIViewController {
-
+    
     // MARK: - Private Dependencies:
     weak private var delegate: NFTCardViewControllerDelegate?
     private var viewModel: NFTCardViewModelProtocol?
@@ -34,7 +34,7 @@ final class NFTCardViewController: UIViewController {
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = self
-        scrollView.backgroundColor = .gray
+        scrollView.backgroundColor = .lightGrayDay
         
         return scrollView
     }()
@@ -107,6 +107,8 @@ final class NFTCardViewController: UIViewController {
     private lazy var addToCartButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 16
+        button.titleLabel?.font = .boldSystemFont(ofSize: 17)
+        button.setTitleColor(.whiteDay, for: .normal)
         button.backgroundColor = .blackDay
         
         return button
@@ -132,6 +134,7 @@ final class NFTCardViewController: UIViewController {
         setupViews()
         setupConstraints()
         setupTargets()
+        setupGesture()
         
         setupNFTInfo()
         bind()
@@ -182,12 +185,12 @@ final class NFTCardViewController: UIViewController {
             self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
         })
     }
-        
+    
     private func setupNFTInfo() {
         guard let viewModel = viewModel else { return }
         
-        let nftModel = viewModel.currentNFT
-        let collection = viewModel.nftCollection
+        let nftModel = viewModel.getCurrentNFTModel()
+        let collection = viewModel.getNFTCollection()
         
         nftCollectionNameLabel.text = collection.name
         setupNFTRatingStackView(rating: nftModel.rating)
@@ -198,19 +201,19 @@ final class NFTCardViewController: UIViewController {
     }
     
     private func changeCellStatus(isLike: Bool) {
-            guard let indexPathToUpdateNFTCell = self.indexPathToUpdateNFTCell,
-                  let cell = self.nftColectionView.cellForItem(at: indexPathToUpdateNFTCell) as? NFTCollectionCell,
-                  let nftModel = cell.getNFTModel() else { return }
-            let newModel = NFTCell(name: nftModel.name,
-                                   images: nftModel.images,
-                                   rating: nftModel.rating,
-                                   price: nftModel.price,
-                                   author: nftModel.author,
-                                   id: nftModel.id,
-                                   isLiked: isLike ? !nftModel.isLiked : nftModel.isLiked,
-                                   isAddedToCard: isLike ? nftModel.isAddedToCard : !nftModel.isAddedToCard)
-            cell.setupNFTModel(model: newModel)
-            self.indexPathToUpdateNFTCell = nil
+        guard let indexPathToUpdateNFTCell = self.indexPathToUpdateNFTCell,
+              let cell = self.nftColectionView.cellForItem(at: indexPathToUpdateNFTCell) as? NFTCollectionCell,
+              let nftModel = cell.getNFTModel() else { return }
+        let newModel = NFTCell(name: nftModel.name,
+                               images: nftModel.images,
+                               rating: nftModel.rating,
+                               price: nftModel.price,
+                               author: nftModel.author,
+                               id: nftModel.id,
+                               isLiked: isLike ? !nftModel.isLiked : nftModel.isLiked,
+                               isAddedToCard: isLike ? nftModel.isAddedToCard : !nftModel.isAddedToCard)
+        cell.setupNFTModel(model: newModel)
+        self.indexPathToUpdateNFTCell = nil
     }
     
     private func setupCoverScrollView(imagesURL: [String]) {
@@ -218,16 +221,16 @@ final class NFTCardViewController: UIViewController {
         var images = [UIImageView]()
         
         coverNFTPageControl.numberOfPages = imagesURL.count
-
+        
         for (index, imageURLString) in imagesURL.enumerated() {
             guard let url = URL(string: imageURLString) else { return }
             let size = CGRect(x: 0, y: 0, width: view.frame.width, height: 375)
             let imageView = UIImageView(frame: CGRect(x: imageWidht * CGFloat(index), y: 0, width: view.frame.width, height: 375))
             let processor = DownsamplingImageProcessor(size: CGSize(width: size.width, height: size.height))
-
+            
             images.append(imageView)
             coverNFTScrollView.addSubview(images[index])
-
+            
             images[index].kf.indicatorType = .activity
             images[index].kf.setImage(with: url, options: [.processor(processor), .transition(.fade(1))])
         }
@@ -248,11 +251,34 @@ final class NFTCardViewController: UIViewController {
     }
     
     private func setupCartButton() {
-        if let isAddedToCard = viewModel?.currentNFT.isAddedToCard {
+        let nftModel = viewModel?.getCurrentNFTModel()
+        
+        if let isAddedToCard = nftModel?.isAddedToCard {
             let title = isAddedToCard ? L10n.Catalog.NftCard.Button.removeFromCart : L10n.Catalog.NftCard.Button.addToCart
             addToCartButton.setTitle(title, for: .normal)
-            addToCartButton.titleLabel?.font = .boldSystemFont(ofSize: 17)
-            addToCartButton.setTitleColor(.whiteDay, for: .normal)
+        }
+    }
+    
+    private func synchronizeCartButtons(id: String, fromCartButton: Bool) {
+        let cells = viewModel?.nftsObservable.wrappedValue
+        let index = cells?.firstIndex(where: { $0.id == id }) ?? 0
+        
+        guard let cell = nftColectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? NFTCollectionCell else { return }
+        
+        if fromCartButton {
+            guard var model = cell.getNFTModel() else { return }
+            cell.setupNFTModel(model: NFTCell(name: model.name,
+                                              images: model.images,
+                                              rating: model.rating,
+                                              price: model.price,
+                                              author: model.author,
+                                              id: model.id,
+                                              isLiked: model.isLiked,
+                                              isAddedToCard: !model.isAddedToCard))
+            setupCartButton()
+        } else {
+            viewModel?.setNewCurrentModel()
+            setupCartButton()
         }
     }
     
@@ -264,7 +290,9 @@ final class NFTCardViewController: UIViewController {
     
     // MARK: Objc Methods:
     @objc private func goToSellerWebSite() {
-        guard let url = URL(string: viewModel?.authorCollection?.website ?? "") else { return }
+        let author = viewModel?.getAuthorCollection()
+        
+        guard let url = URL(string: author?.website ?? "") else { return }
         let webViewViewModel = WebViewViewModel()
         let webViewController = WebViewViewController(viewModel: webViewViewModel, url: url)
         
@@ -272,16 +300,29 @@ final class NFTCardViewController: UIViewController {
     }
     
     @objc private func changeNFTCartStatus() {
-        guard let isAddedToCard = viewModel?.currentNFT.isAddedToCard,
+        let nftModel = viewModel?.getCurrentNFTModel()
+        
+        guard let isAddedToCard = nftModel?.isAddedToCard,
               let index = viewModel?.nftsObservable.wrappedValue?.firstIndex(
-                where: { $0.id == viewModel?.currentNFT.id }) else { return }
+                where: { $0.id == nftModel?.id }) else { return }
         
         delegate?.addIndexToUpdateCell(index: IndexPath(row: index, section: 0), isAddedToCart: !isAddedToCard)
+        viewModel?.setNewCurrentModel()
+        synchronizeCartButtons(id: nftModel?.id ?? "", fromCartButton: true)
     }
     
     @objc private func refreshNFTCardScreen() {
         viewModel?.updateNFTCardModels()
         viewModel?.fetchCurrencies()
+    }
+    
+    @objc private func openFullNFTImage() {
+        let nftModel = viewModel?.getCurrentNFTModel()
+        
+        guard let urlStrings = nftModel?.images else { return }
+        let viewController = BrowsingNFTViewController(urlStrings: urlStrings)
+        
+        present(viewController, animated: true)
     }
 }
 
@@ -301,11 +342,12 @@ extension NFTCardViewController: NFTCollectionCellDelegate {
     
     func addToCardButtonDidTapped(cell: NFTCollectionCell) {
         guard let model = cell.getNFTModel(),
-        let indexPath = nftColectionView.indexPath(for: cell) else { return }
+              let indexPath = nftColectionView.indexPath(for: cell) else { return }
         blockUI()
-
+        
         let modelID = model.id
         
+        synchronizeCartButtons(id: modelID, fromCartButton: false)
         viewModel?.changeNFTCartStatus(isAddedToCart: model.isAddedToCard, id: modelID)
         indexPathToUpdateNFTCell = indexPath
         delegate?.addIndexToUpdateCell(index: indexPath, isLike: false)
@@ -469,5 +511,10 @@ extension NFTCardViewController {
     private func setupTargets() {
         sellerWebsiteButton.addTarget(self, action: #selector(goToSellerWebSite), for: .touchUpInside)
         addToCartButton.addTarget(self, action: #selector(changeNFTCartStatus), for: .touchUpInside)
+    }
+    
+    private func setupGesture() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(openFullNFTImage))
+        coverNFTScrollView.addGestureRecognizer(gesture)
     }
 }

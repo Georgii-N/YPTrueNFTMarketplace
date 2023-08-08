@@ -16,10 +16,10 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     var nftCollectionsObservable: Observable<NFTCollections?> {
         $nftCollections
     }
-
+    
     @Observable
     private(set) var nftCollections: NFTCollections?
-        
+    
     // MARK: - Lifecycle:
     init(dataProvider: DataProviderProtocol?) {
         self.dataProvider = dataProvider
@@ -29,7 +29,7 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     // MARK: Public Methods:
     func sortNFTCollection(option: SortingOption) {
         guard let nftCollections = nftCollections else { return }
-                
+        
         var collection = NFTCollections()
         
         switch option {
