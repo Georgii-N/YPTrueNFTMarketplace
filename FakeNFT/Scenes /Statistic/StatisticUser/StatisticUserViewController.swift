@@ -17,7 +17,6 @@ final class StatisticUserViewController: UIViewController {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 35
-        print("PRINT statisticUserViewModel.profile.avatar: \(statisticUserViewModel.profile.avatar)")
         if let url = URL(string: statisticUserViewModel.profile.avatar) {
             imageView.kf.setImage(with: url)
         }
