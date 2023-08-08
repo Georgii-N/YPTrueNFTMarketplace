@@ -3,7 +3,7 @@ import UIKit
 final class StatisticUserTableViewCell: UITableViewCell {
     
     // MARK: - UI
-    lazy var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         label.textColor = .blackDay
@@ -11,6 +11,7 @@ final class StatisticUserTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -20,6 +21,7 @@ final class StatisticUserTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
 // MARK: - ReuseIdentifying
 extension StatisticUserTableViewCell: ReuseIdentifying {
     static let defaultReuseIdentifier = "statisticUserTableViewCell"
@@ -36,5 +38,10 @@ extension StatisticUserTableViewCell {
             titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
         ])
+    }
+    
+    // MARK: - Public Functions
+    func setupTitleLabel(with title: String) {
+        self.titleLabel.text = title
     }
 }

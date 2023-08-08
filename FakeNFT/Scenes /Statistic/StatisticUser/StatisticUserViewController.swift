@@ -6,17 +6,6 @@ final class StatisticUserViewController: UIViewController {
     // MARK: - Private Dependencies
     private var statisticUserViewModel: StatisticUserViewModel
     
-    private var statisticUserModel: UserResponse? {
-        didSet {
-            guard let statisticUserModel = statisticUserModel else { return }
-            if let url = URL(string: statisticUserModel.avatar) {
-                avatarImageView.kf.setImage(with: url)
-            }
-            nameLabel.text = statisticUserModel.name
-            bioLabel.text = statisticUserModel.description
-        }
-    }
-    
     // MARK: - UI
     private lazy var stackProfileView: UIStackView = {
         let stackView = UIStackView()
@@ -69,7 +58,6 @@ final class StatisticUserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        statisticUserModel = statisticUserViewModel.profile
         setupViews()
         setupConstraints()
         setupUI()
@@ -90,11 +78,10 @@ extension StatisticUserViewController {
     
     // MARK: - Objc Functions
     @objc func didTapProfileButton() {
-        let webViewModel = WebViewViewModel()
-        guard let statisticUserModel = statisticUserModel else { return }
-        let url = URL(string: statisticUserModel.website)
-        let webView = WebViewViewController(viewModel: webViewModel, url: url)
-        navigationController?.pushViewController(webView, animated: true)
+        let webViewViewModel = WebViewViewModel()
+        let url = URL(string: statisticUserViewModel.profile.website)
+        let webViewViewController = WebViewViewController(viewModel: webViewViewModel, url: url)
+        navigationController?.pushViewController(webViewViewController, animated: true)
     }
     
     // MARK: - Private Functions
@@ -159,7 +146,8 @@ extension StatisticUserViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: StatisticUserTableViewCell = tableView.dequeueReusableCell()
-        cell.titleLabel.text = L10n.Statistic.Profile.ButtonCollection.title + " (\(statisticUserViewModel.profile.nfts.count))"
+        let title = L10n.Statistic.Profile.ButtonCollection.title + " (\(statisticUserViewModel.profile.nfts.count))"
+        cell.setupTitleLabel(with: title)
         cell.accessoryView = disclosureImageView
         return cell
     }

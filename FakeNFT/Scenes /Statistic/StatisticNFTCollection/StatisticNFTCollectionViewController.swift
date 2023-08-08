@@ -3,7 +3,7 @@ import UIKit
 final class StatisticNFTCollectionViewController: UIViewController {
     
     // MARK: - Private Dependencies
-    private var statisticNFTViewModel: StatisticNFTCollectionViewModel
+    private var statisticNFTViewModel: StatisticNFTCollectionViewModelProtocol
     
     // MARK: - Private Properties
     private var indexPathToUpdateNFTCell: IndexPath?
@@ -52,7 +52,7 @@ final class StatisticNFTCollectionViewController: UIViewController {
 extension StatisticNFTCollectionViewController {
     
     private func bind() {
-        statisticNFTViewModel.$NFTcards.bind { [weak self] _ in
+        statisticNFTViewModel.nftsObservable.bind { [weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.unblockUI()
@@ -95,7 +95,7 @@ extension StatisticNFTCollectionViewController {
     }
     
     private func showStub() {
-        if statisticNFTViewModel.NFTcards.count == 0 {
+        if statisticNFTViewModel.nftsObservable.wrappedValue.count == 0 {
             stubLabel.isHidden = false
         }
     }
@@ -126,20 +126,21 @@ extension StatisticNFTCollectionViewController {
 // MARK: - DataSource
 extension StatisticNFTCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        statisticNFTViewModel.NFTcards.count
+        statisticNFTViewModel.nftsObservable.wrappedValue.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
+        let model = statisticNFTViewModel.nftsObservable.wrappedValue[indexPath.row]
         cell.delegate = self
-        let NFTCellModel = NFTCell(name: statisticNFTViewModel.NFTcards[indexPath.row].name,
-                                   images: statisticNFTViewModel.NFTcards[indexPath.row].images,
-                                   rating: Int(statisticNFTViewModel.NFTcards[indexPath.row].rating),
-                                   price: statisticNFTViewModel.NFTcards[indexPath.row].price,
-                                   author: statisticNFTViewModel.NFTcards[indexPath.row].author,
-                                   id: statisticNFTViewModel.NFTcards[indexPath.row].id,
-                                   isLiked: statisticNFTViewModel.NFTcards[indexPath.row].isLiked,
-                                   isAddedToCard: statisticNFTViewModel.NFTcards[indexPath.row].isAddedToCard)
+        let NFTCellModel = NFTCell(name: model.name,
+                                   images: model.images,
+                                   rating: Int(model.rating),
+                                   price: model.price,
+                                   author: model.author,
+                                   id: model.id,
+                                   isLiked: model.isLiked,
+                                   isAddedToCard: model.isAddedToCard)
         
         cell.setupNFTModel(model: NFTCellModel)
         return cell

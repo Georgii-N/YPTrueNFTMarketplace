@@ -31,7 +31,6 @@
 		4071F5C62A7CFF8400ADA546 /* StatisticViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5C22A7CFF8400ADA546 /* StatisticViewModel.swift */; };
 		4071F5C72A7CFF8400ADA546 /* StatisticCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5C32A7CFF8400ADA546 /* StatisticCollectionViewCell.swift */; };
 		4071F5CD2A7D001800ADA546 /* StatisticUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5C92A7D001800ADA546 /* StatisticUserViewController.swift */; };
-		4071F5CE2A7D001800ADA546 /* StatisticUserViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5CA2A7D001800ADA546 /* StatisticUserViewModelProtocol.swift */; };
 		4071F5CF2A7D001800ADA546 /* StatisticUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5CB2A7D001800ADA546 /* StatisticUserTableViewCell.swift */; };
 		4071F5D02A7D001800ADA546 /* StatisticUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5CC2A7D001800ADA546 /* StatisticUserViewModel.swift */; };
 		4071F5D52A7D002000ADA546 /* StatisticNFTCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5D22A7D002000ADA546 /* StatisticNFTCollectionViewController.swift */; };
@@ -110,7 +109,6 @@
 		4071F5C22A7CFF8400ADA546 /* StatisticViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewModel.swift; sourceTree = "<group>"; };
 		4071F5C32A7CFF8400ADA546 /* StatisticCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticCollectionViewCell.swift; sourceTree = "<group>"; };
 		4071F5C92A7D001800ADA546 /* StatisticUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticUserViewController.swift; sourceTree = "<group>"; };
-		4071F5CA2A7D001800ADA546 /* StatisticUserViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticUserViewModelProtocol.swift; sourceTree = "<group>"; };
 		4071F5CB2A7D001800ADA546 /* StatisticUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticUserTableViewCell.swift; sourceTree = "<group>"; };
 		4071F5CC2A7D001800ADA546 /* StatisticUserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticUserViewModel.swift; sourceTree = "<group>"; };
 		4071F5D22A7D002000ADA546 /* StatisticNFTCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticNFTCollectionViewController.swift; sourceTree = "<group>"; };
@@ -309,7 +307,6 @@
 			isa = PBXGroup;
 			children = (
 				4071F5C92A7D001800ADA546 /* StatisticUserViewController.swift */,
-				4071F5CA2A7D001800ADA546 /* StatisticUserViewModelProtocol.swift */,
 				4071F5CB2A7D001800ADA546 /* StatisticUserTableViewCell.swift */,
 				4071F5CC2A7D001800ADA546 /* StatisticUserViewModel.swift */,
 			);
@@ -686,7 +683,6 @@
 				409EEFE92A7A711A00B23FF8 /* UsersResponse.swift in Sources */,
 				7EB78AE92A7BFE7200BE892B /* OrderPayment.swift in Sources */,
 				7EB78A682A78EAD000BE892B /* NFTCollectionView.swift in Sources */,
-				4071F5CE2A7D001800ADA546 /* StatisticUserViewModelProtocol.swift in Sources */,
 				7E71E3B52A73F10A00B0073D /* TabBarController.swift in Sources */,
 				4071F5D52A7D002000ADA546 /* StatisticNFTCollectionViewController.swift in Sources */,
 				7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */,
