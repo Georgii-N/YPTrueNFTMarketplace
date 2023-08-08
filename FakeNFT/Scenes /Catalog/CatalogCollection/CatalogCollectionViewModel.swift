@@ -133,7 +133,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let author):
-                authorCollection = author
+                self.authorCollection = author
             case .failure(let error):
                 print(error)
             }
@@ -171,7 +171,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let nfts):
-                nftCollection = nfts.map({
+                self.nftCollection = nfts.map({
                     let isLiked = self.profile?.likes.contains($0.id)
                     let isAddedToCart = self.order?.nfts.contains($0.id)
                     return NFTCell(name: $0.name,
