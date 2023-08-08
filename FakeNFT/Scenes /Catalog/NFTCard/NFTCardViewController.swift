@@ -266,7 +266,7 @@ final class NFTCardViewController: UIViewController {
         guard let cell = nftColectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? NFTCollectionCell else { return }
         
         if fromCartButton {
-            guard var model = cell.getNFTModel() else { return }
+            guard let model = cell.getNFTModel() else { return }
             cell.setupNFTModel(model: NFTCell(name: model.name,
                                               images: model.images,
                                               rating: model.rating,
@@ -275,11 +275,10 @@ final class NFTCardViewController: UIViewController {
                                               id: model.id,
                                               isLiked: model.isLiked,
                                               isAddedToCard: !model.isAddedToCard))
-            setupCartButton()
         } else {
             viewModel?.setNewCurrentModel()
-            setupCartButton()
         }
+        setupCartButton()
     }
     
     private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
