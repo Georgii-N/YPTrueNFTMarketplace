@@ -1,9 +1,3 @@
-//
-//  CartMainCell.swift
-//  FakeNFT
-//
-//  Created by Даниил Крашенинников on 31.07.2023.
-//
 
 import UIKit
 
@@ -55,14 +49,14 @@ final class CartMainCell: UICollectionViewCell {
     
     lazy var deleteCartButton: UIButton = {
         let deleteCartButton = UIButton()
-        deleteCartButton.setImage(UIImage(named: "deleteButton"), for: .normal)
+        deleteCartButton.setImage(UIImage(named: "removeBasket"), for: .normal)
         return deleteCartButton
     }()
     
     // MARK: - Lifecycle:
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUpViews()
+        setupViews()
         setupConstraints()
         setTargets()
     }
@@ -74,7 +68,7 @@ final class CartMainCell: UICollectionViewCell {
 
 // MARK: Set Up UI
 extension CartMainCell {
-    private func setUpViews() {
+    private func setupViews() {
         [imageNFT, nameNFT, ratingNFT, priceNFT, priceCountNFT, deleteCartButton].forEach(contentView.setupView)
     }
     

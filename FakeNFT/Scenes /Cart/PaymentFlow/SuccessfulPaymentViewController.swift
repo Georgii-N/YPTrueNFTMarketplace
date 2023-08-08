@@ -1,9 +1,3 @@
-//
-//  SuccessfulPaymentViewController.swift
-//  FakeNFT
-//
-//  Created by Даниил Крашенинников on 01.08.2023.
-//
 
 import UIKit
 
@@ -31,7 +25,7 @@ final class SuccessfulPaymentViewController: UIViewController {
     // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpViews()
+        setupViews()
         setupConstraints()
         setTargets()
     }
@@ -40,7 +34,7 @@ final class SuccessfulPaymentViewController: UIViewController {
 // MARK: Set Up UI
 extension SuccessfulPaymentViewController {
     
-    private func setUpViews() {
+    private func setupViews() {
         view.backgroundColor = .whiteDay
         [successefulImage, successefulLabel, returnInCatalogButton].forEach(view.setupView)
     }
@@ -64,7 +58,6 @@ extension SuccessfulPaymentViewController {
     
     @objc
     func backToCatalog() {
-        //    navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.popViewController(animated: true)
     }
 }

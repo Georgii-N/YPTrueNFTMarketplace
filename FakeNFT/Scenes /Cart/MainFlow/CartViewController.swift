@@ -1,9 +1,3 @@
-//
-//  CartViewController.swift
-//  FakeNFT
-//
-//  Created by Даниил Крашенинников on 30.07.2023.
-//
 
 import UIKit
 import Kingfisher
@@ -11,7 +5,7 @@ import Kingfisher
 final class CartViewControler: UIViewController {
     
     // MARK: Public dependencies
-    var cartViewModel: CartViewModel
+    var cartViewModel: CartViewModelProtocol
     
     // MARK: UI constants and variables
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -19,7 +13,7 @@ final class CartViewControler: UIViewController {
     
     private lazy var totalView: UIView = {
         let totalView = UIView()
-        totalView.backgroundColor = .lightGray
+        totalView.backgroundColor = .lightGrayDay
         totalView.isHidden = false
         return totalView
     }()
@@ -59,30 +53,6 @@ final class CartViewControler: UIViewController {
     }()
     
     // MARK: - Lifecycle:
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        chekEmptyNFT()
-        setUpViews()
-        setupConstraints()
-        setTargets()
-        makeCollectionView()
-        bind()
-        blockUI()
-    }
-    
-    private func bind() {
-        cartViewModel.$cartNFT.bind {[weak self] _ in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.chekEmptyNFT()
-                self.totalNFT.text = "\(self.cartViewModel.additionNFT()) NFT"
-                self.totalCost.text = "\(self.cartViewModel.additionPriceNFT()) ETH"
-                self.unblockUI()
-            }
-        }
-    }
-    
     init(cartViewModel: CartViewModel) {
         self.cartViewModel = cartViewModel
         super.init(nibName: nil, bundle: nil)
@@ -91,11 +61,34 @@ final class CartViewControler: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+        setupConstraints()
+        setTargets()
+        makeCollectionView()
+        bind()
+        blockUI()
+    }
+    
+    private func bind() {
+        cartViewModel.cartNft.bind {[weak self] _ in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                self.checkEmptyNFT()
+                self.totalNFT.text = "\(self.cartViewModel.additionNFT()) NFT"
+                self.totalCost.text = "\(self.cartViewModel.additionPriceNFT()) ETH"
+                self.unblockUI()
+            }
+        }
+    }
 }
 
 // MARK: Set Up UI
 extension CartViewControler {
-    private func setUpViews() {
+    private func setupViews() {
         view.backgroundColor = .whiteDay
         [totalView, totalNFT, totalCost, toPayButton, collectionView, emptyLabel].forEach(view.setupView)
     }
@@ -129,8 +122,9 @@ extension CartViewControler {
         sortButton.addTarget(self, action: #selector(makeSort), for: .touchUpInside)
     }
     
-    private func chekEmptyNFT() {
-        if cartViewModel.cartNFT.isEmpty {
+    private func checkEmptyNFT() {
+        guard let isEmptyCartNft = cartViewModel.cartNft.wrappedValue?.isEmpty else { return }
+        if isEmptyCartNft {
             emptyLabel.isHidden = false
             totalView.isHidden = true
             toPayButton.isHidden = true
@@ -179,19 +173,21 @@ extension CartViewControler {
 // MARK: Collection View
 extension CartViewControler: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        cartViewModel.cartNFT.count
+        let cartNFT = cartViewModel.unwrappedCartNftViewModel()
+        return cartNFT.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: CartMainCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        let imageUrl = URL(string: cartViewModel.cartNFT[indexPath.row].images[0])
+        let cartNFT = cartViewModel.unwrappedCartNftViewModel()
+        let imageUrl = URL(string: cartNFT[indexPath.row].images[0])
         let size = CGSize(width: 115, height: 115)
         let resizingProcessor = ResizingImageProcessor(referenceSize: size)
-        cell.nameNFT.text = cartViewModel.cartNFT[indexPath.row].name
-        cell.priceCountNFT.text = "\(String(cartViewModel.cartNFT[indexPath.row].price)) ETH"
+        cell.nameNFT.text = cartNFT[indexPath.row].name
+        cell.priceCountNFT.text = "\(String(cartNFT[indexPath.row].price)) ETH"
         cell.imageNFT.kf.setImage(with: imageUrl, options: [.processor(resizingProcessor)])
-        cell.setRating(rating: cartViewModel.cartNFT[indexPath.row].rating)
-        cell.idNft = cartViewModel.cartNFT[indexPath.row].id
+        cell.setRating(rating: cartNFT[indexPath.row].rating)
+        cell.idNft = cartNFT[indexPath.row].id
         cell.delegate = self
         return cell
     }
@@ -223,7 +219,7 @@ extension CartViewControler: DeleteViewControllerDelegate {
             if result {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
-                    self.chekEmptyNFT()
+                    self.checkEmptyNFT()
                     self.totalNFT.text = "\(self.cartViewModel.additionNFT()) NFT"
                     self.totalCost.text = "\(self.cartViewModel.additionPriceNFT()) ETH"
                 }

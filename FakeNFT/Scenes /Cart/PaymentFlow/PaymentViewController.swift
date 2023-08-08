@@ -1,9 +1,3 @@
-//
-//  PaymentViewController.swift
-//  FakeNFT
-//
-//  Created by Даниил Крашенинников on 31.07.2023.
-//
 
 import UIKit
 import Kingfisher
@@ -11,7 +5,7 @@ import Kingfisher
 final class PaymentViewController: UIViewController {
     
     // MARK: Dependencies
-    private var paymentViewModel: PaymentViewModel
+    private var paymentViewModel: PaymentViewModelProtocol
     
     // MARK: UI constants and variables
     private let payButton = BaseBlackButton(with: L10n.Cart.PayScreen.payButton)
@@ -20,7 +14,7 @@ final class PaymentViewController: UIViewController {
     
     private lazy var bottomView: UIView = {
         let bottomView = UIView()
-        bottomView.backgroundColor = .lightGray
+        bottomView.backgroundColor = .lightGrayDay
         return bottomView
     }()
     
@@ -41,9 +35,18 @@ final class PaymentViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle:
+    init(paymentViewModel: PaymentViewModel) {
+        self.paymentViewModel = paymentViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpViews()
+        setupViews()
         setupConstraints()
         makeCollectionView()
         setTargets()
@@ -54,11 +57,10 @@ final class PaymentViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        
     }
     
-    func bind() {
-        paymentViewModel.$currencieNFT.bind {[weak self] _ in
+   private func bind() {
+        paymentViewModel.currencieNfts.bind {[weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -66,21 +68,12 @@ final class PaymentViewController: UIViewController {
             }
         }
     }
-    
-    init(paymentViewModel: PaymentViewModel){
-        self.paymentViewModel = paymentViewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 // MARK: Set Up UI
 extension PaymentViewController {
     
-    private func setUpViews() {
+    private func setupViews() {
         view.backgroundColor = .whiteDay
         self.title = L10n.Cart.PayScreen.paymentChoice
         [bottomView, userTerms, userTermsLink, payButton, collectionView].forEach(view.setupView)
@@ -121,7 +114,7 @@ extension PaymentViewController {
     // MARK: Private Methods
     @objc
     private func goToSuccessScreen() {
-        paymentViewModel.makePay() { result in
+        paymentViewModel.makePay { result in
             switch result {
             case true:
                 DispatchQueue.main.async {
@@ -149,16 +142,18 @@ extension PaymentViewController {
 // MARK: Collection View
 extension PaymentViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        paymentViewModel.currencieNFT.count
+        let currencieNFT = paymentViewModel.unwrappedPaymentViewModel()
+       return currencieNFT.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let imageUrl = URL(string: paymentViewModel.currencieNFT[indexPath.row].image)
+        let currencieNFT = paymentViewModel.unwrappedPaymentViewModel()
+        let imageUrl = URL(string: currencieNFT[indexPath.row].image)
         let size = CGSize(width: 31.5, height: 31.5)
         let resizingProcessor = ResizingImageProcessor(referenceSize: size)
         let cell: CartPaymentCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        cell.nameCoin.text = paymentViewModel.currencieNFT[indexPath.row].title
-        cell.shortNameCoin.text = paymentViewModel.currencieNFT[indexPath.row].name
+        cell.nameCoin.text = currencieNFT[indexPath.row].title
+        cell.shortNameCoin.text = currencieNFT[indexPath.row].name
         cell.imageCoin.kf.setImage(with: imageUrl, options: [.processor(resizingProcessor)])
         return cell
     }
@@ -179,10 +174,11 @@ extension PaymentViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CartPaymentCell else { return }
+        let currencieNFT = paymentViewModel.unwrappedPaymentViewModel()
         cell.layer.borderColor = UIColor.blackDay.cgColor
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 12
-        let id = Int(paymentViewModel.currencieNFT[indexPath.row].id)
+        let id = Int(currencieNFT[indexPath.row].id)
         paymentViewModel.currencieID = id
     }
     

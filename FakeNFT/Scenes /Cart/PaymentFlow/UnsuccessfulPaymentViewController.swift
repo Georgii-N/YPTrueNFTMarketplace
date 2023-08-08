@@ -1,9 +1,3 @@
-//
-//  UnsuccessfulPaymentViewController.swift
-//  FakeNFT
-//
-//  Created by Даниил Крашенинников on 01.08.2023.
-//
 
 import UIKit
 
@@ -32,7 +26,7 @@ final class UnsuccessfulPaymentViewController: UIViewController {
     // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpViews()
+        setupViews()
         setupConstraints()
         setTargets()
     }
@@ -41,7 +35,7 @@ final class UnsuccessfulPaymentViewController: UIViewController {
 // MARK: Set Up UI
 extension UnsuccessfulPaymentViewController {
     
-    private func setUpViews() {
+    private func setupViews() {
         view.backgroundColor = .whiteDay
         [unsuccessefulImage, unsuccessefulLabel, tryButton].forEach(view.setupView)
     }

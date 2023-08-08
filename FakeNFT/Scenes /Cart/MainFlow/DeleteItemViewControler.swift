@@ -1,9 +1,3 @@
-//
-//  DeleteItemViewControler.swift
-//  FakeNFT
-//
-//  Created by Даниил Крашенинников on 01.08.2023.
-//
 
 import UIKit
 
@@ -74,7 +68,7 @@ final class DeleteItemViewControler: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpViews()
+        setupViews()
         setupConstraints()
         setTargets()
     }
@@ -83,7 +77,7 @@ final class DeleteItemViewControler: UIViewController {
 // MARK: Set Up UI
 extension DeleteItemViewControler {
     
-    private func setUpViews() {
+    private func setupViews() {
         let blurEffectView = UIVisualEffectView(effect: self.blurEffect)
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -104,7 +98,7 @@ extension DeleteItemViewControler {
             returnToCartButton.topAnchor.constraint(equalTo: alertlLabel.bottomAnchor, constant: 20),
             returnToCartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -57),
             returnToCartButton.widthAnchor.constraint(equalToConstant: 127),
-            returnToCartButton.heightAnchor.constraint(equalToConstant: 44),
+            returnToCartButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
     

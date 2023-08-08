@@ -1,9 +1,3 @@
-//
-//  CartPaymentCell.swift
-//  FakeNFT
-//
-//  Created by Даниил Крашенинников on 31.07.2023.
-//
 
 import UIKit
 
@@ -12,7 +6,7 @@ final class CartPaymentCell: UICollectionViewCell {
     // MARK: UI constants and variables
     private lazy var backView: UIView = {
         let backgroundView = UIView()
-        backgroundView.backgroundColor = .lightGray
+        backgroundView.backgroundColor = .lightGrayDay
         backgroundView.layer.cornerRadius = 12
         return backgroundView
     }()
@@ -41,7 +35,7 @@ final class CartPaymentCell: UICollectionViewCell {
     // MARK: - Lifecycle:
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUpViews()
+        setupViews()
         setupConstraints()
     }
     
@@ -52,7 +46,7 @@ final class CartPaymentCell: UICollectionViewCell {
 
 // MARK: Set Up UI
 extension CartPaymentCell {
-    private func setUpViews() {
+    private func setupViews() {
         [backView, nameCoin, imageCoin, shortNameCoin].forEach(contentView.setupView)
     }
     
