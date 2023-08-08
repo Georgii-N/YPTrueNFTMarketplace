@@ -17,6 +17,10 @@ final class StatisticUserViewController: UIViewController {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 35
+        print("PRINT statisticUserViewModel.profile.avatar: \(statisticUserViewModel.profile.avatar)")
+        if let url = URL(string: statisticUserViewModel.profile.avatar) {
+            imageView.kf.setImage(with: url)
+        }
         return imageView
     }()
     
@@ -24,6 +28,7 @@ final class StatisticUserViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         label.textColor = .blackDay
+        label.text = statisticUserViewModel.profile.name
         return label
     }()
     
@@ -33,6 +38,7 @@ final class StatisticUserViewController: UIViewController {
         label.sizeToFit()
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textColor = .blackDay
+        label.text = statisticUserViewModel.profile.description
         return label
     }()
     
