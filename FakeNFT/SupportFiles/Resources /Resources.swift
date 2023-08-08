@@ -17,7 +17,7 @@ enum Resources {
         }
         
         enum NavBar {
-            static let sortIcon = UIImage(named: "sort")
+            static let sortIcon = UIImage(systemName: "text.justify.leading")
         }
         
         enum NFTCollectionCell {
