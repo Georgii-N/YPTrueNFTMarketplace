@@ -65,6 +65,18 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
     }
 
     // MARK: - Public Methods:
+    func fetchCurrencies() {
+        dataProvider?.fetchCurrencies(completion: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let currencies):
+                self.currencies = currencies
+            case .failure(let error):
+                print(error)
+            }
+        })
+    }
+    
     func changeNFTFavouriteStatus(isLiked: Bool, id: String) {
         guard var newLikes = profile?.likes else { return }
         
@@ -120,20 +132,14 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
             }
         })
     }
+    
+    func updateNFTCardModels() {
+        fetchProfile()
+        fetchOrder()
+        fetchAuthor()
+    }
  
     // MARK: - Private func:
-    private func fetchCurrencies() {
-        dataProvider?.fetchCurrencies(completion: { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let currencies):
-                self.currencies = currencies
-            case .failure(let error):
-                print(error)
-            }
-        })
-    }
-    
     private func fetchProfile() {
         dataProvider?.fetchProfile(completion: { [weak self] result in
             guard let self = self else { return }

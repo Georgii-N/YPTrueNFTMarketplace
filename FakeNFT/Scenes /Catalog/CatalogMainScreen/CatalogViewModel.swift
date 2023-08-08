@@ -44,8 +44,7 @@ final class CatalogViewModel: CatalogViewModelProtocol {
         self.nftCollections = collection
     }
     
-    // MARK: - Private Methods:
-    private func fetchCollections() {
+    func fetchCollections() {
         dataProvider?.fetchNFTCollection(completion: { [weak self] result in
             guard let self = self else { return }
             switch result {

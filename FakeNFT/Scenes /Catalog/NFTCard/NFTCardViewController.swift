@@ -16,6 +16,7 @@ final class NFTCardViewController: UIViewController {
     
     // MARK: - Constant and Variables:
     private var indexPathToUpdateNFTCell: IndexPath?
+    private lazy var refreshControl = UIRefreshControl()
     
     // MARK: - UI:
     private lazy var allScreenScrollView: UIScrollView = {
@@ -128,8 +129,6 @@ final class NFTCardViewController: UIViewController {
     // MARK: Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
-        blockUI()
-        
         setupViews()
         setupConstraints()
         setupTargets()
@@ -152,6 +151,7 @@ final class NFTCardViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.delegate = delegate
         self.viewModel = viewModel
+        blockUI()
     }
     
     required init?(coder: NSCoder) {
@@ -278,6 +278,11 @@ final class NFTCardViewController: UIViewController {
         
         delegate?.addIndexToUpdateCell(index: IndexPath(row: index, section: 0), isAddedToCart: !isAddedToCard)
     }
+    
+    @objc private func refreshNFTCardScreen() {
+        viewModel?.updateNFTCardModels()
+        viewModel?.fetchCurrencies()
+    }
 }
 
 // MARK: - NFTCollectionCellDelegate:
@@ -328,6 +333,8 @@ extension NFTCardViewController: UITableViewDataSource {
         
         if let currencie = viewModel.currenciesObservable.wrappedValue?[indexPath.row] {
             cell.setupCurrencieModel(model: currencie)
+            refreshControl.endRefreshing()
+            unblockUI()
         }
         
         return cell
@@ -352,7 +359,6 @@ extension NFTCardViewController: UICollectionViewDataSource {
         cell.delegate = self
         
         if let nft = viewModel?.nftsObservable.wrappedValue?[indexPath.row] {
-            unblockUI()
             cell.setupNFTModel(model: nft)
         }
         
@@ -386,6 +392,7 @@ extension NFTCardViewController {
          nftTableView, sellerWebsiteButton, nftColectionView].forEach(contentView.setupView)
         
         setupCartButton()
+        allScreenScrollView.refreshControl = refreshControl
     }
 }
 

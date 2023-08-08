@@ -29,6 +29,7 @@ final class CatalogViewController: UIViewController {
     }()
     
     private lazy var sortButton = SortNavBarBaseButton()
+    private lazy var refreshControl = UIRefreshControl()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -85,6 +86,10 @@ final class CatalogViewController: UIViewController {
             self.sortNFT(options)
         })
     }
+    
+    @objc private func refreshNFTCatalog() {
+        viewModel?.fetchCollections()
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -102,6 +107,7 @@ extension CatalogViewController: UITableViewDataSource {
             unblockUI()
             tableView.isHidden = false
             cell.setupCollectionModel(model: collectionModel)
+            refreshControl.endRefreshing()
         }
         
         return cell
@@ -132,6 +138,8 @@ extension CatalogViewController {
 
         view.backgroundColor = .whiteDay
         view.setupView(catalogNFTTableView)
+        
+        catalogNFTTableView.refreshControl = refreshControl
     }
 }
 
@@ -150,5 +158,6 @@ extension CatalogViewController {
 extension CatalogViewController {
     private func setupTargets() {
         sortButton.addTarget(self, action: #selector(sortButtonTarget), for: .touchUpInside)
+        refreshControl.addTarget(self, action: #selector(refreshNFTCatalog), for: .valueChanged)
     }
 }

@@ -15,6 +15,7 @@ final class CatalogCollectionViewController: UIViewController {
     
     // MARK: - Constant and Variables:
     private var indexPathToUpdateNFTCell: IndexPath?
+    private lazy var refreshControl = UIRefreshControl()
     
     // MARK: - UI:
     private lazy var collectionScrollView: UIScrollView = {
@@ -53,8 +54,7 @@ final class CatalogCollectionViewController: UIViewController {
     
     private lazy var authorLinkTextView: UITextView = {
         let textView = UITextView()
-        textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
-        textView.textAlignment = .center
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0)
         textView.backgroundColor = .whiteDay
         textView.dataDetectorTypes = .link
         textView.delegate = self
@@ -91,6 +91,7 @@ final class CatalogCollectionViewController: UIViewController {
         
         setupViews()
         setupConstraints()
+        setupTargets()
         
         setupCollectionInfo()
         bind()
@@ -134,7 +135,7 @@ final class CatalogCollectionViewController: UIViewController {
         })
         
         viewModel?.cartStatusDidChangeObservable.bind(action: { [weak self] _ in
-                guard let self = self else { return }
+            guard let self = self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
         })
@@ -150,11 +151,15 @@ final class CatalogCollectionViewController: UIViewController {
     }
     
     private func setupAuthorInfo(authorModel: UserResponse?) {
-            guard let author = authorModel,
-                  let link = author.website.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-            let attributeString = NSMutableAttributedString(string: author.name)
-            attributeString.addAttribute(.link, value: link, range: NSRange(location: 0, length: attributeString.length))
-            self.authorLinkTextView.attributedText = attributeString
+        guard let author = authorModel,
+              let link = author.website.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+                .link: link,
+                .font: UIFont.systemFont(ofSize: 15)
+            ]
+        let attributeString = NSMutableAttributedString(string: author.name, attributes: attributes)
+        self.authorLinkTextView.attributedText = attributeString
     }
     
     private func setNFTCollectionImage(model: NFTCollection) {
@@ -170,10 +175,10 @@ final class CatalogCollectionViewController: UIViewController {
     
     private func switchToNFTCardViewController(nftModel: NFTCell) {
         guard let collection = viewModel?.collectionObservable.wrappedValue else { return }
-    
+        
         let nftViewModel = NFTCardViewModel(nftModel: nftModel, nftCollection: collection)
         let viewController = NFTCardViewController(delegate: self, viewModel: nftViewModel)
-                
+        
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -197,6 +202,11 @@ final class CatalogCollectionViewController: UIViewController {
         DispatchQueue.main.async {
             method(argument)
         }
+    }
+    
+    // MARK: Objc Methods:
+    @objc private func refreshNFTCollection() {
+        viewModel?.updateNFTCardModels()
     }
 }
 
@@ -234,7 +244,7 @@ extension CatalogCollectionViewController: NFTCardViewControllerDelegate {
     
     func addIndexToUpdateCell(index: IndexPath, isAddedToCart: Bool) {
         guard let cell = nftCollection.cellForItem(at: index) as? NFTCollectionCell else { return }
-                
+        
         indexPathToUpdateNFTCell = index
         addToCardButtonDidTapped(cell: cell)
     }
@@ -262,10 +272,11 @@ extension CatalogCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NFTCollectionCell = collectionView.dequeueReusableCell(indexPath: indexPath)
         cell.delegate = self
-    
+        
         if let nftModel = viewModel?.nftsObservable.wrappedValue?[indexPath.row] {
             unblockUI()
             cell.setupNFTModel(model: nftModel)
+            refreshControl.endRefreshing()
         }
         
         return cell
@@ -279,16 +290,16 @@ extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        10
+        9
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        10
+        8
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? NFTCollectionCell,
-        let model = cell.getNFTModel() else { return }
+              let model = cell.getNFTModel() else { return }
         
         switchToNFTCardViewController(nftModel: model)
     }
@@ -304,6 +315,8 @@ extension CatalogCollectionViewController {
         
         [coverNFTImageView, nameOfNFTCollectionLabel, aboutAuthorLabel, authorLinkTextView,
          collectionInformationLabel, nftCollection].forEach(collectionScrollView.setupView)
+        
+        collectionScrollView.refreshControl = refreshControl
     }
 }
 
@@ -347,5 +360,12 @@ extension CatalogCollectionViewController {
             nftCollection.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor),
             nftCollection.bottomAnchor.constraint(equalTo: collectionScrollView.bottomAnchor)
         ])
+    }
+}
+
+// MARK: - Add Targets:
+extension CatalogCollectionViewController {
+    private func setupTargets() {
+        refreshControl.addTarget(self, action: #selector(refreshNFTCollection), for: .valueChanged)
     }
 }
