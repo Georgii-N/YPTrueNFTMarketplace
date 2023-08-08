@@ -35,27 +35,26 @@ enum Resources {
         static let goldRatingStar = UIImage(systemName: "star.fill")?.withTintColor(.yellowUniversal, renderingMode: .alwaysOriginal)
         static let putInBasket = UIImage(named: "emptyCart")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
         static let removeFromBasket = UIImage(named: "removeBasket")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
-    }
-    
-    enum NFTBrowsing {
-        static let cancellButton = UIImage(systemName: "xmark")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
-    }
-}
-
-enum Network {
-    enum MockAPI {
-        static let defaultStringURL = "https://64c516a6c853c26efada7a11.mockapi.io"
         
-        enum Paths {
-            static let currencies = "/api/v1/currencies"
-            static let nftCollection = "/api/v1/collections"
-            static let nftCard = "/api/v1/nft"
-            static let orders = "/api/v1/orders/1"
-            static let orderPayment = "/api/v1/orders/1/payment"
-            static let profile = "/api/v1/profile/1"
-            static let users = "/api/v1/users"
+        enum NFTBrowsing {
+            static let cancellButton = UIImage(systemName: "xmark")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
         }
     }
-    static let metricaAPIKey = "de532bb8-8a8d-4118-94ad-dbde6f544bf6"
-}
+    
+    enum Network {
+        enum MockAPI {
+            static let defaultStringURL = "https://64c516a6c853c26efada7a11.mockapi.io"
+            
+            enum Paths {
+                static let currencies = "/api/v1/currencies"
+                static let nftCollection = "/api/v1/collections"
+                static let nftCard = "/api/v1/nft"
+                static let orders = "/api/v1/orders/1"
+                static let orderPayment = "/api/v1/orders/1/payment"
+                static let profile = "/api/v1/profile/1"
+                static let users = "/api/v1/users"
+            }
+        }
+        static let metricaAPIKey = "de532bb8-8a8d-4118-94ad-dbde6f544bf6"
+    }
 }
