@@ -22,18 +22,31 @@ enum SortingOption: CaseIterable {
         }
     }
     
-    init?(localizedString: String) {
-        switch localizedString {
+    var sortingOptions: String {
+        switch self {
+        case .byName:
+            return "byName"
+        case .byPrice:
+            return "byPrice"
+        case .byRating:
+            return "byRating"
+        case .byQuantity:
+            return "byQuantity"
+        default:
+            return ""
+        }
+    }
+    
+    init?(stringValue: String) {
+        switch stringValue {
         case "byName":
             self = .byName
         case "byPrice":
             self = .byPrice
         case "byRating":
             self = .byRating
-        case "byNumberOfNFT":
+        case "byQuantity":
             self = .byQuantity
-        case "close":
-            self = .close
         default:
             return nil
         }
