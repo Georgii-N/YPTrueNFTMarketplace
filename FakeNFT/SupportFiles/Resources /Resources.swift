@@ -6,8 +6,8 @@ enum Resources {
             static let profileImage = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
             static let profileImageSelected = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.blueUniversal, renderingMode: .alwaysOriginal)
             
-            static let catalogImage = UIImage(named: "Catalog")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
-            static let catalogImageSelected = UIImage(named: "Catalog")?.withTintColor(.blueUniversal, renderingMode: .alwaysOriginal)
+            static let catalogImage = UIImage(systemName: "rectangle.stack.fill")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
+            static let catalogImageSelected = UIImage(systemName: "rectangle.stack.fill")?.withTintColor(.blueUniversal, renderingMode: .alwaysOriginal)
             
             static let cartImage = UIImage(named: "cartBasket")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
             static let cartImageSelected = UIImage(named: "cartBasket")?.withTintColor(.blueUniversal, renderingMode: .alwaysOriginal)
