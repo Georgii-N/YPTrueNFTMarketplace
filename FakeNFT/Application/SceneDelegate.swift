@@ -7,9 +7,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: scene)
-        let authViewController = AuthViewController()
+        let tabBarController = TabBarController()
 
-        window?.rootViewController = authViewController
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
 }
