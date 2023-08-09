@@ -164,6 +164,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1464441A2A81617A00A38A67 /* MyNFT */ = {
+			isa = PBXGroup;
+			children = (
+				1464441B2A81618F00A38A67 /* Cells */,
+				E93BBE0A2A7955F6000BEAE0 /* MyNFTViewController.swift */,
+			);
+			path = MyNFT;
+			sourceTree = "<group>";
+		};
+		1464441B2A81618F00A38A67 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1464441D2A8161AD00A38A67 /* Models */,
+				E93BBE0F2A7B3B24000BEAE0 /* MyNFTCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1464441D2A8161AD00A38A67 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E93BBE122A7C31B4000BEAE0 /* MyNFTCellViewModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1464441E2A8161C100A38A67 /* FavouritesNFT */ = {
+			isa = PBXGroup;
+			children = (
+				E93BBE0E2A7B3B0B000BEAE0 /* Cells */,
+				E93BBE142A7C823E000BEAE0 /* FavouritesNFTViewController.swift */,
+			);
+			path = FavouritesNFT;
+			sourceTree = "<group>";
+		};
 		3F68068A29CBBAF100B4F915 = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +265,8 @@
 		3F6806C729CBBC5B00B4F915 /* Scenes  */ = {
 			isa = PBXGroup;
 			children = (
+				1464441E2A8161C100A38A67 /* FavouritesNFT */,
+				1464441A2A81617A00A38A67 /* MyNFT */,
 				E9CA66E02A779D0600C7A218 /* Profile */,
 				7EC0B5312A7666C600688EC9 /* Catalog */,
 				7EC0B53E2A766E3400688EC9 /* Cart */,
@@ -431,7 +468,6 @@
 			isa = PBXGroup;
 			children = (
 				E93BBE112A7C319E000BEAE0 /* Models */,
-				E93BBE0F2A7B3B24000BEAE0 /* MyNFTCollectionViewCell.swift */,
 				E93BBE162A7C83C5000BEAE0 /* FavouritesNFTCollectionViewCell.swift */,
 			);
 			path = Cells;
@@ -440,7 +476,6 @@
 		E93BBE112A7C319E000BEAE0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E93BBE122A7C31B4000BEAE0 /* MyNFTCellViewModel.swift */,
 				E9CFDB0D2A7C88BB006E10DD /* FavouritesNFTCellViewModel.swift */,
 			);
 			path = Models;
@@ -449,11 +484,8 @@
 		E9CA66E02A779D0600C7A218 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				E93BBE0E2A7B3B0B000BEAE0 /* Cells */,
 				E9CA66E12A779D2B00C7A218 /* ProfileViewController.swift */,
 				E93BBE082A793E7F000BEAE0 /* EditProfileViewController.swift */,
-				E93BBE0A2A7955F6000BEAE0 /* MyNFTViewController.swift */,
-				E93BBE142A7C823E000BEAE0 /* FavouritesNFTViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -642,7 +674,7 @@
 				E93BBE152A7C823F000BEAE0 /* FavouritesNFTViewController.swift in Sources */,
 				E93BBE102A7B3B24000BEAE0 /* MyNFTCollectionViewCell.swift in Sources */,
 				7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */,
-				7EF4C5D12A73F86C001E8C67 /* Colors.swift in Sources */,
+				7EF4C5D12A73F86C001E8C67 /* UIColor + Extension.swift in Sources */,
 				E93BBE132A7C31B4000BEAE0 /* MyNFTCellViewModel.swift in Sources */,
 				7EB78A972A7A5C7D00BE892B /* WebViewViewController.swift in Sources */,
 				7EE68CFA2A7FCB8A00CAE2AC /* NFTCell.swift in Sources */,
@@ -676,7 +708,6 @@
 				3F6806D729CBC50A00B4F915 /* Cells + Extension.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */,
-				3F6806CB29CBBCC700B4F915 /* ExampleNetworkModel.swift in Sources */,
 				E9CA66E22A779D2B00C7A218 /* ProfileViewController.swift in Sources */,
 				409EEFE32A7A707700B23FF8 /* DataProviderProtocol.swift in Sources */,
 				7EB78AE72A7BFE0700BE892B /* Order.swift in Sources */,

@@ -116,5 +116,5 @@ final class DataProvider: DataProviderProtocol {
                 completion(.failure(error))
             }
         }
-    } 
+    }
 }

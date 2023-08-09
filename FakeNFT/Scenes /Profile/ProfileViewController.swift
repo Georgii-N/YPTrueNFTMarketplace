@@ -8,6 +8,13 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+
+    // MARK: - Properties
+
+    private lazy var dataProvider = DataProvider()
+    private var profile: Profile?
+    private var userNFTs = [NFTCard]()
+    private var likesNFTs = [NFTCard]()
     
     // MARK: - Lifecycle
     
@@ -16,6 +23,7 @@ class ProfileViewController: UIViewController {
         setupBackground()
         setupNavBar()
         setupConstrains()
+        fetchProfile()
     }
     
     // MARK: - SetupUI
@@ -118,13 +126,67 @@ class ProfileViewController: UIViewController {
             profileTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             profileTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
+    }
+
+    private func setupProfile() {
+        DispatchQueue.main.async { [weak self] in
+            guard let profile = self?.profile,
+            let avatarUrl = URL(string: profile.avatar) else { return }
+            self?.profileNameLabel.text = profile.name
+            self?.profileDescriptionLabel.text = profile.description
+            self?.profileSite.text = profile.website
+            self?.profileAvatarImage.kf.setImage(with: avatarUrl)
+            self?.profileTableView.reloadData()
+        }
     }
     
     // MARK: - Actions
     
     @objc func presentEditVC() {
         present(EditProfileViewController(), animated: true)
+    }
+
+    // MARK: - Functions
+
+    private func fetchProfile() {
+        dataProvider.fetchProfile { [weak self] result in
+            switch result {
+            case .success(let profile):
+                self?.profile = profile
+                self?.setupProfile()
+                self?.fetchNFTs()
+                self?.fetchLikeNFTs()
+                print("/n MY LOG: \(profile)")
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+        }
+    }
+    
+    private func fetchNFTs() {
+        guard let profile = profile else { return }
+        
+        dataProvider.fetchUsersNFT(userId: nil, nftsId: profile.nfts) { [weak self] result in
+            switch result {
+            case .success(let nftCards):
+                self?.userNFTs = nftCards
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+    }
+    
+    private func fetchLikeNFTs() {
+        guard let profile = profile else { return }
+        
+        dataProvider.fetchUsersNFT(userId: nil, nftsId: profile.likes) { [weak self] result in
+            switch result {
+            case .success(let nftCards):
+                self?.likesNFTs = nftCards
+            case .failure(let failure):
+                print(failure)
+            }
+        }
     }
 }
 
@@ -145,9 +207,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = .clear
         switch indexPath.row {
         case 0:
-            cell.textLabel?.text = "Мои NFT (112)"
+            cell.textLabel?.text = "Мои NFT (\(profile?.nfts.count ?? 0))"
         case 1:
-            cell.textLabel?.text = "Избранные NFT (11)"
+            cell.textLabel?.text = "Избранные NFT (\(profile?.likes.count ?? 0))"
         case 2:
             cell.textLabel?.text = "О разработчике"
         default:
@@ -160,15 +222,20 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let myNFTVC = MyNFTViewController()
+            myNFTVC.nftCards = userNFTs
+            myNFTVC.likeNFTIds = likesNFTs.map({ $0.id })
             myNFTVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(myNFTVC, animated: true)
         case 1:
             let favouritesNFT = FavouritesNFTViewController()
+            favouritesNFT.nftCards = likesNFTs
             favouritesNFT.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(favouritesNFT, animated: true)
         case 2:
-            let aqwe = 1
-            // переход 3
+            guard let url = URL(string: "https://practicum.yandex.ru/ios-developer/") else { return }
+            let webViewViewModel = WebViewViewModel()
+            let webViewController = WebViewViewController(viewModel: webViewViewModel, url: url)
+            navigationController?.pushViewController(webViewController, animated: true)
         default:
             break
         }

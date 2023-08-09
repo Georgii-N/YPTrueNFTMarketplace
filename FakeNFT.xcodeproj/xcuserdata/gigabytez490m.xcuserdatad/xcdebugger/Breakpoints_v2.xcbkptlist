@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "A57FD23E-FC68-4EF0-895E-B4620BC261FA"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "758379D9-F25C-4F6E-8F05-E92F9A04BDC0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FakeNFT/Services/DataProvider/DataProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "fetchUsersNFT(userId:nftsId:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "758379D9-F25C-4F6E-8F05-E92F9A04BDC0 - 7c8473d60d0f0e9d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;FakeNFT.NFTCard&gt;, Swift.Error&gt;) -&gt; () in FakeNFT.DataProvider.fetchUsersNFT(userId: Swift.Optional&lt;Swift.String&gt;, nftsId: Swift.Optional&lt;Swift.Array&lt;Swift.String&gt;&gt;, completion: (Swift.Result&lt;Swift.Array&lt;FakeNFT.NFTCard&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "FakeNFT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gigabytez490m/Downloads/NFT%202/FakeNFT/Services/DataProvider/DataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "806">
+               </Location>
+               <Location
+                  uuid = "758379D9-F25C-4F6E-8F05-E92F9A04BDC0 - 196e42ecc3eb99d8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (FakeNFT.NFTCard) -&gt; Swift.Bool in closure #1 (Swift.Result&lt;Swift.Array&lt;FakeNFT.NFTCard&gt;, Swift.Error&gt;) -&gt; () in FakeNFT.DataProvider.fetchUsersNFT(userId: Swift.Optional&lt;Swift.String&gt;, nftsId: Swift.Optional&lt;Swift.Array&lt;Swift.String&gt;&gt;, completion: (Swift.Result&lt;Swift.Array&lt;FakeNFT.NFTCard&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "FakeNFT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gigabytez490m/Downloads/NFT%202/FakeNFT/Services/DataProvider/DataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "42">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8375EAB6-D2D1-49D9-830A-710E1773DA3D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FakeNFT/Services/DataProvider/DataProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "fetchUsersNFT(userId:nftsId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DC5A0487-CC2A-480F-BF74-9BB0048B3EAC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FakeNFT/Services/DataProvider/DataProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "fetchUsersNFT(userId:nftsId:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DC5A0487-CC2A-480F-BF74-9BB0048B3EAC - 7c8473d60d0f0e30"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;FakeNFT.NFTCard&gt;, Swift.Error&gt;) -&gt; () in FakeNFT.DataProvider.fetchUsersNFT(userId: Swift.Optional&lt;Swift.String&gt;, nftsId: Swift.Optional&lt;Swift.Array&lt;Swift.String&gt;&gt;, completion: (Swift.Result&lt;Swift.Array&lt;FakeNFT.NFTCard&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "FakeNFT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gigabytez490m/Downloads/NFT%202/FakeNFT/Services/DataProvider/DataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "477">
+               </Location>
+               <Location
+                  uuid = "DC5A0487-CC2A-480F-BF74-9BB0048B3EAC - e763ee8bd34b3f76"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (FakeNFT.NFTCard) -&gt; Swift.Bool in closure #1 (Swift.Result&lt;Swift.Array&lt;FakeNFT.NFTCard&gt;, Swift.Error&gt;) -&gt; () in FakeNFT.DataProvider.fetchUsersNFT(userId: Swift.Optional&lt;Swift.String&gt;, nftsId: Swift.Optional&lt;Swift.Array&lt;Swift.String&gt;&gt;, completion: (Swift.Result&lt;Swift.Array&lt;FakeNFT.NFTCard&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "FakeNFT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gigabytez490m/Downloads/NFT%202/FakeNFT/Services/DataProvider/DataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "45">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D63CAA6F-368A-4EEB-B4AB-A37965E62959"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FakeNFT/Scenes /MyNFT/MyNFTViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "collectionView(_:numberOfItemsInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2F4A9D33-F286-45FF-AC32-E1DB3AB0CC92"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FakeNFT/Scenes /FavouritesNFT/FavouritesNFTViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "collectionView(_:numberOfItemsInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA16483F-3F77-4ACB-BE0A-48B17C3B8561"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FakeNFT/Scenes /Profile/ProfileViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
