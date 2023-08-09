@@ -38,19 +38,19 @@ enum SortingOption: CaseIterable {
     }
     
     init?(stringValue: String) {
-            switch stringValue {
-            case "byName":
-                self = .byName
-            case "byPrice":
-                self = .byPrice
-            case "byRating":
-                self = .byRating
-            case "byQuantity":
-                self = .byQuantity
-            default:
-                return nil
-            }
+        switch stringValue {
+        case "byName":
+            self = .byName
+        case "byPrice":
+            self = .byPrice
+        case "byRating":
+            self = .byRating
+        case "byQuantity":
+            self = .byQuantity
+        default:
+            return nil
         }
+    }
 }
 
 protocol AlertServiceProtocol {
