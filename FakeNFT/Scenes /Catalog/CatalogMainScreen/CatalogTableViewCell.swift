@@ -17,7 +17,8 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
     private var collection: NFTCollection? {
         didSet {
             guard let collection = collection else { return }
-            let size = CGSize(width: contentView.frame.width, height: 140)
+            let widht = isLargeScreen() ? UIScreen.main.bounds.width : contentView.frame.width * 1.15
+            let size = CGSize(width: widht, height: 140)
             let url = URL(string: collection.cover.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
             let processor = DownsamplingImageProcessor(size: size) |> RoundCornerImageProcessor(cornerRadius: 12)
             contentNFTImageView.kf.indicatorType = .activity
@@ -31,8 +32,10 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
     // MARK: - UI:
     private lazy var contentNFTImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 12
         imageView.backgroundColor = .lightGrayDay
+        imageView.contentMode = .top
         
         return imageView
     }()
@@ -63,6 +66,15 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
     
     func getCollectionModel() -> NFTCollection {
         collection ?? NFTCollection(createdAt: "", name: "", cover: "", nfts: [], description: "", author: "", id: "")
+    }
+    
+    // MARK: - Private Methods:
+    private func isLargeScreen() -> Bool {
+        let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
+        let maxSize = max(screenWidth, screenHeight)
+        
+        return maxSize >= 896
     }
 }
 
