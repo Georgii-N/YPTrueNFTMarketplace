@@ -56,5 +56,16 @@ enum Resources {
             }
         }
         static let metricaAPIKey = "de532bb8-8a8d-4118-94ad-dbde6f544bf6"
+        
+        enum NFTBrowser {
+            static let bitcoin =  "https://bitcoin.org/ru/"
+            static let dogecoin = "https://dogecoin.com"
+            static let tether = "https://tether.to/ru/"
+            static let apecoin = "https://apecoin.com"
+            static let solana = "https://solana.com/ru"
+            static let ethereum = "https://ethereum.org/en/"
+            static let cordano = "https://cardano.org"
+            static let shibainu = "https://www.shibatoken.com"
+        }
     }
 }
