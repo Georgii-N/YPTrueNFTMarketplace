@@ -17,25 +17,28 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     
     // MARK: - Init
     init() {
+        getSortingOption()
         fetchUsersRating()
     }
     
     // MARK: - Public Functions
-    func sortUsers(by type: SortingOption) {
-        if sortingOption == type {
-            return
-        } else {
-            sortingOption = type
-        }
-        
+    func sortUsers(by type: SortingOption, usersList: UsersResponse) {
+        self.sortingOption = type
+        var users = usersList
         switch type {
         case .byName:
-            usersRating.sort { $1.name > $0.name }
+            users.sort { $1.name > $0.name }
         case .byRating:
-            usersRating.sort { (Int($1.rating) ?? 0) > (Int($0.rating) ?? 0) }
+            users.sort { (Int($1.rating) ?? 0) > (Int($0.rating) ?? 0) }
         default:
             break
         }
+        
+        self.usersRating = users
+    }
+    
+    func saveSortingOption() {
+        UserDefaultsService.shared.saveSortingOption(sortingOption, forScreen: .statistic)
     }
     
     // MARK: - Private Functions
@@ -43,10 +46,17 @@ final class StatisticViewModel: StatisticViewModelProtocol {
         dataProvider.fetchUsersRating { [weak self] result in
             switch result {
             case .success(let users):
-                self?.usersRating = users
+                self?.sortUsers(by: self?.sortingOption ?? .byRating, usersList: users)
+               
             case .failure(let error):
                 assertionFailure(error.localizedDescription)
             }
+        }
+    }
+    
+    private func getSortingOption() {
+        if let option = UserDefaultsService.shared.getSortingOption(for: .statistic) {
+            self.sortingOption = option
         }
     }
 }

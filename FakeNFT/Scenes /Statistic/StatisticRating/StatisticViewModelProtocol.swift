@@ -3,5 +3,6 @@ import Foundation
 protocol StatisticViewModelProtocol {
     var usersRatingObservable: Observable<UsersResponse> { get }
     
-    func sortUsers(by type: SortingOption)
+    func sortUsers(by type: SortingOption, usersList: UsersResponse)
+    func saveSortingOption()
 }

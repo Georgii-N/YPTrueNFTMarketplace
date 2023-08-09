@@ -22,22 +22,35 @@ enum SortingOption: CaseIterable {
         }
     }
     
-    init?(localizedString: String) {
-        switch localizedString {
-        case "byName":
-            self = .byName
-        case "byPrice":
-            self = .byPrice
-        case "byRating":
-            self = .byRating
-        case "byNumberOfNFT":
-            self = .byQuantity
-        case "close":
-            self = .close
+    var sortingOptions: String {
+        switch self {
+        case .byName:
+            return "byName"
+        case .byPrice:
+            return "byPrice"
+        case .byRating:
+            return "byRating"
+        case .byQuantity:
+            return "byQuantity"
         default:
-            return nil
+            return ""
         }
     }
+    
+    init?(stringValue: String) {
+            switch stringValue {
+            case "byName":
+                self = .byName
+            case "byPrice":
+                self = .byPrice
+            case "byRating":
+                self = .byRating
+            case "byQuantity":
+                self = .byQuantity
+            default:
+                return nil
+            }
+        }
 }
 
 protocol AlertServiceProtocol {

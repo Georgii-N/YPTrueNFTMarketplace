@@ -103,7 +103,6 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
         
         dataProvider.putNewOrder(order: order, completion: { [weak self] result in
             guard let self = self else { return }
-            print("PRINT сработал пут запрос")
             switch result {
             case .success:
                 self.cartStatusDidChange = true

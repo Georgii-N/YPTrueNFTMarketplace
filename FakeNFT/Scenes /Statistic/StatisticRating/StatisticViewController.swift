@@ -3,6 +3,7 @@ import UIKit
 final class StatisticViewController: UIViewController {
     
     // MARK: - Private Dependencies
+    
     private var alertService: AlertServiceProtocol?
     private var statisticViewModel: StatisticViewModelProtocol
     
@@ -24,6 +25,11 @@ final class StatisticViewController: UIViewController {
         setupNavBar()
         blockUI()
         bind()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        statisticViewModel.saveSortingOption()
     }
     
     // MARK: - Init
@@ -89,9 +95,9 @@ extension StatisticViewController {
     private func performSorting(_ selectedOptions: SortingOption) {
         switch selectedOptions {
         case .byName:
-            statisticViewModel.sortUsers(by: .byName)
+            statisticViewModel.sortUsers(by: .byName, usersList: statisticViewModel.usersRatingObservable.wrappedValue)
         case .byRating:
-            statisticViewModel.sortUsers(by: .byRating)
+            statisticViewModel.sortUsers(by: .byRating, usersList: statisticViewModel.usersRatingObservable.wrappedValue)
         default:
             break
         }
