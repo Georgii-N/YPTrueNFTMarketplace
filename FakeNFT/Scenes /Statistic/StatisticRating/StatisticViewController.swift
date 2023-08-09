@@ -27,11 +27,6 @@ final class StatisticViewController: UIViewController {
         bind()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        statisticViewModel.saveSortingOption()
-    }
-    
     // MARK: - Init
     init(statisticViewModel: StatisticViewModelProtocol) {
         self.statisticViewModel = statisticViewModel

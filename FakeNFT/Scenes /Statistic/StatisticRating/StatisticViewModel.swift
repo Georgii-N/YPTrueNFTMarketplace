@@ -24,6 +24,7 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     // MARK: - Public Functions
     func sortUsers(by type: SortingOption, usersList: UsersResponse) {
         self.sortingOption = type
+        saveSortingOption()
         var users = usersList
         switch type {
         case .byName:
