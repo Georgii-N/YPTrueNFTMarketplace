@@ -19,5 +19,6 @@ protocol NFTCardViewModelProtocol: AnyObject {
     func getCurrentNFTModel() -> NFTCell
     func getNFTCollection() -> NFTCollection
     func getAuthorCollection() -> UserResponse
+    func getNFTWebPath(index: Int) -> String?
     func setNewCurrentModel()
 }

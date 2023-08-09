@@ -23,6 +23,11 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
     
     private var profile: Profile?
     private var order: Order?
+    private var tokenPaths = [
+        Resources.Network.NFTBrowser.bitcoin, Resources.Network.NFTBrowser.dogecoin,
+        Resources.Network.NFTBrowser.tether, Resources.Network.NFTBrowser.apecoin,
+        Resources.Network.NFTBrowser.solana, Resources.Network.NFTBrowser.ethereum,
+        Resources.Network.NFTBrowser.cordano, Resources.Network.NFTBrowser.shibainu]
     
     // MARK: - Observable Values:
     var currenciesObservable: Observable<Currencies?> {
@@ -157,6 +162,10 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
                                          nfts: [],
                                          rating: "",
                                          id: "")
+    }
+    
+    func getNFTWebPath(index: Int) -> String? {
+        tokenPaths[index]
     }
     
     func setNewCurrentModel() {

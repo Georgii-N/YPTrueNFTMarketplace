@@ -186,6 +186,7 @@ final class NFTCardViewController: UIViewController {
         })
     }
     
+    // Controll NFT info and status:
     private func setupNFTInfo() {
         guard let viewModel = viewModel else { return }
         
@@ -279,6 +280,17 @@ final class NFTCardViewController: UIViewController {
             viewModel?.setNewCurrentModel()
         }
         setupCartButton()
+    }
+    
+    private func browsNFTToken(index: Int) {
+        let path = viewModel?.getNFTWebPath(index: index) ?? ""
+        
+        guard let url = URL(string: path) else { return }
+        
+        let webViewModel = WebViewViewModel()
+        let viewController = WebViewViewController(viewModel: webViewModel, url: url)
+        
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
@@ -386,6 +398,13 @@ extension NFTCardViewController: UITableViewDataSource {
 extension NFTCardViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         72
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let tokenName = viewModel?.currenciesObservable.wrappedValue?[indexPath.row].title else { return }
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        browsNFTToken(index: indexPath.row)
     }
 }
 
