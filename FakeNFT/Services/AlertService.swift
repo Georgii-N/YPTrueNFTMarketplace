@@ -21,6 +21,23 @@ enum SortingOption: CaseIterable {
             return L10n.General.close
         }
     }
+    
+    init?(localizedString: String) {
+        switch localizedString {
+        case "byName":
+            self = .byName
+        case "byPrice":
+            self = .byPrice
+        case "byRating":
+            self = .byRating
+        case "byNumberOfNFT":
+            self = .byQuantity
+        case "close":
+            self = .close
+        default:
+            return nil
+        }
+    }
 }
 
 protocol AlertServiceProtocol {
