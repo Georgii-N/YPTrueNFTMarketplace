@@ -17,7 +17,7 @@ enum Resources {
         }
         
         enum NavBar {
-            static let sortIcon = UIImage(named: "sort")
+            static let sortIcon = UIImage(systemName: "text.justify.leading")
         }
         
         enum NFTCollectionCell {
@@ -27,6 +27,9 @@ enum Resources {
             static let goldRatingStar = UIImage(systemName: "star.fill")?.withTintColor(.yellowUniversal, renderingMode: .alwaysOriginal)
             static let putInBasket = UIImage(named: "emptyCart")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
             static let removeFromBasket = UIImage(named: "removeBasket")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
+        }
+        enum NFTBrowsing {
+            static let cancellButton = UIImage(systemName: "xmark")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
         }
     }
     
