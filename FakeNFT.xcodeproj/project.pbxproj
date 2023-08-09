@@ -36,6 +36,7 @@
 		4071F5D52A7D002000ADA546 /* StatisticNFTCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5D22A7D002000ADA546 /* StatisticNFTCollectionViewController.swift */; };
 		4071F5D62A7D002000ADA546 /* StatisticNFTCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5D32A7D002000ADA546 /* StatisticNFTCollectionViewModel.swift */; };
 		4071F5D72A7D002000ADA546 /* StatisticNFTCollectionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5D42A7D002000ADA546 /* StatisticNFTCollectionViewModelProtocol.swift */; };
+		407340E82A838C44008E0C1E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407340E72A838C44008E0C1E /* UserDefaultsService.swift */; };
 		409EEFE32A7A707700B23FF8 /* DataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */; };
 		409EEFE72A7A710D00B23FF8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE62A7A710D00B23FF8 /* User.swift */; };
 		409EEFE92A7A711A00B23FF8 /* UsersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE82A7A711A00B23FF8 /* UsersResponse.swift */; };
@@ -56,7 +57,6 @@
 		7EB78AEB2A7BFEEE00BE892B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78AEA2A7BFEEE00BE892B /* Profile.swift */; };
 		7EC0B5352A76678100688EC9 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B5342A76678100688EC9 /* AlertService.swift */; };
 		7EC0B5392A766ABA00688EC9 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B5382A766ABA00688EC9 /* DataProvider.swift */; };
-		7EC0B53B2A766B7800688EC9 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B53A2A766B7800688EC9 /* DateService.swift */; };
 		7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B53C2A766C1C00688EC9 /* Observable.swift */; };
 		7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */; };
 		7EE68CFA2A7FCB8A00CAE2AC /* NFTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68CF92A7FCB8A00CAE2AC /* NFTCell.swift */; };
@@ -114,6 +114,7 @@
 		4071F5D22A7D002000ADA546 /* StatisticNFTCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticNFTCollectionViewController.swift; sourceTree = "<group>"; };
 		4071F5D32A7D002000ADA546 /* StatisticNFTCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticNFTCollectionViewModel.swift; sourceTree = "<group>"; };
 		4071F5D42A7D002000ADA546 /* StatisticNFTCollectionViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticNFTCollectionViewModelProtocol.swift; sourceTree = "<group>"; };
+		407340E72A838C44008E0C1E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderProtocol.swift; sourceTree = "<group>"; };
 		409EEFE62A7A710D00B23FF8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		409EEFE82A7A711A00B23FF8 /* UsersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersResponse.swift; sourceTree = "<group>"; };
@@ -134,7 +135,6 @@
 		7EB78AEA2A7BFEEE00BE892B /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		7EC0B5342A76678100688EC9 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertService.swift; path = FakeNFT/Services/AlertService.swift; sourceTree = SOURCE_ROOT; };
 		7EC0B5382A766ABA00688EC9 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
-		7EC0B53A2A766B7800688EC9 /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
 		7EC0B53C2A766C1C00688EC9 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		7EE68CF92A7FCB8A00CAE2AC /* NFTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCell.swift; sourceTree = "<group>"; };
@@ -227,8 +227,8 @@
 				409EEFE42A7A707D00B23FF8 /* DataProvider */,
 				3F6806CF29CBBDB100B4F915 /* NetworkClient */,
 				7EC0B5342A76678100688EC9 /* AlertService.swift */,
-				7EC0B53A2A766B7800688EC9 /* DateService.swift */,
 				40EEA7CE2A768BE700A1AE93 /* AnalyticsService.swift */,
+				407340E72A838C44008E0C1E /* UserDefaultsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -680,6 +680,7 @@
 				7E71E3B32A73CBF500B0073D /* Strings+Generated.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */,
+				407340E82A838C44008E0C1E /* UserDefaultsService.swift in Sources */,
 				409EEFE92A7A711A00B23FF8 /* UsersResponse.swift in Sources */,
 				7EB78AE92A7BFE7200BE892B /* OrderPayment.swift in Sources */,
 				7EB78A682A78EAD000BE892B /* NFTCollectionView.swift in Sources */,
@@ -710,8 +711,7 @@
 				7EB78AEB2A7BFEEE00BE892B /* Profile.swift in Sources */,
 				7EB78AE32A7BFCFF00BE892B /* NFTCard.swift in Sources */,
 				406DEE2B2A7FED5D008E2227 /* UIViewController + Extension.swift in Sources */,
-				7EC0B53B2A766B7800688EC9 /* DateService.swift in Sources */,
-				4071F5C62A7CFF8400ADA546 /* StatisticViewModel.swift in Sources */,
+				4071F5C62A7CFF8400ADA546 /* StatisticViewModel.swift in Sources */
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
