@@ -132,9 +132,9 @@ final class AuthViewController: UIViewController {
             guard let self = self else { return }
             self.unblockUI()
             if newValue == true {
-                showLoginPasswordMistake()
+                self.showLoginPasswordMistake()
             } else {
-                hideLoginPasswordMistake()
+                self.hideLoginPasswordMistake()
             }
         }
         
@@ -231,7 +231,7 @@ final class AuthViewController: UIViewController {
     @objc private func keyboardDidHide() {
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self = self else { return }
-            authScrollView.contentSize.height = authScrollView.frame.height
+            self.authScrollView.contentSize.height = authScrollView.frame.height
         }
     }
     

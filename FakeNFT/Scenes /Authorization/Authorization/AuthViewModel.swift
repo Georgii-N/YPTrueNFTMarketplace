@@ -45,9 +45,9 @@ final class AuthViewModel: AuthViewModelProtocol {
             }
             
             if user != nil {
-                isAuthorizationDidSuccesful = true
+                self.isAuthorizationDidSuccesful = true
             } else {
-                loginPasswordMistake = true
+                self.loginPasswordMistake = true
             }
         }
     }
