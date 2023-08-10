@@ -52,7 +52,7 @@ final class SplashScreenViewController: UIViewController {
     }
     
     private func switchToTabBarController() {
-        let viewController = TabBarController()
+        let viewController = OnboardingViewController()
         viewController.modalPresentationStyle = .overFullScreen
         
         present(viewController, animated: true)

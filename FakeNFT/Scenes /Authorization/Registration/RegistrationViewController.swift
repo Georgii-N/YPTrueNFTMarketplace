@@ -127,7 +127,7 @@ final class RegistrationViewController: UIViewController {
             guard let self = self else { return }
             self.unblockUI()
             if newValue == true {
-                self.switchToTabBarController()
+                self.switchToOnboardingViewController()
             } else {
                 self.showLoginPasswordMistake()
                 self.loginPasswordMiskateLabel.text = viewModel.errorDiscription
@@ -141,8 +141,8 @@ final class RegistrationViewController: UIViewController {
         }
     }
     
-    private func switchToTabBarController() {
-        let viewController = TabBarController()
+    private func switchToOnboardingViewController() {
+        let viewController = OnboardingViewController()
         viewController.modalPresentationStyle = .overFullScreen
         
         present(viewController, animated: true)

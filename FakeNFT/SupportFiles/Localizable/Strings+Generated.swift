@@ -135,7 +135,25 @@ internal enum L10n {
   }
   internal enum Onboarding {
     /// Исследуйте
+    internal static let collect = L10n.tr("Localizable", "onboarding.collect", fallback: "Исследуйте")
+    /// Состязайтесь
+    internal static let competit = L10n.tr("Localizable", "onboarding.competit", fallback: "Состязайтесь")
+    /// Что внутри?
+    internal static let isWhatInside = L10n.tr("Localizable", "onboarding.isWhatInside", fallback: "Что внутри?")
+    /// Исследуйте
     internal static let research = L10n.tr("Localizable", "onboarding.research", fallback: "Исследуйте")
+    internal enum Collect {
+      /// Пополняйте свою коллекцию эксклюзивными картинками, созданными нейросетью!
+      internal static let text = L10n.tr("Localizable", "onboarding.collect.text", fallback: "Пополняйте свою коллекцию эксклюзивными картинками, созданными нейросетью!")
+    }
+    internal enum Competit {
+      /// Смотрите статистику других и покажите всем, что у вас самая ценная коллекция
+      internal static let text = L10n.tr("Localizable", "onboarding.competit.text", fallback: "Смотрите статистику других и покажите всем, что у вас самая ценная коллекция")
+    }
+    internal enum Research {
+      /// Присоединяйтесь и откройте новый мир уникальных NFT для коллекционеров
+      internal static let text = L10n.tr("Localizable", "onboarding.research.text", fallback: "Присоединяйтесь и откройте новый мир уникальных NFT для коллекционеров")
+    }
   }
   internal enum Profile {
     /// Профиль
