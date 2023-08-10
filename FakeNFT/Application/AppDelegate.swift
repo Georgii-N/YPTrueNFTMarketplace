@@ -1,8 +1,11 @@
 import UIKit
+import Firebase
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+
 //        let configuration = YMMYandexMetricaConfiguration.init(apiKey: R.Network.metricaAPIKey)
 //        if let configuration = configuration {
 //            YMMYandexMetrica.activate(with: configuration)

@@ -23,7 +23,12 @@
 "authorization.entering" = "Войти";
 "authorization.forgetPassword" = "Забыли пароль?";
 "authorization.demo" = "Демо";
-"authorization.ragistration" = "Зарегистрироваться";
+"authorization.registration" = "Зарегистрироваться";
+"authorization.registrate" = "Регистрация";
+"authorization.error.loginIsBusy" = "Данное имя пользователя занято";
+"authorization.error.loginPasswordMistake" = "Введен неверный логин или пароль";
+"authorization.error.passwordMistake" = "Пароль должен иметь минимум 6 символов";
+"authorization.error.mailMistake" = "Введите email";
 
 // MARK: - Alerts
 "alert.authorization.title" = "Что-то пошло не так (";

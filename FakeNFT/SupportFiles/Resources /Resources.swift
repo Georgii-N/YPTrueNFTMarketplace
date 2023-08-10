@@ -2,6 +2,10 @@ import UIKit
 
 enum Resources {
     enum Images {
+        enum SplashScreen {
+            static let logo = UIImage(named: "Vector")
+        }
+        
         enum TabBar {
             static let profileImage = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
             static let profileImageSelected = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.blueUniversal, renderingMode: .alwaysOriginal)
@@ -42,6 +46,7 @@ enum Resources {
     }
     
     enum Network {
+        
         enum MockAPI {
             static let defaultStringURL = "https://64c516a6c853c26efada7a11.mockapi.io"
             
@@ -55,6 +60,7 @@ enum Resources {
                 static let users = "/api/v1/users"
             }
         }
+        
         static let metricaAPIKey = "de532bb8-8a8d-4118-94ad-dbde6f544bf6"
         
         enum NFTBrowser {

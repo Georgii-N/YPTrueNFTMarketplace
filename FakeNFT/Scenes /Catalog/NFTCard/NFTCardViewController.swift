@@ -401,7 +401,6 @@ extension NFTCardViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let tokenName = viewModel?.currenciesObservable.wrappedValue?[indexPath.row].title else { return }
         tableView.deselectRow(at: indexPath, animated: true)
         
         browsNFTToken(index: indexPath.row)

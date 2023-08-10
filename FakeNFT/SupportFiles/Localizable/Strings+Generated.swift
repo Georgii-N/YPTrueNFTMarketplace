@@ -45,8 +45,20 @@ internal enum L10n {
     internal static let forgetPassword = L10n.tr("Localizable", "authorization.forgetPassword", fallback: "Забыли пароль?")
     /// Пароль
     internal static let password = L10n.tr("Localizable", "authorization.password", fallback: "Пароль")
+    /// Регистрация
+    internal static let registrate = L10n.tr("Localizable", "authorization.registrate", fallback: "Регистрация")
     /// Зарегистрироваться
-    internal static let ragistration = L10n.tr("Localizable", "authorization.ragistration", fallback: "Зарегистрироваться")
+    internal static let registration = L10n.tr("Localizable", "authorization.registration", fallback: "Зарегистрироваться")
+    internal enum Error {
+      /// Данное имя пользователя занято
+      internal static let loginIsBusy = L10n.tr("Localizable", "authorization.error.loginIsBusy", fallback: "Данное имя пользователя занято")
+      /// Введен неверный логин или пароль
+      internal static let loginPasswordMistake = L10n.tr("Localizable", "authorization.error.loginPasswordMistake", fallback: "Введен неверный логин или пароль")
+      /// Введите email
+      internal static let mailMistake = L10n.tr("Localizable", "authorization.error.mailMistake", fallback: "Введите email")
+      /// Пароль должен иметь минимум 6 символов
+      internal static let passwordMistake = L10n.tr("Localizable", "authorization.error.passwordMistake", fallback: "Пароль должен иметь минимум 6 символов")
+    }
   }
   internal enum Basket {
     /// Корзина
