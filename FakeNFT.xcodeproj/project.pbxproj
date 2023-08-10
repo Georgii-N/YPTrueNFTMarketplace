@@ -54,6 +54,12 @@
 		7EE68D092A839EE600CAE2AC /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68D082A839EE600CAE2AC /* AuthViewController.swift */; };
 		7EF4C5D12A73F86C001E8C67 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */; };
 		7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D22A73FD9A001E8C67 /* Resources.swift */; };
+		7EFB261E2A840888001901B6 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB261D2A840888001901B6 /* AuthViewModel.swift */; };
+		7EFB26202A840C30001901B6 /* AuthViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB261F2A840C30001901B6 /* AuthViewModelProtocol.swift */; };
+		7EFB26262A8416FD001901B6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB26252A8416FD001901B6 /* RegistrationViewController.swift */; };
+		7EFB262C2A841C61001901B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EFB262B2A841C61001901B6 /* GoogleService-Info.plist */; };
+		7EFB262E2A841ECB001901B6 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB262D2A841ECB001901B6 /* RegistrationViewModel.swift */; };
+		7EFB26302A841EE5001901B6 /* RegistrationViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB262F2A841EE5001901B6 /* RegistrationViewModelProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +129,12 @@
 		7EE68D082A839EE600CAE2AC /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		7EF4C5D22A73FD9A001E8C67 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		7EFB261D2A840888001901B6 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		7EFB261F2A840C30001901B6 /* AuthViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelProtocol.swift; sourceTree = "<group>"; };
+		7EFB26252A8416FD001901B6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		7EFB262B2A841C61001901B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7EFB262D2A841ECB001901B6 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		7EFB262F2A841EE5001901B6 /* RegistrationViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModelProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -435,7 +447,37 @@
 		7EE68D0A2A839EF000CAE2AC /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
+				7EFB26212A840C34001901B6 /* Protocols */,
+				7EFB26312A841F73001901B6 /* Authorization */,
+				7EFB26272A841728001901B6 /* Registration */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		7EFB26212A840C34001901B6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7EFB261F2A840C30001901B6 /* AuthViewModelProtocol.swift */,
+				7EFB262F2A841EE5001901B6 /* RegistrationViewModelProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7EFB26272A841728001901B6 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				7EFB262D2A841ECB001901B6 /* RegistrationViewModel.swift */,
+				7EFB26252A8416FD001901B6 /* RegistrationViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		7EFB26312A841F73001901B6 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				7EFB261D2A840888001901B6 /* AuthViewModel.swift */,
 				7EE68D082A839EE600CAE2AC /* AuthViewController.swift */,
+				7EFB262B2A841C61001901B6 /* GoogleService-Info.plist */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -555,6 +597,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E71E3AB2A73BEFA00B0073D /* Localizable.strings in Resources */,
+				7EFB262C2A841C61001901B6 /* GoogleService-Info.plist in Resources */,
 				3F6806A329CBBAF200B4F915 /* LaunchScreen.storyboard in Resources */,
 				3F6806A029CBBAF200B4F915 /* Assets.xcassets in Resources */,
 			);
@@ -621,7 +664,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */,
+				7EFB262E2A841ECB001901B6 /* RegistrationViewModel.swift in Sources */,
+				7EFB26302A841EE5001901B6 /* RegistrationViewModelProtocol.swift in Sources */,
 				7EB78A972A7A5C7D00BE892B /* WebViewViewController.swift in Sources */,
+				7EFB26202A840C30001901B6 /* AuthViewModelProtocol.swift in Sources */,
 				7EE68CFA2A7FCB8A00CAE2AC /* NFTCell.swift in Sources */,
 				7EF4C5D12A73F86C001E8C67 /* UIColor + Extension.swift in Sources */,
 				7EB78AE12A7BFBC300BE892B /* NFTCollection.swift in Sources */,
@@ -642,6 +688,7 @@
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				7EB78AD32A7AB8F800BE892B /* WebViewViewModelProtocol.swift in Sources */,
 				7EB78AD12A7AB4F800BE892B /* WebViewViewModel.swift in Sources */,
+				7EFB26262A8416FD001901B6 /* RegistrationViewController.swift in Sources */,
 				7EB78A6A2A78EEC100BE892B /* NFTCollectionCell.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
 				40EEA7CF2A768BE700A1AE93 /* AnalyticsService.swift in Sources */,
@@ -649,6 +696,7 @@
 				4070B1182A76CADF00CF6E74 /* SortNavBarBaseButton.swift in Sources */,
 				409EEFE72A7A710D00B23FF8 /* User.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* NetworkRequestModel.swift in Sources */,
+				7EFB261E2A840888001901B6 /* AuthViewModel.swift in Sources */,
 				7EE68CFF2A80099B00CAE2AC /* NFTCollectionCellDelegate.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* Cells + Extension.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
@@ -835,6 +883,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FakeNFT/SupportFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -862,6 +911,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FakeNFT/SupportFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
