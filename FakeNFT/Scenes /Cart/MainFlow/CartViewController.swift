@@ -180,14 +180,8 @@ extension CartViewControler: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: CartMainCell = collectionView.dequeueReusableCell(indexPath: indexPath)
         let cartNFT = cartViewModel.unwrappedCartNftViewModel()
-        let imageUrl = URL(string: cartNFT[indexPath.row].images[0])
-        let size = CGSize(width: 115, height: 115)
-        let resizingProcessor = ResizingImageProcessor(referenceSize: size)
-        cell.nameNFT.text = cartNFT[indexPath.row].name
-        cell.priceCountNFT.text = "\(String(cartNFT[indexPath.row].price)) ETH"
-        cell.imageNFT.kf.setImage(with: imageUrl, options: [.processor(resizingProcessor)])
-        cell.setRating(rating: cartNFT[indexPath.row].rating)
-        cell.idNft = cartNFT[indexPath.row].id
+        let model = cartNFT[indexPath.row]
+        cell.setupCollectionModel(model: model)
         cell.delegate = self
         return cell
     }
@@ -204,9 +198,8 @@ extension CartViewControler: UICollectionViewDelegateFlowLayout {
 }
 
 extension CartViewControler: CartMainCellDelegate {
-    func didTapDeleteButton(in cell: CartMainCell, idNft: String) {
-        guard let imageCell = cell.imageNFT.image else { return }
-        let deleteAlert = DeleteItemViewControler(itemImage: imageCell, itemId: idNft)
+    func didTapDeleteButton(in image: UIImage, idNft: String) {
+        let deleteAlert = DeleteItemViewControler(itemImage: image, itemId: idNft)
         deleteAlert.delegate = self
         deleteAlert.modalPresentationStyle = .overFullScreen
         present(deleteAlert, animated: true, completion: nil)

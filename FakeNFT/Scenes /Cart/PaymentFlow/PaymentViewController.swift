@@ -1,6 +1,5 @@
 
 import UIKit
-import Kingfisher
 
 final class PaymentViewController: UIViewController {
     
@@ -148,13 +147,9 @@ extension PaymentViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let currencieNFT = paymentViewModel.unwrappedPaymentViewModel()
-        let imageUrl = URL(string: currencieNFT[indexPath.row].image)
-        let size = CGSize(width: 31.5, height: 31.5)
-        let resizingProcessor = ResizingImageProcessor(referenceSize: size)
+        let modelCurrencie = currencieNFT[indexPath.row]
         let cell: CartPaymentCell = collectionView.dequeueReusableCell(indexPath: indexPath)
-        cell.nameCoin.text = currencieNFT[indexPath.row].title
-        cell.shortNameCoin.text = currencieNFT[indexPath.row].name
-        cell.imageCoin.kf.setImage(with: imageUrl, options: [.processor(resizingProcessor)])
+        cell.setupCollectionModel(model: modelCurrencie)
         return cell
     }
     

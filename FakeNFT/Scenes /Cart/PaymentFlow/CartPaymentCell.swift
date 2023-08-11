@@ -1,5 +1,6 @@
 
 import UIKit
+import Kingfisher
 
 final class CartPaymentCell: UICollectionViewCell {
     
@@ -11,21 +12,21 @@ final class CartPaymentCell: UICollectionViewCell {
         return backgroundView
     }()
     
-    lazy var nameCoin: UILabel = {
+   private lazy var nameCoin: UILabel = {
         let nameCoin = UILabel()
         nameCoin.textColor = .blackDay
         nameCoin.font = UIFont.boldSystemFont(ofSize: 13)
         return nameCoin
     }()
     
-    lazy var imageCoin: UIImageView = {
+   private lazy var imageCoin: UIImageView = {
         let imageCoin = UIImageView()
         imageCoin.backgroundColor = .blackUniversal
         imageCoin.layer.cornerRadius = 6
         return imageCoin
     }()
     
-    lazy var shortNameCoin: UILabel = {
+   private lazy var shortNameCoin: UILabel = {
         let shortNameCoin = UILabel()
         shortNameCoin.textColor = .greenUniversal
         shortNameCoin.font = UIFont.systemFont(ofSize: 13)
@@ -65,6 +66,15 @@ extension CartPaymentCell {
             shortNameCoin.topAnchor.constraint(equalTo: nameCoin.bottomAnchor),
             shortNameCoin.leadingAnchor.constraint(equalTo: imageCoin.trailingAnchor, constant: 4)
         ])
+    }
+    
+    func setupCollectionModel(model: Currencie) {
+        let imageUrl = URL(string: model.image)
+        let size = CGSize(width: 31.5, height: 31.5)
+        let resizingProcessor = ResizingImageProcessor(referenceSize: size)
+        nameCoin.text = model.title
+        shortNameCoin.text = model.name
+        imageCoin.kf.setImage(with: imageUrl, options: [.processor(resizingProcessor)])
     }
 }
 
