@@ -142,7 +142,8 @@ final class RegistrationViewController: UIViewController {
     }
     
     private func switchToOnboardingViewController() {
-        let viewController = OnboardingViewController()
+        let viewModel = OnboardingViewModel()
+        let viewController = OnboardingViewController(viewModel: viewModel, delegate: self)
         viewController.modalPresentationStyle = .overFullScreen
         
         present(viewController, animated: true)
@@ -225,6 +226,13 @@ final class RegistrationViewController: UIViewController {
     
     @objc func dismissMyKeyboard() {
         view.endEditing(true)
+    }
+}
+
+// MARK: - OnboardingViewControllerDelegate
+extension RegistrationViewController: OnboardingViewControllerDelegate {
+    func backToAuth() {
+        dismiss(animated: false)
     }
 }
 

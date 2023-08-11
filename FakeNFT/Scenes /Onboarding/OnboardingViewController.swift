@@ -9,6 +9,10 @@ import UIKit
 
 final class OnboardingViewController: UIViewController {
     
+    // MARK: - Private Dependencies:
+    private var viewModel: OnboardingViewModelProtocol
+    private weak var delegate: OnboardingViewControllerDelegate?
+    
     // MARK: - UI:
     private lazy var onboardingScrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
@@ -60,6 +64,17 @@ final class OnboardingViewController: UIViewController {
         setupViews()
         setupConstraints()
         setupScrollView()
+        setupTargets()
+    }
+    
+    init(viewModel: OnboardingViewModelProtocol, delegate: OnboardingViewControllerDelegate) {
+        self.viewModel = viewModel
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Private Methods:
@@ -70,34 +85,78 @@ final class OnboardingViewController: UIViewController {
         let secondImageView = UIImageView(frame: CGRect(x: widht, y: 0, width: widht, height: height))
         let thirdImageView = UIImageView(frame: CGRect(x: widht * CGFloat(2), y: 0, width: widht, height: height))
         
-        firstImageView.image = Resources.Images.Onboarding.firstImage
-        secondImageView.image = Resources.Images.Onboarding.secondImage
-        thirdImageView.image = Resources.Images.Onboarding.thirdImage
-                
-        thirdImageView.addSubview(enterButton)
-        
-        NSLayoutConstraint.activate([
-            enterButton.leadingAnchor.constraint(equalTo: thirdImageView.leadingAnchor, constant: 16),
-            enterButton.trailingAnchor.constraint(equalTo: thirdImageView.trailingAnchor, constant: -16),
-            enterButton.bottomAnchor.constraint(equalTo: thirdImageView.bottomAnchor, constant: -66)
-        ])
-        
-        [firstImageView, secondImageView, thirdImageView].forEach({ [weak self] imageView in
-            guard let self = self else { return }
-            let view = self.makeGradient(view: imageView)
-            onboardingScrollView.addSubview(view)
-        })
+        setImageView(imageViews: [firstImageView, secondImageView, thirdImageView])
     }
     
-    private func setTitleAndDescription(page: Int) {
+    private func setImageView(imageViews: [UIImageView]) {
+        for (index, imageView) in imageViews.enumerated() {
+            let view = self.makeGradient(view: imageView)
+            setImage(page: index, imageView: imageView)
+            setTitlesAndDescriptions(page: index, view: view)
+            
+            onboardingScrollView.addSubview(view)
+            
+            if index == 2 {
+                setEnterButton(view: view)
+            }
+        }
+    }
+    
+    private func setImage(page: Int, imageView: UIImageView) {
+        let image = viewModel.getImage(index: page)
+        imageView.image = image
+    }
+    
+    private func setTitlesAndDescriptions(page: Int, view: UIView) {
+        let titleLabel = UILabel()
+        titleLabel.numberOfLines = 0
+        titleLabel.text = viewModel.getTitle(index: page)
+        titleLabel.font = .boldSystemFont(ofSize: 32)
+        titleLabel.textColor = .whiteUniversal
         
+        view.setupView(titleLabel)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 230),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+        
+        setDescriptions(page: page, view: view, titleLabel: titleLabel)
+    }
+    
+    private func setDescriptions(page: Int, view: UIView, titleLabel: UILabel) {
+        let descriptionLabel = UILabel()
+        let text = viewModel.getDescription(index: page)
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.text = text
+        descriptionLabel.font = .systemFont(ofSize: 15)
+        descriptionLabel.textColor = .whiteUniversal
+        
+        view.setupView(descriptionLabel)
+        
+        NSLayoutConstraint.activate([
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+    }
+    
+    private func setEnterButton(view: UIView) {
+        self.view.setupView(enterButton)
+        
+        NSLayoutConstraint.activate([
+            enterButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            enterButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            enterButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -66)
+        ])
     }
     
     private func makeGradient(view: UIView) -> UIView {
         let gradient = CAGradientLayer()
         let firstColor = UIColor(red: 26.0/255.0, green: 27.0/255.0, blue: 34.0/255.0, alpha: 1.0).cgColor
         let secondColor = UIColor(red: 26.0/255.0, green: 27.0/255.0, blue: 34.0/255.0, alpha: 0.0).cgColor
-
+        
         gradient.colors = [firstColor, secondColor]
         gradient.startPoint = CGPoint(x: 1, y: 0)
         gradient.endPoint = CGPoint(x: 1, y: 1)
@@ -106,6 +165,19 @@ final class OnboardingViewController: UIViewController {
         view.layer.insertSublayer(gradient, at: 0)
         
         return view
+    }
+    
+    // MARK: - Objc Methods:
+    @objc private func switchToTabBarController() {
+        let viewController = TabBarController()
+        viewController.modalPresentationStyle = .overFullScreen
+        
+        present(viewController, animated: true)
+    }
+    
+    @objc private func backToAuthVC() {
+        dismiss(animated: true)
+        delegate?.backToAuth()
     }
 }
 
@@ -122,7 +194,7 @@ extension OnboardingViewController: UIScrollViewDelegate {
 extension OnboardingViewController {
     private func setupViews() {
         view.backgroundColor = .blackDay
-        [onboardingScrollView, pageControl, cancelButton, enterButton, screenTitleLabel,
+        [onboardingScrollView, pageControl, cancelButton, screenTitleLabel,
          screenDescriptionLabel].forEach(view.setupView)
     }
 }
@@ -146,5 +218,13 @@ extension OnboardingViewController {
             cancelButton.topAnchor.constraint(equalTo: pageControl.bottomAnchor),
             cancelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
+    }
+}
+
+// MARK: - Setup Targets:
+extension OnboardingViewController {
+    private func setupTargets() {
+        cancelButton.addTarget(self, action: #selector(backToAuthVC), for: .touchUpInside)
+        enterButton.addTarget(self, action: #selector(switchToTabBarController), for: .touchUpInside)
     }
 }

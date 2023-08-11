@@ -134,8 +134,8 @@ internal enum L10n {
     internal static let `return` = L10n.tr("Localizable", "general.return", fallback: "Вернуться")
   }
   internal enum Onboarding {
-    /// Исследуйте
-    internal static let collect = L10n.tr("Localizable", "onboarding.collect", fallback: "Исследуйте")
+    /// Коллекционируйте
+    internal static let collect = L10n.tr("Localizable", "onboarding.collect", fallback: "Коллекционируйте")
     /// Состязайтесь
     internal static let competit = L10n.tr("Localizable", "onboarding.competit", fallback: "Состязайтесь")
     /// Что внутри?
