@@ -60,6 +60,7 @@ final class CatalogCollectionViewController: UIViewController {
         textView.delegate = self
         textView.isEditable = false
         textView.isSelectable = true
+        textView.isScrollEnabled = false 
         textView.font = .systemFont(ofSize: 15)
         textView.textColor = .blueUniversal
         
