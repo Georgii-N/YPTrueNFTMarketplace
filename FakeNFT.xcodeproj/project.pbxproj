@@ -75,6 +75,10 @@
 		7EFB26302A841EE5001901B6 /* RegistrationViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB262F2A841EE5001901B6 /* RegistrationViewModelProtocol.swift */; };
 		7EFB26362A84F341001901B6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7EFB26352A84F341001901B6 /* FirebaseAuth */; };
 		7EFB26382A84F49B001901B6 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB26372A84F49B001901B6 /* SplashScreen.swift */; };
+		7EFB263B2A850CC4001901B6 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB263A2A850CC4001901B6 /* OnboardingViewController.swift */; };
+		7EFB26432A860030001901B6 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB26422A860030001901B6 /* OnboardingViewModel.swift */; };
+		7EFB26452A86012C001901B6 /* OnboardingViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB26442A86012C001901B6 /* OnboardingViewModelProtocol.swift */; };
+		7EFB26482A860773001901B6 /* OnboardingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB26472A860773001901B6 /* OnboardingViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +168,10 @@
 		7EFB262D2A841ECB001901B6 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		7EFB262F2A841EE5001901B6 /* RegistrationViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModelProtocol.swift; sourceTree = "<group>"; };
 		7EFB26372A84F49B001901B6 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		7EFB263A2A850CC4001901B6 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		7EFB26422A860030001901B6 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		7EFB26442A86012C001901B6 /* OnboardingViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModelProtocol.swift; sourceTree = "<group>"; };
+		7EFB26472A860773001901B6 /* OnboardingViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +269,7 @@
 			children = (
 				7EFB26392A84F4A3001901B6 /* SplashScreen */,
 				7EE68D0A2A839EF000CAE2AC /* Authorization */,
+				7EFB263C2A850CC7001901B6 /* Onboarding */,
 				7EC0B5312A7666C600688EC9 /* Catalog */,
 				7EC0B53E2A766E3400688EC9 /* Cart */,
 				7EB78A9B2A7A730900BE892B /* WebView */,
@@ -558,6 +567,25 @@
 			path = SplashScreen;
 			sourceTree = "<group>";
 		};
+		7EFB263C2A850CC7001901B6 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				7EFB26462A86012F001901B6 /* Protocols */,
+				7EFB26422A860030001901B6 /* OnboardingViewModel.swift */,
+				7EFB263A2A850CC4001901B6 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		7EFB26462A86012F001901B6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				7EFB26472A860773001901B6 /* OnboardingViewControllerDelegate.swift */,
+				7EFB26442A86012C001901B6 /* OnboardingViewModelProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -746,6 +774,8 @@
 				7EB78A4F2A77873D00BE892B /* CatalogViewController.swift in Sources */,
 				7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */,
 				7EE68D042A820F8F00CAE2AC /* BrowsingNFTViewController.swift in Sources */,
+				7EFB26482A860773001901B6 /* OnboardingViewControllerDelegate.swift in Sources */,
+				7EFB263B2A850CC4001901B6 /* OnboardingViewController.swift in Sources */,
 				7EFB262E2A841ECB001901B6 /* RegistrationViewModel.swift in Sources */,
 				7EFB26302A841EE5001901B6 /* RegistrationViewModelProtocol.swift in Sources */,
 				7EB78A972A7A5C7D00BE892B /* WebViewViewController.swift in Sources */,
@@ -756,6 +786,7 @@
 				7EB78AE12A7BFBC300BE892B /* NFTCollection.swift in Sources */,
 				3F478ED129DB476500F6D39E /* UIFont + Extension.swift in Sources */,
 				7EB78A8B2A79504800BE892B /* NFTCollectionCell.swift in Sources */,
+				7EFB26452A86012C001901B6 /* OnboardingViewModelProtocol.swift in Sources */,
 				7EC0B5392A766ABA00688EC9 /* DataProvider.swift in Sources */,
 				7EB78AD92A7ABE1B00BE892B /* WebViewViewModel.swift in Sources */,
 				7EB78A642A77EC6F00BE892B /* CatalogCollectionViewModelProtocol.swift in Sources */,
@@ -770,6 +801,7 @@
 				407340E82A838C44008E0C1E /* UserDefaultsService.swift in Sources */,
 				409EEFE92A7A711A00B23FF8 /* UsersResponse.swift in Sources */,
 				7EE68D022A80FBBA00CAE2AC /* NFTCardViewControllerDelegate.swift in Sources */,
+				7EFB26432A860030001901B6 /* OnboardingViewModel.swift in Sources */,
 				7EB78AE92A7BFE7200BE892B /* OrderPayment.swift in Sources */,
 				7E71E3B52A73F10A00B0073D /* TabBarController.swift in Sources */,
 				7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */,

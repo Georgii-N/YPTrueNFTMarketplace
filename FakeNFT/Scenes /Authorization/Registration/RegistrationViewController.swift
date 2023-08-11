@@ -127,7 +127,7 @@ final class RegistrationViewController: UIViewController {
             guard let self = self else { return }
             self.unblockUI()
             if newValue == true {
-                self.switchToTabBarController()
+                self.switchToOnboardingViewController()
             } else {
                 self.showLoginPasswordMistake()
                 self.loginPasswordMiskateLabel.text = viewModel.errorDiscription
@@ -141,8 +141,9 @@ final class RegistrationViewController: UIViewController {
         }
     }
     
-    private func switchToTabBarController() {
-        let viewController = TabBarController()
+    private func switchToOnboardingViewController() {
+        let viewModel = OnboardingViewModel()
+        let viewController = OnboardingViewController(viewModel: viewModel, delegate: self)
         viewController.modalPresentationStyle = .overFullScreen
         
         present(viewController, animated: true)
@@ -225,6 +226,13 @@ final class RegistrationViewController: UIViewController {
     
     @objc func dismissMyKeyboard() {
         view.endEditing(true)
+    }
+}
+
+// MARK: - OnboardingViewControllerDelegate
+extension RegistrationViewController: OnboardingViewControllerDelegate {
+    func backToAuth() {
+        dismiss(animated: false)
     }
 }
 
