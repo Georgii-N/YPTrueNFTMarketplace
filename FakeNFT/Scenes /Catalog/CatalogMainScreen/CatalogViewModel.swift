@@ -17,13 +17,19 @@ final class CatalogViewModel: CatalogViewModelProtocol {
         $nftCollections
     }
     
+    var networkErrorObservable: Observable<String?> {
+        $networkError
+    }
+    
     @Observable
     private(set) var nftCollections: NFTCollections?
+    
+    @Observable
+    private(set) var networkError: String?
     
     // MARK: - Lifecycle:
     init(dataProvider: DataProviderProtocol?) {
         self.dataProvider = dataProvider
-        fetchCollections()
     }
     
     // MARK: Public Methods:
@@ -49,9 +55,11 @@ final class CatalogViewModel: CatalogViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let collections):
+                self.networkError = nil
                 self.nftCollections = collections
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         })
     }

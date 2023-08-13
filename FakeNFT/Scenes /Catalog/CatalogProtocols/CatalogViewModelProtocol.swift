@@ -9,6 +9,7 @@ import UIKit
 
 protocol CatalogViewModelProtocol: AnyObject {
     var nftCollectionsObservable: Observable<NFTCollections?> { get }
+    var networkErrorObservable: Observable<String?> { get }
     func sortNFTCollection(option: SortingOption)
     func fetchCollections()
 }

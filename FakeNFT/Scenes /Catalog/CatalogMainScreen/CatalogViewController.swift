@@ -18,7 +18,6 @@ final class CatalogViewController: UIViewController {
     private lazy var catalogNFTTableView: UITableView = {
         var tableView = UITableView()
         tableView.register(CatalogTableViewCell.self)
-        tableView.isHidden = true
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .whiteDay
@@ -28,18 +27,31 @@ final class CatalogViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var stubRefreshLabel: UILabel = {
+       let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        label.text = "Кажется,что ничего нет\nПотяните вниз чтобы обновить"
+        label.textColor = .gray
+        label.font = .systemFont(ofSize: 15)
+        
+        return label
+    }()
+    
     private lazy var sortButton = SortNavBarBaseButton()
     private lazy var refreshControl = UIRefreshControl()
-    
+        
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        blockUI()
         setupViews()
         setupConstraints()
         setupTargets()
+        blockUI()
         
         bind()
+        
+        viewModel?.fetchCollections()
     }
     
     init(viewModel: CatalogViewModelProtocol?) {
@@ -56,11 +68,25 @@ final class CatalogViewController: UIViewController {
         viewModel?.nftCollectionsObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
+                self.unblockUI()
                 self.catalogNFTTableView.reloadData()
             }
         })
+        
+        viewModel?.networkErrorObservable.bind(action: { [weak self] errorText in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if errorText == nil {
+                    self.unblockUI()
+                } else {
+                    self.refreshControl.endRefreshing()
+                    self.unblockUI()
+                    self.showNotificationBanner(with: errorText ?? "")
+                }
+            }
+        })
     }
-    
+                                               
     private func sortNFT(_ sortOptions: SortingOption) {
         switch sortOptions {
         case .byName:
@@ -72,6 +98,15 @@ final class CatalogViewController: UIViewController {
         }
         
         alertService = nil
+    }
+    
+    private func setupStubLabel() {
+        view.setupView(stubRefreshLabel)
+
+        NSLayoutConstraint.activate([
+        stubRefreshLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        stubRefreshLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     // MARK: - Objc Methods:
@@ -88,6 +123,7 @@ final class CatalogViewController: UIViewController {
     }
     
     @objc private func refreshNFTCatalog() {
+        blockUI()
         viewModel?.fetchCollections()
     }
 }
@@ -96,6 +132,12 @@ final class CatalogViewController: UIViewController {
 extension CatalogViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let collections = viewModel?.nftCollectionsObservable.wrappedValue
+
+        if collections == nil {
+            setupStubLabel()
+        } else {
+            stubRefreshLabel.removeFromSuperview()
+        }
         return collections?.count ?? 0
     }
     
@@ -104,7 +146,6 @@ extension CatalogViewController: UITableViewDataSource {
         let cell: CatalogTableViewCell = tableView.dequeueReusableCell()
         
         if let collectionModel = viewModel.nftCollectionsObservable.wrappedValue?[indexPath.row] {
-            unblockUI()
             tableView.isHidden = false
             cell.setupCollectionModel(model: collectionModel)
             refreshControl.endRefreshing()
@@ -150,7 +191,8 @@ extension CatalogViewController {
             catalogNFTTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             catalogNFTTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             catalogNFTTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            catalogNFTTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)])
+            catalogNFTTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
     }
 }
 
