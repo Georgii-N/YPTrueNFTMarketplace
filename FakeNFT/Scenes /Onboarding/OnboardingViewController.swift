@@ -1,10 +1,3 @@
-//
-//  Onboarding.swift
-//  FakeNFT
-//
-//  Created by Евгений on 10.08.2023.
-//
-
 import UIKit
 
 final class OnboardingViewController: UIViewController {

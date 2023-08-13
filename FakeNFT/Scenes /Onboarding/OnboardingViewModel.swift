@@ -1,10 +1,3 @@
-//
-//  OnboardingViewModel.swift
-//  FakeNFT
-//
-//  Created by Евгений on 11.08.2023.
-//
-
 import UIKit
 
 final class OnboardingViewModel: OnboardingViewModelProtocol {

@@ -24,6 +24,7 @@
 		400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531762A73EB4D008CAF3B /* BlackBaseButton.swift */; };
 		400531792A73EC58008CAF3B /* BaseWhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531782A73EC58008CAF3B /* BaseWhiteButton.swift */; };
 		406DEE2B2A7FED5D008E2227 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */; };
+		407047572A88B86400067E68 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407047562A88B86400067E68 /* UIFont + Extension.swift */; };
 		4070B1182A76CADF00CF6E74 /* SortNavBarBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */; };
 		407340E82A838C44008E0C1E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407340E72A838C44008E0C1E /* UserDefaultsService.swift */; };
 		409EEFE32A7A707700B23FF8 /* DataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */; };
@@ -104,6 +105,7 @@
 		400531762A73EB4D008CAF3B /* BlackBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBaseButton.swift; sourceTree = "<group>"; };
 		400531782A73EC58008CAF3B /* BaseWhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWhiteButton.swift; sourceTree = "<group>"; };
 		406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
+		407047562A88B86400067E68 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortNavBarBaseButton.swift; sourceTree = "<group>"; };
 		407340E72A838C44008E0C1E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderProtocol.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 			children = (
 				3F6806D629CBC50A00B4F915 /* Cells + Extension.swift */,
 				7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */,
+				407047562A88B86400067E68 /* UIFont + Extension.swift */,
 				4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */,
 				406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */,
 			);
@@ -703,6 +706,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				407047572A88B86400067E68 /* UIFont + Extension.swift in Sources */,
 				7EFB26482A860773001901B6 /* OnboardingViewControllerDelegate.swift in Sources */,
 				7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */,
 				7EFB263B2A850CC4001901B6 /* OnboardingViewController.swift in Sources */,
