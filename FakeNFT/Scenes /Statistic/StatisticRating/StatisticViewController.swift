@@ -82,7 +82,7 @@ extension StatisticViewController {
     // MARK: - Private Functions
     private func showActionSheet() {
         alertService = UniversalAlertService()
-        alertService?.showActionSheet(title: L10n.Alert.sortTitle, sortingOptions: [.byName, .byRating, .close], on: self) { selectedOptions in
+        alertService?.showActionSheet(title: L10n.Sorting.title, sortingOptions: [.byName, .byRating, .close], on: self) { selectedOptions in
             self.performSorting(selectedOptions)
         }
     }
