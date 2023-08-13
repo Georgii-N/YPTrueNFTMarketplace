@@ -11,27 +11,11 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
   internal enum Alert {
-    /// Cортировка
-    internal static let sortTitle = L10n.tr("Localizable", "alert.sortTitle", fallback: "Cортировка")
     internal enum Authorization {
       /// Не удалось войти в систему
       internal static let message = L10n.tr("Localizable", "alert.authorization.message", fallback: "Не удалось войти в систему")
       /// Что-то пошло не так (
       internal static let title = L10n.tr("Localizable", "alert.authorization.title", fallback: "Что-то пошло не так (")
-    }
-    internal enum Sort {
-      /// По имени
-      internal static let byName = L10n.tr("Localizable", "alert.sort.byName", fallback: "По имени")
-      /// По названию
-      internal static let byNameOfNFT = L10n.tr("Localizable", "alert.sort.byNameOfNFT", fallback: "По названию")
-      /// По имени
-      internal static let byNameOfPerson = L10n.tr("Localizable", "alert.sort.byNameOfPerson", fallback: "По имени")
-      /// По количеству NFT
-      internal static let byNumberOfNFT = L10n.tr("Localizable", "alert.sort.byNumberOfNFT", fallback: "По количеству NFT")
-      /// По цене
-      internal static let byPrice = L10n.tr("Localizable", "alert.sort.byPrice", fallback: "По цене")
-      /// По рейтингу
-      internal static let byRating = L10n.tr("Localizable", "alert.sort.byRating", fallback: "По рейтингу")
     }
   }
   internal enum Authorization {
@@ -188,14 +172,16 @@ internal enum L10n {
     }
   }
   internal enum Sorting {
-    /// По названию
-    internal static let byName = L10n.tr("Localizable", "sorting.byName", fallback: "По названию")
+    /// По имени
+    internal static let byName = L10n.tr("Localizable", "sorting.byName", fallback: "По имени")
     /// По количеству NFT
     internal static let byNFTCount = L10n.tr("Localizable", "sorting.byNFTCount", fallback: "По количеству NFT")
     /// По цене
     internal static let byPrice = L10n.tr("Localizable", "sorting.byPrice", fallback: "По цене")
     /// По рейтингу
     internal static let byRating = L10n.tr("Localizable", "sorting.byRating", fallback: "По рейтингу")
+    /// По названию
+    internal static let byTitle = L10n.tr("Localizable", "sorting.byTitle", fallback: "По названию")
     /// Сортировка
     internal static let title = L10n.tr("Localizable", "sorting.title", fallback: "Сортировка")
   }
