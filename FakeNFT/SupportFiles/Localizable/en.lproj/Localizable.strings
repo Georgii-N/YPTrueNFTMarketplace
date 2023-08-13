@@ -40,18 +40,11 @@
 // MARK: - Alerts
 "alert.authorization.title" = "Что-то пошло не так (";
 "alert.authorization.message" = "Не удалось войти в систему";
-"alert.sortTitle" = "Cортировка";
-"alert.sort.byName" = "По имени";
-"alert.sort.byNumberOfNFT" = "По количеству NFT";
-"alert.sort.byPrice" = "По цене";
-"alert.sort.byRating" = "По рейтингу";
-"alert.sort.byNameOfPerson" = "По имени";
-"alert.sort.byNameOfNFT" = "По названию";
 
 // MARK: - Sorting
-
 "sorting.title" = "Сортировка";
-"sorting.byName" = "По названию";
+"sorting.byName" = "По имени";
+"sorting.byTitle" = "По названию";
 "sorting.byPrice" = "По цене";
 "sorting.byNFTCount" = "По количеству NFT";
 "sorting.byRating" = "По рейтингу";
