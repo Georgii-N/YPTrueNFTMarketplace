@@ -113,7 +113,7 @@ final class CatalogViewController: UIViewController {
     @objc private func sortButtonTarget() {
         alertService = UniversalAlertService()
         
-        alertService?.showActionSheet(title: L10n.Alert.sortTitle,
+        alertService?.showActionSheet(title: L10n.Sorting.title,
                                       sortingOptions: [.byName, .byQuantity, .close],
                                       on: self,
                                       completion: { [weak self] options in

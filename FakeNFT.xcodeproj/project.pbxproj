@@ -24,6 +24,7 @@
 		400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531762A73EB4D008CAF3B /* BlackBaseButton.swift */; };
 		400531792A73EC58008CAF3B /* BaseWhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531782A73EC58008CAF3B /* BaseWhiteButton.swift */; };
 		406DEE2B2A7FED5D008E2227 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */; };
+		407047572A88B86400067E68 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407047562A88B86400067E68 /* UIFont + Extension.swift */; };
 		4070B1182A76CADF00CF6E74 /* SortNavBarBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */; };
 		407340E82A838C44008E0C1E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407340E72A838C44008E0C1E /* UserDefaultsService.swift */; };
 		409EEFE32A7A707700B23FF8 /* DataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */; };
@@ -49,6 +50,8 @@
 		7EB78AD72A7ABE1300BE892B /* WebViewViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78AD62A7ABE1300BE892B /* WebViewViewModelProtocol.swift */; };
 		7EB78AD92A7ABE1B00BE892B /* WebViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78AD82A7ABE1B00BE892B /* WebViewViewModel.swift */; };
 		7EB78ADB2A7B72CD00BE892B /* NFTCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78ADA2A7B72CD00BE892B /* NFTCardTableViewCell.swift */; };
+		7EB552D62A896BC60046EA33 /* HandlingErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB552D52A896BC60046EA33 /* HandlingErrorService.swift */; };
+		7EB552D92A896CFC0046EA33 /* NotificationBannerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7EB552D82A896CFC0046EA33 /* NotificationBannerSwift */; };
 		7EB78AE12A7BFBC300BE892B /* NFTCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78AE02A7BFBC300BE892B /* NFTCollection.swift */; };
 		7EB78AE32A7BFCFF00BE892B /* NFTCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78AE22A7BFCFF00BE892B /* NFTCard.swift */; };
 		7EB78AE52A7BFDB200BE892B /* Currencie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78AE42A7BFDB200BE892B /* Currencie.swift */; };
@@ -117,6 +120,7 @@
 		400531762A73EB4D008CAF3B /* BlackBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBaseButton.swift; sourceTree = "<group>"; };
 		400531782A73EC58008CAF3B /* BaseWhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWhiteButton.swift; sourceTree = "<group>"; };
 		406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
+		407047562A88B86400067E68 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortNavBarBaseButton.swift; sourceTree = "<group>"; };
 		407340E72A838C44008E0C1E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderProtocol.swift; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 		7EB78AD62A7ABE1300BE892B /* WebViewViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewModelProtocol.swift; sourceTree = "<group>"; };
 		7EB78AD82A7ABE1B00BE892B /* WebViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewViewModel.swift; path = "FakeNFT/Scenes /WebView/WebViewViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		7EB78ADA2A7B72CD00BE892B /* NFTCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCardTableViewCell.swift; sourceTree = "<group>"; };
+		7EB552D52A896BC60046EA33 /* HandlingErrorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlingErrorService.swift; sourceTree = "<group>"; };
 		7EB78AE02A7BFBC300BE892B /* NFTCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollection.swift; sourceTree = "<group>"; };
 		7EB78AE22A7BFCFF00BE892B /* NFTCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCard.swift; sourceTree = "<group>"; };
 		7EB78AE42A7BFDB200BE892B /* Currencie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currencie.swift; sourceTree = "<group>"; };
@@ -178,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F603CD029DB4A74000C43D7 /* Kingfisher in Frameworks */,
+				7EB552D92A896CFC0046EA33 /* NotificationBannerSwift in Frameworks */,
 				7EFB26362A84F341001901B6 /* FirebaseAuth in Frameworks */,
 				3F603CCD29DB4A53000C43D7 /* ProgressHUD in Frameworks */,
 			);
@@ -295,6 +301,7 @@
 				3F6806D029CBBE6B00B4F915 /* NetworkClient.swift */,
 				3F6806D229CBBE9600B4F915 /* NetworkRequest.swift */,
 				3F6806D429CBBEC700B4F915 /* NetworkTask.swift */,
+				7EB552D52A896BC60046EA33 /* HandlingErrorService.swift */,
 			);
 			path = NetworkClient;
 			sourceTree = "<group>";
@@ -304,6 +311,7 @@
 			children = (
 				3F6806D629CBC50A00B4F915 /* Cells + Extension.swift */,
 				7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */,
+				407047562A88B86400067E68 /* UIFont + Extension.swift */,
 				4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */,
 				406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */,
 			);
@@ -605,6 +613,7 @@
 				3F603CCC29DB4A53000C43D7 /* ProgressHUD */,
 				3F603CCF29DB4A74000C43D7 /* Kingfisher */,
 				7EFB26352A84F341001901B6 /* FirebaseAuth */,
+				7EB552D82A896CFC0046EA33 /* NotificationBannerSwift */,
 			);
 			productName = FakeNFT;
 			productReference = 3F68069329CBBAF100B4F915 /* FakeNFT.app */;
@@ -682,6 +691,7 @@
 				3F603CCB29DB4A53000C43D7 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 				3F603CCE29DB4A74000C43D7 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				7EFB26342A84F341001901B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7EB552D72A896CFC0046EA33 /* XCRemoteSwiftPackageReference "NotificationBanner" */,
 			);
 			productRefGroup = 3F68069429CBBAF100B4F915 /* Products */;
 			projectDirPath = "";
@@ -769,10 +779,13 @@
 				7EB78A902A7A539B00BE892B /* NFTCardViewController.swift in Sources */,
 				7EB78A952A7A56C000BE892B /* NFTCardViewModelProtocol.swift in Sources */,
 				7EB78A4F2A77873D00BE892B /* CatalogViewController.swift in Sources */,
+				407047572A88B86400067E68 /* UIFont + Extension.swift in Sources */,
+				7EFB26482A860773001901B6 /* OnboardingViewControllerDelegate.swift in Sources */,
 				7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */,
 				7EE68D042A820F8F00CAE2AC /* BrowsingNFTViewController.swift in Sources */,
 				7EFB26482A860773001901B6 /* OnboardingViewControllerDelegate.swift in Sources */,
 				7EFB263B2A850CC4001901B6 /* OnboardingViewController.swift in Sources */,
+				7EB552D62A896BC60046EA33 /* HandlingErrorService.swift in Sources */,
 				7EFB262E2A841ECB001901B6 /* RegistrationViewModel.swift in Sources */,
 				7EFB26302A841EE5001901B6 /* RegistrationViewModelProtocol.swift in Sources */,
 				7EFB26202A840C30001901B6 /* AuthViewModelProtocol.swift in Sources */,
@@ -1182,6 +1195,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		7EB552D72A896CFC0046EA33 /* XCRemoteSwiftPackageReference "NotificationBanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Daltron/NotificationBanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		7EFB26342A84F341001901B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1202,6 +1223,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3F603CCE29DB4A74000C43D7 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		7EB552D82A896CFC0046EA33 /* NotificationBannerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EB552D72A896CFC0046EA33 /* XCRemoteSwiftPackageReference "NotificationBanner" */;
+			productName = NotificationBannerSwift;
 		};
 		7EFB26352A84F341001901B6 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

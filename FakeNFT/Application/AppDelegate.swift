@@ -3,6 +3,9 @@ import Firebase
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let dataProvider: DataProviderProtocol = DataProvider()
+    
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
 
