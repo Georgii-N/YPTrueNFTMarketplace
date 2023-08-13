@@ -6,6 +6,13 @@ enum Resources {
             static let logo = UIImage(named: "Vector")
         }
         
+        enum Onboarding {
+            static let firstImage = UIImage(named: "Onboarding1")
+            static let secondImage = UIImage(named: "Onboarding2")
+            static let thirdImage = UIImage(named: "Onboarding3")
+            static let cancelButton = UIImage(systemName: "multiply")?.withTintColor(.whiteDay, renderingMode: .alwaysOriginal)
+        }
+        
         enum TabBar {
             static let profileImage = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
             static let profileImageSelected = UIImage(systemName: "person.crop.circle.fill")?.withTintColor(.blueUniversal, renderingMode: .alwaysOriginal)

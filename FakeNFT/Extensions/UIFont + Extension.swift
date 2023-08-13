@@ -1,19 +1,21 @@
 import UIKit
 
 extension UIFont {
-    // Ниже приведены примеры шрифтов, настоящие шрифты надо взять из фигмы
 
-    // Headline Fonts
-    static var headline1 = UIFont.systemFont(ofSize: 34, weight: .bold)
-    static var headline2 = UIFont.systemFont(ofSize: 28, weight: .bold)
-    static var headline3 = UIFont.systemFont(ofSize: 22, weight: .bold)
-    static var headline4 = UIFont.systemFont(ofSize: 20, weight: .bold)
-
-    // Body Fonts
-    static var bodyRegular = UIFont.systemFont(ofSize: 17, weight: .regular)
-    static var bodyBold = UIFont.systemFont(ofSize: 17, weight: .bold)
-
-    // Caption Fonts
-    static var caption1 = UIFont.systemFont(ofSize: 15, weight: .regular)
-    static var caption2 = UIFont.systemFont(ofSize: 13, weight: .regular)
+    static var headlineLarge = UIFont.systemFont(ofSize: 34, weight: .bold)
+    static var headlineMedium = UIFont.systemFont(ofSize: 22, weight: .bold)
+    static var headlineSmall = UIFont.systemFont(ofSize: 17, weight: .bold)
+    
+    static var bodyLargeBold = UIFont.systemFont(ofSize: 22, weight: .bold)
+    static var bodyMediumBold = UIFont.systemFont(ofSize: 17, weight: .bold)
+    static var bodyMediumRegular = UIFont.systemFont(ofSize: 17, weight: .regular)
+    static var bodySmallRegular = UIFont.systemFont(ofSize: 15, weight: .regular)
+    static var bodySmallerRegular = UIFont.systemFont(ofSize: 13, weight: .regular)
+    
+    static var captionLargeBold = UIFont.systemFont(ofSize: 22, weight: .bold)
+    static var captionMediumBold = UIFont.systemFont(ofSize: 17, weight: .bold)
+    static var captionMediumRegular = UIFont.systemFont(ofSize: 17, weight: .regular)
+    static var captionSmallRegular = UIFont.systemFont(ofSize: 15, weight: .regular)
+    static var captionSmallerRegular = UIFont.systemFont(ofSize: 13, weight: .regular)
+    static var captionSmallestMedium = UIFont.systemFont(ofSize: 10, weight: .medium)
 }

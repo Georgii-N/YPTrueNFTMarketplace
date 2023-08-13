@@ -1,5 +1,12 @@
 // MARK: - Onboarding
 "onboarding.research" = "Исследуйте";
+"onboarding.research.text" = "Присоединяйтесь и откройте новый мир уникальных NFT для коллекционеров";
+"onboarding.collect" = "Коллекционируйте";
+"onboarding.collect.text" = "Пополняйте свою коллекцию эксклюзивными картинками, созданными нейросетью!";
+"onboarding.competit" = "Состязайтесь";
+"onboarding.competit.text" = "Смотрите статистику других и покажите всем, что у вас самая ценная коллекция";
+"onboarding.isWhatInside" = "Что внутри?";
+
 
 // MARK: - TabBar
 
