@@ -15,6 +15,13 @@ final class TabBarController: UITabBarController {
         tabBar.backgroundColor = .whiteDay
         
         let statisticViewModel = StatisticViewModel()
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            assertionFailure("appDelegate not found")
+            return
+        }
+        
+        let dataProvider = appDelegate.dataProvider
 
         let profileViewController = CustomNavigationController(rootViewController: UIViewController())
         let catalogViewController = CustomNavigationController(rootViewController: UIViewController())
