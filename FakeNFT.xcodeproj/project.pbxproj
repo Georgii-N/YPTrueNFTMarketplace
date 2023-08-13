@@ -34,6 +34,8 @@
 		7E71E3AB2A73BEFA00B0073D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E71E3AD2A73BEFA00B0073D /* Localizable.strings */; };
 		7E71E3B32A73CBF500B0073D /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E71E3B22A73CBF500B0073D /* Strings+Generated.swift */; };
 		7E71E3B52A73F10A00B0073D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E71E3B42A73F10A00B0073D /* TabBarController.swift */; };
+		7EB552D62A896BC60046EA33 /* HandlingErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB552D52A896BC60046EA33 /* HandlingErrorService.swift */; };
+		7EB552D92A896CFC0046EA33 /* NotificationBannerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7EB552D82A896CFC0046EA33 /* NotificationBannerSwift */; };
 		7EB78A682A78EAD000BE892B /* NFTCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78A672A78EAD000BE892B /* NFTCollectionView.swift */; };
 		7EB78A6A2A78EEC100BE892B /* NFTCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78A692A78EEC100BE892B /* NFTCollectionCell.swift */; };
 		7EB78A972A7A5C7D00BE892B /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78A962A7A5C7D00BE892B /* WebViewViewController.swift */; };
@@ -115,6 +117,7 @@
 		7E71E3AC2A73BEFA00B0073D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7E71E3B22A73CBF500B0073D /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 		7E71E3B42A73F10A00B0073D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		7EB552D52A896BC60046EA33 /* HandlingErrorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlingErrorService.swift; sourceTree = "<group>"; };
 		7EB78A672A78EAD000BE892B /* NFTCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionView.swift; sourceTree = "<group>"; };
 		7EB78A692A78EEC100BE892B /* NFTCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionCell.swift; sourceTree = "<group>"; };
 		7EB78A962A7A5C7D00BE892B /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F603CD029DB4A74000C43D7 /* Kingfisher in Frameworks */,
+				7EB552D92A896CFC0046EA33 /* NotificationBannerSwift in Frameworks */,
 				7EFB26362A84F341001901B6 /* FirebaseAuth in Frameworks */,
 				3F603CCD29DB4A53000C43D7 /* ProgressHUD in Frameworks */,
 			);
@@ -273,6 +277,7 @@
 				3F6806D029CBBE6B00B4F915 /* NetworkClient.swift */,
 				3F6806D229CBBE9600B4F915 /* NetworkRequest.swift */,
 				3F6806D429CBBEC700B4F915 /* NetworkTask.swift */,
+				7EB552D52A896BC60046EA33 /* HandlingErrorService.swift */,
 			);
 			path = NetworkClient;
 			sourceTree = "<group>";
@@ -545,6 +550,7 @@
 				3F603CCC29DB4A53000C43D7 /* ProgressHUD */,
 				3F603CCF29DB4A74000C43D7 /* Kingfisher */,
 				7EFB26352A84F341001901B6 /* FirebaseAuth */,
+				7EB552D82A896CFC0046EA33 /* NotificationBannerSwift */,
 			);
 			productName = FakeNFT;
 			productReference = 3F68069329CBBAF100B4F915 /* FakeNFT.app */;
@@ -622,6 +628,7 @@
 				3F603CCB29DB4A53000C43D7 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 				3F603CCE29DB4A74000C43D7 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				7EFB26342A84F341001901B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7EB552D72A896CFC0046EA33 /* XCRemoteSwiftPackageReference "NotificationBanner" */,
 			);
 			productRefGroup = 3F68069429CBBAF100B4F915 /* Products */;
 			projectDirPath = "";
@@ -710,6 +717,7 @@
 				7EFB26482A860773001901B6 /* OnboardingViewControllerDelegate.swift in Sources */,
 				7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */,
 				7EFB263B2A850CC4001901B6 /* OnboardingViewController.swift in Sources */,
+				7EB552D62A896BC60046EA33 /* HandlingErrorService.swift in Sources */,
 				7EFB262E2A841ECB001901B6 /* RegistrationViewModel.swift in Sources */,
 				7EFB26302A841EE5001901B6 /* RegistrationViewModelProtocol.swift in Sources */,
 				7EB78A972A7A5C7D00BE892B /* WebViewViewController.swift in Sources */,
@@ -1110,6 +1118,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		7EB552D72A896CFC0046EA33 /* XCRemoteSwiftPackageReference "NotificationBanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Daltron/NotificationBanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		7EFB26342A84F341001901B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1130,6 +1146,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3F603CCE29DB4A74000C43D7 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		7EB552D82A896CFC0046EA33 /* NotificationBannerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EB552D72A896CFC0046EA33 /* XCRemoteSwiftPackageReference "NotificationBanner" */;
+			productName = NotificationBannerSwift;
 		};
 		7EFB26352A84F341001901B6 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

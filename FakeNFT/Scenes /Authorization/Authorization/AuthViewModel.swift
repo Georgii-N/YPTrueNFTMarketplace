@@ -34,13 +34,13 @@ final class AuthViewModel: AuthViewModelProtocol {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] user, error in
             guard let self = self else { return }
             if error != nil {
-                isAuthorizationDidSuccesful = false
+                self.isAuthorizationDidSuccesful = false
             }
             
             if user != nil {
-                isAuthorizationDidSuccesful = true
+                self.isAuthorizationDidSuccesful = true
             } else {
-                loginPasswordMistake = true
+                self.loginPasswordMistake = true
             }
         }
     }

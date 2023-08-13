@@ -99,12 +99,17 @@
 "profile.favouritesNFT.plug" = "У Вас еще нет избранных NFT";
 
 // MARK: - Statistic
-
 "statistic.profile.buttonUser.title" = "Перейти на сайт пользователя";
 "statistic.profile.buttonCollection.title" = "Коллекция NFT";
 "statistic.profile.userCollection.stub" = "У пользователя еще нет NFT";
 
-
-
-
-
+// MARK: - Netword Errors:
+"networkError.http.404" = "По запросу ничего не найдено";
+"networkError.http.409" = "Ошибка обновления ресурса";
+"networkError.http.410" = "Запрошенный ресурс больше недоступен";
+"networkError.http.5хх" = "Ошибка на стороне сервера";
+"networkError.URLSessionError" = "Проверьте интернет - соединение";
+"networkError.parsingError" = "Не удалось конвертировать полученные данные";
+"networkError.anotherError" = "Не удалось получить данные, попробуйте позже";
+"networkError.requestError" = "Ошибка выполнения запроса";
+"networkError.tryLater" = "Попробуйте позже";
