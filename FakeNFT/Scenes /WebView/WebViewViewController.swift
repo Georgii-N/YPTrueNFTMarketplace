@@ -28,6 +28,16 @@ final class WebViewViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle:
+    init(viewModel: WebViewViewModelProtocol?, url: URL?) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+        self.url = url
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -42,16 +52,6 @@ final class WebViewViewController: UIViewController {
          super.viewWillAppear(animated)
          navigationController?.isNavigationBarHidden = false
      }
-    
-    init(viewModel: WebViewViewModelProtocol?, url: URL?) {
-        super.init(nibName: nil, bundle: nil)
-        self.viewModel = viewModel
-        self.url = url
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     // MARK: - Private Methods:
     private func bind() {

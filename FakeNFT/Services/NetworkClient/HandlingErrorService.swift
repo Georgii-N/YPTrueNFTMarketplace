@@ -1,10 +1,3 @@
-//
-//  HandlingErrorService.swift
-//  FakeNFT
-//
-//  Created by Евгений on 13.08.2023.
-//
-
 import Foundation
 
 final class HandlingErrorService {
