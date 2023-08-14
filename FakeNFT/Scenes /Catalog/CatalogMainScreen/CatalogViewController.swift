@@ -33,7 +33,7 @@ final class CatalogViewController: UIViewController {
         label.numberOfLines = 2
         label.text = "Кажется,что ничего нет\nПотяните вниз чтобы обновить"
         label.textColor = .gray
-        label.font = .systemFont(ofSize: 15)
+        label.font = .captionSmallRegular
         
         return label
     }()

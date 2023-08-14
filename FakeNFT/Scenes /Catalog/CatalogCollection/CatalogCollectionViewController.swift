@@ -37,7 +37,7 @@ final class CatalogCollectionViewController: UIViewController {
     private lazy var nameOfNFTCollectionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .blackDay
-        label.font = .boldSystemFont(ofSize: 22)
+        label.font = .captionLargeBold
         label.numberOfLines = 0
         
         return label
@@ -46,7 +46,7 @@ final class CatalogCollectionViewController: UIViewController {
     private lazy var aboutAuthorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .blackDay
-        label.font = .systemFont(ofSize: 13)
+        label.font = .captionSmallerRegular
         label.text = L10n.Catalog.CurrentCollection.author
         
         return label
@@ -61,7 +61,7 @@ final class CatalogCollectionViewController: UIViewController {
         textView.isEditable = false
         textView.isSelectable = true
         textView.isScrollEnabled = false 
-        textView.font = .systemFont(ofSize: 15)
+        textView.font = .captionSmallRegular
         textView.textColor = .blueUniversal
         textView.backgroundColor = .whiteDay
         
@@ -71,7 +71,7 @@ final class CatalogCollectionViewController: UIViewController {
     private lazy var collectionInformationLabel: UILabel = {
         let text = UILabel()
         text.numberOfLines = 0
-        text.font = .systemFont(ofSize: 13)
+        text.font = .captionSmallerRegular
         text.textColor = .blackDay
         
         return text
@@ -168,7 +168,7 @@ final class CatalogCollectionViewController: UIViewController {
         
         let attributes: [NSAttributedString.Key: Any] = [
             .link: link,
-            .font: UIFont.systemFont(ofSize: 15)
+            .font: UIFont.captionSmallRegular
         ]
         let attributeString = NSMutableAttributedString(string: author.name, attributes: attributes)
         self.authorLinkTextView.attributedText = attributeString

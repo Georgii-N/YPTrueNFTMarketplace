@@ -42,7 +42,7 @@ final class NFTCardTableViewCell: UITableViewCell, ReuseIdentifying {
     
     private lazy var nftNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13)
+        label.font = .captionSmallerRegular
         label.textColor = .blackDay
         
         return label
@@ -50,7 +50,7 @@ final class NFTCardTableViewCell: UITableViewCell, ReuseIdentifying {
     
     private lazy var nftPriceLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 15)
+        label.font = .captionSmallRegular
         label.textColor = .blackDay
         label.text = "$18.11"
         
@@ -59,7 +59,7 @@ final class NFTCardTableViewCell: UITableViewCell, ReuseIdentifying {
     
     private lazy var nftDepositLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13)
+        label.font = .captionSmallerRegular
         label.textColor = .greenUniversal
         label.text = "$18.11"
         

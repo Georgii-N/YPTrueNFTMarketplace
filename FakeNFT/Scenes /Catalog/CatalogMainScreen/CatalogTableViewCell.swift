@@ -43,7 +43,7 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
     private lazy var nameOfNFTCollectionLabel: UILabel = {
         var label = UILabel()
         label.numberOfLines = 1
-        label.font = .boldSystemFont(ofSize: 17)
+        label.font = .captionMediumBold
         
         return label
     }()

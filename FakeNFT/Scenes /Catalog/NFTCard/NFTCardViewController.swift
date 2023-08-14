@@ -51,7 +51,7 @@ final class NFTCardViewController: UIViewController {
     
     private lazy var nftNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 22)
+        label.font = .captionLargeBold
         label.textColor = .blackDay
         
         return label
@@ -68,7 +68,7 @@ final class NFTCardViewController: UIViewController {
     
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 15)
+        label.font = .captionSmallRegular
         label.textColor = .blackDay
         label.text = L10n.General.price
         
@@ -77,7 +77,7 @@ final class NFTCardViewController: UIViewController {
     
     private lazy var priceValueLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 17)
+        label.font = .captionMediumBold
         label.textColor = .blackDay
         
         return label
@@ -85,7 +85,7 @@ final class NFTCardViewController: UIViewController {
     
     private lazy var nftCollectionNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 17)
+        label.font = .captionMediumBold
         label.textColor = .blackDay
         
         return label
@@ -107,7 +107,7 @@ final class NFTCardViewController: UIViewController {
     private lazy var addToCartButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 16
-        button.titleLabel?.font = .boldSystemFont(ofSize: 17)
+        button.titleLabel?.font = .captionMediumBold
         button.setTitleColor(.whiteDay, for: .normal)
         button.backgroundColor = .blackDay
         
