@@ -43,6 +43,10 @@ enum Resources {
         enum NFTBrowsing {
             static let cancellButton = UIImage(systemName: "xmark")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
         }
+        
+        enum NotificationBanner {
+            static let notificationBannerImage = UIImage(systemName: "antenna.radiowaves.left.and.right.slash")
+        }
     }
     
     enum Network {

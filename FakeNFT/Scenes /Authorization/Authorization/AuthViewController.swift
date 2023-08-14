@@ -125,9 +125,9 @@ final class AuthViewController: UIViewController {
             guard let self = self else { return }
             self.unblockUI()
             if newValue == true {
-                showLoginPasswordMistake()
+                self.showLoginPasswordMistake()
             } else {
-                hideLoginPasswordMistake()
+                self.hideLoginPasswordMistake()
             }
         }
         

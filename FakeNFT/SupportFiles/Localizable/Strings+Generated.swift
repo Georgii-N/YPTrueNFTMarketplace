@@ -117,6 +117,28 @@ internal enum L10n {
     /// Вернуться
     internal static let `return` = L10n.tr("Localizable", "general.return", fallback: "Вернуться")
   }
+  internal enum NetworkError {
+    /// Не удалось получить данные, попробуйте позже
+    internal static let anotherError = L10n.tr("Localizable", "networkError.anotherError", fallback: "Не удалось получить данные, попробуйте позже")
+    /// Не удалось конвертировать полученные данные
+    internal static let parsingError = L10n.tr("Localizable", "networkError.parsingError", fallback: "Не удалось конвертировать полученные данные")
+    /// Ошибка выполнения запроса
+    internal static let requestError = L10n.tr("Localizable", "networkError.requestError", fallback: "Ошибка выполнения запроса")
+    /// Попробуйте позже
+    internal static let tryLater = L10n.tr("Localizable", "networkError.tryLater", fallback: "Попробуйте позже")
+    /// Проверьте интернет - соединение
+    internal static let urlSessionError = L10n.tr("Localizable", "networkError.URLSessionError", fallback: "Проверьте интернет - соединение")
+    internal enum Http {
+      /// По запросу ничего не найдено
+      internal static let _404 = L10n.tr("Localizable", "networkError.http.404", fallback: "По запросу ничего не найдено")
+      /// Ошибка обновления ресурса
+      internal static let _409 = L10n.tr("Localizable", "networkError.http.409", fallback: "Ошибка обновления ресурса")
+      /// Запрошенный ресурс больше недоступен
+      internal static let _410 = L10n.tr("Localizable", "networkError.http.410", fallback: "Запрошенный ресурс больше недоступен")
+      /// Ошибка на стороне сервера
+      internal static let _5Хх = L10n.tr("Localizable", "networkError.http.5хх", fallback: "Ошибка на стороне сервера")
+    }
+  }
   internal enum Onboarding {
     /// Коллекционируйте
     internal static let collect = L10n.tr("Localizable", "onboarding.collect", fallback: "Коллекционируйте")
