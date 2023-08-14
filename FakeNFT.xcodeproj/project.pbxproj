@@ -68,9 +68,6 @@
 		7EFB26432A860030001901B6 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB26422A860030001901B6 /* OnboardingViewModel.swift */; };
 		7EFB26452A86012C001901B6 /* OnboardingViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB26442A86012C001901B6 /* OnboardingViewModelProtocol.swift */; };
 		7EFB26482A860773001901B6 /* OnboardingViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB26472A860773001901B6 /* OnboardingViewControllerDelegate.swift */; };
-		A583C0322A8A19E100977DB6 /* DemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A583C02F2A8A19E100977DB6 /* DemoCell.swift */; };
-		A583C0332A8A19E100977DB6 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A583C0302A8A19E100977DB6 /* DemoViewController.swift */; };
-		A583C0342A8A19E100977DB6 /* DemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A583C0312A8A19E100977DB6 /* DemoViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,9 +149,6 @@
 		7EFB26422A860030001901B6 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		7EFB26442A86012C001901B6 /* OnboardingViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModelProtocol.swift; sourceTree = "<group>"; };
 		7EFB26472A860773001901B6 /* OnboardingViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewControllerDelegate.swift; sourceTree = "<group>"; };
-		A583C02F2A8A19E100977DB6 /* DemoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoCell.swift; sourceTree = "<group>"; };
-		A583C0302A8A19E100977DB6 /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
-		A583C0312A8A19E100977DB6 /* DemoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -472,7 +466,6 @@
 		7EE68D0A2A839EF000CAE2AC /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
-				A583C02E2A8A19E100977DB6 /* Demo */,
 				7EFB26212A840C34001901B6 /* Protocols */,
 				7EFB26312A841F73001901B6 /* Authorization */,
 				7EFB26272A841728001901B6 /* Registration */,
@@ -533,17 +526,6 @@
 				7EFB26442A86012C001901B6 /* OnboardingViewModelProtocol.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		A583C02E2A8A19E100977DB6 /* Demo */ = {
-			isa = PBXGroup;
-			children = (
-				A583C02F2A8A19E100977DB6 /* DemoCell.swift */,
-				A583C0302A8A19E100977DB6 /* DemoViewController.swift */,
-				A583C0312A8A19E100977DB6 /* DemoViewModel.swift */,
-			);
-			name = Demo;
-			path = ../../../../../Demo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -732,7 +714,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				407047572A88B86400067E68 /* UIFont + Extension.swift in Sources */,
-				A583C0332A8A19E100977DB6 /* DemoViewController.swift in Sources */,
 				7EFB26482A860773001901B6 /* OnboardingViewControllerDelegate.swift in Sources */,
 				7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */,
 				7EFB263B2A850CC4001901B6 /* OnboardingViewController.swift in Sources */,
@@ -740,7 +721,6 @@
 				7EFB262E2A841ECB001901B6 /* RegistrationViewModel.swift in Sources */,
 				7EFB26302A841EE5001901B6 /* RegistrationViewModelProtocol.swift in Sources */,
 				7EB78A972A7A5C7D00BE892B /* WebViewViewController.swift in Sources */,
-				A583C0342A8A19E100977DB6 /* DemoViewModel.swift in Sources */,
 				7EFB26202A840C30001901B6 /* AuthViewModelProtocol.swift in Sources */,
 				7EE68CFA2A7FCB8A00CAE2AC /* NFTCell.swift in Sources */,
 				7EF4C5D12A73F86C001E8C67 /* UIColor + Extension.swift in Sources */,
@@ -779,7 +759,6 @@
 				409EEFE32A7A707700B23FF8 /* DataProviderProtocol.swift in Sources */,
 				7EB78AE72A7BFE0700BE892B /* Order.swift in Sources */,
 				7EFB26382A84F49B001901B6 /* SplashScreen.swift in Sources */,
-				A583C0322A8A19E100977DB6 /* DemoCell.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
 				7EB78AE52A7BFDB200BE892B /* Currency.swift in Sources */,
 				7EB78AEB2A7BFEEE00BE892B /* Profile.swift in Sources */,
