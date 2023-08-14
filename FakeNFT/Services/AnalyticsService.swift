@@ -2,14 +2,14 @@ import Foundation
 import YandexMobileMetrica
 
 enum Screens: String {
-        case CatalogMain = "CatalogMain"
-        case CartMain = "CartMain"
+        case catalogMain = "CatalogMain"
+        case cartMain = "CartMain"
     
-        case ProfileMain = "ProfileMain"
+        case profileMain = "ProfileMain"
     
-        case StatisticMain = "StatisticMain"
-        case StatisticProfile = "StatisticProfile"
-        case StatisticСollectionNFT = "StatisticСollectionNFT"
+        case statisticMain = "StatisticMain"
+        case statisticProfile = "StatisticProfile"
+        case statisticСollectionNFT = "StatisticСollectionNFT"
 }
 
 enum Items {
@@ -28,8 +28,6 @@ enum Events {
     case open
     case close
 }
-
-
 
 final class AnalyticsService {
     
