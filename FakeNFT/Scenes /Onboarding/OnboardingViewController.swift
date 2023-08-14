@@ -52,14 +52,6 @@ final class OnboardingViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle:
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupViews()
-        setupConstraints()
-        setupScrollView()
-        setupTargets()
-    }
-    
     init(viewModel: OnboardingViewModelProtocol, delegate: OnboardingViewControllerDelegate) {
         self.viewModel = viewModel
         self.delegate = delegate
@@ -70,6 +62,14 @@ final class OnboardingViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+        setupConstraints()
+        setupScrollView()
+        setupTargets()
+    }
+
     // MARK: - Private Methods:
     private func setupScrollView() {
         let widht = view.frame.width
