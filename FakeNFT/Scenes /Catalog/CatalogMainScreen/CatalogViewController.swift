@@ -65,20 +65,20 @@ final class CatalogViewController: UIViewController {
     
     // MARK: - Private Methods:
     private func bind() {
-        viewModel?.nftCollectionsObservable.bind(action: { [weak self] _ in
+        viewModel?.nftCollectionsObservable.bind { [weak self] _ in
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.catalogNFTTableView.reloadData, with: ())
-        })
+        }
         
-        viewModel?.networkErrorObservable.bind(action: { [weak self] errorText in
+        viewModel?.networkErrorObservable.bind { [weak self] errorText in
             guard let self = self else { return }
             if let errorText {
                 self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
                 self.resumeMethodOnMainThread(self.unblockUI, with: ())
                 self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
             }
-        })
+        }
     }
                                                
     private func sortNFT(_ sortOptions: SortingOption) {

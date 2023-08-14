@@ -112,41 +112,45 @@ final class CatalogCollectionViewController: UIViewController {
     
     // MARK: - Private Methods:
     private func bind() {
-        viewModel?.collectionObservable.bind(action: { [weak self] _ in
+        viewModel?.collectionObservable.bind { [weak self] _ in
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.setupCollectionInfo, with: ())
-        })
+        }
         
-        self.viewModel?.authorCollectionObservable.bind(action: { [weak self] author in
+        self.viewModel?.authorCollectionObservable.bind { [weak self] author in
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.setupAuthorInfo, with: author)
-        })
+        }
         
-        viewModel?.nftsObservable.bind(action: { [weak self] _ in
+        viewModel?.nftsObservable.bind { [weak self] _ in
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.nftCollection.reloadData, with: ())
-        })
+        }
         
-        viewModel?.likeStatusDidChangeObservable.bind(action: { [weak self] _ in
+        viewModel?.likeStatusDidChangeObservable.bind { [weak self] _ in
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: true)
-        })
+        }
         
-        viewModel?.cartStatusDidChangeObservable.bind(action: { [weak self] _ in
+        viewModel?.cartStatusDidChangeObservable.bind { [weak self] _ in
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
-        })
+        }
         
-        viewModel?.networkErrorObservable.bind(action: { [weak self] errorText in
+        viewModel?.networkErrorObservable.bind { [weak self] errorText in
             guard let self = self else { return }
             if let errorText {
                 self.resumeMethodOnMainThread(self.unblockUI, with: ())
                 self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
                 self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
+                
+                if self.indexPathToUpdateNFTCell != nil {
+                    self.saveCellModelAfterError()
+                }
             }
-        })
+        }
     }
     
     // Setup NFT's info:
@@ -204,6 +208,14 @@ final class CatalogCollectionViewController: UIViewController {
                                isAddedToCard: isLike ? nftModel.isAddedToCard : !nftModel.isAddedToCard)
         cell.setupNFTModel(model: newModel)
         self.indexPathToUpdateNFTCell = nil
+    }
+    
+    private func saveCellModelAfterError() {
+        guard let indexPath = indexPathToUpdateNFTCell,
+              let cell = nftCollection.cellForItem(at: indexPath) as? NFTCollectionCell,
+              let model = cell.getNFTModel() else { return }
+        
+        cell.setupNFTModel(model: model)
     }
     
     private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {

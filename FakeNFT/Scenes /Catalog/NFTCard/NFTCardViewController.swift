@@ -183,6 +183,10 @@ final class NFTCardViewController: UIViewController {
                 self.resumeMethodOnMainThread(self.unblockUI, with: ())
                 self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
                 self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
+                
+                if self.indexPathToUpdateNFTCell != nil {
+                    self.saveCellModelAfterError()
+                }
             }
         })
     }
@@ -216,6 +220,14 @@ final class NFTCardViewController: UIViewController {
                                isAddedToCard: isLike ? nftModel.isAddedToCard : !nftModel.isAddedToCard)
         cell.setupNFTModel(model: newModel)
         self.indexPathToUpdateNFTCell = nil
+    }
+    
+    private func saveCellModelAfterError() {
+        guard let indexPath = indexPathToUpdateNFTCell,
+              let cell = nftColectionView.cellForItem(at: indexPath) as? NFTCollectionCell,
+              let model = cell.getNFTModel() else { return }
+        
+        cell.setupNFTModel(model: model)
     }
     
     private func setupCoverScrollView(imagesURL: [String]) {

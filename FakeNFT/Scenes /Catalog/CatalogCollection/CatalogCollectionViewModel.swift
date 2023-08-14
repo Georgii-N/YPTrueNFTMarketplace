@@ -13,16 +13,8 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     private var dataProvider: DataProviderProtocol?
     
     // MARK: Constants and Variables:
-    private var profile: Profile? {
-        didSet {
-            fetchOrder()
-        }
-    }
-    private var order: Order? {
-        didSet {
-            fetchAuthor()
-        }
-    }
+    private var profile: Profile?
+    private var order: Order?
     
     // MARK: - Observable Values:
     var collectionObservable: Observable<NFTCollection> {
@@ -97,7 +89,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
                           likes: newLikes,
                           id: profile.id)
         
-        dataProvider?.putNewProfile(profile: profile, completion: { [weak self] result in
+        dataProvider?.putNewProfile(profile: profile) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
@@ -107,7 +99,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
                 let errorText = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.networkError = errorText
             }
-        })
+        }
     }
     
     func changeNFTCartStatus(isAddedToCart: Bool, id: String) {
@@ -123,7 +115,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
         guard var order = order else { return }
         order = Order(nfts: newOrderID, id: "1")
         
-        dataProvider?.putNewOrder(order: order, completion: { [weak self] result in
+        dataProvider?.putNewOrder(order: order) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
@@ -133,7 +125,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
                 let errorText = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.networkError = errorText
             }
-        })
+        }
     }
     
     func updateNFTCardModels() {
@@ -143,7 +135,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     // MARK: - Private Methods:
     private func fetchAuthor() {
         let authorID = collectionObservable.wrappedValue.author
-        dataProvider?.fetchUserID(userId: authorID, completion: { [weak self] result in
+        dataProvider?.fetchUserID(userId: authorID) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let author):
@@ -152,33 +144,35 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
                 let errorText = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.networkError = errorText
             }
-        })
+        }
     }
     
     private func fetchProfile() {
-        dataProvider?.fetchProfile(completion: { [weak self] result in
+        dataProvider?.fetchProfile { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let profile):
                 self.profile = profile
+                self.fetchOrder()
             case .failure(let error):
                 let errorText = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.networkError = errorText
             }
-        })
+        }
     }
     
     private func fetchOrder() {
-        dataProvider?.fetchOrder(completion: { [weak self] result in
+        dataProvider?.fetchOrder { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let order):
                 self.order = order
+                self.fetchAuthor()
             case .failure(let error):
                 let errorText = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.networkError = errorText
             }
-        })
+        }
     }
     
     private func fetchNFTs() {

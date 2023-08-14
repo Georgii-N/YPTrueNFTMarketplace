@@ -50,7 +50,7 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     }
     
     func fetchCollections() {
-        dataProvider?.fetchNFTCollection(completion: { [weak self] result in
+        dataProvider?.fetchNFTCollection { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let collections):
@@ -60,6 +60,6 @@ final class CatalogViewModel: CatalogViewModelProtocol {
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.networkError = errorString
             }
-        })
+        }
     }
 }
