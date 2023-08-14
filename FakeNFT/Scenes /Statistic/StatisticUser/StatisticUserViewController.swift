@@ -60,15 +60,6 @@ final class StatisticUserViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupViews()
-        setupConstraints()
-        setupUI()
-    }
-    
-    // MARK: - Init
     init(statisticUserViewModel: StatisticUserViewModel) {
         self.statisticUserViewModel = statisticUserViewModel
         super.init(nibName: nil, bundle: nil)
@@ -76,6 +67,14 @@ final class StatisticUserViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupViews()
+        setupConstraints()
+        setupUI()
     }
 }
 
@@ -165,7 +164,12 @@ extension StatisticUserViewController: UITableViewDataSource {
 // MARK: - TableViewDelegate
 extension StatisticUserViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let statisticNFTCollectionViewModel = StatisticNFTCollectionViewModel(nftsId: statisticUserViewModel.profile.nfts)
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                    assertionFailure("appDelegate not found")
+                    return
+                }
+        let dataProvider = appDelegate.dataProvider
+        let statisticNFTCollectionViewModel = StatisticNFTCollectionViewModel(nftsId: statisticUserViewModel.profile.nfts, dataProvider: dataProvider)
         let statisticNFTCollectionViewController = StatisticNFTCollectionViewController(statisticNFTViewModel: statisticNFTCollectionViewModel)
         navigationController?.pushViewController(statisticNFTCollectionViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)

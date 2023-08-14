@@ -3,7 +3,7 @@ import Foundation
 final class StatisticViewModel: StatisticViewModelProtocol {
     
     // MARK: - Private classes
-    private let dataProvider = DataProvider()
+    private let dataProvider: DataProviderProtocol?
     
     // MARK: - Private properties
     private var sortingOption: SortingOption = .byRating
@@ -24,7 +24,8 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     private(set) var networkError: String?
     
     // MARK: - Init
-    init() {
+    init(dataProvider: DataProviderProtocol) {
+        self.dataProvider = dataProvider
         getSortingOption()
         fetchUsersRating()
     }
@@ -52,7 +53,7 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     
     // MARK: - Private Functions
     func fetchUsersRating() {
-        dataProvider.fetchUsersRating { [weak self] result in
+        dataProvider?.fetchUsersRating { [weak self] result in
             switch result {
             case .success(let users):
                 self?.networkError = nil

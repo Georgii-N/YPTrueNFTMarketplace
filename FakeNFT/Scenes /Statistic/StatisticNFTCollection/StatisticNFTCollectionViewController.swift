@@ -79,13 +79,10 @@ extension StatisticNFTCollectionViewController {
         
         statisticNFTViewModel.networkErrorObservable.bind { [weak self] errorText in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                if errorText == nil {
-                    self.endRefreshing()
-                } else {
-                    self.endRefreshing()
-                    self.showNotificationBanner(with: errorText ?? "")
-                }
+            if let errorText {
+                self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
+                self.resumeMethodOnMainThread(self.unblockUI, with: ())
+                self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
             }
         }
     }
@@ -116,11 +113,6 @@ extension StatisticNFTCollectionViewController {
         if statisticNFTViewModel.nftsObservable.wrappedValue.count == 0 {
             stubLabel.isHidden = false
         }
-    }
-    
-    private func endRefreshing() {
-        self.refreshControl.endRefreshing()
-        self.unblockUI()
     }
     
     private func setupViews() {

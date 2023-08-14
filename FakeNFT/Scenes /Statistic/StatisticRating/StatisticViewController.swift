@@ -33,6 +33,7 @@ final class StatisticViewController: UIViewController {
         setupViews()
         setupConstraints()
         setupUI()
+        setupTargets()
         setupNavBar()
         blockUI()
         bind()
@@ -117,26 +118,23 @@ extension StatisticViewController {
         
         statisticViewModel.networkErrorObservable.bind { [weak self] errorText in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                if errorText == nil {
-                    self.endRefreshing()
-                } else {
-                    self.endRefreshing()
-                    self.showNotificationBanner(with: errorText ?? "")
-                }
+            if let errorText {
+                self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
+                self.resumeMethodOnMainThread(self.unblockUI, with: ())
+                self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
             }
         }
     }
     
-    private func endRefreshing() {
-        self.refreshControl.endRefreshing()
-        self.unblockUI()
+    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
+        DispatchQueue.main.async {
+            method(argument)
+        }
     }
     
     private func setupViews() {
         view.setupView(collectionView)
         collectionView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refreshNFTCatalog), for: .valueChanged)
     }
     
     private func setupConstraints() {
@@ -150,6 +148,10 @@ extension StatisticViewController {
     
     private func setupUI() {
         view.backgroundColor = .whiteDay
+    }
+    
+    private func setupTargets() {
+        refreshControl.addTarget(self, action: #selector(refreshNFTCatalog), for: .valueChanged)
     }
     
     private func setupNavBar() {

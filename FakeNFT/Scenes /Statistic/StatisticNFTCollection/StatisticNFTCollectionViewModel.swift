@@ -3,7 +3,7 @@ import Foundation
 final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProtocol {
     
     // MARK: - Private classes
-    private let dataProvider = DataProvider()
+    private let dataProvider: DataProviderProtocol?
     
     // MARK: - Private Constants and Variables
     private let nftsId: [String]
@@ -40,8 +40,9 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
     private(set) var networkError: String?
     
     // MARK: - Init
-    init(nftsId: [String]) {
+    init(nftsId: [String], dataProvider: DataProviderProtocol) {
         self.nftsId = nftsId
+        self.dataProvider = dataProvider
         fetchOrder()
         fetchProfile()
         fetchUsersNFT()
@@ -49,7 +50,7 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
     
     // MARK: - Private Functions
     func fetchUsersNFT() {
-        dataProvider.fetchUsersNFT(userId: nil, nftsId: nftsId) { [weak self] result in
+        dataProvider?.fetchUsersNFT(userId: nil, nftsId: nftsId) { [weak self] result in
             switch result {
             case .success(let result):
                 self?.networkError = nil
@@ -74,7 +75,7 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
     }
     
     private func fetchProfile() {
-        dataProvider.fetchProfile(completion: { [weak self] result in
+        dataProvider?.fetchProfile(completion: { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let profile):
@@ -88,7 +89,7 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
     }
     
     private func fetchOrder() {
-        dataProvider.fetchOrder(completion: { [weak self] result in
+        dataProvider?.fetchOrder(completion: { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let order):
@@ -114,7 +115,7 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
         guard var order = order else { return }
         order = Order(nfts: newOrderID, id: "1")
         
-        dataProvider.putNewOrder(order: order, completion: { [weak self] result in
+        dataProvider?.putNewOrder(order: order, completion: { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
@@ -145,7 +146,7 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
                           likes: newLikes,
                           id: profile.id)
         
-        dataProvider.putNewProfile(profile: profile, completion: { [weak self] result in
+        dataProvider?.putNewProfile(profile: profile, completion: { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
