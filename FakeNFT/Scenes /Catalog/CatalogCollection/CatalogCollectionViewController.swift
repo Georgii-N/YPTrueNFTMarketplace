@@ -343,8 +343,18 @@ extension CatalogCollectionViewController {
 extension CatalogCollectionViewController {
     private func setupConstraints() {
         
+        enum ConstantsAnchor {
+            static let cellHeight = 182
+            static let cellInRow = 3
+            static let topInset = 24
+            static let cellHeightPlusInset = 204
+        }
+        
         let collectionItems = viewModel?.collectionObservable.wrappedValue.nfts.count ?? 0
-        let collectionHeight = collectionItems % 3 == 0 ? (collectionItems / 3 * 182) + 24 : (collectionItems / 3 * 182) + 204
+        let collectionHeight = collectionItems % ConstantsAnchor.cellInRow == 0 ?
+        (collectionItems / ConstantsAnchor.cellInRow * ConstantsAnchor.cellHeight) +
+        ConstantsAnchor.topInset : (collectionItems / ConstantsAnchor.cellInRow * ConstantsAnchor.cellHeight) +
+        ConstantsAnchor.cellHeightPlusInset
         
         NSLayoutConstraint.activate([
             collectionScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
