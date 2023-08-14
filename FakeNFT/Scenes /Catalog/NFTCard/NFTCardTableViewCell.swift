@@ -11,7 +11,7 @@ import Kingfisher
 final class NFTCardTableViewCell: UITableViewCell, ReuseIdentifying {
     
     // MARK: - Constant and Variables:
-    private var сurrency: Сurrency? {
+    private var сurrency: Currency? {
         didSet {
             let size = CGSize(width: 32, height: contentView.frame.height - 36)
             let processor = DownsamplingImageProcessor(size: size)
@@ -85,7 +85,7 @@ final class NFTCardTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     
     // MARK: - Public Methods:
-    func setupСurrencyModel(model: Сurrency) {
+    func setupСurrencyModel(model: Currency) {
         сurrency = model
     }
 }
