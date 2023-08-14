@@ -5,6 +5,7 @@ final class StatisticViewController: UIViewController {
     // MARK: - Private Dependencies
     private var alertService: AlertServiceProtocol?
     private var statisticViewModel: StatisticViewModelProtocol
+    private lazy var refreshControl = UIRefreshControl()
     
     // MARK: - UI
     private lazy var collectionView: UICollectionView = {
@@ -72,10 +73,16 @@ extension StatisticViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension StatisticViewController {
+    
     // MARK: - Objc Methods:
     @objc
     private func didTapSortButton() {
         showActionSheet()
+    }
+    
+    @objc private func refreshNFTCatalog() {
+        blockUI()
+        statisticViewModel.fetchUsersRating()
     }
     
     // MARK: - Private Functions
@@ -106,10 +113,26 @@ extension StatisticViewController {
                 self.collectionView.reloadData()
             }
         }
+        
+        statisticViewModel.networkErrorObservable.bind { [weak self] errorText in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if errorText == nil {
+                    self.refreshControl.endRefreshing()
+                    self.unblockUI()
+                } else {
+                    self.refreshControl.endRefreshing()
+                    self.unblockUI()
+                    self.showNotificationBanner(with: errorText ?? "")
+                }
+            }
+        }
     }
     
     private func setupViews() {
         view.setupView(collectionView)
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshNFTCatalog), for: .valueChanged)
     }
     
     private func setupConstraints() {

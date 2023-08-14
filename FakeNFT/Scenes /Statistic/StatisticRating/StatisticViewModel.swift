@@ -12,8 +12,16 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     var usersRatingObservable: Observable<UsersResponse> {
         $usersRating
     }
+    
+    var networkErrorObservable: Observable<String?> {
+        $networkError
+    }
+    
     @Observable
     private(set) var usersRating: UsersResponse = []
+    
+    @Observable
+    private(set) var networkError: String?
     
     // MARK: - Init
     init() {
@@ -43,14 +51,15 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     }
     
     // MARK: - Private Functions
-    private func fetchUsersRating() {
+    func fetchUsersRating() {
         dataProvider.fetchUsersRating { [weak self] result in
             switch result {
             case .success(let users):
+                self?.networkError = nil
                 self?.sortUsers(by: self?.sortingOption ?? .byRating, usersList: users)
-               
             case .failure(let error):
-                assertionFailure(error.localizedDescription)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self?.networkError = errorString
             }
         }
     }
