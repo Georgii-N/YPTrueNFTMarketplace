@@ -37,7 +37,7 @@ final class OnboardingViewController: UIViewController {
     
     private lazy var screenTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 32)
+        label.font = .headlineOnboarding
         label.textColor = .whiteUniversal
         
         return label
@@ -45,7 +45,7 @@ final class OnboardingViewController: UIViewController {
     
     private lazy var screenDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 15)
+        label.font = .bodySmallRegular
         label.textColor = .whiteUniversal
         
         return label
@@ -104,7 +104,7 @@ final class OnboardingViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.numberOfLines = 0
         titleLabel.text = viewModel.getTitle(index: page)
-        titleLabel.font = .boldSystemFont(ofSize: 32)
+        titleLabel.font = .headlineOnboarding
         titleLabel.textColor = .whiteUniversal
         
         view.setupView(titleLabel)
@@ -123,7 +123,7 @@ final class OnboardingViewController: UIViewController {
         let text = viewModel.getDescription(index: page)
         descriptionLabel.numberOfLines = 0
         descriptionLabel.text = text
-        descriptionLabel.font = .systemFont(ofSize: 15)
+        descriptionLabel.font = .bodySmallRegular
         descriptionLabel.textColor = .whiteUniversal
         
         view.setupView(descriptionLabel)

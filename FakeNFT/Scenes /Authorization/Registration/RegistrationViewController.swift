@@ -23,7 +23,7 @@ final class RegistrationViewController: UIViewController {
     
     private lazy var enterTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 34)
+        label.font = .headlineLarge
         label.textColor = .blackDay
         label.text = L10n.Authorization.registrate
         label.textAlignment = .left
@@ -64,7 +64,7 @@ final class RegistrationViewController: UIViewController {
     
     private lazy var loginPasswordMistakeLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13)
+        label.font = .bodySmallerRegular
         label.textColor = .redUniversal
         label.textAlignment = .left
         

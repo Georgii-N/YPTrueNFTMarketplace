@@ -15,7 +15,7 @@ final class AuthViewController: UIViewController {
     
     private lazy var enterTittleLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 34)
+        label.font = .headlineLarge
         label.textColor = .blackDay
         label.text = L10n.Authorization.enter
         label.textAlignment = .left
@@ -59,7 +59,7 @@ final class AuthViewController: UIViewController {
         button.backgroundColor = .clear
         button.setTitle(L10n.Authorization.forgetPassword, for: .normal)
         button.setTitleColor(.blackDay, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 13)
+        button.titleLabel?.font = .captionSmallerRegular
         
         return button
     }()
@@ -69,7 +69,7 @@ final class AuthViewController: UIViewController {
         button.backgroundColor = .clear
         button.setTitle(L10n.Authorization.demo, for: .normal)
         button.setTitleColor(.blueUniversal, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 17)
+        button.titleLabel?.font = .captionMediumBold
         
         return button
     }()
@@ -79,14 +79,14 @@ final class AuthViewController: UIViewController {
         button.backgroundColor = .clear
         button.setTitle(L10n.Authorization.registration, for: .normal)
         button.setTitleColor(.blackDay, for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 17)
+        button.titleLabel?.font = .captionMediumBold
         
         return button
     }()
     
-    private lazy var loginPasswordMiskateLabel: UILabel = {
+    private lazy var loginPasswordMistakeLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13)
+        label.font = .bodySmallerRegular
         label.textColor = .redUniversal
         label.textAlignment = .left
         label.text = L10n.Authorization.Error.loginPasswordMistake
@@ -170,16 +170,16 @@ final class AuthViewController: UIViewController {
         
         UIView.animate(withDuration: 0.5) { [weak self] in
             guard let self = self else { return }
-            self.view.setupView(loginPasswordMiskateLabel)
+            self.view.setupView(loginPasswordMistakeLabel)
             self.emailTextField.layer.borderWidth = 1
             self.emailTextField.layer.borderColor = UIColor.redUniversal.cgColor
             self.passwordTextField.layer.borderWidth = 1
             self.passwordTextField.layer.borderColor = UIColor.redUniversal.cgColor
             
             NSLayoutConstraint.activate([
-                self.loginPasswordMiskateLabel.topAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: 16),
-                self.loginPasswordMiskateLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-                self.loginPasswordMiskateLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 16)
+                self.loginPasswordMistakeLabel.topAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: 16),
+                self.loginPasswordMistakeLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+                self.loginPasswordMistakeLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 16)
             ])
         }
     }
@@ -190,7 +190,7 @@ final class AuthViewController: UIViewController {
         
         UIView.animate(withDuration: 0.5) { [weak self] in
             guard let self = self else { return }
-            self.loginPasswordMiskateLabel.removeFromSuperview()
+            self.loginPasswordMistakeLabel.removeFromSuperview()
             self.emailTextField.layer.borderWidth = 0
             self.passwordTextField.layer.borderWidth = 0
         }

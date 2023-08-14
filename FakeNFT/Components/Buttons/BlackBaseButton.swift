@@ -34,7 +34,7 @@ final class BaseBlackButton: UIButton {
         self.setTitleColor(.whiteDay, for: .normal)
         self.layer.cornerRadius = 16
         self.titleLabel?.textAlignment = .center
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        self.titleLabel?.font = .captionMediumBold
         
         NSLayoutConstraint.activate([
             self.heightAnchor.constraint(equalToConstant: 60)
