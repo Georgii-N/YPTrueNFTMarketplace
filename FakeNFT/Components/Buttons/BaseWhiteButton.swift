@@ -38,7 +38,7 @@ final class BaseWhiteButton: UIButton {
         self.layer.borderColor = UIColor.blackDay.cgColor
 
         self.titleLabel?.textAlignment = .center
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        self.titleLabel?.font = .captionSmallRegular
 
         NSLayoutConstraint.activate([
             self.heightAnchor.constraint(equalToConstant: 40)

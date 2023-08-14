@@ -66,7 +66,7 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
     private lazy var nftNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 17)
+        label.font = .captionMediumBold
         label.textColor = .blackDay
         
         return label
@@ -74,7 +74,7 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
     private lazy var nftPriceLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 10)
+        label.font = .captionSmallestMedium
         label.textColor = .blackDay
         
         return label
