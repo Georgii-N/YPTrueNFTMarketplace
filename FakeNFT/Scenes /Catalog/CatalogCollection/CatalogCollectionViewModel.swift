@@ -13,8 +13,16 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     private var dataProvider: DataProviderProtocol?
     
     // MARK: Constants and Variables:
-    private var profile: Profile?
-    private var order: Order?
+    private var profile: Profile? {
+        didSet {
+            fetchOrder()
+        }
+    }
+    private var order: Order? {
+        didSet {
+            fetchAuthor()
+        }
+    }
     
     // MARK: - Observable Values:
     var collectionObservable: Observable<NFTCollection> {
@@ -37,6 +45,10 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
         $cartStatusDidChange
     }
     
+    var networkErrorObservable: Observable<String?> {
+        $networkError
+    }
+    
     @Observable
     private(set) var collection: NFTCollection
     
@@ -56,11 +68,13 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     @Observable
     private(set) var cartStatusDidChange = false
     
+    @Observable
+    private(set) var networkError: String?
+    
     // MARK: - Lifecycle:
     init(collection: NFTCollection) {
         self.collection = collection
         self.dataProvider = DataProvider()
-        updateNFTCardModels()
     }
     
     // MARK: - Public Methods:
@@ -90,7 +104,8 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
                 self.likeStatusDidChange = true
                 self.profile = profile
             case .failure(let error):
-                print(error)
+                let errorText = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorText
             }
         })
     }
@@ -115,15 +130,14 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
                 self.cartStatusDidChange = true
                 self.order = order
             case .failure(let error):
-                print(error)
+                let errorText = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorText
             }
         })
     }
     
     func updateNFTCardModels() {
         fetchProfile()
-        fetchOrder()
-        fetchAuthor()
     }
     
     // MARK: - Private Methods:
@@ -135,7 +149,8 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
             case .success(let author):
                 self.authorCollection = author
             case .failure(let error):
-                print(error)
+                let errorText = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorText
             }
         })
     }
@@ -147,7 +162,8 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
             case .success(let profile):
                 self.profile = profile
             case .failure(let error):
-                print(error)
+                let errorText = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorText
             }
         })
     }
@@ -159,7 +175,8 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
             case .success(let order):
                 self.order = order
             case .failure(let error):
-                print(error)
+                let errorText = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorText
             }
         })
     }
@@ -184,7 +201,8 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
                                    isAddedToCard: isAddedToCart ?? false)
                 })
             case .failure(let error):
-                print(error)
+                let errorText = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorText
             }
         }
     }

@@ -14,7 +14,7 @@ final class CatalogViewController: UIViewController {
     private var viewModel: CatalogViewModelProtocol?
     private var alertService: AlertServiceProtocol?
     
-    // MARK: - UI:    
+    // MARK: - UI:
     private lazy var catalogNFTTableView: UITableView = {
         var tableView = UITableView()
         tableView.register(CatalogTableViewCell.self)
@@ -28,7 +28,7 @@ final class CatalogViewController: UIViewController {
     }()
     
     private lazy var stubRefreshLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 2
         label.text = "Кажется,что ничего нет\nПотяните вниз чтобы обновить"
@@ -40,7 +40,7 @@ final class CatalogViewController: UIViewController {
     
     private lazy var sortButton = SortNavBarBaseButton()
     private lazy var refreshControl = UIRefreshControl()
-        
+    
     // MARK: - Lifecycle
     init(viewModel: CatalogViewModelProtocol?) {
         super.init(nibName: nil, bundle: nil)
@@ -67,22 +67,16 @@ final class CatalogViewController: UIViewController {
     private func bind() {
         viewModel?.nftCollectionsObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.unblockUI()
-                self.catalogNFTTableView.reloadData()
-            }
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
+            self.resumeMethodOnMainThread(self.catalogNFTTableView.reloadData, with: ())
         })
         
         viewModel?.networkErrorObservable.bind(action: { [weak self] errorText in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                if errorText == nil {
-                    self.unblockUI()
-                } else {
-                    self.refreshControl.endRefreshing()
-                    self.unblockUI()
-                    self.showNotificationBanner(with: errorText ?? "")
-                }
+            if let errorText {
+                self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
+                self.resumeMethodOnMainThread(self.unblockUI, with: ())
+                self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
             }
         })
     }
@@ -107,6 +101,12 @@ final class CatalogViewController: UIViewController {
         stubRefreshLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         stubRefreshLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
+        DispatchQueue.main.async {
+            method(argument)
+        }
     }
     
     // MARK: - Objc Methods:

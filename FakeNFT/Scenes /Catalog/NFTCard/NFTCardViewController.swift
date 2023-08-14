@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 final class NFTCardViewController: UIViewController {
-
+    
     // MARK: - Private Dependencies:
     weak private var delegate: NFTCardViewControllerDelegate?
     private var viewModel: NFTCardViewModelProtocol?
@@ -149,6 +149,8 @@ final class NFTCardViewController: UIViewController {
         
         setupNFTInfo()
         bind()
+        
+        viewModel?.updateNFTCardModels()
     }
     
     // MARK: - Private Methods:
@@ -173,6 +175,15 @@ final class NFTCardViewController: UIViewController {
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
+        })
+        
+        viewModel?.networkErrorObservable.bind(action: { [weak self] errorText in
+            guard let self = self else { return }
+            if let errorText {
+                self.resumeMethodOnMainThread(self.unblockUI, with: ())
+                self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
+                self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
+            }
         })
     }
     
@@ -314,7 +325,6 @@ final class NFTCardViewController: UIViewController {
     
     @objc private func refreshNFTCardScreen() {
         viewModel?.updateNFTCardModels()
-        viewModel?.fetchCurrencies()
     }
     
     @objc private func openFullNFTImage() {
@@ -515,7 +525,7 @@ extension NFTCardViewController {
 
 // MARK: - Setup Targets:
 private extension NFTCardViewController {
-     func setupTargets() {
+    func setupTargets() {
         sellerWebsiteButton.addTarget(self, action: #selector(goToSellerWebSite), for: .touchUpInside)
         addToCartButton.addTarget(self, action: #selector(changeNFTCartStatus), for: .touchUpInside)
     }

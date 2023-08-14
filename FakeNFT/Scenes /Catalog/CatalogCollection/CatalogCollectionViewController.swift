@@ -106,6 +106,8 @@ final class CatalogCollectionViewController: UIViewController {
         
         setupCollectionInfo()
         bind()
+        
+        viewModel?.updateNFTCardModels()
     }
     
     // MARK: - Private Methods:
@@ -135,6 +137,15 @@ final class CatalogCollectionViewController: UIViewController {
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
+        })
+        
+        viewModel?.networkErrorObservable.bind(action: { [weak self] errorText in
+            guard let self = self else { return }
+            if let errorText {
+                self.resumeMethodOnMainThread(self.unblockUI, with: ())
+                self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
+                self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
+            }
         })
     }
     

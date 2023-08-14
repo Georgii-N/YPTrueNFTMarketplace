@@ -21,8 +21,17 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
         }
     }
     
-    private var profile: Profile?
-    private var order: Order?
+    private var profile: Profile? {
+        didSet {
+            fetchOrder()
+        }
+    }
+    private var order: Order? {
+        didSet {
+            fetchAuthor()
+        }
+    }
+    
     private var tokenPaths = [
         Resources.Network.NFTBrowser.bitcoin, Resources.Network.NFTBrowser.dogecoin,
         Resources.Network.NFTBrowser.tether, Resources.Network.NFTBrowser.apecoin,
@@ -47,6 +56,10 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
         $cartStatusDidChange
     }
     
+    var networkErrorObservable: Observable<String?> {
+        $networkError
+    }
+    
     @Observable
     private(set) var currencies: Currencies?
     
@@ -59,29 +72,21 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
     @Observable
     private(set) var cartStatusDidChange = false
     
+    @Observable
+    private(set) var networkError: String?
+    
     // MARK: - Lifecycle:
     init(nftModel: NFTCell, nftCollection: NFTCollection) {
         self.currentNFT = nftModel
         self.nftCollection = nftCollection
         self.dataProvider = DataProvider()
-        fetchAuthor()
-        fetchProfile()
-        fetchOrder()
-        fetchCurrencies()
     }
     
     // MARK: - Public Methods:
     // Network
-    func fetchCurrencies() {
-        dataProvider?.fetchCurrencies(completion: { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let currencies):
-                self.currencies = currencies
-            case .failure(let error):
-                print(error)
-            }
-        })
+    func updateNFTCardModels() {
+        fetchProfile()
+        fetchCurrencies()
     }
     
     func changeNFTFavouriteStatus(isLiked: Bool, id: String) {
@@ -110,7 +115,8 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
                 self.likeStatusDidChange = true
                 self.profile = profile
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         })
     }
@@ -135,15 +141,10 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
                 self.cartStatusDidChange = true
                 self.order = order
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         })
-    }
-    
-    func updateNFTCardModels() {
-        fetchProfile()
-        fetchOrder()
-        fetchAuthor()
     }
     
     // Actions with info:
@@ -189,7 +190,8 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
             case .success(let profile):
                 self.profile = profile
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         })
     }
@@ -201,7 +203,8 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
             case .success(let order):
                 self.order = order
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         })
     }
@@ -214,7 +217,8 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
             case .success(let author):
                 authorCollection = author
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         })
     }
@@ -239,8 +243,22 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
                                    isAddedToCard: isAddedToCart ?? false)
                 })
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         }
+    }
+    
+    private func fetchCurrencies() {
+        dataProvider?.fetchCurrencies(completion: { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let currencies):
+                self.currencies = currencies
+            case .failure(let error):
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
+            }
+        })
     }
 }

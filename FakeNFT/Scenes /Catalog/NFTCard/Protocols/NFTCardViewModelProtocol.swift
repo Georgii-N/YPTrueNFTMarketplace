@@ -12,7 +12,7 @@ protocol NFTCardViewModelProtocol: AnyObject {
     var nftsObservable: Observable<[NFTCell]?> { get }
     var likeStatusDidChangeObservable: Observable<Bool> { get }
     var cartStatusDidChangeObservable: Observable<Bool> { get }
-    func fetchCurrencies()
+    var networkErrorObservable: Observable<String?> { get }
     func changeNFTFavouriteStatus(isLiked: Bool, id: String)
     func changeNFTCartStatus(isAddedToCart: Bool, id: String)
     func updateNFTCardModels()
