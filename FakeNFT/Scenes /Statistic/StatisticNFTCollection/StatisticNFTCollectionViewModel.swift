@@ -23,6 +23,10 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
         $cartStatusDidChange
     }
     
+    var networkErrorObservable: Observable<String?> {
+        $networkError
+    }
+    
     @Observable
     private(set) var NFTcards: NFTCells = []
     
@@ -31,6 +35,9 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
     
     @Observable
     private(set) var cartStatusDidChange = false
+    
+    @Observable
+    private(set) var networkError: String?
     
     // MARK: - Init
     init(nftsId: [String]) {
@@ -41,10 +48,11 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
     }
     
     // MARK: - Private Functions
-    private func fetchUsersNFT() {
+    func fetchUsersNFT() {
         dataProvider.fetchUsersNFT(userId: nil, nftsId: nftsId) { [weak self] result in
             switch result {
             case .success(let result):
+                self?.networkError = nil
                 self?.NFTcards = result.map({
                     let isLiked = self?.profile?.likes.contains($0.id)
                     let isAddedToCart = self?.order?.nfts.contains($0.id)
@@ -59,7 +67,8 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
                 })
                 
             case .failure(let error):
-                assertionFailure(error.localizedDescription)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self?.networkError = errorString
             }
         }
     }
@@ -69,9 +78,11 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
             guard let self = self else { return }
             switch result {
             case .success(let profile):
+                self.networkError = nil
                 self.profile = profile
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         })
     }
@@ -81,9 +92,11 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
             guard let self = self else { return }
             switch result {
             case .success(let order):
+                self.networkError = nil
                 self.order = order
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         })
     }

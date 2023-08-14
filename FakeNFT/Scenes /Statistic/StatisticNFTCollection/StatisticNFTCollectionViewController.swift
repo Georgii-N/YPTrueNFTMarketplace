@@ -7,12 +7,14 @@ final class StatisticNFTCollectionViewController: UIViewController {
     
     // MARK: - Private Properties
     private var indexPathToUpdateNFTCell: IndexPath?
+    private lazy var refreshControl = UIRefreshControl()
     
     // MARK: - UI
     private lazy var collectionView: NFTCollectionView = {
         let collectionView = NFTCollectionView()
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.refreshControl = refreshControl
         return collectionView
     }()
     
@@ -27,6 +29,15 @@ final class StatisticNFTCollectionViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle
+    init(statisticNFTViewModel: StatisticNFTCollectionViewModel) {
+        self.statisticNFTViewModel = statisticNFTViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,20 +47,15 @@ final class StatisticNFTCollectionViewController: UIViewController {
         bind()
         blockUI()
     }
-    
-    // MARK: - Init
-    init(statisticNFTViewModel: StatisticNFTCollectionViewModel) {
-        self.statisticNFTViewModel = statisticNFTViewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 // MARK: - Private Functions
 extension StatisticNFTCollectionViewController {
+    
+    @objc private func refreshNFTCatalog() {
+        blockUI()
+        statisticNFTViewModel.fetchUsersNFT()
+    }
     
     private func bind() {
         statisticNFTViewModel.nftsObservable.bind { [weak self] _ in
@@ -69,6 +75,18 @@ extension StatisticNFTCollectionViewController {
         statisticNFTViewModel.cartStatusDidChangeObservable.bind { [weak self] _ in
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
+        }
+        
+        statisticNFTViewModel.networkErrorObservable.bind { [weak self] errorText in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if errorText == nil {
+                    self.endRefreshing()
+                } else {
+                    self.endRefreshing()
+                    self.showNotificationBanner(with: errorText ?? "")
+                }
+            }
         }
     }
     
@@ -100,6 +118,11 @@ extension StatisticNFTCollectionViewController {
         }
     }
     
+    private func endRefreshing() {
+        self.refreshControl.endRefreshing()
+        self.unblockUI()
+    }
+    
     private func setupViews() {
         view.setupView(collectionView)
         view.setupView(stubLabel)
@@ -120,6 +143,7 @@ extension StatisticNFTCollectionViewController {
     private func setupUI() {
         view.backgroundColor = .white
         self.title = L10n.Statistic.Profile.ButtonCollection.title
+        refreshControl.addTarget(self, action: #selector(refreshNFTCatalog), for: .valueChanged)
     }
 }
 

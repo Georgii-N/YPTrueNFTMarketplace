@@ -5,6 +5,8 @@ final class StatisticViewController: UIViewController {
     // MARK: - Private Dependencies
     private var alertService: AlertServiceProtocol?
     private var statisticViewModel: StatisticViewModelProtocol
+    
+    // MARK: - Private Properties
     private lazy var refreshControl = UIRefreshControl()
     
     // MARK: - UI
@@ -17,6 +19,15 @@ final class StatisticViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle
+    init(statisticViewModel: StatisticViewModelProtocol) {
+        self.statisticViewModel = statisticViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -25,16 +36,6 @@ final class StatisticViewController: UIViewController {
         setupNavBar()
         blockUI()
         bind()
-    }
-    
-    // MARK: - Init
-    init(statisticViewModel: StatisticViewModelProtocol) {
-        self.statisticViewModel = statisticViewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -118,15 +119,18 @@ extension StatisticViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 if errorText == nil {
-                    self.refreshControl.endRefreshing()
-                    self.unblockUI()
+                    self.endRefreshing()
                 } else {
-                    self.refreshControl.endRefreshing()
-                    self.unblockUI()
+                    self.endRefreshing()
                     self.showNotificationBanner(with: errorText ?? "")
                 }
             }
         }
+    }
+    
+    private func endRefreshing() {
+        self.refreshControl.endRefreshing()
+        self.unblockUI()
     }
     
     private func setupViews() {
