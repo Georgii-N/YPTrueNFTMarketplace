@@ -54,15 +54,16 @@ final class CatalogCollectionViewController: UIViewController {
     
     private lazy var authorLinkTextView: UITextView = {
         let textView = UITextView()
-        textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 0)
-        textView.backgroundColor = .whiteDay
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
         textView.dataDetectorTypes = .link
+        textView.textContainer.lineFragmentPadding = 0
         textView.delegate = self
         textView.isEditable = false
         textView.isSelectable = true
         textView.isScrollEnabled = false 
         textView.font = .systemFont(ofSize: 15)
         textView.textColor = .blueUniversal
+        textView.backgroundColor = .whiteDay
         
         return textView
     }()
@@ -86,6 +87,15 @@ final class CatalogCollectionViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle:
+    init(viewModel: CatalogCollectionViewModelProtocol?) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         blockUI()
@@ -96,20 +106,6 @@ final class CatalogCollectionViewController: UIViewController {
         
         setupCollectionInfo()
         bind()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.hidesBarsOnSwipe = true
-    }
-    
-    init(viewModel: CatalogCollectionViewModelProtocol?) {
-        super.init(nibName: nil, bundle: nil)
-        self.viewModel = viewModel
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Private Methods:
@@ -310,7 +306,6 @@ extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
 extension CatalogCollectionViewController {
     private func setupViews() {
         view.backgroundColor = .whiteDay
-        navigationController?.navigationBar.backgroundColor = .clear
         
         view.setupView(collectionScrollView)
         
@@ -329,7 +324,7 @@ extension CatalogCollectionViewController {
         let collectionHeight = collectionItems % 3 == 0 ? (collectionItems / 3 * 182) + 24 : (collectionItems / 3 * 182) + 204
         
         NSLayoutConstraint.activate([
-            collectionScrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),

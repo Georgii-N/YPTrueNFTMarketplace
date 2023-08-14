@@ -37,9 +37,8 @@ final class CatalogViewModel: CatalogViewModelProtocol {
         guard let nftCollections = nftCollections else { return }
         
         var collection = NFTCollections()
-        
         switch option {
-        case .byName:
+        case .byTitle:
             collection = nftCollections.sorted(by: { $0.name < $1.name })
         case .byQuantity:
             collection = nftCollections.sorted(by: { $0.nfts.count > $1.nfts.count })

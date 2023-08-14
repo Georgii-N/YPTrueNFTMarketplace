@@ -42,6 +42,15 @@ final class CatalogViewController: UIViewController {
     private lazy var refreshControl = UIRefreshControl()
         
     // MARK: - Lifecycle
+    init(viewModel: CatalogViewModelProtocol?) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -52,15 +61,6 @@ final class CatalogViewController: UIViewController {
         bind()
         
         viewModel?.fetchCollections()
-    }
-    
-    init(viewModel: CatalogViewModelProtocol?) {
-        super.init(nibName: nil, bundle: nil)
-        self.viewModel = viewModel
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Private Methods:
@@ -89,8 +89,8 @@ final class CatalogViewController: UIViewController {
                                                
     private func sortNFT(_ sortOptions: SortingOption) {
         switch sortOptions {
-        case .byName:
-            viewModel?.sortNFTCollection(option: .byName)
+        case .byTitle:
+            viewModel?.sortNFTCollection(option: .byTitle)
         case .byQuantity:
             viewModel?.sortNFTCollection(option: .byQuantity)
         default:
@@ -114,7 +114,7 @@ final class CatalogViewController: UIViewController {
         alertService = UniversalAlertService()
         
         alertService?.showActionSheet(title: L10n.Sorting.title,
-                                      sortingOptions: [.byName, .byQuantity, .close],
+                                      sortingOptions: [.byTitle, .byQuantity, .close],
                                       on: self,
                                       completion: { [weak self] options in
             guard let self = self else { return }

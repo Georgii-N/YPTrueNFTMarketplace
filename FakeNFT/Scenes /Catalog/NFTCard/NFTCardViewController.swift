@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 final class NFTCardViewController: UIViewController {
-    
+
     // MARK: - Private Dependencies:
     weak private var delegate: NFTCardViewControllerDelegate?
     private var viewModel: NFTCardViewModelProtocol?
@@ -129,27 +129,6 @@ final class NFTCardViewController: UIViewController {
     }()
     
     // MARK: Lifecycle:
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupViews()
-        setupConstraints()
-        setupTargets()
-        setupGesture()
-        
-        setupNFTInfo()
-        bind()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.hidesBarsOnSwipe = true
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        navigationController?.hidesBarsOnSwipe = false
-    }
-    
     init(delegate: NFTCardViewControllerDelegate?, viewModel: NFTCardViewModelProtocol?) {
         super.init(nibName: nil, bundle: nil)
         self.delegate = delegate
@@ -159,6 +138,17 @@ final class NFTCardViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+        setupConstraints()
+        setupTargets()
+        setupGesture()
+        
+        setupNFTInfo()
+        bind()
     }
     
     // MARK: - Private Methods:
@@ -384,8 +374,8 @@ extension NFTCardViewController: UITableViewDataSource {
         
         let cell: NFTCardTableViewCell = tableView.dequeueReusableCell()
         
-        if let currencie = viewModel.currenciesObservable.wrappedValue?[indexPath.row] {
-            cell.setupCurrencieModel(model: currencie)
+        if let currency = viewModel.currenciesObservable.wrappedValue?[indexPath.row] {
+            cell.setupСurrencyModel(model: currency)
             refreshControl.endRefreshing()
             unblockUI()
         }
@@ -470,7 +460,7 @@ extension NFTCardViewController {
             contentView.trailingAnchor.constraint(equalTo: allScreenScrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: allScreenScrollView.widthAnchor),
             
-            coverNFTScrollView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            coverNFTScrollView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             coverNFTScrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             coverNFTScrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             coverNFTScrollView.heightAnchor.constraint(equalToConstant: 375),
@@ -524,13 +514,13 @@ extension NFTCardViewController {
 }
 
 // MARK: - Setup Targets:
-extension NFTCardViewController {
-    private func setupTargets() {
+private extension NFTCardViewController {
+     func setupTargets() {
         sellerWebsiteButton.addTarget(self, action: #selector(goToSellerWebSite), for: .touchUpInside)
         addToCartButton.addTarget(self, action: #selector(changeNFTCartStatus), for: .touchUpInside)
     }
     
-    private func setupGesture() {
+    func setupGesture() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(openFullNFTImage))
         coverNFTScrollView.addGestureRecognizer(gesture)
     }
