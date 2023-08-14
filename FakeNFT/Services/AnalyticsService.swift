@@ -1,18 +1,26 @@
 import Foundation
+import YandexMobileMetrica
 
-enum Screens {
-    enum Catalog {
-        case main
-    }
-    enum Cart {
-        case main
-    }
-    enum Profile {
-        case main
-    }
-    enum Statistic {
-        case main
-    }
+enum Screens: String {
+        case CatalogMain = "CatalogMain"
+        case CartMain = "CartMain"
+    
+        case ProfileMain = "ProfileMain"
+    
+        case StatisticMain = "StatisticMain"
+        case StatisticProfile = "StatisticProfile"
+        case StatisticСollectionNFT = "StatisticСollectionNFT"
+}
+
+enum Items {
+    case screen
+    case buttonSorting
+    case buttonSortingByName
+    case buttonSortingByRating
+    case buttonGoToUserSite
+    case buttonGoToUserCollection
+    case buttonAddToCard
+    case buttonLike
 }
 
 enum Events {
@@ -21,9 +29,7 @@ enum Events {
     case close
 }
 
-enum Items {
-    case item
-}
+
 
 final class AnalyticsService {
     
@@ -31,12 +37,12 @@ final class AnalyticsService {
 
     private init() {}
     
-    func sentEvents(screen: Screens, item: Items, event: Events) {
+    func sentEvent(screen: Screens, item: Items, event: Events) {
         var parameters: [AnyHashable: Any] = [:]
         parameters = [item: event]
         
-//        YMMYandexMetrica.reportEvent(screen, parameters: parameters) { error in
-//            print("REPORT ERROR: %@", error.localizedDescription)
-//        }
+        YMMYandexMetrica.reportEvent(screen.rawValue, parameters: parameters) { error in
+            print("REPORT ERROR: %@", error.localizedDescription)
+        }
     }
 }
