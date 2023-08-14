@@ -18,14 +18,14 @@ final class DemoViewController: UIViewController {
     private lazy var totalNFT: UILabel = {
         let totalNFT = UILabel()
         totalNFT.textColor = .blackDay
-        totalNFT.font = UIFont.systemFont(ofSize: 15)
+        totalNFT.font = .captionSmallRegular
         return totalNFT
     }()
     
     private lazy var totalCost: UILabel = {
         let totalCost = UILabel()
         totalCost.textColor = .greenUniversal
-        totalCost.font = UIFont.boldSystemFont(ofSize: 17)
+        totalCost.font = .captionMediumBold
         return totalCost
     }()
     
@@ -36,7 +36,7 @@ final class DemoViewController: UIViewController {
         toPayButton.setTitleColor(.whiteDay, for: .normal)
         toPayButton.layer.cornerRadius = 16
         toPayButton.titleLabel?.textAlignment = .center
-        toPayButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        toPayButton.titleLabel?.font = .captionMediumBold
         return toPayButton
     }()
     
@@ -72,21 +72,21 @@ final class DemoViewController: UIViewController {
     
     private let tabBarProfileLabel: UILabel = {
         let profile = UILabel()
-        profile.font = UIFont.systemFont(ofSize: 10)
+        profile.font = .captionSmallestMedium
         profile.text = L10n.Profile.title
         return profile
     }()
     
     private let tabBarCatalogLabel: UILabel = {
         let catalog = UILabel()
-        catalog.font = UIFont.systemFont(ofSize: 10)
+        catalog.font = .captionSmallestMedium
         catalog.text = L10n.Catalog.title
         return catalog
     }()
     
     private let tabBarCartLabel: UILabel = {
         let profile = UILabel()
-        profile.font = UIFont.systemFont(ofSize: 10)
+        profile.font = .captionSmallestMedium
         profile.text = L10n.Basket.title
         profile.textColor = .blueUniversal
         return profile
@@ -94,7 +94,7 @@ final class DemoViewController: UIViewController {
     
     private let tabBarStatisticLabel: UILabel = {
         let profile = UILabel()
-        profile.font = UIFont.systemFont(ofSize: 10)
+        profile.font = .captionSmallestMedium
         profile.text = L10n.Statistic.title
         return profile
     }()

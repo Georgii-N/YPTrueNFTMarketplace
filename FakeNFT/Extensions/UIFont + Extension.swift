@@ -3,6 +3,7 @@ import UIKit
 extension UIFont {
 
     static var headlineLarge = UIFont.systemFont(ofSize: 34, weight: .bold)
+    static var headlineOnboarding = UIFont.systemFont(ofSize: 32, weight: .bold)
     static var headlineMedium = UIFont.systemFont(ofSize: 22, weight: .bold)
     static var headlineSmall = UIFont.systemFont(ofSize: 17, weight: .bold)
     
