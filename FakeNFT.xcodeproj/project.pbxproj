@@ -346,20 +346,6 @@
 			path = Demo;
 			sourceTree = "<group>";
 		};
-		408616C22A76585E004CA07E /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		408616C32A765882004CA07E /* Statistic */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Statistic;
-			sourceTree = "<group>";
-		};
 		408616C42A765902004CA07E /* Application */ = {
 			isa = PBXGroup;
 			children = (

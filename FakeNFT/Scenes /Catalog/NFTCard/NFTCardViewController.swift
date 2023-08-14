@@ -163,6 +163,7 @@ final class NFTCardViewController: UIViewController {
         viewModel?.nftsObservable.bind(action: { [weak self] _ in
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.nftColectionView.reloadData, with: ())
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
         })
         
         viewModel?.likeStatusDidChangeObservable.bind(action: { [weak self] _ in
@@ -540,6 +541,7 @@ private extension NFTCardViewController {
     func setupTargets() {
         sellerWebsiteButton.addTarget(self, action: #selector(goToSellerWebSite), for: .touchUpInside)
         addToCartButton.addTarget(self, action: #selector(changeNFTCartStatus), for: .touchUpInside)
+        refreshControl.addTarget(self, action: #selector(refreshNFTCardScreen), for: .valueChanged)
     }
     
     func setupGesture() {
