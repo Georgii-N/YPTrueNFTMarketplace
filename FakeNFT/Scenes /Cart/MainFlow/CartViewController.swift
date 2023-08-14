@@ -5,7 +5,7 @@ import Kingfisher
 final class CartViewControler: UIViewController {
     
     // MARK: Public dependencies
-    var cartViewModel: CartViewModelProtocol
+    private let cartViewModel: CartViewModelProtocol
     
     // MARK: UI constants and variables
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())

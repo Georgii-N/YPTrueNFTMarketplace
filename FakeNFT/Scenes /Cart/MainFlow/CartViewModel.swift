@@ -14,13 +14,13 @@ protocol CartViewModelProtocol: AnyObject {
 
 final class CartViewModel: CartViewModelProtocol {
     
-    
     // MARK: constants and variables
-    private let dataProvider = DataProvider()
-    private var idNfts: [String] = []
     var cartNft: Observable<[NFTCard]?> {
         $cartNFT
     }
+    private let dataProvider = DataProvider()
+    private var idNfts: [String] = []
+
     
     // MARK: Dependencies
     private var orderID: String?
@@ -36,7 +36,8 @@ final class CartViewModel: CartViewModelProtocol {
     
     // MARK: Methods
     func getOrder() {
-        dataProvider.fetchOrder { result in
+        dataProvider.fetchOrder {[weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let data):
                 data.nfts.forEach { self.idNfts.append($0) }
@@ -57,7 +58,8 @@ final class CartViewModel: CartViewModelProtocol {
             newNftId.append(nft.id)
         }
         let newOrder = Order(nfts: newNftId, id: orderId)
-        dataProvider.putNewOrder(order: newOrder) { result in
+        dataProvider.putNewOrder(order: newOrder) {[weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let data):
                 self.idNfts = []
@@ -73,7 +75,8 @@ final class CartViewModel: CartViewModelProtocol {
     }
     
     func getNfts() {
-        dataProvider.fetchUsersNFT(userId: nil, nftsId: idNfts) {result in
+        dataProvider.fetchUsersNFT(userId: nil, nftsId: idNfts) {[weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let data):
                 data.forEach {self.cartNFT?.append($0)}
@@ -97,8 +100,8 @@ final class CartViewModel: CartViewModelProtocol {
         var newNftCart: [NFTCard] = []
         let cartNFT = unwrappedCartNftViewModel()
         switch sortOptions {
-        case .byPrice: newNftCart = cartNFT.sorted(by: {$0.price < $1.price})
-        case .byRating: newNftCart = cartNFT.sorted(by: {$0.rating < $1.rating})
+        case .byPrice: newNftCart = cartNFT.sorted(by: {$0.price > $1.price})
+        case .byRating: newNftCart = cartNFT.sorted(by: {$0.rating > $1.rating})
         case .byName: newNftCart = cartNFT.sorted(by: {$0.name < $1.name})
         default: break
         }

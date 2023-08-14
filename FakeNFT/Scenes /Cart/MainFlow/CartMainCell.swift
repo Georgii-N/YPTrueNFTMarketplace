@@ -84,7 +84,7 @@ extension CartMainCell {
             priceNFT.leadingAnchor.constraint(equalTo: imageNFT.trailingAnchor, constant: 20),
             priceCountNFT.topAnchor.constraint(equalTo: priceNFT.bottomAnchor, constant: 2),
             priceCountNFT.leadingAnchor.constraint(equalTo: imageNFT.trailingAnchor, constant: 20),
-            deleteCartButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 34),
+            deleteCartButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             deleteCartButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
     }
@@ -95,15 +95,10 @@ extension CartMainCell {
     
     // MARK: Methods
     private func setRating(rating: Int) {
-        switch rating {
-        case 0: ratingNFT.image = UIImage(named: "rating_0")
-        case 1: ratingNFT.image = UIImage(named: "rating_1")
-        case 2: ratingNFT.image = UIImage(named: "rating_2")
-        case 3: ratingNFT.image = UIImage(named: "rating_3")
-        case 4: ratingNFT.image = UIImage(named: "rating_4")
-        case 5: ratingNFT.image = UIImage(named: "rating_5")
-        default: break
+        guard rating < 6 else {
+            return
         }
+        return ratingNFT.image = UIImage(named: "rating_\(rating)")
     }
     
     func setupCollectionModel(model: NFTCard) {

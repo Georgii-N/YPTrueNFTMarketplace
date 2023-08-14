@@ -4,7 +4,7 @@ import UIKit
 final class PaymentViewController: UIViewController {
     
     // MARK: Dependencies
-    private var paymentViewModel: PaymentViewModelProtocol
+    private let paymentViewModel: PaymentViewModelProtocol
     
     // MARK: UI constants and variables
     private let payButton = BaseBlackButton(with: L10n.Cart.PayScreen.payButton)
@@ -113,15 +113,15 @@ extension PaymentViewController {
     // MARK: Private Methods
     @objc
     private func goToSuccessScreen() {
-        paymentViewModel.makePay { result in
+        paymentViewModel.makePay { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
             switch result {
             case true:
-                DispatchQueue.main.async {
+
                     let successViewController = SuccessfulPaymentViewController()
                     self.navigationController?.pushViewController(successViewController, animated: true)
-                }
             case false:
-                DispatchQueue.main.async {
                     let unsuccessViewController = UnsuccessfulPaymentViewController()
                     self.navigationController?.pushViewController(unsuccessViewController, animated: true)
                 }

@@ -31,7 +31,8 @@ final class PaymentViewModel: PaymentViewModelProtocol {
     
     // MARK: Methods
    private func getData () {
-        dataProvider.fetchCurrencies {result in
+       dataProvider.fetchCurrencies {[weak self] result in
+           guard let self = self else { return }
             switch result {
             case .success(let currencie):
                 self.currencieNFT?.append(contentsOf: currencie)

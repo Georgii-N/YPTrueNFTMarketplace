@@ -15,7 +15,7 @@ final class CartPaymentCell: UICollectionViewCell {
    private lazy var nameCoin: UILabel = {
         let nameCoin = UILabel()
         nameCoin.textColor = .blackDay
-        nameCoin.font = UIFont.boldSystemFont(ofSize: 13)
+        nameCoin.font = UIFont.systemFont(ofSize: 13)
         return nameCoin
     }()
     

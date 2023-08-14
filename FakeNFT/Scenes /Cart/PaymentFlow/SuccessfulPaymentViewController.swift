@@ -57,7 +57,7 @@ extension SuccessfulPaymentViewController {
     }
     
     @objc
-    func backToCatalog() {
+   private func backToCatalog() {
         navigationController?.popViewController(animated: true)
     }
 }

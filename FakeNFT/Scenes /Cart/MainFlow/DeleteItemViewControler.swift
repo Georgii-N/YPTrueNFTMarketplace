@@ -9,8 +9,8 @@ final class DeleteItemViewControler: UIViewController {
     
     // MARK: Public dependencies
     weak var delegate: DeleteViewControllerDelegate?
-    var itemImage: UIImage
-    var itemId: String
+    private let itemImage: UIImage
+    private let itemId: String
     
     // MARK: UI constants and variables
     private let blurEffect = UIBlurEffect(style: .light)

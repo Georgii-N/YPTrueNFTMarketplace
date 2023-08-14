@@ -4,7 +4,7 @@ import UIKit
 final class UnsuccessfulPaymentViewController: UIViewController {
     
     // MARK: UI constants and variables
-    let tryButton = BaseBlackButton(with: L10n.Cart.UnsuccessfulPayment.tryAgain)
+   private let tryButton = BaseBlackButton(with: L10n.Cart.UnsuccessfulPayment.tryAgain)
     
     private lazy var unsuccessefulImage: UIImageView = {
         let unsuccessefulImage = UIImageView()
