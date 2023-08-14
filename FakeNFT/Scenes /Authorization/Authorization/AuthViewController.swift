@@ -210,6 +210,15 @@ final class AuthViewController: UIViewController {
         present(viewController, animated: true)
     }
     
+    @objc private func switchToDemoVC() {
+        let viewModel = DemoViewModel()
+        let viewController = DemoViewController(demoViewModel: viewModel)
+        viewController.modalPresentationStyle = .overFullScreen
+        
+        present(viewController, animated: true)
+    }
+    
+    // Keyboard Observers:
     @objc private func keyboardDidShow(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let keyboardFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
@@ -309,5 +318,6 @@ extension AuthViewController {
     private func setupTargets() {
         registrationButton.addTarget(self, action: #selector(switchToRegistrateVC), for: .touchUpInside)
         enterButton.addTarget(self, action: #selector(authorizeUser), for: .touchUpInside)
+        demoButton.addTarget(self, action: #selector(switchToDemoVC), for: .touchUpInside)
     }
 }
