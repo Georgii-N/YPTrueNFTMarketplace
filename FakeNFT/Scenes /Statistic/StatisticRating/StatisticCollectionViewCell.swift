@@ -18,7 +18,7 @@ final class StatisticCollectionViewCell: UICollectionViewCell {
     // MARK: - UI
     private lazy var numberLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.font = .captionSmallRegular
         label.textColor = .blackDay
         label.textAlignment = .center
         return label
@@ -41,14 +41,14 @@ final class StatisticCollectionViewCell: UICollectionViewCell {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        label.font = .captionLargeBold
         label.textColor = .blackDay
         return label
     }()
     
     private lazy var ratingPointsLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        label.font = .captionLargeBold
         label.textColor = .blackDay
         label.textAlignment = .right
         return label

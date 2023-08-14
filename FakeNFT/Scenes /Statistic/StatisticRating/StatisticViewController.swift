@@ -3,7 +3,6 @@ import UIKit
 final class StatisticViewController: UIViewController {
     
     // MARK: - Private Dependencies
-    
     private var alertService: AlertServiceProtocol?
     private var statisticViewModel: StatisticViewModelProtocol
     

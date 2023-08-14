@@ -5,7 +5,7 @@ final class StatisticUserTableViewCell: UITableViewCell {
     // MARK: - UI
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        label.font = .captionMediumBold
         label.textColor = .blackDay
         label.textAlignment = .left
         return label

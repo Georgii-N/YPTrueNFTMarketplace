@@ -25,7 +25,7 @@ final class StatisticUserViewController: UIViewController {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        label.font = .captionLargeBold
         label.textColor = .blackDay
         label.text = statisticUserViewModel.profile.name
         return label
@@ -35,7 +35,7 @@ final class StatisticUserViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.sizeToFit()
-        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.font = .bodySmallerRegular
         label.textColor = .blackDay
         label.text = statisticUserViewModel.profile.description
         return label

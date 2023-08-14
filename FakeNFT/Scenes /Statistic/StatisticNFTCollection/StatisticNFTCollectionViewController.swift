@@ -18,7 +18,7 @@ final class StatisticNFTCollectionViewController: UIViewController {
     
     private lazy var stubLabel: UILabel = {
         let stubLabel = UILabel()
-        stubLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        stubLabel.font = .bodyMediumBold
         stubLabel.textColor = .blackDay
         stubLabel.textAlignment = .center
         stubLabel.text = L10n.Statistic.Profile.UserCollection.stub
