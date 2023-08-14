@@ -11,27 +11,11 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
   internal enum Alert {
-    /// Cортировка
-    internal static let sortTitle = L10n.tr("Localizable", "alert.sortTitle", fallback: "Cортировка")
     internal enum Authorization {
       /// Не удалось войти в систему
       internal static let message = L10n.tr("Localizable", "alert.authorization.message", fallback: "Не удалось войти в систему")
       /// Что-то пошло не так (
       internal static let title = L10n.tr("Localizable", "alert.authorization.title", fallback: "Что-то пошло не так (")
-    }
-    internal enum Sort {
-      /// По имени
-      internal static let byName = L10n.tr("Localizable", "alert.sort.byName", fallback: "По имени")
-      /// По названию
-      internal static let byNameOfNFT = L10n.tr("Localizable", "alert.sort.byNameOfNFT", fallback: "По названию")
-      /// По имени
-      internal static let byNameOfPerson = L10n.tr("Localizable", "alert.sort.byNameOfPerson", fallback: "По имени")
-      /// По количеству NFT
-      internal static let byNumberOfNFT = L10n.tr("Localizable", "alert.sort.byNumberOfNFT", fallback: "По количеству NFT")
-      /// По цене
-      internal static let byPrice = L10n.tr("Localizable", "alert.sort.byPrice", fallback: "По цене")
-      /// По рейтингу
-      internal static let byRating = L10n.tr("Localizable", "alert.sort.byRating", fallback: "По рейтингу")
     }
   }
   internal enum Authorization {
@@ -133,6 +117,28 @@ internal enum L10n {
     /// Вернуться
     internal static let `return` = L10n.tr("Localizable", "general.return", fallback: "Вернуться")
   }
+  internal enum NetworkError {
+    /// Не удалось получить данные, попробуйте позже
+    internal static let anotherError = L10n.tr("Localizable", "networkError.anotherError", fallback: "Не удалось получить данные, попробуйте позже")
+    /// Не удалось конвертировать полученные данные
+    internal static let parsingError = L10n.tr("Localizable", "networkError.parsingError", fallback: "Не удалось конвертировать полученные данные")
+    /// Ошибка выполнения запроса
+    internal static let requestError = L10n.tr("Localizable", "networkError.requestError", fallback: "Ошибка выполнения запроса")
+    /// Попробуйте позже
+    internal static let tryLater = L10n.tr("Localizable", "networkError.tryLater", fallback: "Попробуйте позже")
+    /// Проверьте интернет - соединение
+    internal static let urlSessionError = L10n.tr("Localizable", "networkError.URLSessionError", fallback: "Проверьте интернет - соединение")
+    internal enum Http {
+      /// По запросу ничего не найдено
+      internal static let _404 = L10n.tr("Localizable", "networkError.http.404", fallback: "По запросу ничего не найдено")
+      /// Ошибка обновления ресурса
+      internal static let _409 = L10n.tr("Localizable", "networkError.http.409", fallback: "Ошибка обновления ресурса")
+      /// Запрошенный ресурс больше недоступен
+      internal static let _410 = L10n.tr("Localizable", "networkError.http.410", fallback: "Запрошенный ресурс больше недоступен")
+      /// Ошибка на стороне сервера
+      internal static let _5Хх = L10n.tr("Localizable", "networkError.http.5хх", fallback: "Ошибка на стороне сервера")
+    }
+  }
   internal enum Onboarding {
     /// Коллекционируйте
     internal static let collect = L10n.tr("Localizable", "onboarding.collect", fallback: "Коллекционируйте")
@@ -188,14 +194,16 @@ internal enum L10n {
     }
   }
   internal enum Sorting {
-    /// По названию
-    internal static let byName = L10n.tr("Localizable", "sorting.byName", fallback: "По названию")
+    /// По имени
+    internal static let byName = L10n.tr("Localizable", "sorting.byName", fallback: "По имени")
     /// По количеству NFT
     internal static let byNFTCount = L10n.tr("Localizable", "sorting.byNFTCount", fallback: "По количеству NFT")
     /// По цене
     internal static let byPrice = L10n.tr("Localizable", "sorting.byPrice", fallback: "По цене")
     /// По рейтингу
     internal static let byRating = L10n.tr("Localizable", "sorting.byRating", fallback: "По рейтингу")
+    /// По названию
+    internal static let byTitle = L10n.tr("Localizable", "sorting.byTitle", fallback: "По названию")
     /// Сортировка
     internal static let title = L10n.tr("Localizable", "sorting.title", fallback: "Сортировка")
   }

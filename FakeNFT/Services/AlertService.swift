@@ -2,21 +2,24 @@ import UIKit
 
 enum SortingOption: CaseIterable {
     case byName
-    case byPrice
     case byRating
+    case byTitle
+    case byPrice
     case byQuantity
     case close
     
     var localizedString: String {
         switch self {
         case .byName:
-            return L10n.Alert.Sort.byName
-        case .byPrice:
-            return L10n.Alert.Sort.byPrice
+            return L10n.Sorting.byName
         case .byRating:
-            return L10n.Alert.Sort.byRating
+            return L10n.Sorting.byRating
+        case .byTitle:
+            return L10n.Sorting.byTitle
+        case .byPrice:
+            return L10n.Sorting.byPrice
         case .byQuantity:
-            return L10n.Alert.Sort.byNumberOfNFT
+            return L10n.Sorting.byNFTCount
         case .close:
             return L10n.General.close
         }
@@ -26,10 +29,12 @@ enum SortingOption: CaseIterable {
         switch self {
         case .byName:
             return "byName"
-        case .byPrice:
-            return "byPrice"
         case .byRating:
             return "byRating"
+        case .byTitle:
+            return "byTitle"
+        case .byPrice:
+            return "byPrice"
         case .byQuantity:
             return "byQuantity"
         default:
@@ -41,10 +46,12 @@ enum SortingOption: CaseIterable {
         switch stringValue {
         case "byName":
             self = .byName
-        case "byPrice":
-            self = .byPrice
         case "byRating":
             self = .byRating
+        case "byTitle":
+            self = .byTitle
+        case "byPrice":
+            self = .byPrice
         case "byQuantity":
             self = .byQuantity
         default:

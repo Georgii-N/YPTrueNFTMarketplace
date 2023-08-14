@@ -1,10 +1,3 @@
-//
-//  RegistrationViewModelProtocol.swift
-//  FakeNFT
-//
-//  Created by Евгений on 09.08.2023.
-//
-
 import Foundation
 
 protocol RegistrationViewModelProtocol: AnyObject {

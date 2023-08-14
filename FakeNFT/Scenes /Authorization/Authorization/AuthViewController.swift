@@ -1,10 +1,3 @@
-//
-//  AuthViewController.swift
-//  FakeNFT
-//
-//  Created by Евгений on 09.08.2023.
-//
-
 import UIKit
 
 final class AuthViewController: UIViewController {
@@ -132,9 +125,9 @@ final class AuthViewController: UIViewController {
             guard let self = self else { return }
             self.unblockUI()
             if newValue == true {
-                showLoginPasswordMistake()
+                self.showLoginPasswordMistake()
             } else {
-                hideLoginPasswordMistake()
+                self.hideLoginPasswordMistake()
             }
         }
         
