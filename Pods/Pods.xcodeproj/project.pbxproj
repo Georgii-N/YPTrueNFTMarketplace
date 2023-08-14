@@ -1,0 +1,1107 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		899318C1CEDE586664EC232A68069570 /* YandexMobileMetrica */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 83787D0EC5DA7713B7C6D32C1D11D707 /* Build configuration list for PBXAggregateTarget "YandexMobileMetrica" */;
+			buildPhases = (
+				6D2995F93765283CDFA66CFB2B2808F6 /* [CP] Copy XCFrameworks */,
+			);
+			dependencies = (
+			);
+			name = YandexMobileMetrica;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		2A6ADF79413C4771CBACFED40117DEEE /* Pods-FakeNFT-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F131E4A891DD9879247429F0804313AF /* Pods-FakeNFT-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5BBC1EB2F7BC2AB2D0DA82C6F556788E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		5D2693966E004C732CE172EAA8D6E3BA /* Pods-FakeNFT-FakeNFTUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 62276B623A90AE7187EFAB4C6B46F280 /* Pods-FakeNFT-FakeNFTUITests-dummy.m */; };
+		5E7AD8D2090D986BADB9BC1EFA34475A /* Pods-FakeNFTTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 19306A6090FFE87B0F54AF6DE2C99346 /* Pods-FakeNFTTests-dummy.m */; };
+		6D440068910024753BD45676CFC44C34 /* Pods-FakeNFT-FakeNFTUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EF56668AF48B5B96EEF29B45BB943ABF /* Pods-FakeNFT-FakeNFTUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		74C511FCEE77072996412F4BB9155D6D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		9940C684BBB7896F569235B41E5826F7 /* Pods-FakeNFTTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 223A4C7AFC132586551953754972803D /* Pods-FakeNFTTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF8DDBAA202CB89C2E37D665C17A6A08 /* Pods-FakeNFT-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1FECFCB65993C5F4FB664DBDA78161 /* Pods-FakeNFT-dummy.m */; };
+		E0F81DB778516959799BA0E24CA01855 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		291AD78F3651695ADF20114E4763E96B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED2F888801DC0905957764110A86D5B1;
+			remoteInfo = "Pods-FakeNFT";
+		};
+		5A99FB9DF0AD760204340068C0D8ED90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 899318C1CEDE586664EC232A68069570;
+			remoteInfo = YandexMobileMetrica;
+		};
+		C7450FD861D9DCA4198C6C40227AEC11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 899318C1CEDE586664EC232A68069570;
+			remoteInfo = YandexMobileMetrica;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		09198C8929D7051B5DE9B7C816030642 /* Pods-FakeNFT-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FakeNFT-acknowledgements.plist"; sourceTree = "<group>"; };
+		0A71BC32A47112B0ABC03BAE8A6DBB13 /* YMMYandexMetricaReporting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaReporting.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMYandexMetricaReporting.h"; sourceTree = "<group>"; };
+		0B3C9A0FBC6EC4988CD8CA1F45A5C7C3 /* Pods-FakeNFT-FakeNFTUITests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-FakeNFT-FakeNFTUITests"; path = Pods_FakeNFT_FakeNFTUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B9B5B115B13731790ADE26C8F40B1B6 /* YandexMobileMetricaCrashes-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "YandexMobileMetricaCrashes-umbrella.h"; path = "dynamic/YandexMobileMetricaCrashes.xcframework/ios-arm64_armv7/YandexMobileMetricaCrashes.framework/Headers/YandexMobileMetricaCrashes-umbrella.h"; sourceTree = "<group>"; };
+		0D0B48A490DDB2ABE26A22603C8CC586 /* YMMProfileAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMProfileAttribute.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMProfileAttribute.h"; sourceTree = "<group>"; };
+		0E731F60D473A26BA0F1E4793FCB4125 /* YMMReporterConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMReporterConfiguration.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMReporterConfiguration.h"; sourceTree = "<group>"; };
+		13653C5DAE9623572A7B8BE6FFEA1881 /* YMMStackTraceElement.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMStackTraceElement.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMStackTraceElement.h"; sourceTree = "<group>"; };
+		138E78AD9A664EBCF2633D89B34A74FB /* YMMPluginErrorDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMPluginErrorDetails.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMPluginErrorDetails.h"; sourceTree = "<group>"; };
+		19306A6090FFE87B0F54AF6DE2C99346 /* Pods-FakeNFTTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FakeNFTTests-dummy.m"; sourceTree = "<group>"; };
+		223A4C7AFC132586551953754972803D /* Pods-FakeNFTTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FakeNFTTests-umbrella.h"; sourceTree = "<group>"; };
+		29E72CE86E372B085DD87E8509452234 /* YMMYandexMetrica.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetrica.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMYandexMetrica.h"; sourceTree = "<group>"; };
+		29F08BF097A2F42E6BDE88E70E7FE7F1 /* YMMRevenueInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMRevenueInfo.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMRevenueInfo.h"; sourceTree = "<group>"; };
+		29FF8E04B5BCB2ECCE6B1E6FFC81549B /* YMMYandexMetrica.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetrica.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMYandexMetrica.h"; sourceTree = "<group>"; };
+		2B14AF32EBE4F16EFF18C2FC6AF84C52 /* Pods-FakeNFTTests */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-FakeNFTTests"; path = Pods_FakeNFTTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DB313092A0F4210CD9222DEF2257E4F /* YandexMobileMetricaCrashes-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "YandexMobileMetricaCrashes-umbrella.h"; path = "dynamic/YandexMobileMetricaCrashes.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetricaCrashes.framework/Headers/YandexMobileMetricaCrashes-umbrella.h"; sourceTree = "<group>"; };
+		3012C1466989E382663BE04B0D143BCD /* YMMError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMError.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMError.h"; sourceTree = "<group>"; };
+		3538D397767F22576FAECE9F8E18A2F4 /* Pods-FakeNFTTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FakeNFTTests.modulemap"; sourceTree = "<group>"; };
+		380D0E8F81A9E55411E7A2994DA685B6 /* YMMCompletionBlocks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMCompletionBlocks.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMCompletionBlocks.h"; sourceTree = "<group>"; };
+		39C294A8BD6B8C88B119EAE9F4AF0E3A /* Pods-FakeNFT */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-FakeNFT"; path = Pods_FakeNFT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D727E30B9047BC2A22763D65486ACD7 /* YMMYandexMetricaConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaConfiguration.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMYandexMetricaConfiguration.h"; sourceTree = "<group>"; };
+		3E7D1553D24690687E20F12D3C583AEE /* YandexMobileMetricaCrashes-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "YandexMobileMetricaCrashes-umbrella.h"; path = "dynamic/YandexMobileMetricaCrashes.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetricaCrashes.framework/Headers/YandexMobileMetricaCrashes-umbrella.h"; sourceTree = "<group>"; };
+		3ECD143AA2CF7F0AB8FA73C4058468D2 /* Pods-FakeNFT-FakeNFTUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FakeNFT-FakeNFTUITests.modulemap"; sourceTree = "<group>"; };
+		3F67A7A1430E87662994CE89A3ECB36E /* Pods-FakeNFT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FakeNFT.debug.xcconfig"; sourceTree = "<group>"; };
+		426D101F6543A22A46C7B47FE00924DA /* YMMRevenueInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMRevenueInfo.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMRevenueInfo.h"; sourceTree = "<group>"; };
+		4504EE294F21EC5A91C1D9960263E370 /* YMMVersion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMVersion.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMVersion.h"; sourceTree = "<group>"; };
+		452643126B8B698B3F693EB10FBBA65D /* YMMPluginErrorDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMPluginErrorDetails.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMPluginErrorDetails.h"; sourceTree = "<group>"; };
+		47B1CEB42A6C302BB020740D348F123B /* YMMErrorRepresentable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMErrorRepresentable.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMErrorRepresentable.h"; sourceTree = "<group>"; };
+		48EE194EAEB09BF351C16DAA80A56C2B /* YandexMobileMetrica.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; name = YandexMobileMetrica.xcframework; path = dynamic/YandexMobileMetrica.xcframework; sourceTree = "<group>"; };
+		4A265162BC896FE942097D2FCDFA6194 /* Pods-FakeNFT-FakeNFTUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FakeNFT-FakeNFTUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		4A3BC4D55A3CEE7AECDA857DB2875D3C /* YMMYandexMetricaPluginReporting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPluginReporting.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMYandexMetricaPluginReporting.h"; sourceTree = "<group>"; };
+		4A80F356AB0396399C7C0E5C048712F5 /* YMMCompletionBlocks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMCompletionBlocks.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMCompletionBlocks.h"; sourceTree = "<group>"; };
+		4DFAAE238A7778C32F03BBA71AF97D83 /* Pods-FakeNFT-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FakeNFT-frameworks.sh"; sourceTree = "<group>"; };
+		5203BB0447A0B33719738FB41475C4C6 /* YMMError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMError.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMError.h"; sourceTree = "<group>"; };
+		54A4927018562DC9B0FFAEE1C22693AF /* Pods-FakeNFT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FakeNFT.release.xcconfig"; sourceTree = "<group>"; };
+		559783E6EAC05F7D98AF1F261961EB38 /* YMMAdRevenueInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMAdRevenueInfo.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMAdRevenueInfo.h"; sourceTree = "<group>"; };
+		57369F77C3A165FF9854CD1CC09C2357 /* YMMUserProfile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMUserProfile.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMUserProfile.h"; sourceTree = "<group>"; };
+		5A77F6EDC7ECCB4F775E1897CF7136E5 /* YMMUserProfile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMUserProfile.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMUserProfile.h"; sourceTree = "<group>"; };
+		5E051ACBFEDFB572619FFB5407446977 /* Pods-FakeNFT-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FakeNFT-Info.plist"; sourceTree = "<group>"; };
+		5EE583AF8393411C0A63C645BD60B0DA /* YMMStackTraceElement.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMStackTraceElement.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMStackTraceElement.h"; sourceTree = "<group>"; };
+		62276B623A90AE7187EFAB4C6B46F280 /* Pods-FakeNFT-FakeNFTUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FakeNFT-FakeNFTUITests-dummy.m"; sourceTree = "<group>"; };
+		63613B48111C74CA571652FF72336094 /* YandexMobileMetrica.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YandexMobileMetrica.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YandexMobileMetrica.h"; sourceTree = "<group>"; };
+		63D632F41616DBA0FB97F924B0B05D30 /* YandexMobileMetrica-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "YandexMobileMetrica-umbrella.h"; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YandexMobileMetrica-umbrella.h"; sourceTree = "<group>"; };
+		6431AFAFA8D4BC2760E0B239ED0E2BE8 /* YMMReporterConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMReporterConfiguration.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMReporterConfiguration.h"; sourceTree = "<group>"; };
+		6461EE8E7F6DAACE7EE158B3CBE48A66 /* YMMYandexMetricaPreloadInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPreloadInfo.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMYandexMetricaPreloadInfo.h"; sourceTree = "<group>"; };
+		68DDF6CCFB8673F1CA947690440657A3 /* YandexMobileMetricaCrashes-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "YandexMobileMetricaCrashes-umbrella.h"; path = "dynamic/YandexMobileMetricaCrashes.xcframework/tvos-arm64/YandexMobileMetricaCrashes.framework/Headers/YandexMobileMetricaCrashes-umbrella.h"; sourceTree = "<group>"; };
+		6AEB38741AF0871BC2A2F25D7D03189F /* YMMYandexMetricaReporting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaReporting.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMYandexMetricaReporting.h"; sourceTree = "<group>"; };
+		6E8BA7EA1661F7C8DE1C3E268A12B8CA /* YMMErrorRepresentable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMErrorRepresentable.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMErrorRepresentable.h"; sourceTree = "<group>"; };
+		6F55B18258221CFC74BFAD52B227E082 /* YandexMobileMetricaCrashes.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; name = YandexMobileMetricaCrashes.xcframework; path = dynamic/YandexMobileMetricaCrashes.xcframework; sourceTree = "<group>"; };
+		6FBDD13CEC5D14DF1F487A2A5B565AE7 /* YandexMobileMetrica.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YandexMobileMetrica.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YandexMobileMetrica.h"; sourceTree = "<group>"; };
+		6FEE293737B7F176294EE1199E7444EE /* Pods-FakeNFTTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FakeNFTTests.debug.xcconfig"; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		738E8FCE1CE34FC20BE39D9922F8FC8D /* YMMYandexMetricaReporting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaReporting.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMYandexMetricaReporting.h"; sourceTree = "<group>"; };
+		757BB72FDC1446A84BC11DFCCEDE7C1D /* YandexMobileMetrica.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YandexMobileMetrica.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YandexMobileMetrica.h"; sourceTree = "<group>"; };
+		7A8F6A5E2C0CE01275D1E8CE2EB0CA4D /* YandexMobileMetrica.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YandexMobileMetrica.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YandexMobileMetrica.h"; sourceTree = "<group>"; };
+		7BB11E41171612A6440739B7B354B125 /* YMMYandexMetrica.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetrica.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMYandexMetrica.h"; sourceTree = "<group>"; };
+		82B65005303C25A48AEA5BE5F77DD6B1 /* YMMError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMError.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMError.h"; sourceTree = "<group>"; };
+		83B87FBF92FD18E63ECED774402EF774 /* YMMYandexMetricaPlugins.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPlugins.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMYandexMetricaPlugins.h"; sourceTree = "<group>"; };
+		8727FF0C526786D2A527FA20F2327B5A /* YMMPluginErrorDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMPluginErrorDetails.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMPluginErrorDetails.h"; sourceTree = "<group>"; };
+		88F6521C62F62207F795B525716A6D39 /* YMMYandexMetricaConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaConfiguration.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMYandexMetricaConfiguration.h"; sourceTree = "<group>"; };
+		8D17B7CFCD3A0A4CC0CEDE95AB91633B /* YMMProfileAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMProfileAttribute.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMProfileAttribute.h"; sourceTree = "<group>"; };
+		8D807A9183CC7FD5BC407740E8CF691E /* Pods-FakeNFT-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FakeNFT-acknowledgements.markdown"; sourceTree = "<group>"; };
+		9245BE4191B5A7CED41E43DA1C254C05 /* YMMAdRevenueInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMAdRevenueInfo.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMAdRevenueInfo.h"; sourceTree = "<group>"; };
+		936BEF218B7DC289E66DEB57461D7173 /* YMMVersion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMVersion.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMVersion.h"; sourceTree = "<group>"; };
+		93BB474FA736B88426FBA58A222FC794 /* Pods-FakeNFT.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FakeNFT.modulemap"; sourceTree = "<group>"; };
+		97745C09BAFE036906B5E38FEE2A6B40 /* YandexMobileMetrica-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "YandexMobileMetrica-umbrella.h"; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YandexMobileMetrica-umbrella.h"; sourceTree = "<group>"; };
+		9AD8267618967B2A48F39F5298C471A4 /* YMMECommerce.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMECommerce.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMECommerce.h"; sourceTree = "<group>"; };
+		9B3A1AD1A84A6A795AAEC1F450E43208 /* Pods-FakeNFTTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FakeNFTTests.release.xcconfig"; sourceTree = "<group>"; };
+		9D2199F0583A34A7D909904EB685C114 /* YMMYandexMetrica.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetrica.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMYandexMetrica.h"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9E0DB909F78DCC585D58C4DC2B78DA88 /* YMMYandexMetricaPreloadInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPreloadInfo.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMYandexMetricaPreloadInfo.h"; sourceTree = "<group>"; };
+		A0B2E644BF66A910021AE84585C381EB /* YMMRevenueInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMRevenueInfo.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMRevenueInfo.h"; sourceTree = "<group>"; };
+		A0CB18A8A5B4E7A48B4521BB5E0F13C0 /* YandexMobileMetrica-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "YandexMobileMetrica-umbrella.h"; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YandexMobileMetrica-umbrella.h"; sourceTree = "<group>"; };
+		A16DC242BE0089564FF8B07927B59E1B /* YMMECommerce.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMECommerce.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMECommerce.h"; sourceTree = "<group>"; };
+		A5DD179F9713D0A3CA9AA07CE5F159B4 /* YMMECommerce.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMECommerce.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMECommerce.h"; sourceTree = "<group>"; };
+		AB4CB7DAA4B52E30F49720EE8DA7264D /* YandexMobileMetrica-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "YandexMobileMetrica-umbrella.h"; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YandexMobileMetrica-umbrella.h"; sourceTree = "<group>"; };
+		AD7C3D67ADBCC0F1D052D33BABE1DE67 /* YMMYandexMetricaPreloadInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPreloadInfo.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMYandexMetricaPreloadInfo.h"; sourceTree = "<group>"; };
+		AE616C9D4DD228D7E9A2ABDAB46BA421 /* YMMECommerce.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMECommerce.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMECommerce.h"; sourceTree = "<group>"; };
+		B36279BBE8891BFC5C056737BF880EC3 /* YandexMobileMetrica-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "YandexMobileMetrica-xcframeworks.sh"; sourceTree = "<group>"; };
+		B3FD82B2902183F12965EB5B32AD0412 /* YMMYandexMetricaReporting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaReporting.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMYandexMetricaReporting.h"; sourceTree = "<group>"; };
+		B5107F736018A3E9BB6663EF413F9B3E /* Pods-FakeNFT-FakeNFTUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FakeNFT-FakeNFTUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B614A73D25B76B18226BB8DA264C4E61 /* YMMCompletionBlocks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMCompletionBlocks.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMCompletionBlocks.h"; sourceTree = "<group>"; };
+		BABDC3A24E8D1E40B130E2077A62DE01 /* Pods-FakeNFTTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FakeNFTTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		BAD4301E82206C763CF9E0048127BEE9 /* YMMPluginErrorDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMPluginErrorDetails.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMPluginErrorDetails.h"; sourceTree = "<group>"; };
+		C081B712255E15BB8D3DEBD8431A490A /* Pods-FakeNFT-FakeNFTUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FakeNFT-FakeNFTUITests-frameworks.sh"; sourceTree = "<group>"; };
+		C3963B3A86818637CCD391A1C311F87B /* YMMErrorRepresentable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMErrorRepresentable.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMErrorRepresentable.h"; sourceTree = "<group>"; };
+		C495BE7398B789E1B8D555858FAA577F /* YMMYandexMetricaPlugins.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPlugins.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMYandexMetricaPlugins.h"; sourceTree = "<group>"; };
+		C57C8F8C89E63B4566FC33A121135BA0 /* YMMStackTraceElement.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMStackTraceElement.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMStackTraceElement.h"; sourceTree = "<group>"; };
+		C724E254F0C54AF31053016F2223F298 /* YMMVersion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMVersion.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMVersion.h"; sourceTree = "<group>"; };
+		C7890F01E18091DC4727131F4DDEEB6D /* YMMError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMError.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMError.h"; sourceTree = "<group>"; };
+		C84D3C0AA237C8886514C1A78AD96AD6 /* YMMCompletionBlocks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMCompletionBlocks.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMCompletionBlocks.h"; sourceTree = "<group>"; };
+		CA1FECFCB65993C5F4FB664DBDA78161 /* Pods-FakeNFT-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FakeNFT-dummy.m"; sourceTree = "<group>"; };
+		CAFFAB72280253933A583B3ABE729530 /* YMMYandexMetricaPlugins.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPlugins.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMYandexMetricaPlugins.h"; sourceTree = "<group>"; };
+		CB44EAF2175AF14E4409DC49F600B92B /* YMMUserProfile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMUserProfile.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMUserProfile.h"; sourceTree = "<group>"; };
+		CBB13DFEA15AA02C5D2877E4C9398E38 /* YMMYandexMetricaPluginReporting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPluginReporting.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMYandexMetricaPluginReporting.h"; sourceTree = "<group>"; };
+		CCAD25C7E8ACE350FA614BD90E435567 /* YMMYandexMetricaPlugins.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPlugins.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMYandexMetricaPlugins.h"; sourceTree = "<group>"; };
+		CCEA0569ED2146FE5469FF5369C9AB0B /* Pods-FakeNFTTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FakeNFTTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		CF0406597F93EEFD3E49F5A5F9E7593E /* YandexMobileMetrica.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = YandexMobileMetrica.release.xcconfig; sourceTree = "<group>"; };
+		D1CB6546CBDA0F7811555A7BC8D6B5DE /* YMMAdRevenueInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMAdRevenueInfo.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMAdRevenueInfo.h"; sourceTree = "<group>"; };
+		D381EECDD8F28A470540BF06C8DFD0B6 /* YMMReporterConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMReporterConfiguration.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMReporterConfiguration.h"; sourceTree = "<group>"; };
+		D3E7EA0C7B73ADF060316D1030E2022B /* YMMUserProfile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMUserProfile.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMUserProfile.h"; sourceTree = "<group>"; };
+		D3F945CAF65BB2A3601E53166CD256AA /* YMMReporterConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMReporterConfiguration.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMReporterConfiguration.h"; sourceTree = "<group>"; };
+		DB884E7BCCE692D9B8870191B51CE51B /* YMMStackTraceElement.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMStackTraceElement.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMStackTraceElement.h"; sourceTree = "<group>"; };
+		DD2FFCF644A8AEC9357C09976ABA7E3A /* YMMProfileAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMProfileAttribute.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMProfileAttribute.h"; sourceTree = "<group>"; };
+		DE2B13EA2CD2BA9E13DD3F0E608E93CB /* Pods-FakeNFT-FakeNFTUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FakeNFT-FakeNFTUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		DECDAAA8022C4D9106D529ED665763CC /* YMMRevenueInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMRevenueInfo.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64/YandexMobileMetrica.framework/Headers/YMMRevenueInfo.h"; sourceTree = "<group>"; };
+		DEFF6F9D0CAEA4F314BDAA2B8FD259DE /* Pods-FakeNFTTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FakeNFTTests-Info.plist"; sourceTree = "<group>"; };
+		E0425FBC084FBEF26DF4F17C5453195A /* YMMYandexMetricaConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaConfiguration.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMYandexMetricaConfiguration.h"; sourceTree = "<group>"; };
+		E31F4A3432A3E189E6EE69180E565968 /* YMMProfileAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMProfileAttribute.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMProfileAttribute.h"; sourceTree = "<group>"; };
+		E6C0621616CB905B9F737F560AE59A0D /* YMMVersion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMVersion.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMVersion.h"; sourceTree = "<group>"; };
+		E6EC74C7E6ED8D25EA74DD00EA0DD1BB /* YMMAdRevenueInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMAdRevenueInfo.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMAdRevenueInfo.h"; sourceTree = "<group>"; };
+		EB9B2CE9D50332E010982D1548F28C4D /* YMMYandexMetricaPreloadInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPreloadInfo.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMYandexMetricaPreloadInfo.h"; sourceTree = "<group>"; };
+		EBE14134EDF7BAC2EE3D88A84F648670 /* YandexMobileMetrica.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = YandexMobileMetrica.debug.xcconfig; sourceTree = "<group>"; };
+		EEC547D7511FBB15536C53348E62EBF6 /* YMMYandexMetricaConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaConfiguration.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMYandexMetricaConfiguration.h"; sourceTree = "<group>"; };
+		EF56668AF48B5B96EEF29B45BB943ABF /* Pods-FakeNFT-FakeNFTUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FakeNFT-FakeNFTUITests-umbrella.h"; sourceTree = "<group>"; };
+		F131E4A891DD9879247429F0804313AF /* Pods-FakeNFT-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FakeNFT-umbrella.h"; sourceTree = "<group>"; };
+		F197FB222B8A32BB9A3A8BA59A702BF1 /* YMMErrorRepresentable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMErrorRepresentable.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_i386_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMErrorRepresentable.h"; sourceTree = "<group>"; };
+		F213542DA3A05B4C1D546BE71B3FF0D0 /* Pods-FakeNFT-FakeNFTUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FakeNFT-FakeNFTUITests.release.xcconfig"; sourceTree = "<group>"; };
+		F283D6A96666F1035FF719B8E40AB6A6 /* YMMYandexMetricaPluginReporting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPluginReporting.h; path = "dynamic/YandexMobileMetrica.xcframework/ios-arm64_armv7/YandexMobileMetrica.framework/Headers/YMMYandexMetricaPluginReporting.h"; sourceTree = "<group>"; };
+		FDBBC0A555CD88542C304F292BB3CDBD /* Pods-FakeNFT-FakeNFTUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FakeNFT-FakeNFTUITests-Info.plist"; sourceTree = "<group>"; };
+		FDFB078AFA3B5B13B1E347D65E09BAA5 /* YMMYandexMetricaPluginReporting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YMMYandexMetricaPluginReporting.h; path = "dynamic/YandexMobileMetrica.xcframework/tvos-arm64_x86_64-simulator/YandexMobileMetrica.framework/Headers/YMMYandexMetricaPluginReporting.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0F0611FBF48BB53B0D8CE3B9EAC19CF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5BBC1EB2F7BC2AB2D0DA82C6F556788E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7C415B48CAB199E6E27B2D6DC324C7DB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0F81DB778516959799BA0E24CA01855 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88283F40F00B10CD1C0D7B7E8FAB735E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74C511FCEE77072996412F4BB9155D6D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		02E20430CC50901D0826417AF502EEA8 /* Crashes */ = {
+			isa = PBXGroup;
+			children = (
+				0B9B5B115B13731790ADE26C8F40B1B6 /* YandexMobileMetricaCrashes-umbrella.h */,
+				3E7D1553D24690687E20F12D3C583AEE /* YandexMobileMetricaCrashes-umbrella.h */,
+				68DDF6CCFB8673F1CA947690440657A3 /* YandexMobileMetricaCrashes-umbrella.h */,
+				2DB313092A0F4210CD9222DEF2257E4F /* YandexMobileMetricaCrashes-umbrella.h */,
+				DE3E954C20C35CAF35B9F51B9F495FE5 /* Frameworks */,
+			);
+			name = Crashes;
+			sourceTree = "<group>";
+		};
+		0AE1EFCA2A99C021550D4AF9C3A5FEB1 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B36279BBE8891BFC5C056737BF880EC3 /* YandexMobileMetrica-xcframeworks.sh */,
+				EBE14134EDF7BAC2EE3D88A84F648670 /* YandexMobileMetrica.debug.xcconfig */,
+				CF0406597F93EEFD3E49F5A5F9E7593E /* YandexMobileMetrica.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/YandexMobileMetrica";
+			sourceTree = "<group>";
+		};
+		32C2E1605B2E550B4FDA554DB5483E50 /* Pods-FakeNFT-FakeNFTUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3ECD143AA2CF7F0AB8FA73C4058468D2 /* Pods-FakeNFT-FakeNFTUITests.modulemap */,
+				DE2B13EA2CD2BA9E13DD3F0E608E93CB /* Pods-FakeNFT-FakeNFTUITests-acknowledgements.markdown */,
+				4A265162BC896FE942097D2FCDFA6194 /* Pods-FakeNFT-FakeNFTUITests-acknowledgements.plist */,
+				62276B623A90AE7187EFAB4C6B46F280 /* Pods-FakeNFT-FakeNFTUITests-dummy.m */,
+				C081B712255E15BB8D3DEBD8431A490A /* Pods-FakeNFT-FakeNFTUITests-frameworks.sh */,
+				FDBBC0A555CD88542C304F292BB3CDBD /* Pods-FakeNFT-FakeNFTUITests-Info.plist */,
+				EF56668AF48B5B96EEF29B45BB943ABF /* Pods-FakeNFT-FakeNFTUITests-umbrella.h */,
+				B5107F736018A3E9BB6663EF413F9B3E /* Pods-FakeNFT-FakeNFTUITests.debug.xcconfig */,
+				F213542DA3A05B4C1D546BE71B3FF0D0 /* Pods-FakeNFT-FakeNFTUITests.release.xcconfig */,
+			);
+			name = "Pods-FakeNFT-FakeNFTUITests";
+			path = "Target Support Files/Pods-FakeNFT-FakeNFTUITests";
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		59EEC4D3DCB9EEDFCB5771C565AAF4D3 /* Pods-FakeNFTTests */ = {
+			isa = PBXGroup;
+			children = (
+				3538D397767F22576FAECE9F8E18A2F4 /* Pods-FakeNFTTests.modulemap */,
+				BABDC3A24E8D1E40B130E2077A62DE01 /* Pods-FakeNFTTests-acknowledgements.markdown */,
+				CCEA0569ED2146FE5469FF5369C9AB0B /* Pods-FakeNFTTests-acknowledgements.plist */,
+				19306A6090FFE87B0F54AF6DE2C99346 /* Pods-FakeNFTTests-dummy.m */,
+				DEFF6F9D0CAEA4F314BDAA2B8FD259DE /* Pods-FakeNFTTests-Info.plist */,
+				223A4C7AFC132586551953754972803D /* Pods-FakeNFTTests-umbrella.h */,
+				6FEE293737B7F176294EE1199E7444EE /* Pods-FakeNFTTests.debug.xcconfig */,
+				9B3A1AD1A84A6A795AAEC1F450E43208 /* Pods-FakeNFTTests.release.xcconfig */,
+			);
+			name = "Pods-FakeNFTTests";
+			path = "Target Support Files/Pods-FakeNFTTests";
+			sourceTree = "<group>";
+		};
+		8AF2AA60C1077847802C157410A6BBC4 /* Dynamic */ = {
+			isa = PBXGroup;
+			children = (
+				BCCFA0068889F2194989996AA5170A82 /* Core */,
+				02E20430CC50901D0826417AF502EEA8 /* Crashes */,
+			);
+			name = Dynamic;
+			sourceTree = "<group>";
+		};
+		BCCFA0068889F2194989996AA5170A82 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6FBDD13CEC5D14DF1F487A2A5B565AE7 /* YandexMobileMetrica.h */,
+				63613B48111C74CA571652FF72336094 /* YandexMobileMetrica.h */,
+				7A8F6A5E2C0CE01275D1E8CE2EB0CA4D /* YandexMobileMetrica.h */,
+				757BB72FDC1446A84BC11DFCCEDE7C1D /* YandexMobileMetrica.h */,
+				63D632F41616DBA0FB97F924B0B05D30 /* YandexMobileMetrica-umbrella.h */,
+				A0CB18A8A5B4E7A48B4521BB5E0F13C0 /* YandexMobileMetrica-umbrella.h */,
+				97745C09BAFE036906B5E38FEE2A6B40 /* YandexMobileMetrica-umbrella.h */,
+				AB4CB7DAA4B52E30F49720EE8DA7264D /* YandexMobileMetrica-umbrella.h */,
+				E6EC74C7E6ED8D25EA74DD00EA0DD1BB /* YMMAdRevenueInfo.h */,
+				559783E6EAC05F7D98AF1F261961EB38 /* YMMAdRevenueInfo.h */,
+				D1CB6546CBDA0F7811555A7BC8D6B5DE /* YMMAdRevenueInfo.h */,
+				9245BE4191B5A7CED41E43DA1C254C05 /* YMMAdRevenueInfo.h */,
+				B614A73D25B76B18226BB8DA264C4E61 /* YMMCompletionBlocks.h */,
+				C84D3C0AA237C8886514C1A78AD96AD6 /* YMMCompletionBlocks.h */,
+				380D0E8F81A9E55411E7A2994DA685B6 /* YMMCompletionBlocks.h */,
+				4A80F356AB0396399C7C0E5C048712F5 /* YMMCompletionBlocks.h */,
+				A16DC242BE0089564FF8B07927B59E1B /* YMMECommerce.h */,
+				9AD8267618967B2A48F39F5298C471A4 /* YMMECommerce.h */,
+				A5DD179F9713D0A3CA9AA07CE5F159B4 /* YMMECommerce.h */,
+				AE616C9D4DD228D7E9A2ABDAB46BA421 /* YMMECommerce.h */,
+				5203BB0447A0B33719738FB41475C4C6 /* YMMError.h */,
+				82B65005303C25A48AEA5BE5F77DD6B1 /* YMMError.h */,
+				3012C1466989E382663BE04B0D143BCD /* YMMError.h */,
+				C7890F01E18091DC4727131F4DDEEB6D /* YMMError.h */,
+				47B1CEB42A6C302BB020740D348F123B /* YMMErrorRepresentable.h */,
+				F197FB222B8A32BB9A3A8BA59A702BF1 /* YMMErrorRepresentable.h */,
+				C3963B3A86818637CCD391A1C311F87B /* YMMErrorRepresentable.h */,
+				6E8BA7EA1661F7C8DE1C3E268A12B8CA /* YMMErrorRepresentable.h */,
+				BAD4301E82206C763CF9E0048127BEE9 /* YMMPluginErrorDetails.h */,
+				8727FF0C526786D2A527FA20F2327B5A /* YMMPluginErrorDetails.h */,
+				452643126B8B698B3F693EB10FBBA65D /* YMMPluginErrorDetails.h */,
+				138E78AD9A664EBCF2633D89B34A74FB /* YMMPluginErrorDetails.h */,
+				0D0B48A490DDB2ABE26A22603C8CC586 /* YMMProfileAttribute.h */,
+				DD2FFCF644A8AEC9357C09976ABA7E3A /* YMMProfileAttribute.h */,
+				8D17B7CFCD3A0A4CC0CEDE95AB91633B /* YMMProfileAttribute.h */,
+				E31F4A3432A3E189E6EE69180E565968 /* YMMProfileAttribute.h */,
+				D3F945CAF65BB2A3601E53166CD256AA /* YMMReporterConfiguration.h */,
+				D381EECDD8F28A470540BF06C8DFD0B6 /* YMMReporterConfiguration.h */,
+				0E731F60D473A26BA0F1E4793FCB4125 /* YMMReporterConfiguration.h */,
+				6431AFAFA8D4BC2760E0B239ED0E2BE8 /* YMMReporterConfiguration.h */,
+				A0B2E644BF66A910021AE84585C381EB /* YMMRevenueInfo.h */,
+				29F08BF097A2F42E6BDE88E70E7FE7F1 /* YMMRevenueInfo.h */,
+				DECDAAA8022C4D9106D529ED665763CC /* YMMRevenueInfo.h */,
+				426D101F6543A22A46C7B47FE00924DA /* YMMRevenueInfo.h */,
+				DB884E7BCCE692D9B8870191B51CE51B /* YMMStackTraceElement.h */,
+				C57C8F8C89E63B4566FC33A121135BA0 /* YMMStackTraceElement.h */,
+				13653C5DAE9623572A7B8BE6FFEA1881 /* YMMStackTraceElement.h */,
+				5EE583AF8393411C0A63C645BD60B0DA /* YMMStackTraceElement.h */,
+				5A77F6EDC7ECCB4F775E1897CF7136E5 /* YMMUserProfile.h */,
+				57369F77C3A165FF9854CD1CC09C2357 /* YMMUserProfile.h */,
+				CB44EAF2175AF14E4409DC49F600B92B /* YMMUserProfile.h */,
+				D3E7EA0C7B73ADF060316D1030E2022B /* YMMUserProfile.h */,
+				E6C0621616CB905B9F737F560AE59A0D /* YMMVersion.h */,
+				C724E254F0C54AF31053016F2223F298 /* YMMVersion.h */,
+				4504EE294F21EC5A91C1D9960263E370 /* YMMVersion.h */,
+				936BEF218B7DC289E66DEB57461D7173 /* YMMVersion.h */,
+				29FF8E04B5BCB2ECCE6B1E6FFC81549B /* YMMYandexMetrica.h */,
+				9D2199F0583A34A7D909904EB685C114 /* YMMYandexMetrica.h */,
+				7BB11E41171612A6440739B7B354B125 /* YMMYandexMetrica.h */,
+				29E72CE86E372B085DD87E8509452234 /* YMMYandexMetrica.h */,
+				E0425FBC084FBEF26DF4F17C5453195A /* YMMYandexMetricaConfiguration.h */,
+				3D727E30B9047BC2A22763D65486ACD7 /* YMMYandexMetricaConfiguration.h */,
+				88F6521C62F62207F795B525716A6D39 /* YMMYandexMetricaConfiguration.h */,
+				EEC547D7511FBB15536C53348E62EBF6 /* YMMYandexMetricaConfiguration.h */,
+				F283D6A96666F1035FF719B8E40AB6A6 /* YMMYandexMetricaPluginReporting.h */,
+				4A3BC4D55A3CEE7AECDA857DB2875D3C /* YMMYandexMetricaPluginReporting.h */,
+				CBB13DFEA15AA02C5D2877E4C9398E38 /* YMMYandexMetricaPluginReporting.h */,
+				FDFB078AFA3B5B13B1E347D65E09BAA5 /* YMMYandexMetricaPluginReporting.h */,
+				CAFFAB72280253933A583B3ABE729530 /* YMMYandexMetricaPlugins.h */,
+				CCAD25C7E8ACE350FA614BD90E435567 /* YMMYandexMetricaPlugins.h */,
+				83B87FBF92FD18E63ECED774402EF774 /* YMMYandexMetricaPlugins.h */,
+				C495BE7398B789E1B8D555858FAA577F /* YMMYandexMetricaPlugins.h */,
+				EB9B2CE9D50332E010982D1548F28C4D /* YMMYandexMetricaPreloadInfo.h */,
+				6461EE8E7F6DAACE7EE158B3CBE48A66 /* YMMYandexMetricaPreloadInfo.h */,
+				9E0DB909F78DCC585D58C4DC2B78DA88 /* YMMYandexMetricaPreloadInfo.h */,
+				AD7C3D67ADBCC0F1D052D33BABE1DE67 /* YMMYandexMetricaPreloadInfo.h */,
+				6AEB38741AF0871BC2A2F25D7D03189F /* YMMYandexMetricaReporting.h */,
+				0A71BC32A47112B0ABC03BAE8A6DBB13 /* YMMYandexMetricaReporting.h */,
+				B3FD82B2902183F12965EB5B32AD0412 /* YMMYandexMetricaReporting.h */,
+				738E8FCE1CE34FC20BE39D9922F8FC8D /* YMMYandexMetricaReporting.h */,
+				C246B6616E6E3B53FD05769717FF8858 /* Frameworks */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		C246B6616E6E3B53FD05769717FF8858 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				48EE194EAEB09BF351C16DAA80A56C2B /* YandexMobileMetrica.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CAF4E6223CA8B92ED940B98055F0385C /* Pods-FakeNFT */ = {
+			isa = PBXGroup;
+			children = (
+				93BB474FA736B88426FBA58A222FC794 /* Pods-FakeNFT.modulemap */,
+				8D807A9183CC7FD5BC407740E8CF691E /* Pods-FakeNFT-acknowledgements.markdown */,
+				09198C8929D7051B5DE9B7C816030642 /* Pods-FakeNFT-acknowledgements.plist */,
+				CA1FECFCB65993C5F4FB664DBDA78161 /* Pods-FakeNFT-dummy.m */,
+				4DFAAE238A7778C32F03BBA71AF97D83 /* Pods-FakeNFT-frameworks.sh */,
+				5E051ACBFEDFB572619FFB5407446977 /* Pods-FakeNFT-Info.plist */,
+				F131E4A891DD9879247429F0804313AF /* Pods-FakeNFT-umbrella.h */,
+				3F67A7A1430E87662994CE89A3ECB36E /* Pods-FakeNFT.debug.xcconfig */,
+				54A4927018562DC9B0FFAEE1C22693AF /* Pods-FakeNFT.release.xcconfig */,
+			);
+			name = "Pods-FakeNFT";
+			path = "Target Support Files/Pods-FakeNFT";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				E5802AEAA60E68F516E1689C48BDC3EE /* Pods */,
+				D4573357D58684C4B9817732A8FD3B63 /* Products */,
+				DCC4453BB82A14F4E5F8BC471FEB79C2 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D4573357D58684C4B9817732A8FD3B63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				39C294A8BD6B8C88B119EAE9F4AF0E3A /* Pods-FakeNFT */,
+				0B3C9A0FBC6EC4988CD8CA1F45A5C7C3 /* Pods-FakeNFT-FakeNFTUITests */,
+				2B14AF32EBE4F16EFF18C2FC6AF84C52 /* Pods-FakeNFTTests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DB0ED362FAFC6B400109E9AFFB3BCAB3 /* YandexMobileMetrica */ = {
+			isa = PBXGroup;
+			children = (
+				8AF2AA60C1077847802C157410A6BBC4 /* Dynamic */,
+				0AE1EFCA2A99C021550D4AF9C3A5FEB1 /* Support Files */,
+			);
+			name = YandexMobileMetrica;
+			path = YandexMobileMetrica;
+			sourceTree = "<group>";
+		};
+		DCC4453BB82A14F4E5F8BC471FEB79C2 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				CAF4E6223CA8B92ED940B98055F0385C /* Pods-FakeNFT */,
+				32C2E1605B2E550B4FDA554DB5483E50 /* Pods-FakeNFT-FakeNFTUITests */,
+				59EEC4D3DCB9EEDFCB5771C565AAF4D3 /* Pods-FakeNFTTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		DE3E954C20C35CAF35B9F51B9F495FE5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6F55B18258221CFC74BFAD52B227E082 /* YandexMobileMetricaCrashes.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E5802AEAA60E68F516E1689C48BDC3EE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DB0ED362FAFC6B400109E9AFFB3BCAB3 /* YandexMobileMetrica */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A25FD8D4987B393090F495ABEC4B8EBA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9940C684BBB7896F569235B41E5826F7 /* Pods-FakeNFTTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8AEE09226A77D63873AC8DF85DCF410 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A6ADF79413C4771CBACFED40117DEEE /* Pods-FakeNFT-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED9D36B31A7FF0293CF0654C4E7DE29B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D440068910024753BD45676CFC44C34 /* Pods-FakeNFT-FakeNFTUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		62B7F171885A629DED1B4B1B61FCE375 /* Pods-FakeNFT-FakeNFTUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFE7EAF8A0DBEA362BC268EF4C23280D /* Build configuration list for PBXNativeTarget "Pods-FakeNFT-FakeNFTUITests" */;
+			buildPhases = (
+				ED9D36B31A7FF0293CF0654C4E7DE29B /* Headers */,
+				DB168C811265D4C3AA29A93E1D79F2DC /* Sources */,
+				0F0611FBF48BB53B0D8CE3B9EAC19CF5 /* Frameworks */,
+				494C14F43E4F77A3253D1AA164804183 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				209909BD7D9435B64A9A30E6B5C7F1D7 /* PBXTargetDependency */,
+			);
+			name = "Pods-FakeNFT-FakeNFTUITests";
+			productName = Pods_FakeNFT_FakeNFTUITests;
+			productReference = 0B3C9A0FBC6EC4988CD8CA1F45A5C7C3 /* Pods-FakeNFT-FakeNFTUITests */;
+			productType = "com.apple.product-type.framework";
+		};
+		ED2F888801DC0905957764110A86D5B1 /* Pods-FakeNFT */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25FDFBCB3EF5CB651BAABD483938734C /* Build configuration list for PBXNativeTarget "Pods-FakeNFT" */;
+			buildPhases = (
+				D8AEE09226A77D63873AC8DF85DCF410 /* Headers */,
+				E2E639C628358491C0E82F84FE08C526 /* Sources */,
+				88283F40F00B10CD1C0D7B7E8FAB735E /* Frameworks */,
+				C61F38DB5F2AA0624FE5DA8C62C00ED7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CB5D6C914918337DADE06FA46C1F659E /* PBXTargetDependency */,
+			);
+			name = "Pods-FakeNFT";
+			productName = Pods_FakeNFT;
+			productReference = 39C294A8BD6B8C88B119EAE9F4AF0E3A /* Pods-FakeNFT */;
+			productType = "com.apple.product-type.framework";
+		};
+		EDC8CC800A2D590A3E038A6A6F11FCD2 /* Pods-FakeNFTTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 759B851AF825521B6C3E0371E167D5E0 /* Build configuration list for PBXNativeTarget "Pods-FakeNFTTests" */;
+			buildPhases = (
+				A25FD8D4987B393090F495ABEC4B8EBA /* Headers */,
+				A1082C17A5AC7156CCA4F4068EC20C19 /* Sources */,
+				7C415B48CAB199E6E27B2D6DC324C7DB /* Frameworks */,
+				1DB426797E63FBB23A394810228684DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03D1E6C51B9E875554714E468CCAD961 /* PBXTargetDependency */,
+			);
+			name = "Pods-FakeNFTTests";
+			productName = Pods_FakeNFTTests;
+			productReference = 2B14AF32EBE4F16EFF18C2FC6AF84C52 /* Pods-FakeNFTTests */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = D4573357D58684C4B9817732A8FD3B63 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ED2F888801DC0905957764110A86D5B1 /* Pods-FakeNFT */,
+				62B7F171885A629DED1B4B1B61FCE375 /* Pods-FakeNFT-FakeNFTUITests */,
+				EDC8CC800A2D590A3E038A6A6F11FCD2 /* Pods-FakeNFTTests */,
+				899318C1CEDE586664EC232A68069570 /* YandexMobileMetrica */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1DB426797E63FBB23A394810228684DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		494C14F43E4F77A3253D1AA164804183 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C61F38DB5F2AA0624FE5DA8C62C00ED7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6D2995F93765283CDFA66CFB2B2808F6 /* [CP] Copy XCFrameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/YandexMobileMetrica/YandexMobileMetrica-xcframeworks-input-files.xcfilelist",
+			);
+			name = "[CP] Copy XCFrameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/YandexMobileMetrica/YandexMobileMetrica-xcframeworks-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/YandexMobileMetrica/YandexMobileMetrica-xcframeworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1082C17A5AC7156CCA4F4068EC20C19 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E7AD8D2090D986BADB9BC1EFA34475A /* Pods-FakeNFTTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DB168C811265D4C3AA29A93E1D79F2DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D2693966E004C732CE172EAA8D6E3BA /* Pods-FakeNFT-FakeNFTUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2E639C628358491C0E82F84FE08C526 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF8DDBAA202CB89C2E37D665C17A6A08 /* Pods-FakeNFT-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		03D1E6C51B9E875554714E468CCAD961 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-FakeNFT";
+			target = ED2F888801DC0905957764110A86D5B1 /* Pods-FakeNFT */;
+			targetProxy = 291AD78F3651695ADF20114E4763E96B /* PBXContainerItemProxy */;
+		};
+		209909BD7D9435B64A9A30E6B5C7F1D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = YandexMobileMetrica;
+			target = 899318C1CEDE586664EC232A68069570 /* YandexMobileMetrica */;
+			targetProxy = 5A99FB9DF0AD760204340068C0D8ED90 /* PBXContainerItemProxy */;
+		};
+		CB5D6C914918337DADE06FA46C1F659E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = YandexMobileMetrica;
+			target = 899318C1CEDE586664EC232A68069570 /* YandexMobileMetrica */;
+			targetProxy = C7450FD861D9DCA4198C6C40227AEC11 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		58CF2DA3202EE85B9CC6F2183EEA0C4D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B3A1AD1A84A6A795AAEC1F450E43208 /* Pods-FakeNFTTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-FakeNFTTests/Pods-FakeNFTTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FakeNFTTests/Pods-FakeNFTTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8DE5143C03248BB6CD542DE3963D6F3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		97AF336EF3DCA108926939B3580C4FB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F67A7A1430E87662994CE89A3ECB36E /* Pods-FakeNFT.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-FakeNFT/Pods-FakeNFT-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FakeNFT/Pods-FakeNFT.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9E406C6AAF85E580207CD97B0044DEAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		A73E8F6199B13AC6A39A67C86A5DD7AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54A4927018562DC9B0FFAEE1C22693AF /* Pods-FakeNFT.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-FakeNFT/Pods-FakeNFT-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FakeNFT/Pods-FakeNFT.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B4F2B041EDB30E21FDBD59988A62DA90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBE14134EDF7BAC2EE3D88A84F648670 /* YandexMobileMetrica.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CB526FE0B462A6044A58A9C861138952 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FEE293737B7F176294EE1199E7444EE /* Pods-FakeNFTTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-FakeNFTTests/Pods-FakeNFTTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FakeNFTTests/Pods-FakeNFTTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		CE41DAF1404243B04D8AC5BE3E507828 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF0406597F93EEFD3E49F5A5F9E7593E /* YandexMobileMetrica.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D939E21C50371F7F35DCCC249E56E35C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5107F736018A3E9BB6663EF413F9B3E /* Pods-FakeNFT-FakeNFTUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-FakeNFT-FakeNFTUITests/Pods-FakeNFT-FakeNFTUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FakeNFT-FakeNFTUITests/Pods-FakeNFT-FakeNFTUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		EC40B159610D0EBB06DB20398574A191 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F213542DA3A05B4C1D546BE71B3FF0D0 /* Pods-FakeNFT-FakeNFTUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-FakeNFT-FakeNFTUITests/Pods-FakeNFT-FakeNFTUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FakeNFT-FakeNFTUITests/Pods-FakeNFT-FakeNFTUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		25FDFBCB3EF5CB651BAABD483938734C /* Build configuration list for PBXNativeTarget "Pods-FakeNFT" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97AF336EF3DCA108926939B3580C4FB7 /* Debug */,
+				A73E8F6199B13AC6A39A67C86A5DD7AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DE5143C03248BB6CD542DE3963D6F3A /* Debug */,
+				9E406C6AAF85E580207CD97B0044DEAB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		759B851AF825521B6C3E0371E167D5E0 /* Build configuration list for PBXNativeTarget "Pods-FakeNFTTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB526FE0B462A6044A58A9C861138952 /* Debug */,
+				58CF2DA3202EE85B9CC6F2183EEA0C4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83787D0EC5DA7713B7C6D32C1D11D707 /* Build configuration list for PBXAggregateTarget "YandexMobileMetrica" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4F2B041EDB30E21FDBD59988A62DA90 /* Debug */,
+				CE41DAF1404243B04D8AC5BE3E507828 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFE7EAF8A0DBEA362BC268EF4C23280D /* Build configuration list for PBXNativeTarget "Pods-FakeNFT-FakeNFTUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D939E21C50371F7F35DCCC249E56E35C /* Debug */,
+				EC40B159610D0EBB06DB20398574A191 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}
