@@ -95,6 +95,19 @@ final class AuthViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle:
+    init(viewModel: AuthViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -104,19 +117,6 @@ final class AuthViewController: UIViewController {
         
         initializeHideKeyboard()
         bind()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-        
-    init(viewModel: AuthViewModelProtocol) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Private Methods:
