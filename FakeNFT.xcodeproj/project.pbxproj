@@ -23,6 +23,9 @@
 		4005316E2A73DDFC008CAF3B /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */; };
 		400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531762A73EB4D008CAF3B /* BlackBaseButton.swift */; };
 		400531792A73EC58008CAF3B /* BaseWhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531782A73EC58008CAF3B /* BaseWhiteButton.swift */; };
+		406414662A8A247F00EBBE39 /* DemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406414652A8A247F00EBBE39 /* DemoCell.swift */; };
+		406414682A8A250100EBBE39 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406414672A8A250100EBBE39 /* DemoViewController.swift */; };
+		4064146A2A8A254800EBBE39 /* DemoViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406414692A8A254800EBBE39 /* DemoViewModelProtocol.swift */; };
 		406DEE2B2A7FED5D008E2227 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */; };
 		407047572A88B86400067E68 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407047562A88B86400067E68 /* UIFont + Extension.swift */; };
 		4070B1182A76CADF00CF6E74 /* SortNavBarBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */; };
@@ -116,6 +119,9 @@
 		4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		400531762A73EB4D008CAF3B /* BlackBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBaseButton.swift; sourceTree = "<group>"; };
 		400531782A73EC58008CAF3B /* BaseWhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWhiteButton.swift; sourceTree = "<group>"; };
+		406414652A8A247F00EBBE39 /* DemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCell.swift; sourceTree = "<group>"; };
+		406414672A8A250100EBBE39 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
+		406414692A8A254800EBBE39 /* DemoViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewModelProtocol.swift; sourceTree = "<group>"; };
 		406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		407047562A88B86400067E68 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortNavBarBaseButton.swift; sourceTree = "<group>"; };
@@ -355,6 +361,16 @@
 				4071F5D42A7D002000ADA546 /* StatisticNFTCollectionViewModelProtocol.swift */,
 			);
 			path = StatisticNFTCollection;
+            sourceTree = "<group>";
+        };
+		406414642A8A246000EBBE39 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				406414672A8A250100EBBE39 /* DemoViewController.swift */,
+				406414652A8A247F00EBBE39 /* DemoCell.swift */,
+				406414692A8A254800EBBE39 /* DemoViewModelProtocol.swift */,
+			);
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		408616C22A76585E004CA07E /* Profile */ = {
@@ -523,6 +539,7 @@
 				7EFB26212A840C34001901B6 /* Protocols */,
 				7EFB26312A841F73001901B6 /* Authorization */,
 				7EFB26272A841728001901B6 /* Registration */,
+				406414642A8A246000EBBE39 /* Demo */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -819,12 +836,15 @@
 				3F6806D729CBC50A00B4F915 /* Cells + Extension.swift in Sources */,
 				3F6806D329CBBE9600B4F915 /* NetworkRequest.swift in Sources */,
 				7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */,
+				4064146A2A8A254800EBBE39 /* DemoViewModelProtocol.swift in Sources */,
 				409EEFE32A7A707700B23FF8 /* DataProviderProtocol.swift in Sources */,
 				7EB78AE72A7BFE0700BE892B /* Order.swift in Sources */,
 				7EFB26382A84F49B001901B6 /* SplashScreen.swift in Sources */,
 				3F6806D129CBBE6B00B4F915 /* NetworkClient.swift in Sources */,
 				7EB78AE52A7BFDB200BE892B /* Currency.swift in Sources */,
 				7EB78AEB2A7BFEEE00BE892B /* Profile.swift in Sources */,
+				406414662A8A247F00EBBE39 /* DemoCell.swift in Sources */,
+				406414682A8A250100EBBE39 /* DemoViewController.swift in Sources */,
 				7EB78AE32A7BFCFF00BE892B /* NFTCard.swift in Sources */,
 				406DEE2B2A7FED5D008E2227 /* UIViewController + Extension.swift in Sources */,
 				4071F5C62A7CFF8400ADA546 /* StatisticViewModel.swift in Sources */
