@@ -37,7 +37,7 @@ final class CatalogCollectionViewController: UIViewController {
     private lazy var nameOfNFTCollectionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .blackDay
-        label.font = .captionLargeBold
+        label.font = .headlineMedium
         label.numberOfLines = 0
         
         return label

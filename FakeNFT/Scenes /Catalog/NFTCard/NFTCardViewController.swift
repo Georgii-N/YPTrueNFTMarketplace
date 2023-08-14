@@ -51,7 +51,7 @@ final class NFTCardViewController: UIViewController {
     
     private lazy var nftNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .captionLargeBold
+        label.font = .headlineMedium
         label.textColor = .blackDay
         
         return label
@@ -85,7 +85,7 @@ final class NFTCardViewController: UIViewController {
     
     private lazy var nftCollectionNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .captionMediumBold
+        label.font = .headlineSmall
         label.textColor = .blackDay
         
         return label
