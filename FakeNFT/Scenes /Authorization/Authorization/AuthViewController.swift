@@ -224,7 +224,7 @@ final class AuthViewController: UIViewController {
     @objc private func keyboardDidHide() {
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self = self else { return }
-            authScrollView.contentSize.height = authScrollView.frame.height
+            self.authScrollView.contentSize.height = authScrollView.frame.height
         }
     }
     

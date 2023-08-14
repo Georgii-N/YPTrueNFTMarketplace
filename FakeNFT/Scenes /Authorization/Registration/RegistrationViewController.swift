@@ -21,7 +21,7 @@ final class RegistrationViewController: UIViewController {
         return button
     }()
     
-    private lazy var enterTittleLabel: UILabel = {
+    private lazy var enterTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 34)
         label.textColor = .blackDay
@@ -60,9 +60,9 @@ final class RegistrationViewController: UIViewController {
         return textField
     }()
     
-    private lazy var registrateButton = BaseBlackButton(with: L10n.Authorization.registration)
+    private lazy var registrationButton = BaseBlackButton(with: L10n.Authorization.registration)
     
-    private lazy var loginPasswordMiskateLabel: UILabel = {
+    private lazy var loginPasswordMistakeLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13)
         label.textColor = .redUniversal
@@ -103,7 +103,7 @@ final class RegistrationViewController: UIViewController {
             self.unblockUI()
             if newValue == false {
                 self.showLoginPasswordMistake()
-                self.loginPasswordMiskateLabel.text = viewModel.errorDiscription
+                self.loginPasswordMistakeLabel.text = viewModel.errorDiscription
             }
         }
         
@@ -112,7 +112,7 @@ final class RegistrationViewController: UIViewController {
             self.unblockUI()
             if newValue == false {
                 self.showLoginPasswordMistake()
-                self.loginPasswordMiskateLabel.text = viewModel.errorDiscription
+                self.loginPasswordMistakeLabel.text = viewModel.errorDiscription
             }
         }
         
@@ -123,7 +123,7 @@ final class RegistrationViewController: UIViewController {
                 self.switchToOnboardingViewController()
             } else {
                 self.showLoginPasswordMistake()
-                self.loginPasswordMiskateLabel.text = viewModel.errorDiscription
+                self.loginPasswordMistakeLabel.text = viewModel.errorDiscription
             }
         }
         
@@ -152,32 +152,32 @@ final class RegistrationViewController: UIViewController {
     }
     
     private func showLoginPasswordMistake() {
-        registrateButton.isEnabled = false
-        registrateButton.backgroundColor = .gray
+        registrationButton.isEnabled = false
+        registrationButton.backgroundColor = .gray
         
         UIView.animate(withDuration: 0.5) { [weak self] in
             guard let self = self else { return }
-            self.view.setupView(loginPasswordMiskateLabel)
+            self.view.setupView(loginPasswordMistakeLabel)
             self.emailTextField.layer.borderWidth = 1
             self.emailTextField.layer.borderColor = UIColor.redUniversal.cgColor
             self.passwordTextField.layer.borderWidth = 1
             self.passwordTextField.layer.borderColor = UIColor.redUniversal.cgColor
             
             NSLayoutConstraint.activate([
-                self.loginPasswordMiskateLabel.topAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: 16),
-                self.loginPasswordMiskateLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-                self.loginPasswordMiskateLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 16)
+                self.loginPasswordMistakeLabel.topAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: 16),
+                self.loginPasswordMistakeLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+                self.loginPasswordMistakeLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 16)
             ])
         }
     }
     
     private func hideLoginPasswordMistake() {
-        registrateButton.isEnabled = true
-        registrateButton.backgroundColor = .blackDay
+        registrationButton.isEnabled = true
+        registrationButton.backgroundColor = .blackDay
         
         UIView.animate(withDuration: 0.5) { [weak self] in
             guard let self = self else { return }
-            self.loginPasswordMiskateLabel.removeFromSuperview()
+            self.loginPasswordMistakeLabel.removeFromSuperview()
             self.emailTextField.layer.borderWidth = 0
             self.passwordTextField.layer.borderWidth = 0
         }
@@ -213,7 +213,7 @@ final class RegistrationViewController: UIViewController {
     @objc private func keyboardDidHide() {
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self = self else { return }
-            authScrollView.contentSize.height = authScrollView.frame.height
+            self.authScrollView.contentSize.height = authScrollView.frame.height
         }
     }
     
@@ -250,7 +250,7 @@ extension RegistrationViewController {
         view.backgroundColor = .whiteDay
         
         view.setupView(authScrollView)
-        [enterTittleLabel, emailTextField, passwordTextField, registrateButton,
+        [enterTitleLabel, emailTextField, passwordTextField, registrationButton,
          backButton].forEach(authScrollView.setupView)
     }
 }
@@ -269,12 +269,12 @@ extension RegistrationViewController {
             backButton.topAnchor.constraint(equalTo: authScrollView.topAnchor, constant: 55),
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 9),
             
-            enterTittleLabel.topAnchor.constraint(equalTo: authScrollView.topAnchor, constant: 176),
-            enterTittleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            enterTittleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            enterTitleLabel.topAnchor.constraint(equalTo: authScrollView.topAnchor, constant: 176),
+            enterTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            enterTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
             emailTextField.heightAnchor.constraint(equalToConstant: 46),
-            emailTextField.topAnchor.constraint(equalTo: enterTittleLabel.bottomAnchor, constant: 50),
+            emailTextField.topAnchor.constraint(equalTo: enterTitleLabel.bottomAnchor, constant: 50),
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
@@ -283,10 +283,10 @@ extension RegistrationViewController {
             passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            registrateButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 84),
-            registrateButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            registrateButton.bottomAnchor.constraint(equalTo: authScrollView.bottomAnchor, constant: -293),
-            registrateButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+            registrationButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 84),
+            registrationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            registrationButton.bottomAnchor.constraint(equalTo: authScrollView.bottomAnchor, constant: -293),
+            registrationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
 }
@@ -295,6 +295,6 @@ extension RegistrationViewController {
 extension RegistrationViewController {
     private func setupTargets() {
         backButton.addTarget(self, action: #selector(backToAuthVC), for: .touchUpInside)
-        registrateButton.addTarget(self, action: #selector(registrateUser), for: .touchUpInside)
+        registrationButton.addTarget(self, action: #selector(registrateUser), for: .touchUpInside)
     }
 }
