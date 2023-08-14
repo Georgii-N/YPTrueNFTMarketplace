@@ -12,6 +12,9 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     // MARK: - Private Dependencies:
     private var dataProvider: DataProviderProtocol?
     
+    // MARK: - Private Classes:
+    private let userDefaultService = UserDefaultsService.shared
+    
     // MARK: - Observable Values:
     var nftCollectionsObservable: Observable<NFTCollections?> {
         $nftCollections
@@ -46,6 +49,7 @@ final class CatalogViewModel: CatalogViewModelProtocol {
             break
         }
         
+        userDefaultService.saveSortingOption(option, forScreen: .catalog)
         self.nftCollections = collection
     }
     
@@ -56,6 +60,9 @@ final class CatalogViewModel: CatalogViewModelProtocol {
             case .success(let collections):
                 self.networkError = nil
                 self.nftCollections = collections
+                if let option = self.userDefaultService.getSortingOption(for: .catalog) {
+                    self.sortNFTCollection(option: option)
+                }
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.networkError = errorString
