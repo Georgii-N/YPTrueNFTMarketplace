@@ -155,30 +155,30 @@ final class NFTCardViewController: UIViewController {
     
     // MARK: - Private Methods:
     private func bind() {
-        viewModel?.currenciesObservable.bind(action: { [weak self] _ in
+        viewModel?.currenciesObservable.bind { [weak self] _ in
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.nftTableView.reloadData, with: ())
-        })
+        }
         
-        viewModel?.nftsObservable.bind(action: { [weak self] _ in
+        viewModel?.nftsObservable.bind { [weak self] _ in
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.nftColectionView.reloadData, with: ())
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
-        })
+        }
         
-        viewModel?.likeStatusDidChangeObservable.bind(action: { [weak self] _ in
+        viewModel?.likeStatusDidChangeObservable.bind { [weak self] _ in
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: true)
-        })
+        }
         
-        viewModel?.cartStatusDidChangeObservable.bind(action: { [weak self] _ in
+        viewModel?.cartStatusDidChangeObservable.bind { [weak self] _ in
             guard let self = self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
-        })
+        }
         
-        viewModel?.networkErrorObservable.bind(action: { [weak self] errorText in
+        viewModel?.networkErrorObservable.bind { [weak self] errorText in
             guard let self = self else { return }
             if let errorText {
                 self.resumeMethodOnMainThread(self.unblockUI, with: ())
@@ -189,7 +189,7 @@ final class NFTCardViewController: UIViewController {
                     self.saveCellModelAfterError()
                 }
             }
-        })
+        }
     }
     
     // Controll NFT info and status:
