@@ -46,10 +46,11 @@ final class CatalogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        blockUI()
+
         setupViews()
         setupConstraints()
         setupTargets()
-        blockUI()
         
         bind()
         
@@ -183,6 +184,7 @@ extension CatalogViewController: UITableViewDelegate {
 extension CatalogViewController {
     private func setupViews() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: sortButton)
+        setupBackButtonItem()
         
         view.backgroundColor = .whiteDay
         view.setupView(catalogNFTTableView)

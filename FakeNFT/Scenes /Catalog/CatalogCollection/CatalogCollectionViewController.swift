@@ -104,6 +104,7 @@ final class CatalogCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         blockUI()
+        
         setupViews()
         setupConstraints()
         setupTargets()
@@ -373,6 +374,7 @@ extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
 extension CatalogCollectionViewController {
     private func setupViews() {
         view.backgroundColor = .whiteDay
+        setupBackButtonItem()
         
         view.setupView(collectionScrollView)
         

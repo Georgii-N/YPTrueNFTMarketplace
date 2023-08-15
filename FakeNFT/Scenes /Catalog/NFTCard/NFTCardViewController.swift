@@ -474,6 +474,7 @@ extension NFTCardViewController {
         view.backgroundColor = .whiteDay
         navigationController?.navigationBar.backgroundColor = .clear
         tabBarController?.tabBar.isHidden = true
+        setupBackButtonItem()
         
         view.setupView(allScreenScrollView)
         allScreenScrollView.setupView(contentView)
