@@ -13,6 +13,9 @@ final class CatalogCollectionViewController: UIViewController {
     // MARK: - Private Dependencies:
     private var viewModel: CatalogCollectionViewModelProtocol?
     
+    // MARK: - Private Classes:
+    private let analyticsService = AnalyticsService.instance
+    
     // MARK: - Constant and Variables:
     private var indexPathToUpdateNFTCell: IndexPath?
     private lazy var refreshControl = UIRefreshControl()
@@ -98,8 +101,9 @@ final class CatalogCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        blockUI()
+        analyticsService.sentEvent(screen: .catalogCollection, item: .screen, event: .open)
         
+        blockUI()
         setupViews()
         setupConstraints()
         setupTargets()
@@ -108,6 +112,11 @@ final class CatalogCollectionViewController: UIViewController {
         bind()
         
         viewModel?.updateNFTCardModels()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        analyticsService.sentEvent(screen: .catalogCollection, item: .screen, event: .close)
     }
     
     // MARK: - Private Methods:
@@ -125,6 +134,7 @@ final class CatalogCollectionViewController: UIViewController {
         viewModel?.nftsObservable.bind { [weak self] _ in
             guard let self else { return }
             self.resumeMethodOnMainThread(self.nftCollection.reloadData, with: ())
+            self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
         }
         
         viewModel?.likeStatusDidChangeObservable.bind { [weak self] _ in
@@ -229,6 +239,8 @@ final class CatalogCollectionViewController: UIViewController {
     // MARK: Objc Methods:
     @objc private func refreshNFTCollection() {
         viewModel?.updateNFTCardModels()
+        
+        analyticsService.sentEvent(screen: .catalogCollection, item: .pullToRefresh, event: .click)
     }
 }
 
@@ -243,6 +255,8 @@ extension CatalogCollectionViewController: NFTCollectionCellDelegate {
         
         viewModel?.changeNFTFavouriteStatus(isLiked: model.isLiked, id: modelID)
         indexPathToUpdateNFTCell = indexPath
+        
+        analyticsService.sentEvent(screen: .catalogCollection, item: .buttonLike, event: .click)
     }
     
     func addToCardButtonDidTapped(cell: NFTCollectionCell) {
@@ -254,6 +268,8 @@ extension CatalogCollectionViewController: NFTCollectionCellDelegate {
         
         viewModel?.changeNFTCartStatus(isAddedToCart: model.isAddedToCard, id: modelID)
         indexPathToUpdateNFTCell = indexPath
+        
+        analyticsService.sentEvent(screen: .catalogCollection, item: .buttonAddToCard, event: .click)
     }
 }
 
@@ -280,6 +296,9 @@ extension CatalogCollectionViewController: UITextViewDelegate {
         
         navigationController?.pushViewController(webViewController, animated: true)
         
+        analyticsService.sentEvent(screen: .catalogCollection, item: .buttonGoToUserSite, event: .click)
+        analyticsService.sentEvent(screen: .catalogAboutAuthor, item: .screen, event: .open)
+        
         return false
     }
 }
@@ -296,9 +315,7 @@ extension CatalogCollectionViewController: UICollectionViewDataSource {
         cell.delegate = self
         
         if let nftModel = viewModel?.nftsObservable.wrappedValue?[indexPath.row] {
-            unblockUI()
             cell.setupNFTModel(model: nftModel)
-            refreshControl.endRefreshing()
         }
         
         return cell
@@ -324,6 +341,8 @@ extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
               let model = cell.getNFTModel() else { return }
         
         switchToNFTCardViewController(nftModel: model)
+        
+        analyticsService.sentEvent(screen: .catalogCollection, item: .buttonGoToUserCollection, event: .click)
     }
 }
 

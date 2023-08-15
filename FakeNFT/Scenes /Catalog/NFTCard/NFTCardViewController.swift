@@ -14,6 +14,9 @@ final class NFTCardViewController: UIViewController {
     weak private var delegate: NFTCardViewControllerDelegate?
     private var viewModel: NFTCardViewModelProtocol?
     
+    // MARK: - Private Classes:
+    private let analyticsService = AnalyticsService.instance
+    
     // MARK: - Constant and Variables:
     private var indexPathToUpdateNFTCell: IndexPath?
     private lazy var refreshControl = UIRefreshControl()
@@ -134,6 +137,8 @@ final class NFTCardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        analyticsService.sentEvent(screen: .nftCard, item: .screen, event: .open)
+        
         setupViews()
         setupConstraints()
         setupTargets()
@@ -143,6 +148,11 @@ final class NFTCardViewController: UIViewController {
         bind()
         
         viewModel?.updateNFTCardModels()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        analyticsService.sentEvent(screen: .nftCard, item: .screen, event: .close)
     }
     
     // MARK: - Private Methods:
@@ -156,6 +166,7 @@ final class NFTCardViewController: UIViewController {
             guard let self else { return }
             self.resumeMethodOnMainThread(self.nftColectionView.reloadData, with: ())
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
+            self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
         }
         
         viewModel?.likeStatusDidChangeObservable.bind { [weak self] _ in
@@ -283,6 +294,8 @@ final class NFTCardViewController: UIViewController {
         let viewController = WebViewViewController(viewModel: webViewModel, url: url)
         
         navigationController?.pushViewController(viewController, animated: true)
+        
+        analyticsService.sentEvent(screen: .aboutCurrency, item: .screen, event: .open)
     }
     
     private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
@@ -300,6 +313,9 @@ final class NFTCardViewController: UIViewController {
         let webViewController = WebViewViewController(viewModel: webViewViewModel, url: url)
         
         navigationController?.pushViewController(webViewController, animated: true)
+        
+        analyticsService.sentEvent(screen: .nftCard, item: .buttonGoToUserSite, event: .open)
+        analyticsService.sentEvent(screen: .catalogAboutAuthorFromNFTCard, item: .screen, event: .open)
     }
     
     @objc private func changeNFTCartStatus() {
@@ -316,6 +332,8 @@ final class NFTCardViewController: UIViewController {
     
     @objc private func refreshNFTCardScreen() {
         viewModel?.updateNFTCardModels()
+        
+        analyticsService.sentEvent(screen: .nftCard, item: .pullToRefresh, event: .click)
     }
     
     @objc private func openFullNFTImage() {
@@ -340,6 +358,8 @@ extension NFTCardViewController: NFTCollectionCellDelegate {
         viewModel?.changeNFTFavouriteStatus(isLiked: model.isLiked, id: modelID)
         indexPathToUpdateNFTCell = indexPath
         delegate?.addIndexToUpdateCell(index: indexPath, isLike: true)
+        
+        analyticsService.sentEvent(screen: .nftCard, item: .buttonLike, event: .click)
     }
     
     func addToCardButtonDidTapped(cell: NFTCollectionCell) {
@@ -353,6 +373,8 @@ extension NFTCardViewController: NFTCollectionCellDelegate {
         viewModel?.changeNFTCartStatus(isAddedToCart: model.isAddedToCard, id: modelID)
         indexPathToUpdateNFTCell = indexPath
         delegate?.addIndexToUpdateCell(index: indexPath, isLike: false)
+        
+        analyticsService.sentEvent(screen: .nftCard, item: .buttonAddToCard, event: .click)
     }
 }
 
@@ -361,6 +383,8 @@ extension NFTCardViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = round(scrollView.contentOffset.x / view.frame.width)
         coverNFTPageControl.currentPage = Int(page)
+        
+        analyticsService.sentEvent(screen: .nftCard, item: .swipeNFTCard, event: .click)
     }
 }
 
@@ -377,8 +401,6 @@ extension NFTCardViewController: UITableViewDataSource {
         
         if let currency = viewModel.currenciesObservable.wrappedValue?[indexPath.row] {
             cell.setupСurrencyModel(model: currency)
-            refreshControl.endRefreshing()
-            unblockUI()
         }
         
         return cell

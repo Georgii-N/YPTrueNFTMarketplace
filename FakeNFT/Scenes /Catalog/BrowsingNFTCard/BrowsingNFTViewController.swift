@@ -10,6 +10,9 @@ import Kingfisher
 
 final class BrowsingNFTViewController: UIViewController {
     
+    // MARK: - Private Classes:
+    private let analyticsService = AnalyticsService.instance
+    
     // MARK: - Constants and Variables:
     private var urlStringsImageView = [String]()
     
@@ -42,8 +45,19 @@ final class BrowsingNFTViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle
+    init(urlStrings: [String]) {
+        self.urlStringsImageView = urlStrings
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        analyticsService.sentEvent(screen: .browsingNFTCard, item: .screen, event: .open)
+        
         setupViews()
         setupConstraints()
         setupTargets()
@@ -53,13 +67,9 @@ final class BrowsingNFTViewController: UIViewController {
         imageScrollView.maximumZoomScale = 1.25
     }
     
-    init(urlStrings: [String]) {
-        self.urlStringsImageView = urlStrings
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        analyticsService.sentEvent(screen: .browsingNFTCard, item: .screen, event: .close)
     }
     
     // MARK: - Private Methods:
@@ -107,11 +117,15 @@ extension BrowsingNFTViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = round(scrollView.contentOffset.x / view.frame.width)
         pageControll.currentPage = Int(page)
+        
+        analyticsService.sentEvent(screen: .browsingNFTCard, item: .swipeNFTCard, event: .click)
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         let page = round(scrollView.contentOffset.x / view.frame.width)
         pageControll.currentPage = Int(page)
+        
+        analyticsService.sentEvent(screen: .browsingNFTCard, item: .scaleNFTCard, event: .click)
         
         return imageScrollView.subviews[Int(page)]
     }

@@ -14,6 +14,9 @@ final class CatalogViewController: UIViewController {
     private var viewModel: CatalogViewModelProtocol?
     private var alertService: AlertServiceProtocol?
     
+    // MARK: - Private Classes:
+    private var analyticsService = AnalyticsService.instance
+    
     // MARK: - UI:
     private lazy var catalogNFTTableView: UITableView = {
         var tableView = UITableView()
@@ -43,6 +46,8 @@ final class CatalogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        analyticsService.sentEvent(screen: .catalogMain, item: .screen, event: .open)
+        
         setupViews()
         setupConstraints()
         setupTargets()
@@ -51,6 +56,11 @@ final class CatalogViewController: UIViewController {
         bind()
         
         viewModel?.fetchCollections()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        analyticsService.sentEvent(screen: .catalogMain, item: .screen, event: .close)
     }
     
     // MARK: - Private Methods:
@@ -110,11 +120,14 @@ final class CatalogViewController: UIViewController {
             guard let self else { return }
             self.sortNFT(options)
         })
+        
+        analyticsService.sentEvent(screen: .catalogMain, item: .buttonSorting, event: .click)
     }
     
     @objc private func refreshNFTCatalog() {
         blockUI()
         viewModel?.fetchCollections()
+        analyticsService.sentEvent(screen: .catalogMain, item: .pullToRefresh, event: .click)
     }
 }
 
