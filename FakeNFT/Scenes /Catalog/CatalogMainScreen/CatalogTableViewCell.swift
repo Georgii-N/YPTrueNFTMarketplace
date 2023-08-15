@@ -16,7 +16,7 @@ final class CatalogTableViewCell: UITableViewCell, ReuseIdentifying {
     // MARK: - Constants and Variables:
     private var collection: NFTCollection? {
         didSet {
-            guard let collection = collection else { return }
+            guard let collection else { return }
             let widht = isLargeScreen() ? UIScreen.main.bounds.width : contentView.frame.width * 1.15
             let size = CGSize(width: widht, height: 140)
             let url = URL(string: collection.cover.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")

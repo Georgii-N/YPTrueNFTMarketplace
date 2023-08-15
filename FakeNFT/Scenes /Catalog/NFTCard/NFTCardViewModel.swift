@@ -68,10 +68,10 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
     private(set) var networkError: String?
     
     // MARK: - Lifecycle:
-    init(nftModel: NFTCell, nftCollection: NFTCollection) {
+    init(dataProvider: DataProviderProtocol, nftModel: NFTCell, nftCollection: NFTCollection) {
+        self.dataProvider = dataProvider
         self.currentNFT = nftModel
         self.nftCollection = nftCollection
-        self.dataProvider = DataProvider()
     }
     
     // MARK: - Public Methods:
@@ -91,7 +91,7 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
             newLikes.remove(at: index)
         }
         
-        guard var profile = profile else { return }
+        guard var profile else { return }
         profile = Profile(name: profile.name,
                           avatar: profile.avatar,
                           description: profile.description,
@@ -101,7 +101,7 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
                           id: profile.id)
         
         dataProvider?.putNewProfile(profile: profile) { [weak self] result in
-            guard let self = self else { return }
+            guard let self else { return }
             switch result {
             case .success:
                 self.likeStatusDidChange = true
@@ -123,11 +123,11 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
             newOrderID.remove(at: index)
         }
         
-        guard var order = order else { return }
+        guard var order else { return }
         order = Order(nfts: newOrderID, id: "1")
         
         dataProvider?.putNewOrder(order: order) { [weak self] result in
-            guard let self = self else { return }
+            guard let self else { return }
             switch result {
             case .success:
                 self.cartStatusDidChange = true
@@ -177,7 +177,7 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
     // MARK: - Private func:
     private func fetchProfile() {
         dataProvider?.fetchProfile { [weak self] result in
-            guard let self = self else { return }
+            guard let self else { return }
             switch result {
             case .success(let profile):
                 self.profile = profile
@@ -191,7 +191,7 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
     
     private func fetchOrder() {
         dataProvider?.fetchOrder { [weak self] result in
-            guard let self = self else { return }
+            guard let self else { return }
             switch result {
             case .success(let order):
                 self.order = order
@@ -206,7 +206,7 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
     private func fetchAuthor() {
         let authorID = nftCollection.author
         dataProvider?.fetchUserID(userId: authorID) { [weak self] result in
-            guard let self = self else { return }
+            guard let self else { return }
             switch result {
             case .success(let author):
                 authorCollection = author
@@ -221,7 +221,7 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
         guard let authorID = authorCollection?.id else { return }
         
         dataProvider?.fetchUsersNFT(userId: authorID, nftsId: nftCollection.nfts) { [weak self] result in
-            guard let self = self else { return }
+            guard let self else { return }
             switch result {
             case .success(let nfts):
                 self.nfts = nfts.map({
@@ -245,7 +245,7 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
     
     private func fetchCurrencies() {
         dataProvider?.fetchCurrencies { [weak self] result in
-            guard let self = self else { return }
+            guard let self else { return }
             switch result {
             case .success(let currencies):
                 self.currencies = currencies

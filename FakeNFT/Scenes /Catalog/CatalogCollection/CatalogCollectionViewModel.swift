@@ -10,9 +10,13 @@ import UIKit
 final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     
     // MARK: Private Dependencies:
-    private var dataProvider: DataProviderProtocol?
+    private var dataProvider: DataProviderProtocol
     
     // MARK: Constants and Variables:
+    var provider: DataProviderProtocol {
+        dataProvider
+    }
+    
     private var profile: Profile?
     private var order: Order?
     
@@ -64,9 +68,9 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     private(set) var networkError: String?
     
     // MARK: - Lifecycle:
-    init(collection: NFTCollection) {
+    init(dataProvider: DataProviderProtocol, collection: NFTCollection) {
+        self.dataProvider = dataProvider
         self.collection = collection
-        self.dataProvider = DataProvider()
     }
     
     // MARK: - Public Methods:
@@ -80,7 +84,7 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
             newLikes.remove(at: index)
         }
         
-        guard var profile = profile else { return }
+        guard var profile else { return }
         profile = Profile(name: profile.name,
                           avatar: profile.avatar,
                           description: profile.description,
@@ -89,8 +93,8 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
                           likes: newLikes,
                           id: profile.id)
         
-        dataProvider?.putNewProfile(profile: profile) { [weak self] result in
-            guard let self = self else { return }
+        dataProvider.putNewProfile(profile: profile) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success:
                 self.likeStatusDidChange = true
@@ -112,11 +116,11 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
             newOrderID.remove(at: index)
         }
         
-        guard var order = order else { return }
+        guard var order else { return }
         order = Order(nfts: newOrderID, id: "1")
         
-        dataProvider?.putNewOrder(order: order) { [weak self] result in
-            guard let self = self else { return }
+        dataProvider.putNewOrder(order: order) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success:
                 self.cartStatusDidChange = true
@@ -135,8 +139,8 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     // MARK: - Private Methods:
     private func fetchAuthor() {
         let authorID = collectionObservable.wrappedValue.author
-        dataProvider?.fetchUserID(userId: authorID) { [weak self] result in
-            guard let self = self else { return }
+        dataProvider.fetchUserID(userId: authorID) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let author):
                 self.authorCollection = author
@@ -148,8 +152,8 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     }
     
     private func fetchProfile() {
-        dataProvider?.fetchProfile { [weak self] result in
-            guard let self = self else { return }
+        dataProvider.fetchProfile { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let profile):
                 self.profile = profile
@@ -162,8 +166,8 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     }
     
     private func fetchOrder() {
-        dataProvider?.fetchOrder { [weak self] result in
-            guard let self = self else { return }
+        dataProvider.fetchOrder { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let order):
                 self.order = order
@@ -178,8 +182,8 @@ final class CatalogCollectionViewModel: CatalogCollectionViewModelProtocol {
     private func fetchNFTs() {
         guard let authorID = authorCollection?.id else { return }
         
-        dataProvider?.fetchUsersNFT(userId: authorID, nftsId: collection.nfts) { [weak self] result in
-            guard let self = self else { return }
+        dataProvider.fetchUsersNFT(userId: authorID, nftsId: collection.nfts) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let nfts):
                 self.nftCollection = nfts.map({

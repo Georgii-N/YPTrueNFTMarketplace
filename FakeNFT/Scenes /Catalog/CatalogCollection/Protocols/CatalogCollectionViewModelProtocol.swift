@@ -8,6 +8,7 @@
 import UIKit
 
 protocol CatalogCollectionViewModelProtocol: AnyObject {
+    var provider: DataProviderProtocol { get }
     var collectionObservable: Observable<NFTCollection> { get }
     var nftsObservable: Observable<[NFTCell]?> { get }
     var authorCollectionObservable: Observable<UserResponse?> { get }

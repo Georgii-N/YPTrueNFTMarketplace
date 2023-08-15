@@ -105,9 +105,6 @@ final class NFTCardViewController: UIViewController {
         return button
     }()
     
-    private lazy var sellerWebsiteButton = BaseWhiteButton(with: L10n.Catalog.NftCard.Button.goToSellerSite)
-    private lazy var nftRatingStackView = NFTRatingStackView()
-    
     private lazy var nftColectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -119,6 +116,9 @@ final class NFTCardViewController: UIViewController {
         
         return collectionView
     }()
+    
+    private lazy var sellerWebsiteButton = BaseWhiteButton(with: L10n.Catalog.NftCard.Button.goToSellerSite)
+    private lazy var nftRatingStackView = NFTRatingStackView()
     
     // MARK: Lifecycle:
     init(delegate: NFTCardViewControllerDelegate?, viewModel: NFTCardViewModelProtocol?) {
@@ -148,30 +148,30 @@ final class NFTCardViewController: UIViewController {
     // MARK: - Private Methods:
     private func bind() {
         viewModel?.currenciesObservable.bind { [weak self] _ in
-            guard let self = self else { return }
+            guard let self else { return }
             self.resumeMethodOnMainThread(self.nftTableView.reloadData, with: ())
         }
         
         viewModel?.nftsObservable.bind { [weak self] _ in
-            guard let self = self else { return }
+            guard let self else { return }
             self.resumeMethodOnMainThread(self.nftColectionView.reloadData, with: ())
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
         }
         
         viewModel?.likeStatusDidChangeObservable.bind { [weak self] _ in
-            guard let self = self else { return }
+            guard let self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: true)
         }
         
         viewModel?.cartStatusDidChangeObservable.bind { [weak self] _ in
-            guard let self = self else { return }
+            guard let self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
         }
         
         viewModel?.networkErrorObservable.bind { [weak self] errorText in
-            guard let self = self else { return }
+            guard let self else { return }
             if let errorText {
                 self.resumeMethodOnMainThread(self.unblockUI, with: ())
                 self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
@@ -186,7 +186,7 @@ final class NFTCardViewController: UIViewController {
     
     // Controll NFT info and status:
     private func setupNFTInfo() {
-        guard let viewModel = viewModel else { return }
+        guard let viewModel else { return }
         
         let nftModel = viewModel.getCurrentNFTModel()
         let collection = viewModel.getNFTCollection()
@@ -371,7 +371,7 @@ extension NFTCardViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let viewModel = viewModel else { return UITableViewCell() }
+        guard let viewModel else { return UITableViewCell() }
         
         let cell: NFTCardTableViewCell = tableView.dequeueReusableCell()
         

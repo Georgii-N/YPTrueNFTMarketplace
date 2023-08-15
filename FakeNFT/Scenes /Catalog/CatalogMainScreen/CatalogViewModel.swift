@@ -10,10 +10,15 @@ import UIKit
 final class CatalogViewModel: CatalogViewModelProtocol {
     
     // MARK: - Private Dependencies:
-    private var dataProvider: DataProviderProtocol?
+    private var dataProvider: DataProviderProtocol
     
     // MARK: - Private Classes:
     private let userDefaultService = UserDefaultsService.shared
+    
+    // MARK: - Constants and Variables:
+    var provider: DataProviderProtocol {
+        dataProvider
+    }
     
     // MARK: - Observable Values:
     var nftCollectionsObservable: Observable<NFTCollections?> {
@@ -31,13 +36,13 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     private(set) var networkError: String?
     
     // MARK: - Lifecycle:
-    init(dataProvider: DataProviderProtocol?) {
+    init(dataProvider: DataProviderProtocol) {
         self.dataProvider = dataProvider
     }
     
     // MARK: Public Methods:
     func sortNFTCollection(option: SortingOption) {
-        guard let nftCollections = nftCollections else { return }
+        guard let nftCollections else { return }
         
         var collection = NFTCollections()
         switch option {
@@ -54,8 +59,8 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     }
     
     func fetchCollections() {
-        dataProvider?.fetchNFTCollection { [weak self] result in
-            guard let self = self else { return }
+        dataProvider.fetchNFTCollection { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let collections):
                 self.networkError = nil

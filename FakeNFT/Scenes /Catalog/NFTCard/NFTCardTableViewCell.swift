@@ -61,7 +61,6 @@ final class NFTCardTableViewCell: UITableViewCell, ReuseIdentifying {
         let label = UILabel()
         label.font = .captionSmallerRegular
         label.textColor = .greenUniversal
-        label.text = "$18.11"
         
         return label
     }()

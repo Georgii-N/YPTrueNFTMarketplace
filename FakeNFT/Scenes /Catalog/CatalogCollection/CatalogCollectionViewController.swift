@@ -113,34 +113,34 @@ final class CatalogCollectionViewController: UIViewController {
     // MARK: - Private Methods:
     private func bind() {
         viewModel?.collectionObservable.bind { [weak self] _ in
-            guard let self = self else { return }
+            guard let self else { return }
             self.resumeMethodOnMainThread(self.setupCollectionInfo, with: ())
         }
         
         self.viewModel?.authorCollectionObservable.bind { [weak self] author in
-            guard let self = self else { return }
+            guard let self else { return }
             self.resumeMethodOnMainThread(self.setupAuthorInfo, with: author)
         }
         
         viewModel?.nftsObservable.bind { [weak self] _ in
-            guard let self = self else { return }
+            guard let self else { return }
             self.resumeMethodOnMainThread(self.nftCollection.reloadData, with: ())
         }
         
         viewModel?.likeStatusDidChangeObservable.bind { [weak self] _ in
-            guard let self = self else { return }
+            guard let self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: true)
         }
         
         viewModel?.cartStatusDidChangeObservable.bind { [weak self] _ in
-            guard let self = self else { return }
+            guard let self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
         }
         
         viewModel?.networkErrorObservable.bind { [weak self] errorText in
-            guard let self = self else { return }
+            guard let self else { return }
             if let errorText {
                 self.resumeMethodOnMainThread(self.unblockUI, with: ())
                 self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
@@ -186,9 +186,11 @@ final class CatalogCollectionViewController: UIViewController {
     }
     
     private func switchToNFTCardViewController(nftModel: NFTCell) {
-        guard let collection = viewModel?.collectionObservable.wrappedValue else { return }
+        guard let collection = viewModel?.collectionObservable.wrappedValue,
+              let viewModel else { return }
         
-        let nftViewModel = NFTCardViewModel(nftModel: nftModel, nftCollection: collection)
+        let dataProvider = viewModel.provider
+        let nftViewModel = NFTCardViewModel(dataProvider: dataProvider, nftModel: nftModel, nftCollection: collection)
         let viewController = NFTCardViewController(delegate: self, viewModel: nftViewModel)
         
         navigationController?.pushViewController(viewController, animated: true)

@@ -22,7 +22,7 @@ final class TabBarController: UITabBarController {
         let dataProvider = appDelegate.dataProvider
         
         // Initialize dependencies:
-        let catalogViewModel = CatalogViewModel(dataProvider: DataProvider())
+        let catalogViewModel = CatalogViewModel(dataProvider: dataProvider)
         
         // Initizialize ViewControllers:
         let catalogViewController = CatalogViewController(viewModel: catalogViewModel)

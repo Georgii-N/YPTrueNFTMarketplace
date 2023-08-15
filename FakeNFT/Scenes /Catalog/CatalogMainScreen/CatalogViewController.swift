@@ -56,13 +56,13 @@ final class CatalogViewController: UIViewController {
     // MARK: - Private Methods:
     private func bind() {
         viewModel?.nftCollectionsObservable.bind { [weak self] _ in
-            guard let self = self else { return }
+            guard let self else { return }
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.catalogNFTTableView.reloadData, with: ())
         }
         
         viewModel?.networkErrorObservable.bind { [weak self] errorText in
-            guard let self = self else { return }
+            guard let self else { return }
             if let errorText {
                 self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
                 self.resumeMethodOnMainThread(self.unblockUI, with: ())
@@ -107,7 +107,7 @@ final class CatalogViewController: UIViewController {
                                       sortingOptions: [.byTitle, .byQuantity, .close],
                                       on: self,
                                       completion: { [weak self] options in
-            guard let self = self else { return }
+            guard let self else { return }
             self.sortNFT(options)
         })
     }
@@ -132,7 +132,7 @@ extension CatalogViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let viewModel = viewModel else { return UITableViewCell() }
+        guard let viewModel else { return UITableViewCell() }
         let cell: CatalogTableViewCell = tableView.dequeueReusableCell()
         
         if let collectionModel = viewModel.nftCollectionsObservable.wrappedValue?[indexPath.row] {
@@ -152,10 +152,12 @@ extension CatalogViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension CatalogViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? CatalogTableViewCell else { return }
+        guard let cell = tableView.cellForRow(at: indexPath) as? CatalogTableViewCell,
+              let viewModel else { return }
         
         let collectionModel = cell.getCollectionModel()
-        let catalogCollectionViewModel = CatalogCollectionViewModel(collection: collectionModel)
+        let dataProvider = viewModel.provider
+        let catalogCollectionViewModel = CatalogCollectionViewModel(dataProvider: dataProvider, collection: collectionModel)
         let viewController = CatalogCollectionViewController(viewModel: catalogCollectionViewModel)
         
         navigationController?.pushViewController(viewController, animated: true)
