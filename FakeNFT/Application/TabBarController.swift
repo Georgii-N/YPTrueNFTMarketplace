@@ -12,8 +12,14 @@ final class TabBarController: UITabBarController {
         let appearance = UITabBarAppearance()
 
         tabBar.standardAppearance = appearance
-        tabBar.backgroundColor = .whiteDay
+        tabBar.backgroundColor = .white
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            assertionFailure("appDelegate not found")
+            return
+        }
         
+        let dataProvider = appDelegate.dataProvider
+
         let profileViewController = CustomNavigationController(rootViewController: UIViewController())
         let catalogViewController = CustomNavigationController(rootViewController: UIViewController())
         let cartViewController = CustomNavigationController(rootViewController: CartViewControler(cartViewModel: CartViewModel()))

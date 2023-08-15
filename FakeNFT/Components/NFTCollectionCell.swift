@@ -27,7 +27,7 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
                 nftPriceLabel.text = "(\(nftModel.price) ETH)"
                 setButtonImages()
                 if ratingStackView.subviews.count == 0 {
-                    setupRatingStackView(rating: nftModel.rating)
+                    ratingStackView.setupNFTRating(with: nftModel.rating)
                 }
             }
         }
@@ -54,19 +54,10 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
         
         return button
     }()
-    
-    private lazy var ratingStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 2
-        stackView.distribution = .fillEqually
         
-        return stackView
-    }()
-    
     private lazy var nftNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: 17)
+        label.font = .captionMediumBold
         label.textColor = .blackDay
         
         return label
@@ -74,7 +65,7 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
     
     private lazy var nftPriceLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 10)
+        label.font = .captionSmallestMedium
         label.textColor = .blackDay
         
         return label
@@ -94,6 +85,8 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
         return button
     }()
     
+    private lazy var ratingStackView = NFTRatingStackView()
+
     static var defaultReuseIdentifier = "NFTCollectionViewCell"
     
     // MARK: - Lifecycle:

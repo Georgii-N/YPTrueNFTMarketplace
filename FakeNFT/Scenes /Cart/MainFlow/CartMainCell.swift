@@ -49,7 +49,7 @@ final class CartMainCell: UICollectionViewCell {
     
     private lazy var deleteCartButton: UIButton = {
         let deleteCartButton = UIButton()
-        deleteCartButton.setImage(UIImage(named: "removeBasket"), for: .normal)
+        deleteCartButton.setImage(Resources.Images.NFTCollectionCell.removeFromBasket, for: .normal)
         return deleteCartButton
     }()
     

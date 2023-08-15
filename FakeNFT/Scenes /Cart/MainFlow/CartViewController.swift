@@ -151,7 +151,7 @@ extension CartViewControler {
     private func makeSort() {
         let alert = UniversalAlertService()
         
-        alert.showActionSheet(title: L10n.Alert.sortTitle, sortingOptions: [.byPrice, .byRating, .byName, .close], on: self) { [weak self] options in
+        alert.showActionSheet(title: L10n.Sorting.title, sortingOptions: [.byPrice, .byRating, .byName, .close], on: self) { [weak self] options in
             guard let self = self else { return }
             self.cartViewModel.sortNFT(options)
             

@@ -3,9 +3,9 @@ import Foundation
 
 protocol PaymentViewModelProtocol: AnyObject {
     var currencieID: Int? {get set}
-    var currencieNfts: Observable<[Currencie]?> {get}
+    var currencieNfts: Observable<[Currency]?> {get}
     func makePay(completion: @escaping (Bool) -> Void)
-    func unwrappedPaymentViewModel() -> [Currencie]
+    func unwrappedPaymentViewModel() -> [Currency]
 }
 
 final class PaymentViewModel: PaymentViewModelProtocol {
@@ -15,12 +15,12 @@ final class PaymentViewModel: PaymentViewModelProtocol {
     
     // MARK: Observable constants and variables
     @Observable
-    private(set) var currencieNFT: [Currencie]? = []
+    private(set) var currencieNFT: [Currency]? = []
     
     //MARK: Dependencies
     var currencieID: Int?
     
-    var currencieNfts: Observable<[Currencie]?> {
+    var currencieNfts: Observable<[Currency]?> {
         $currencieNFT
     }
     
@@ -54,8 +54,8 @@ final class PaymentViewModel: PaymentViewModelProtocol {
         }
     }
     
-    func unwrappedPaymentViewModel() -> [Currencie] {
-       let currencieNFT: [Currencie] = []
+    func unwrappedPaymentViewModel() -> [Currency] {
+       let currencieNFT: [Currency] = []
        if let currencieNFT = self.currencieNfts.wrappedValue {
            return currencieNFT
        }

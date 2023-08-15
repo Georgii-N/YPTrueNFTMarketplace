@@ -68,7 +68,7 @@ extension CartPaymentCell {
         ])
     }
     
-    func setupCollectionModel(model: Currencie) {
+    func setupCollectionModel(model: Currency) {
         let imageUrl = URL(string: model.image)
         let size = CGSize(width: 31.5, height: 31.5)
         let resizingProcessor = ResizingImageProcessor(referenceSize: size)
