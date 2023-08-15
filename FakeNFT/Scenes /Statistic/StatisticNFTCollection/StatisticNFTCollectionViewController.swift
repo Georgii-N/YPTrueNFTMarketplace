@@ -79,12 +79,18 @@ extension StatisticNFTCollectionViewController {
         
         statisticNFTViewModel.networkErrorObservable.bind { [weak self] errorText in
             guard let self = self else { return }
-            if let errorText {
-                self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
-                self.resumeMethodOnMainThread(self.unblockUI, with: ())
-                self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
+            if errorText == nil {
+                self.resumeMethodOnMainThread(self.endRefreshing, with: ())
+            } else {
+                self.resumeMethodOnMainThread(self.endRefreshing, with: ())
+                self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText ?? "")
             }
         }
+    }
+    
+    private func endRefreshing() {
+        self.refreshControl.endRefreshing()
+        self.unblockUI()
     }
     
     private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
