@@ -15,7 +15,7 @@ final class RegistrationViewController: UIViewController {
     
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        button.setImage(Resources.Images.Authorization.backButtonImage, for: .normal)
         button.tintColor = .blackDay
         
         return button
@@ -35,11 +35,12 @@ final class RegistrationViewController: UIViewController {
         let textField = UITextField()
         textField.layer.cornerRadius = 12
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
+        textField.textAlignment = Locale.current.languageCode == "ar" ? .right : .left
         textField.leftViewMode = .always
         textField.autocapitalizationType = .none
         textField.textColor = .blackDay
         textField.backgroundColor = .lightGrayDay
-        textField.placeholder = "Email"
+        textField.placeholder = L10n.General.email
         textField.delegate = self
         
         return textField
@@ -49,6 +50,7 @@ final class RegistrationViewController: UIViewController {
         let textField = UITextField()
         textField.layer.cornerRadius = 12
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
+        textField.textAlignment = Locale.current.languageCode == "ar" ? .right : .left
         textField.leftViewMode = .always
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
@@ -64,9 +66,10 @@ final class RegistrationViewController: UIViewController {
     
     private lazy var loginPasswordMistakeLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = Locale.current.languageCode == "ar" ? .right : .center
+        label.numberOfLines = 0
         label.font = .bodySmallerRegular
         label.textColor = .redUniversal
-        label.textAlignment = .left
         
         return label
     }()
@@ -166,7 +169,7 @@ final class RegistrationViewController: UIViewController {
             NSLayoutConstraint.activate([
                 self.loginPasswordMistakeLabel.topAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: 16),
                 self.loginPasswordMistakeLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-                self.loginPasswordMistakeLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 16)
+                self.loginPasswordMistakeLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16)
             ])
         }
     }

@@ -62,7 +62,7 @@ final class RegistrationViewModel: RegistrationViewModelProtocol {
             
             if error != nil {
                 guard let error = error as? NSError else { return }
-                self.errorDiscription = error.code == 17007 ? L10n.Authorization.Error.loginIsBusy : L10n.Alert.Authorization.message
+                self.errorDiscription = error.code == 17007 ? L10n.Authorization.Error.loginIsBusy : L10n.Authorization.Error.loginPasswordMistake
                 self.isRegistrationDidSuccesful = false
             }
             

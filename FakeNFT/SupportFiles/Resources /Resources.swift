@@ -6,6 +6,10 @@ enum Resources {
             static let logo = UIImage(named: "Vector")
         }
         
+        enum Authorization {
+            static let backButtonImage = UIImage(systemName: "chevron.backward")
+        }
+        
         enum Onboarding {
             static let firstImage = UIImage(named: "Onboarding1")
             static let secondImage = UIImage(named: "Onboarding2")

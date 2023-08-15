@@ -110,6 +110,8 @@ internal enum L10n {
     internal static let close = L10n.tr("Localizable", "general.close", fallback: "Close")
     /// Remove
     internal static let delete = L10n.tr("Localizable", "general.delete", fallback: "Remove")
+    /// Email
+    internal static let email = L10n.tr("Localizable", "general.email", fallback: "Email")
     /// OK
     internal static let ok = L10n.tr("Localizable", "general.OK", fallback: "OK")
     /// Price

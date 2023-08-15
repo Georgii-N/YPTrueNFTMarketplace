@@ -19,6 +19,7 @@
 "general.delete" = "Удалить";
 "general.return" = "Вернуться";
 "general.close" = "Закрыть";
+"general.email" = "Email";
 "general.price" = "Цена";
 "general.OK" = "OK";
 "general.refreshStub" = "Кажется, что ничего нет\nПотяните вниз чтобы обновить";

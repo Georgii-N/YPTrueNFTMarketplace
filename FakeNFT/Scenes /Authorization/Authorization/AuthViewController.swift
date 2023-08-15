@@ -27,13 +27,14 @@ final class AuthViewController: UIViewController {
         let textField = UITextField()
         textField.layer.cornerRadius = 12
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
+        textField.textAlignment = Locale.current.languageCode == "ar" ? .right : .left
         textField.leftViewMode = .always
         textField.autocapitalizationType = .none
         textField.textColor = .blackDay
         textField.backgroundColor = .lightGrayDay
-        textField.placeholder = "Email"
+        textField.placeholder = L10n.General.email
         textField.delegate = self
-        
+                
         return textField
     }()
     
@@ -41,6 +42,7 @@ final class AuthViewController: UIViewController {
         let textField = UITextField()
         textField.layer.cornerRadius = 12
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
+        textField.textAlignment = Locale.current.languageCode == "ar" ? .right : .left
         textField.leftViewMode = .always
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
@@ -86,9 +88,10 @@ final class AuthViewController: UIViewController {
     
     private lazy var loginPasswordMistakeLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = Locale.current.languageCode == "ar" ? .right : .center
         label.font = .bodySmallerRegular
         label.textColor = .redUniversal
-        label.textAlignment = .left
         label.text = L10n.Authorization.Error.loginPasswordMistake
         
         return label
@@ -179,7 +182,7 @@ final class AuthViewController: UIViewController {
             NSLayoutConstraint.activate([
                 self.loginPasswordMistakeLabel.topAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: 16),
                 self.loginPasswordMistakeLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-                self.loginPasswordMistakeLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 16)
+                self.loginPasswordMistakeLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16)
             ])
         }
     }
