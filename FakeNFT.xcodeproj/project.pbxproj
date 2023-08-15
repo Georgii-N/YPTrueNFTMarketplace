@@ -73,6 +73,7 @@
 		7EE68D042A820F8F00CAE2AC /* BrowsingNFTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68D032A820F8F00CAE2AC /* BrowsingNFTViewController.swift */; };
 		7EE68D092A839EE600CAE2AC /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68D082A839EE600CAE2AC /* AuthViewController.swift */; };
 		7EF440002A8B3A7F00444684 /* RefreshStubLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF43FFF2A8B3A7F00444684 /* RefreshStubLabel.swift */; };
+		7EF440042A8B402E00444684 /* NFTRatingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF440032A8B402E00444684 /* NFTRatingStackView.swift */; };
 		7EF4C5D12A73F86C001E8C67 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */; };
 		7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D22A73FD9A001E8C67 /* Resources.swift */; };
 		7EFB261E2A840888001901B6 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB261D2A840888001901B6 /* AuthViewModel.swift */; };
@@ -176,6 +177,7 @@
 		7EE68D032A820F8F00CAE2AC /* BrowsingNFTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowsingNFTViewController.swift; sourceTree = "<group>"; };
 		7EE68D082A839EE600CAE2AC /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		7EF43FFF2A8B3A7F00444684 /* RefreshStubLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshStubLabel.swift; sourceTree = "<group>"; };
+		7EF440032A8B402E00444684 /* NFTRatingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTRatingStackView.swift; sourceTree = "<group>"; };
 		7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		7EF4C5D22A73FD9A001E8C67 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		7EFB261D2A840888001901B6 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				7EB78A8D2A79505000BE892B /* Buttons */,
 				7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */,
 				7EF43FFF2A8B3A7F00444684 /* RefreshStubLabel.swift */,
+				7EF440032A8B402E00444684 /* NFTRatingStackView.swift */,
 				7EB78A892A79504800BE892B /* NFTCollectionCell.swift */,
 				7EB78A8A2A79504800BE892B /* NFTCollectionView.swift */,
 			);
@@ -979,6 +982,7 @@
 				4005316E2A73DDFC008CAF3B /* UIView + Extension.swift in Sources */,
 				7E71E3B32A73CBF500B0073D /* Strings+Generated.swift in Sources */,
 				7EB78A5D2A77D84100BE892B /* CatalogCollectionViewController.swift in Sources */,
+				7EF440042A8B402E00444684 /* NFTRatingStackView.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
 				400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */,
 				7EE68D092A839EE600CAE2AC /* AuthViewController.swift in Sources */,
