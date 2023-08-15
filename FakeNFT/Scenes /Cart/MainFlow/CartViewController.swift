@@ -10,6 +10,7 @@ final class CartViewControler: UIViewController {
     // MARK: UI constants and variables
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private let sortButton = SortNavBarBaseButton()
+    private lazy var refreshControl = UIRefreshControl()
     
     private lazy var totalView: UIView = {
         let totalView = UIView()
@@ -83,6 +84,15 @@ final class CartViewControler: UIViewController {
                 self.unblockUI()
             }
         }
+        
+        cartViewModel.networkErrorObservable.bind {[weak self] errorText in
+            guard let self = self else { return }
+            guard let errorText = errorText else {
+                return self.resumeMethodOnMainThread(self.endRefreshing, with: ())
+            }
+            self.resumeMethodOnMainThread(self.endRefreshing, with: ())
+            self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText ?? "")
+        }
     }
 }
 
@@ -128,12 +138,16 @@ extension CartViewControler {
             emptyLabel.isHidden = false
             totalView.isHidden = true
             toPayButton.isHidden = true
+            totalNFT.isHidden = true
+            totalCost.isHidden = true
             self.navigationItem.rightBarButtonItem = nil
             
         } else {
             emptyLabel.isHidden = true
             totalView.isHidden = false
             toPayButton.isHidden = false
+            totalNFT.isHidden = false
+            totalCost.isHidden = false
             makeSortButton()
         }
     }
@@ -151,7 +165,7 @@ extension CartViewControler {
     private func makeSort() {
         let alert = UniversalAlertService()
         
-        alert.showActionSheet(title: L10n.Sorting.title, sortingOptions: [.byPrice, .byRating, .byName, .close], on: self) { [weak self] options in
+        alert.showActionSheet(title: L10n.Sorting.title, sortingOptions: [.byPrice, .byRating, .byTitle, .close], on: self) { [weak self] options in
             guard let self = self else { return }
             self.cartViewModel.sortNFT(options)
             
@@ -168,6 +182,17 @@ extension CartViewControler {
     private func makeSortButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: sortButton)
     }
+    
+    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
+            DispatchQueue.main.async {
+                method(argument)
+            }
+        }
+    
+    private func endRefreshing() {
+            self.refreshControl.endRefreshing()
+            self.unblockUI()
+        }
 }
 
 // MARK: Collection View

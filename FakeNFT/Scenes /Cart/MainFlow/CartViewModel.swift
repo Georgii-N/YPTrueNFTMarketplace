@@ -3,9 +3,8 @@ import Foundation
 
 protocol CartViewModelProtocol: AnyObject {
     var cartNft: Observable<[NFTCard]?> {get}
-    func getOrder()
+    var networkErrorObservable: Observable<String?> {get}
     func sendDeleteNft(id: String, completion: @escaping (Bool) -> Void)
-    func getNfts()
     func additionNFT() -> Int
     func additionPriceNFT() -> Float
     func sortNFT(_ sortOptions: SortingOption)
@@ -18,9 +17,14 @@ final class CartViewModel: CartViewModelProtocol {
     var cartNft: Observable<[NFTCard]?> {
         $cartNFT
     }
+    
+    var networkErrorObservable: Observable<String?> {
+            $networkError
+        }
+    
     private let dataProvider = DataProvider()
     private var idNfts: [String] = []
-
+    private let userDefaults = UserDefaultsService.shared
     
     // MARK: Dependencies
     private var orderID: String?
@@ -29,13 +33,16 @@ final class CartViewModel: CartViewModelProtocol {
     @Observable
     private(set) var cartNFT: [NFTCard]?  = []
     
+    @Observable
+        private(set) var networkError: String?
+    
     // MARK: Init
     init() {
         getOrder()
     }
     
     // MARK: Methods
-    func getOrder() {
+   private func getOrder() {
         dataProvider.fetchOrder {[weak self] result in
             guard let self = self else { return }
             switch result {
@@ -44,7 +51,8 @@ final class CartViewModel: CartViewModelProtocol {
                 self.orderID = data.id
                 self.getNfts()
             case .failure(let error):
-                assertionFailure(error.localizedDescription)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         }
     }
@@ -69,19 +77,22 @@ final class CartViewModel: CartViewModelProtocol {
                 self.getNfts()
                 completion(true)
             case .failure(let error):
-                assertionFailure(error.localizedDescription)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         }
     }
     
-    func getNfts() {
+    private func getNfts() {
         dataProvider.fetchUsersNFT(userId: nil, nftsId: idNfts) {[weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let data):
                 data.forEach {self.cartNFT?.append($0)}
+                self.getSort()
             case .failure(let error):
-                assertionFailure(error.localizedDescription)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         }
     }
@@ -97,15 +108,24 @@ final class CartViewModel: CartViewModelProtocol {
     }
     
     func sortNFT(_ sortOptions: SortingOption) {
+        userDefaults.saveSortingOption(sortOptions, forScreen: .cart)
         var newNftCart: [NFTCard] = []
         let cartNFT = unwrappedCartNftViewModel()
         switch sortOptions {
         case .byPrice: newNftCart = cartNFT.sorted(by: {$0.price > $1.price})
         case .byRating: newNftCart = cartNFT.sorted(by: {$0.rating > $1.rating})
-        case .byName: newNftCart = cartNFT.sorted(by: {$0.name < $1.name})
+        case .byTitle: newNftCart = cartNFT.sorted(by: {$0.name < $1.name})
         default: break
         }
         self.cartNFT = newNftCart
+    }
+    
+   private func getSort() {
+        if let userDefaulds = userDefaults.getSortingOption(for: .cart) {
+            sortNFT(userDefaulds)
+        } else {
+            sortNFT(.byTitle)
+        }
     }
     
      func unwrappedCartNftViewModel() -> [NFTCard] {

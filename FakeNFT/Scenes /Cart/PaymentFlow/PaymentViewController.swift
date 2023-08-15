@@ -10,6 +10,7 @@ final class PaymentViewController: UIViewController {
     private let payButton = BaseBlackButton(with: L10n.Cart.PayScreen.payButton)
     private let url = URL(string: "https://yandex.ru/legal/practicum_termsofuse/")
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private lazy var refreshControl = UIRefreshControl()
     
     private lazy var bottomView: UIView = {
         let bottomView = UIView()
@@ -58,13 +59,22 @@ final class PaymentViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-   private func bind() {
+    private func bind() {
         paymentViewModel.currencieNfts.bind {[weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.unblockUI()
             }
+        }
+        
+        paymentViewModel.networkErrorObservable.bind {[weak self] errorText in
+            guard let self = self else { return }
+            guard let errorText = errorText else {
+                return self.resumeMethodOnMainThread(self.endRefreshing, with: ())
+            }
+            self.resumeMethodOnMainThread(self.endRefreshing, with: ())
+            self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText ?? "")
         }
     }
 }
@@ -116,12 +126,12 @@ extension PaymentViewController {
         paymentViewModel.makePay { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
-            switch result {
-            case true:
-
+                switch result {
+                case true:
+                    
                     let successViewController = SuccessfulPaymentViewController()
                     self.navigationController?.pushViewController(successViewController, animated: true)
-            case false:
+                case false:
                     let unsuccessViewController = UnsuccessfulPaymentViewController()
                     self.navigationController?.pushViewController(unsuccessViewController, animated: true)
                 }
@@ -136,13 +146,24 @@ extension PaymentViewController {
         let webViewController = WebViewViewController(viewModel: webViewModel, url: url)
         navigationController?.pushViewController(webViewController, animated: true)
     }
+    
+    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
+        DispatchQueue.main.async {
+            method(argument)
+        }
+    }
+    
+    private func endRefreshing() {
+        self.refreshControl.endRefreshing()
+        self.unblockUI()
+    }
 }
 
 // MARK: Collection View
 extension PaymentViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let currencieNFT = paymentViewModel.unwrappedPaymentViewModel()
-       return currencieNFT.count
+        return currencieNFT.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

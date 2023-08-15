@@ -4,6 +4,7 @@ import Foundation
 protocol PaymentViewModelProtocol: AnyObject {
     var currencieID: Int? {get set}
     var currencieNfts: Observable<[Currency]?> {get}
+    var networkErrorObservable: Observable<String?> {get}
     func makePay(completion: @escaping (Bool) -> Void)
     func unwrappedPaymentViewModel() -> [Currency]
 }
@@ -17,12 +18,19 @@ final class PaymentViewModel: PaymentViewModelProtocol {
     @Observable
     private(set) var currencieNFT: [Currency]? = []
     
+    @Observable
+        private(set) var networkError: String?
+    
     //MARK: Dependencies
     var currencieID: Int?
     
     var currencieNfts: Observable<[Currency]?> {
         $currencieNFT
     }
+    
+    var networkErrorObservable: Observable<String?> {
+            $networkError
+        }
     
     // MARK: Init
     init() {
@@ -37,7 +45,8 @@ final class PaymentViewModel: PaymentViewModelProtocol {
             case .success(let currencie):
                 self.currencieNFT?.append(contentsOf: currencie)
             case .failure(let error):
-                assertionFailure(error.localizedDescription)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         }
     }
@@ -49,7 +58,8 @@ final class PaymentViewModel: PaymentViewModelProtocol {
             case .success(let data):
                 completion(data.success)
             case .failure(let error):
-                assertionFailure(error.localizedDescription)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         }
     }
