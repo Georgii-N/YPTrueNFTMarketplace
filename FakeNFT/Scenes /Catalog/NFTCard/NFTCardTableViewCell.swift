@@ -67,7 +67,7 @@ final class NFTCardTableViewCell: UITableViewCell, ReuseIdentifying {
     
     private lazy var nftDetailButton: UIButton = {
         let button = UIButton(type: .system)
-        let image = UIImage(systemName: "chevron.forward")
+        let image = Resources.Images.Authorization.forwardButtonImage
         button.setImage(image, for: .normal)
         button.tintColor = .blackDay
         
