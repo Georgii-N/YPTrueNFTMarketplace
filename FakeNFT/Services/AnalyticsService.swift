@@ -23,24 +23,24 @@ enum Screens: String {
     case statisticСollectionNFT = "StatisticСollectionNFT"
 }
 
-enum Items {
-    case screen
-    case buttonSorting
-    case buttonSortingByName
-    case buttonSortingByRating
-    case buttonGoToUserSite
-    case buttonGoToUserCollection
-    case buttonAddToCard
-    case buttonLike
-    case pullToRefresh
-    case swipeNFTCard
-    case scaleNFTCard
+enum Items: String {
+    case screen = "Screen"
+    case buttonSorting = "ButtonSorting"
+    case buttonSortingByName = "ButtonSortingByName"
+    case buttonSortingByRating = "ButtonSortingByRating"
+    case buttonGoToUserSite = "ButtonGoToUserSite"
+    case buttonGoToUserCollection = "ButtonGoToUserCollection"
+    case buttonAddToCard = "ButtonAddToCard"
+    case buttonLike = "ButtonLike"
+    case pullToRefresh = "BullToRefresh"
+    case swipeNFTCard = "SwipeNFTCard"
+    case scaleNFTCard = "ScaleNFTCard"
 }
 
-enum Events {
-    case click
-    case open
-    case close
+enum Events: String {
+    case click = "Click"
+    case open = "Open"
+    case close = "Close"
 }
 
 final class AnalyticsService {
@@ -51,7 +51,7 @@ final class AnalyticsService {
     
     func sentEvent(screen: Screens, item: Items, event: Events) {
         var parameters: [AnyHashable: Any] = [:]
-        parameters = [item: event]
+        parameters = [item.rawValue: event.rawValue]
         
         YMMYandexMetrica.reportEvent(screen.rawValue, parameters: parameters) { error in
             print("REPORT ERROR: %@", error.localizedDescription)
