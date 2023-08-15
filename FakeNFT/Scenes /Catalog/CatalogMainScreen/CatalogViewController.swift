@@ -27,17 +27,7 @@ final class CatalogViewController: UIViewController {
         return tableView
     }()
     
-    private lazy var stubRefreshLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.numberOfLines = 2
-        label.text = "Кажется,что ничего нет\nПотяните вниз чтобы обновить"
-        label.textColor = .gray
-        label.font = .captionSmallRegular
-        
-        return label
-    }()
-    
+    private lazy var refreshStubLabel = RefreshStubLabel()
     private lazy var sortButton = SortNavBarBaseButton()
     private lazy var refreshControl = UIRefreshControl()
     
@@ -95,11 +85,11 @@ final class CatalogViewController: UIViewController {
     }
     
     private func setupStubLabel() {
-        view.setupView(stubRefreshLabel)
+        view.setupView(refreshStubLabel)
 
         NSLayoutConstraint.activate([
-        stubRefreshLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-        stubRefreshLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        refreshStubLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        refreshStubLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
@@ -136,7 +126,7 @@ extension CatalogViewController: UITableViewDataSource {
         if collections == nil {
             setupStubLabel()
         } else {
-            stubRefreshLabel.removeFromSuperview()
+            refreshStubLabel.removeFromSuperview()
         }
         return collections?.count ?? 0
     }

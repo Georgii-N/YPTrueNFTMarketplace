@@ -107,6 +107,9 @@ internal enum L10n {
     internal static let ok = L10n.tr("Localizable", "general.OK", fallback: "OK")
     /// Цена
     internal static let price = L10n.tr("Localizable", "general.price", fallback: "Цена")
+    /// Кажется, что ничего нет
+    /// Потяните вниз чтобы обновить
+    internal static let refreshStub = L10n.tr("Localizable", "general.refreshStub", fallback: "Кажется, что ничего нет\nПотяните вниз чтобы обновить")
     /// Вернуться
     internal static let `return` = L10n.tr("Localizable", "general.return", fallback: "Вернуться")
   }
