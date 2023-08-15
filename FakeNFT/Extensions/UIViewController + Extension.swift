@@ -2,6 +2,11 @@ import UIKit
 import NotificationBannerSwift
 
 extension UIViewController {
+    // MARK: - Navigation Controller setup:
+     func setupBackButtonItem() {
+         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+         navigationController?.interactivePopGestureRecognizer?.delegate = nil
+     }
     
     // MARK: - ActivityIndicatior and Blocking UI:
     private var activityIndicator: UIActivityIndicatorView? {
