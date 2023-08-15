@@ -89,6 +89,8 @@ final class CatalogCollectionViewController: UIViewController {
         return collection
     }()
     
+    private lazy var refreshStubLabel = RefreshStubLabel()
+    
     // MARK: - Lifecycle:
     init(viewModel: CatalogCollectionViewModelProtocol?) {
         super.init(nibName: nil, bundle: nil)
@@ -101,8 +103,6 @@ final class CatalogCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        analyticsService.sentEvent(screen: .catalogCollection, item: .screen, event: .open)
-        
         blockUI()
         setupViews()
         setupConstraints()
@@ -112,6 +112,11 @@ final class CatalogCollectionViewController: UIViewController {
         bind()
         
         viewModel?.updateNFTCardModels()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        analyticsService.sentEvent(screen: .catalogCollection, item: .screen, event: .open)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -231,6 +236,15 @@ final class CatalogCollectionViewController: UIViewController {
         cell.setupNFTModel(model: model)
     }
     
+    private func setupStubLabel() {
+        view.setupView(refreshStubLabel)
+
+        NSLayoutConstraint.activate([
+        refreshStubLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        refreshStubLabel.topAnchor.constraint(equalTo: collectionInformationLabel.bottomAnchor, constant: 100)
+        ])
+    }
+    
     private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
         DispatchQueue.main.async {
             method(argument)
@@ -307,8 +321,16 @@ extension CatalogCollectionViewController: UITextViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension CatalogCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let collection = viewModel?.collectionObservable.wrappedValue else { return 0 }
-        return collection.nfts.count
+        let collection = viewModel?.collectionObservable.wrappedValue
+        let nfts = viewModel?.nftsObservable.wrappedValue
+        
+        if nfts == nil {
+            setupStubLabel()
+            return 0
+        } else {
+            refreshStubLabel.removeFromSuperview()
+            return collection?.nfts.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

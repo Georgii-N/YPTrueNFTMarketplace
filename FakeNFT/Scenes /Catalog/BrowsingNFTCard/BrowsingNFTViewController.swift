@@ -56,8 +56,6 @@ final class BrowsingNFTViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        analyticsService.sentEvent(screen: .browsingNFTCard, item: .screen, event: .open)
-        
         setupViews()
         setupConstraints()
         setupTargets()
@@ -65,6 +63,11 @@ final class BrowsingNFTViewController: UIViewController {
         loadImages()
         
         imageScrollView.maximumZoomScale = 1.25
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        analyticsService.sentEvent(screen: .browsingNFTCard, item: .screen, event: .open)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

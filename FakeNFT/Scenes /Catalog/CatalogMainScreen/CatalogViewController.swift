@@ -46,8 +46,6 @@ final class CatalogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        analyticsService.sentEvent(screen: .catalogMain, item: .screen, event: .open)
-        
         setupViews()
         setupConstraints()
         setupTargets()
@@ -56,6 +54,11 @@ final class CatalogViewController: UIViewController {
         bind()
         
         viewModel?.fetchCollections()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        analyticsService.sentEvent(screen: .catalogMain, item: .screen, event: .open)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -141,6 +144,7 @@ extension CatalogViewController: UITableViewDataSource {
         } else {
             refreshStubLabel.removeFromSuperview()
         }
+        
         return collections?.count ?? 0
     }
     
@@ -149,9 +153,7 @@ extension CatalogViewController: UITableViewDataSource {
         let cell: CatalogTableViewCell = tableView.dequeueReusableCell()
         
         if let collectionModel = viewModel.nftCollectionsObservable.wrappedValue?[indexPath.row] {
-            tableView.isHidden = false
             cell.setupCollectionModel(model: collectionModel)
-            refreshControl.endRefreshing()
         }
         
         return cell

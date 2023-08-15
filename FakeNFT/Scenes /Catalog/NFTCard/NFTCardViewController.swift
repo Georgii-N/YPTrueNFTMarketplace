@@ -122,6 +122,7 @@ final class NFTCardViewController: UIViewController {
     
     private lazy var sellerWebsiteButton = BaseWhiteButton(with: L10n.Catalog.NftCard.Button.goToSellerSite)
     private lazy var nftRatingStackView = NFTRatingStackView()
+    private lazy var refreshStubLabel = RefreshStubLabel()
     
     // MARK: Lifecycle:
     init(delegate: NFTCardViewControllerDelegate?, viewModel: NFTCardViewModelProtocol?) {
@@ -137,8 +138,6 @@ final class NFTCardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        analyticsService.sentEvent(screen: .nftCard, item: .screen, event: .open)
-        
         setupViews()
         setupConstraints()
         setupTargets()
@@ -148,6 +147,11 @@ final class NFTCardViewController: UIViewController {
         bind()
         
         viewModel?.updateNFTCardModels()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        analyticsService.sentEvent(screen: .nftCard, item: .screen, event: .open)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -298,6 +302,15 @@ final class NFTCardViewController: UIViewController {
         analyticsService.sentEvent(screen: .aboutCurrency, item: .screen, event: .open)
     }
     
+    private func setupStubLabel() {
+        view.setupView(refreshStubLabel)
+
+        NSLayoutConstraint.activate([
+        refreshStubLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        refreshStubLabel.topAnchor.constraint(equalTo: addToCartButton.bottomAnchor, constant: 100)
+        ])
+    }
+    
     private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
         DispatchQueue.main.async {
             method(argument)
@@ -391,7 +404,13 @@ extension NFTCardViewController: UIScrollViewDelegate {
 // MARK: - UITableViewDataSource
 extension NFTCardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.currenciesObservable.wrappedValue?.count ?? 0
+        if viewModel?.currenciesObservable.wrappedValue == nil {
+            setupStubLabel()
+        } else {
+            refreshStubLabel.removeFromSuperview()
+        }
+        
+        return viewModel?.currenciesObservable.wrappedValue?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
