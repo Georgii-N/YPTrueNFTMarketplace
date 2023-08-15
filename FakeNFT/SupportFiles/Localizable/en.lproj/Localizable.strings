@@ -19,6 +19,7 @@
 "general.delete" = "Remove";
 "general.return" = "Return";
 "general.close" = "Close";
+"general.email" = "Email";
 "general.price" = "Price";
 "general.OK" = "OK";
 "general.refreshStub" = "It seems that there is nothing\npull down to update";

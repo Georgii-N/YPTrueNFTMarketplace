@@ -19,7 +19,8 @@
 "general.delete" = "إزالة";
 "general.return" = "للعودة";
 "general.close" = "لإغلاق";
-"general.price" = "Цена";
+"general.email" = "Email";
+"general.price" = "السعر";
 "general.OK" = "حسنا";
 "general.refreshStub" = "يبدو أنه لا يوجد شيء \nهدم لتحديث";
 
