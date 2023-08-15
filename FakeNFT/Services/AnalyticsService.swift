@@ -2,14 +2,25 @@ import Foundation
 import YandexMobileMetrica
 
 enum Screens: String {
-        case catalogMain = "CatalogMain"
-        case cartMain = "CartMain"
+    // Catalog screens:
+    case catalogMain = "CatalogMain"
+    case catalogCollection = "CatalogCollection"
+    case catalogAboutAuthor = "CatalogAboutAuthor"
+    case nftCard = "CatalogNFTCard"
+    case catalogAboutAuthorFromNFTCard = "CatalogAboutAuthorFromNFTCard"
+    case aboutCurrency = "CatalogAboutCurrency"
+    case browsingNFTCard = "CatalogBrowsingNFTCard"
     
-        case profileMain = "ProfileMain"
+    // Cart screens:
+    case cartMain = "CartMain"
     
-        case statisticMain = "StatisticMain"
-        case statisticProfile = "StatisticProfile"
-        case statisticСollectionNFT = "StatisticСollectionNFT"
+    // Pforile screens:
+    case profileMain = "ProfileMain"
+    
+    // Statistic screens:
+    case statisticMain = "StatisticMain"
+    case statisticProfile = "StatisticProfile"
+    case statisticСollectionNFT = "StatisticСollectionNFT"
 }
 
 enum Items {
@@ -21,6 +32,9 @@ enum Items {
     case buttonGoToUserCollection
     case buttonAddToCard
     case buttonLike
+    case pullToRefresh
+    case swipeNFTCard
+    case scaleNFTCard
 }
 
 enum Events {
