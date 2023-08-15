@@ -8,6 +8,7 @@ enum Resources {
         
         enum Authorization {
             static let backButtonImage = UIImage(systemName: "chevron.backward")
+            static let forwardButtonImage = UIImage(systemName: "chevron.forward")
         }
         
         enum Onboarding {
