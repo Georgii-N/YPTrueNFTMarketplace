@@ -58,6 +58,7 @@
 		7EE68CFA2A7FCB8A00CAE2AC /* NFTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68CF92A7FCB8A00CAE2AC /* NFTCell.swift */; };
 		7EE68CFF2A80099B00CAE2AC /* NFTCollectionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68CFE2A80099B00CAE2AC /* NFTCollectionCellDelegate.swift */; };
 		7EE68D092A839EE600CAE2AC /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68D082A839EE600CAE2AC /* AuthViewController.swift */; };
+		7EF440002A8B3A7F00444684 /* RefreshStubLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF43FFF2A8B3A7F00444684 /* RefreshStubLabel.swift */; };
 		7EF4C5D12A73F86C001E8C67 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */; };
 		7EF4C5D32A73FD9A001E8C67 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4C5D22A73FD9A001E8C67 /* Resources.swift */; };
 		7EFB261E2A840888001901B6 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB261D2A840888001901B6 /* AuthViewModel.swift */; };
@@ -148,6 +149,7 @@
 		7EE68CF92A7FCB8A00CAE2AC /* NFTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCell.swift; sourceTree = "<group>"; };
 		7EE68CFE2A80099B00CAE2AC /* NFTCollectionCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionCellDelegate.swift; sourceTree = "<group>"; };
 		7EE68D082A839EE600CAE2AC /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		7EF43FFF2A8B3A7F00444684 /* RefreshStubLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshStubLabel.swift; sourceTree = "<group>"; };
 		7EF4C5D02A73F86C001E8C67 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		7EF4C5D22A73FD9A001E8C67 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		7EFB261D2A840888001901B6 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				7EE68D002A8009A300CAE2AC /* Protocols */,
 				7EB78A662A78EAB200BE892B /* Buttons */,
 				7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */,
+				7EF43FFF2A8B3A7F00444684 /* RefreshStubLabel.swift */,
 				7EB78A672A78EAD000BE892B /* NFTCollectionView.swift */,
 				7EB78A692A78EEC100BE892B /* NFTCollectionCell.swift */,
 			);
@@ -908,6 +911,7 @@
 				7EC0B5352A76678100688EC9 /* AlertService.swift in Sources */,
 				4070B1182A76CADF00CF6E74 /* SortNavBarBaseButton.swift in Sources */,
 				409EEFE72A7A710D00B23FF8 /* User.swift in Sources */,
+				7EF440002A8B3A7F00444684 /* RefreshStubLabel.swift in Sources */,
 				3FC8C39129D2453B0081F015 /* NetworkRequestModel.swift in Sources */,
 				7EFB261E2A840888001901B6 /* AuthViewModel.swift in Sources */,
 				7EE68CFF2A80099B00CAE2AC /* NFTCollectionCellDelegate.swift in Sources */,
