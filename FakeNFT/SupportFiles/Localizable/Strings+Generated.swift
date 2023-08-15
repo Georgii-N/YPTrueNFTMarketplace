@@ -12,219 +12,221 @@ import Foundation
 internal enum L10n {
   internal enum Alert {
     internal enum Authorization {
-      /// Не удалось войти в систему
-      internal static let message = L10n.tr("Localizable", "alert.authorization.message", fallback: "Не удалось войти в систему")
-      /// Что-то пошло не так (
-      internal static let title = L10n.tr("Localizable", "alert.authorization.title", fallback: "Что-то пошло не так (")
+      /// Failed to log in
+      internal static let message = L10n.tr("Localizable", "alert.authorization.message", fallback: "Failed to log in")
+      /// Something went wrong :(
+      internal static let title = L10n.tr("Localizable", "alert.authorization.title", fallback: "Something went wrong :(")
     }
   }
   internal enum Authorization {
-    /// Демо
-    internal static let demo = L10n.tr("Localizable", "authorization.demo", fallback: "Демо")
-    /// Вход
-    internal static let enter = L10n.tr("Localizable", "authorization.enter", fallback: "Вход")
-    /// Войти
-    internal static let entering = L10n.tr("Localizable", "authorization.entering", fallback: "Войти")
-    /// Забыли пароль?
-    internal static let forgetPassword = L10n.tr("Localizable", "authorization.forgetPassword", fallback: "Забыли пароль?")
-    /// Пароль
-    internal static let password = L10n.tr("Localizable", "authorization.password", fallback: "Пароль")
-    /// Регистрация
-    internal static let registrate = L10n.tr("Localizable", "authorization.registrate", fallback: "Регистрация")
-    /// Зарегистрироваться
-    internal static let registration = L10n.tr("Localizable", "authorization.registration", fallback: "Зарегистрироваться")
+    /// Demo
+    internal static let demo = L10n.tr("Localizable", "authorization.demo", fallback: "Demo")
+    /// Entrance
+    internal static let enter = L10n.tr("Localizable", "authorization.enter", fallback: "Entrance")
+    /// Enter
+    internal static let entering = L10n.tr("Localizable", "authorization.entering", fallback: "Enter")
+    /// Forgot your password?
+    internal static let forgetPassword = L10n.tr("Localizable", "authorization.forgetPassword", fallback: "Forgot your password?")
+    /// Password
+    internal static let password = L10n.tr("Localizable", "authorization.password", fallback: "Password")
+    /// Registration
+    internal static let registrate = L10n.tr("Localizable", "authorization.registrate", fallback: "Registration")
+    /// Register
+    internal static let registration = L10n.tr("Localizable", "authorization.registration", fallback: "Register")
     internal enum Error {
-      /// Данное имя пользователя занято
-      internal static let loginIsBusy = L10n.tr("Localizable", "authorization.error.loginIsBusy", fallback: "Данное имя пользователя занято")
-      /// Введен неверный логин или пароль
-      internal static let loginPasswordMistake = L10n.tr("Localizable", "authorization.error.loginPasswordMistake", fallback: "Введен неверный логин или пароль")
-      /// Введите email
-      internal static let mailMistake = L10n.tr("Localizable", "authorization.error.mailMistake", fallback: "Введите email")
-      /// Пароль должен иметь минимум 6 символов
-      internal static let passwordMistake = L10n.tr("Localizable", "authorization.error.passwordMistake", fallback: "Пароль должен иметь минимум 6 символов")
+      /// This username is busy
+      internal static let loginIsBusy = L10n.tr("Localizable", "authorization.error.loginIsBusy", fallback: "This username is busy")
+      /// Invalid username or password entered
+      internal static let loginPasswordMistake = L10n.tr("Localizable", "authorization.error.loginPasswordMistake", fallback: "Invalid username or password entered")
+      /// Enter email
+      internal static let mailMistake = L10n.tr("Localizable", "authorization.error.mailMistake", fallback: "Enter email")
+      /// The password must have at least 6 characters
+      internal static let passwordMistake = L10n.tr("Localizable", "authorization.error.passwordMistake", fallback: "The password must have at least 6 characters")
     }
   }
   internal enum Basket {
-    /// Корзина
-    internal static let title = L10n.tr("Localizable", "basket.title", fallback: "Корзина")
+    /// Cart
+    internal static let title = L10n.tr("Localizable", "basket.title", fallback: "Cart")
   }
   internal enum Cart {
     internal enum MainScreen {
-      /// Вы уверены, что хотите удалить объект из корзины?
-      internal static let deleteItemAlert = L10n.tr("Localizable", "cart.mainScreen.deleteItemAlert", fallback: "Вы уверены, что хотите удалить объект из корзины?")
-      /// Удалить
-      internal static let deleteItemButton = L10n.tr("Localizable", "cart.mainScreen.deleteItemButton", fallback: "Удалить")
-      /// Корзина пуста
-      internal static let emptyCart = L10n.tr("Localizable", "cart.mainScreen.emptyCart", fallback: "Корзина пуста")
-      /// Вернуться
-      internal static let returnButton = L10n.tr("Localizable", "cart.mainScreen.returnButton", fallback: "Вернуться")
-      /// К оплате
-      internal static let toPayButton = L10n.tr("Localizable", "cart.mainScreen.toPayButton", fallback: "К оплате")
+      /// Are you sure you want to delete an object from the cart?
+      internal static let deleteItemAlert = L10n.tr("Localizable", "cart.mainScreen.deleteItemAlert", fallback: "Are you sure you want to delete an object from the cart?")
+      /// Delete
+      internal static let deleteItemButton = L10n.tr("Localizable", "cart.mainScreen.deleteItemButton", fallback: "Delete")
+      /// The cart is empty
+      internal static let emptyCart = L10n.tr("Localizable", "cart.mainScreen.emptyCart", fallback: "The cart is empty")
+      /// Return
+      internal static let returnButton = L10n.tr("Localizable", "cart.mainScreen.returnButton", fallback: "Return")
+      /// To be paid
+      internal static let toPayButton = L10n.tr("Localizable", "cart.mainScreen.toPayButton", fallback: "To be paid")
     }
     internal enum PayScreen {
-      /// Оплатить
-      internal static let payButton = L10n.tr("Localizable", "cart.payScreen.payButton", fallback: "Оплатить")
-      /// Выберите способ оплаты
-      internal static let paymentChoice = L10n.tr("Localizable", "cart.payScreen.paymentChoice", fallback: "Выберите способ оплаты")
-      /// Совершая покупку, вы соглашаетесь с условиями
-      internal static let userTerms = L10n.tr("Localizable", "cart.payScreen.userTerms", fallback: "Совершая покупку, вы соглашаетесь с условиями")
-      /// Пользовательского соглашения
-      internal static let userTermsLink = L10n.tr("Localizable", "cart.payScreen.userTermsLink", fallback: "Пользовательского соглашения")
+      /// Pay
+      internal static let payButton = L10n.tr("Localizable", "cart.payScreen.payButton", fallback: "Pay")
+      /// Choose a payment method
+      internal static let paymentChoice = L10n.tr("Localizable", "cart.payScreen.paymentChoice", fallback: "Choose a payment method")
+      /// By making a purchase, you agree to the terms and conditions
+      internal static let userTerms = L10n.tr("Localizable", "cart.payScreen.userTerms", fallback: "By making a purchase, you agree to the terms and conditions")
+      /// User Agreement
+      internal static let userTermsLink = L10n.tr("Localizable", "cart.payScreen.userTermsLink", fallback: "User Agreement")
     }
     internal enum SuccessfulPayment {
-      /// Успех! Оплата прошла, поздравляем с покупкой!
-      internal static let successful = L10n.tr("Localizable", "cart.successfulPayment.successful", fallback: "Успех! Оплата прошла, поздравляем с покупкой!")
-      /// Вернуться в каталог
-      internal static let toBackCatalogButton = L10n.tr("Localizable", "cart.successfulPayment.toBackCatalogButton", fallback: "Вернуться в каталог")
+      /// Success! The payment has passed, congratulations on your purchase!
+      internal static let successful = L10n.tr("Localizable", "cart.successfulPayment.successful", fallback: "Success! The payment has passed, congratulations on your purchase!")
+      /// Return to the catalog
+      internal static let toBackCatalogButton = L10n.tr("Localizable", "cart.successfulPayment.toBackCatalogButton", fallback: "Return to the catalog")
     }
     internal enum UnsuccessfulPayment {
-      /// Попробовать еще раз
-      internal static let tryAgain = L10n.tr("Localizable", "cart.unsuccessfulPayment.tryAgain", fallback: "Попробовать еще раз")
-      /// Упс! Что-то пошло не так :(
-      ///  Попробуйте ещё раз!
-      internal static let unsuccessful = L10n.tr("Localizable", "cart.unsuccessfulPayment.unsuccessful", fallback: "Упс! Что-то пошло не так :(\n Попробуйте ещё раз!")
+      /// Try again
+      internal static let tryAgain = L10n.tr("Localizable", "cart.unsuccessfulPayment.tryAgain", fallback: "Try again")
+      /// Oops! Something went wrong :(
+      /// Try again!
+      internal static let unsuccessful = L10n.tr("Localizable", "cart.unsuccessfulPayment.unsuccessful", fallback: "Oops! Something went wrong :(\nTry again!")
     }
   }
   internal enum Catalog {
-    /// Каталог
-    internal static let title = L10n.tr("Localizable", "catalog.title", fallback: "Каталог")
+    /// Catalog
+    internal static let title = L10n.tr("Localizable", "catalog.title", fallback: "Catalog")
     internal enum CurrentCollection {
-      /// Автор коллекции
-      internal static let author = L10n.tr("Localizable", "catalog.currentCollection.author", fallback: "Автор коллекции")
+      /// Author of the collection
+      internal static let author = L10n.tr("Localizable", "catalog.currentCollection.author", fallback: "Author of the collection")
     }
     internal enum NftCard {
       internal enum Button {
-        /// Добавить в корзину
-        internal static let addToCart = L10n.tr("Localizable", "catalog.nftCard.button.addToCart", fallback: "Добавить в корзину")
-        /// Перейти на сайт продавца
-        internal static let goToSellerSite = L10n.tr("Localizable", "catalog.nftCard.button.goToSellerSite", fallback: "Перейти на сайт продавца")
-        /// Удалить из корзины
-        internal static let removeFromCart = L10n.tr("Localizable", "catalog.nftCard.button.removeFromCart", fallback: "Удалить из корзины")
+        /// Add to Cart
+        internal static let addToCart = L10n.tr("Localizable", "catalog.nftCard.button.addToCart", fallback: "Add to Cart")
+        /// Go to the seller's website
+        internal static let goToSellerSite = L10n.tr("Localizable", "catalog.nftCard.button.goToSellerSite", fallback: "Go to the seller's website")
+        /// Remove from Cart
+        internal static let removeFromCart = L10n.tr("Localizable", "catalog.nftCard.button.removeFromCart", fallback: "Remove from Cart")
       }
     }
   }
   internal enum General {
-    /// Отменить
-    internal static let cancel = L10n.tr("Localizable", "general.cancel", fallback: "Отменить")
-    /// Закрыть
-    internal static let close = L10n.tr("Localizable", "general.close", fallback: "Закрыть")
-    /// Удалить
-    internal static let delete = L10n.tr("Localizable", "general.delete", fallback: "Удалить")
+    /// Cancel
+    internal static let cancel = L10n.tr("Localizable", "general.cancel", fallback: "Cancel")
+    /// Close
+    internal static let close = L10n.tr("Localizable", "general.close", fallback: "Close")
+    /// Remove
+    internal static let delete = L10n.tr("Localizable", "general.delete", fallback: "Remove")
+    /// Email
+    internal static let email = L10n.tr("Localizable", "general.email", fallback: "Email")
     /// OK
     internal static let ok = L10n.tr("Localizable", "general.OK", fallback: "OK")
-    /// Цена
-    internal static let price = L10n.tr("Localizable", "general.price", fallback: "Цена")
-    /// Кажется, что ничего нет
-    /// Потяните вниз чтобы обновить
-    internal static let refreshStub = L10n.tr("Localizable", "general.refreshStub", fallback: "Кажется, что ничего нет\nПотяните вниз чтобы обновить")
-    /// Вернуться
-    internal static let `return` = L10n.tr("Localizable", "general.return", fallback: "Вернуться")
+    /// Price
+    internal static let price = L10n.tr("Localizable", "general.price", fallback: "Price")
+    /// It seems that there is nothing
+    /// pull down to update
+    internal static let refreshStub = L10n.tr("Localizable", "general.refreshStub", fallback: "It seems that there is nothing\npull down to update")
+    /// Return
+    internal static let `return` = L10n.tr("Localizable", "general.return", fallback: "Return")
   }
   internal enum NetworkError {
-    /// Не удалось получить данные, попробуйте позже
-    internal static let anotherError = L10n.tr("Localizable", "networkError.anotherError", fallback: "Не удалось получить данные, попробуйте позже")
-    /// Не удалось конвертировать полученные данные
-    internal static let parsingError = L10n.tr("Localizable", "networkError.parsingError", fallback: "Не удалось конвертировать полученные данные")
-    /// Ошибка выполнения запроса
-    internal static let requestError = L10n.tr("Localizable", "networkError.requestError", fallback: "Ошибка выполнения запроса")
-    /// Попробуйте позже
-    internal static let tryLater = L10n.tr("Localizable", "networkError.tryLater", fallback: "Попробуйте позже")
-    /// Проверьте интернет - соединение
-    internal static let urlSessionError = L10n.tr("Localizable", "networkError.URLSessionError", fallback: "Проверьте интернет - соединение")
+    /// Data could not be retrieved
+    internal static let anotherError = L10n.tr("Localizable", "networkError.anotherError", fallback: "Data could not be retrieved")
+    /// Failed to convert the received data
+    internal static let parsingError = L10n.tr("Localizable", "networkError.parsingError", fallback: "Failed to convert the received data")
+    /// Request execution error
+    internal static let requestError = L10n.tr("Localizable", "networkError.requestError", fallback: "Request execution error")
+    /// Please try again later
+    internal static let tryLater = L10n.tr("Localizable", "networkError.tryLater", fallback: "Please try again later")
+    /// Check your internet connection
+    internal static let urlSessionError = L10n.tr("Localizable", "networkError.URLSessionError", fallback: "Check your internet connection")
     internal enum Http {
-      /// По запросу ничего не найдено
-      internal static let _404 = L10n.tr("Localizable", "networkError.http.404", fallback: "По запросу ничего не найдено")
-      /// Ошибка обновления ресурса
-      internal static let _409 = L10n.tr("Localizable", "networkError.http.409", fallback: "Ошибка обновления ресурса")
-      /// Запрошенный ресурс больше недоступен
-      internal static let _410 = L10n.tr("Localizable", "networkError.http.410", fallback: "Запрошенный ресурс больше недоступен")
-      /// Ошибка на стороне сервера
-      internal static let _5Хх = L10n.tr("Localizable", "networkError.http.5хх", fallback: "Ошибка на стороне сервера")
+      /// Nothing was found on the request
+      internal static let _404 = L10n.tr("Localizable", "networkError.http.404", fallback: "Nothing was found on the request")
+      /// Resource update error
+      internal static let _409 = L10n.tr("Localizable", "networkError.http.409", fallback: "Resource update error")
+      /// The requested resource is no longer available
+      internal static let _410 = L10n.tr("Localizable", "networkError.http.410", fallback: "The requested resource is no longer available")
+      /// Server-side error
+      internal static let _5Хх = L10n.tr("Localizable", "networkError.http.5хх", fallback: "Server-side error")
     }
   }
   internal enum Onboarding {
-    /// Коллекционируйте
-    internal static let collect = L10n.tr("Localizable", "onboarding.collect", fallback: "Коллекционируйте")
-    /// Состязайтесь
-    internal static let competit = L10n.tr("Localizable", "onboarding.competit", fallback: "Состязайтесь")
-    /// Что внутри?
-    internal static let isWhatInside = L10n.tr("Localizable", "onboarding.isWhatInside", fallback: "Что внутри?")
-    /// Исследуйте
-    internal static let research = L10n.tr("Localizable", "onboarding.research", fallback: "Исследуйте")
+    /// Collect
+    internal static let collect = L10n.tr("Localizable", "onboarding.collect", fallback: "Collect")
+    /// Compete
+    internal static let competit = L10n.tr("Localizable", "onboarding.competit", fallback: "Compete")
+    /// What's inside?
+    internal static let isWhatInside = L10n.tr("Localizable", "onboarding.isWhatInside", fallback: "What's inside?")
+    /// Explore
+    internal static let research = L10n.tr("Localizable", "onboarding.research", fallback: "Explore")
     internal enum Collect {
-      /// Пополняйте свою коллекцию эксклюзивными картинками, созданными нейросетью!
-      internal static let text = L10n.tr("Localizable", "onboarding.collect.text", fallback: "Пополняйте свою коллекцию эксклюзивными картинками, созданными нейросетью!")
+      /// Replenish your collection with exclusive pictures created by the neural network!
+      internal static let text = L10n.tr("Localizable", "onboarding.collect.text", fallback: "Replenish your collection with exclusive pictures created by the neural network!")
     }
     internal enum Competit {
-      /// Смотрите статистику других и покажите всем, что у вас самая ценная коллекция
-      internal static let text = L10n.tr("Localizable", "onboarding.competit.text", fallback: "Смотрите статистику других и покажите всем, что у вас самая ценная коллекция")
+      /// See the statistics of others and show everyone that you have the most valuable collection
+      internal static let text = L10n.tr("Localizable", "onboarding.competit.text", fallback: "See the statistics of others and show everyone that you have the most valuable collection")
     }
     internal enum Research {
-      /// Присоединяйтесь и откройте новый мир уникальных NFT для коллекционеров
-      internal static let text = L10n.tr("Localizable", "onboarding.research.text", fallback: "Присоединяйтесь и откройте новый мир уникальных NFT для коллекционеров")
+      /// Join us and discover a new world of unique NFT for collectors
+      internal static let text = L10n.tr("Localizable", "onboarding.research.text", fallback: "Join us and discover a new world of unique NFT for collectors")
     }
   }
   internal enum Profile {
-    /// Профиль
-    internal static let title = L10n.tr("Localizable", "profile.title", fallback: "Профиль")
+    /// Profile
+    internal static let title = L10n.tr("Localizable", "profile.title", fallback: "Profile")
     internal enum EditScreen {
-      /// Сменить фото
-      internal static let changePhoto = L10n.tr("Localizable", "profile.editScreen.changePhoto", fallback: "Сменить фото")
-      /// Описание
-      internal static let description = L10n.tr("Localizable", "profile.editScreen.description", fallback: "Описание")
-      /// Имя
-      internal static let name = L10n.tr("Localizable", "profile.editScreen.name", fallback: "Имя")
-      /// Cайт
-      internal static let site = L10n.tr("Localizable", "profile.editScreen.site", fallback: "Cайт")
+      /// Change photo
+      internal static let changePhoto = L10n.tr("Localizable", "profile.editScreen.changePhoto", fallback: "Change photo")
+      /// Description
+      internal static let description = L10n.tr("Localizable", "profile.editScreen.description", fallback: "Description")
+      /// Name
+      internal static let name = L10n.tr("Localizable", "profile.editScreen.name", fallback: "Name")
+      /// Website
+      internal static let site = L10n.tr("Localizable", "profile.editScreen.site", fallback: "Website")
     }
     internal enum FavouritesNFT {
-      /// У Вас еще нет избранных NFT
-      internal static let plug = L10n.tr("Localizable", "profile.favouritesNFT.plug", fallback: "У Вас еще нет избранных NFT")
+      /// You don't have any NFT favorites yet
+      internal static let plug = L10n.tr("Localizable", "profile.favouritesNFT.plug", fallback: "You don't have any NFT favorites yet")
     }
     internal enum MainScreen {
-      /// О разработчике
-      internal static let aboutDeveloper = L10n.tr("Localizable", "profile.mainScreen.aboutDeveloper", fallback: "О разработчике")
-      /// Избранные NFT
-      internal static let favouritesNFT = L10n.tr("Localizable", "profile.mainScreen.favouritesNFT", fallback: "Избранные NFT")
-      /// Мои NFT
-      internal static let myNFT = L10n.tr("Localizable", "profile.mainScreen.myNFT", fallback: "Мои NFT")
+      /// About developer
+      internal static let aboutDeveloper = L10n.tr("Localizable", "profile.mainScreen.aboutDeveloper", fallback: "About developer")
+      /// Favorites NFT
+      internal static let favouritesNFT = L10n.tr("Localizable", "profile.mainScreen.favouritesNFT", fallback: "Favorites NFT")
+      /// My NFT
+      internal static let myNFT = L10n.tr("Localizable", "profile.mainScreen.myNFT", fallback: "My NFT")
     }
     internal enum MyNFT {
-      /// От
-      internal static let from = L10n.tr("Localizable", "profile.myNFT.from", fallback: "От")
-      /// У Вас еще нет NFT
-      internal static let plug = L10n.tr("Localizable", "profile.myNFT.plug", fallback: "У Вас еще нет NFT")
+      /// From
+      internal static let from = L10n.tr("Localizable", "profile.myNFT.from", fallback: "From")
+      /// You don't have NFT yet
+      internal static let plug = L10n.tr("Localizable", "profile.myNFT.plug", fallback: "You don't have NFT yet")
     }
   }
   internal enum Sorting {
-    /// По имени
-    internal static let byName = L10n.tr("Localizable", "sorting.byName", fallback: "По имени")
-    /// По количеству NFT
-    internal static let byNFTCount = L10n.tr("Localizable", "sorting.byNFTCount", fallback: "По количеству NFT")
-    /// По цене
-    internal static let byPrice = L10n.tr("Localizable", "sorting.byPrice", fallback: "По цене")
-    /// По рейтингу
-    internal static let byRating = L10n.tr("Localizable", "sorting.byRating", fallback: "По рейтингу")
-    /// По названию
-    internal static let byTitle = L10n.tr("Localizable", "sorting.byTitle", fallback: "По названию")
-    /// Сортировка
-    internal static let title = L10n.tr("Localizable", "sorting.title", fallback: "Сортировка")
+    /// By name
+    internal static let byName = L10n.tr("Localizable", "sorting.byName", fallback: "By name")
+    /// By the number of NFT
+    internal static let byNFTCount = L10n.tr("Localizable", "sorting.byNFTCount", fallback: "By the number of NFT")
+    /// By price
+    internal static let byPrice = L10n.tr("Localizable", "sorting.byPrice", fallback: "By price")
+    /// By rating
+    internal static let byRating = L10n.tr("Localizable", "sorting.byRating", fallback: "By rating")
+    /// By title
+    internal static let byTitle = L10n.tr("Localizable", "sorting.byTitle", fallback: "By title")
+    /// Sorting
+    internal static let title = L10n.tr("Localizable", "sorting.title", fallback: "Sorting")
   }
   internal enum Statistic {
-    /// Статистика
-    internal static let title = L10n.tr("Localizable", "statistic.title", fallback: "Статистика")
+    /// Statistics
+    internal static let title = L10n.tr("Localizable", "statistic.title", fallback: "Statistics")
     internal enum Profile {
       internal enum ButtonCollection {
-        /// Коллекция NFT
-        internal static let title = L10n.tr("Localizable", "statistic.profile.buttonCollection.title", fallback: "Коллекция NFT")
+        /// NFT collection
+        internal static let title = L10n.tr("Localizable", "statistic.profile.buttonCollection.title", fallback: "NFT collection")
       }
       internal enum ButtonUser {
-        /// Перейти на сайт пользователя
-        internal static let title = L10n.tr("Localizable", "statistic.profile.buttonUser.title", fallback: "Перейти на сайт пользователя")
+        /// Go to the user's website
+        internal static let title = L10n.tr("Localizable", "statistic.profile.buttonUser.title", fallback: "Go to the user's website")
       }
       internal enum UserCollection {
-        /// У пользователя еще нет NFT
-        internal static let stub = L10n.tr("Localizable", "statistic.profile.userCollection.stub", fallback: "У пользователя еще нет NFT")
+        /// The user does not have an NFT yet
+        internal static let stub = L10n.tr("Localizable", "statistic.profile.userCollection.stub", fallback: "The user does not have an NFT yet")
       }
     }
   }
