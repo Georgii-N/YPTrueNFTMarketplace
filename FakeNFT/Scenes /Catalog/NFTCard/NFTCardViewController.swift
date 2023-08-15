@@ -56,16 +56,7 @@ final class NFTCardViewController: UIViewController {
         
         return label
     }()
-    
-    private lazy var nftRatingStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 2
-        stackView.distribution = .fillEqually
         
-        return stackView
-    }()
-    
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.font = .captionSmallRegular
@@ -115,6 +106,7 @@ final class NFTCardViewController: UIViewController {
     }()
     
     private lazy var sellerWebsiteButton = BaseWhiteButton(with: L10n.Catalog.NftCard.Button.goToSellerSite)
+    private lazy var nftRatingStackView = NFTRatingStackView()
     
     private lazy var nftColectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -200,7 +192,7 @@ final class NFTCardViewController: UIViewController {
         let collection = viewModel.getNFTCollection()
         
         nftCollectionNameLabel.text = collection.name
-        setupNFTRatingStackView(rating: nftModel.rating)
+        nftRatingStackView.setupNFTRating(with: nftModel.rating)
         nftNameLabel.text = nftModel.name
         priceValueLabel.text = "\(nftModel.price) ETH"
         
@@ -248,20 +240,6 @@ final class NFTCardViewController: UIViewController {
             
             images[index].kf.indicatorType = .activity
             images[index].kf.setImage(with: url, options: [.processor(processor), .transition(.fade(1))])
-        }
-    }
-    
-    private func setupNFTRatingStackView(rating: Int) {
-        (1...5).forEach { [weak self] number in
-            guard let self = self else { return }
-            
-            if number <= rating {
-                let goldStar = UIImageView(image: Resources.Images.NFTCollectionCell.goldRatingStar)
-                self.nftRatingStackView.addArrangedSubview(goldStar)
-            } else {
-                let grayStar = UIImageView(image: Resources.Images.NFTCollectionCell.grayRatingStar)
-                self.nftRatingStackView.addArrangedSubview(grayStar)
-            }
         }
     }
     
