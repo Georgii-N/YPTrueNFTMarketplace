@@ -2,6 +2,10 @@ import UIKit
 import NotificationBannerSwift
 
 extension UIViewController {
+    // MARK: - Navigation Controller setup:
+     func setupBackButtonItem() {
+         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+     }
     
     // MARK: - ActivityIndicatior and Blocking UI:
     private var activityIndicator: UIActivityIndicatorView? {
@@ -39,7 +43,13 @@ extension UIViewController {
     }
     
     // MARK: - Notification Banner:
+    private static var lastBannerShowTime: Date?
+    
     func showNotificationBanner(with text: String) {
+        let currentTime = Date()
+        if let lastShowTime = UIViewController.lastBannerShowTime,
+                       currentTime.timeIntervalSince(lastShowTime) < 2 { return }
+        
         let image = Resources.Images.NotificationBanner.notificationBannerImage
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         imageView.image = image
@@ -49,7 +59,11 @@ extension UIViewController {
                                         subtitle: L10n.NetworkError.tryLater,
                                         leftView: imageView, style: .info)
         banner.autoDismiss = false
+        banner.dismissOnTap = true
+        banner.dismissOnSwipeUp = true
         banner.show()
+        
+        UIViewController.lastBannerShowTime = currentTime
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             banner.dismiss()

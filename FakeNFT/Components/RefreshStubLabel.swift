@@ -9,6 +9,7 @@ import UIKit
 
 final class RefreshStubLabel: UILabel {
     
+    // MARK: - Lifecycle:
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLabel()
@@ -18,6 +19,7 @@ final class RefreshStubLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Private Methods:
     private func setupLabel() {
         textAlignment = .center
         numberOfLines = 2
