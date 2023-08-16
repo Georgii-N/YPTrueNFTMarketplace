@@ -69,6 +69,16 @@ final class OnboardingViewController: UIViewController {
         setupScrollView()
         setupTargets()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AnalyticsService.instance.sentEvent(screen: .onboardingMain, item: .screen, event: .open)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AnalyticsService.instance.sentEvent(screen: .onboardingMain, item: .screen, event: .close)
+    }
 
     // MARK: - Private Methods:
     private func setupScrollView() {

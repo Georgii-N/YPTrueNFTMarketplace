@@ -125,6 +125,16 @@ final class DemoViewController: UIViewController {
         blockUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AnalyticsService.instance.sentEvent(screen: .authDemo, item: .screen, event: .open)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AnalyticsService.instance.sentEvent(screen: .authDemo, item: .screen, event: .close)
+    }
+    
     private func bind() {
         
         demoViewModel.authorName.bind {[weak self] _ in
