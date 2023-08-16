@@ -2,12 +2,14 @@ import UIKit
 
 final class TabBarController: UITabBarController {
 
+    // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabBar()
     }
 
-    func setTabBar() {
+    // MARK: - Private func
+    private func setTabBar() {
         let appearance = UITabBarAppearance()
 
         tabBar.standardAppearance = appearance

@@ -5,7 +5,7 @@ final class SortNavBarBaseButton: UIButton {
     // MARK: - Lifecycle:
     init() {
         super.init(frame: .zero)
-        setupUI()
+        setupViews()
     }
     
     required init?(coder: NSCoder) {
@@ -27,9 +27,11 @@ final class SortNavBarBaseButton: UIButton {
         super.touchesCancelled(touches, with: event)
         transform = .identity
     }
-    
-    // MARK: - Private Methods:
-    private func setupUI() {
+}
+
+// MARK: - Setup Views:
+extension SortNavBarBaseButton {
+    private func setupViews() {
         self.setImage(Resources.Images.NavBar.sortIcon, for: .normal)
     }
 }
