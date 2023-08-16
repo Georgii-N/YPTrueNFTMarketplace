@@ -7,6 +7,13 @@ extension UIViewController {
          navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
      }
     
+    // MARK: - Resume On Main Thread
+    func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
+            DispatchQueue.main.async {
+                method(argument)
+            }
+        }
+    
     // MARK: - ActivityIndicatior and Blocking UI:
     private var activityIndicator: UIActivityIndicatorView? {
         return view.subviews.first { $0 is UIActivityIndicatorView } as? UIActivityIndicatorView

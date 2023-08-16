@@ -28,6 +28,9 @@ enum Items: String {
     case buttonSorting = "ButtonSorting"
     case buttonSortingByName = "ButtonSortingByName"
     case buttonSortingByRating = "ButtonSortingByRating"
+    case buttonSortingByTitle = "buttonSortingByTitle"
+    case buttonSortingByNumber = "buttonSortingByNumber"
+    case buttonSortingByPrice = "buttonSortingByPrice"
     case buttonGoToUserSite = "ButtonGoToUserSite"
     case buttonGoToUserCollection = "ButtonGoToUserCollection"
     case buttonAddToCard = "ButtonAddToCard"
@@ -41,6 +44,7 @@ enum Events: String {
     case click = "Click"
     case open = "Open"
     case close = "Close"
+    case pull = "Pull"
 }
 
 final class AnalyticsService {
