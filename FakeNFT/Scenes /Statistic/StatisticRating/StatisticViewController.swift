@@ -80,6 +80,7 @@ extension StatisticViewController: UICollectionViewDelegateFlowLayout {
             profile: statisticViewModel.usersRatingObservable.wrappedValue[indexPath.row])
         
         let statisticUserViewController = StatisticUserViewController(statisticUserViewModel: statisticUserViewModel)
+        AnalyticsService.instance.sentEvent(screen: .statisticMain, item: .buttonGoToUserSite, event: .close)
         navigationController?.pushViewController(statisticUserViewController, animated: true)
     }
 }
@@ -96,7 +97,7 @@ extension StatisticViewController {
     @objc private func refreshNFTCatalog() {
         blockUI()
         statisticViewModel.fetchUsersRating()
-        AnalyticsService.instance.sentEvent(screen: .statisticMain, item: .buttonSorting, event: .click)
+        AnalyticsService.instance.sentEvent(screen: .statisticMain, item: .buttonSorting, event: .pull)
     }
     
     // MARK: - Private Functions
@@ -145,12 +146,6 @@ extension StatisticViewController {
             self.refreshControl.endRefreshing()
             self.unblockUI()
         }
-    
-    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
-        DispatchQueue.main.async {
-            method(argument)
-        }
-    }
     
     private func setupViews() {
         view.setupView(collectionView)
