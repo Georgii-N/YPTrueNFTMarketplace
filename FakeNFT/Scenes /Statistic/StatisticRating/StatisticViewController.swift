@@ -38,6 +38,16 @@ final class StatisticViewController: UIViewController {
         blockUI()
         bind()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AnalyticsService.instance.sentEvent(screen: .statisticMain, item: .screen, event: .open)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AnalyticsService.instance.sentEvent(screen: .statisticMain, item: .screen, event: .close)
+    }
 }
 
 // MARK: - DataSource
@@ -80,11 +90,13 @@ extension StatisticViewController {
     @objc
     private func didTapSortButton() {
         showActionSheet()
+        AnalyticsService.instance.sentEvent(screen: .statisticMain, item: .buttonSorting, event: .click)
     }
     
     @objc private func refreshNFTCatalog() {
         blockUI()
         statisticViewModel.fetchUsersRating()
+        AnalyticsService.instance.sentEvent(screen: .statisticMain, item: .buttonSorting, event: .click)
     }
     
     // MARK: - Private Functions
@@ -99,8 +111,10 @@ extension StatisticViewController {
         switch selectedOptions {
         case .byName:
             statisticViewModel.sortUsers(by: .byName, usersList: statisticViewModel.usersRatingObservable.wrappedValue)
+            AnalyticsService.instance.sentEvent(screen: .statisticMain, item: .buttonSortingByName, event: .click)
         case .byRating:
             statisticViewModel.sortUsers(by: .byRating, usersList: statisticViewModel.usersRatingObservable.wrappedValue)
+            AnalyticsService.instance.sentEvent(screen: .statisticMain, item: .buttonSortingByRating, event: .click)
         default:
             break
         }

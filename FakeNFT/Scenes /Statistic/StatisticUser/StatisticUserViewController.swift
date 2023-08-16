@@ -76,6 +76,16 @@ final class StatisticUserViewController: UIViewController {
         setupConstraints()
         setupUI()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AnalyticsService.instance.sentEvent(screen: .statisticProfile, item: .screen, event: .open)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AnalyticsService.instance.sentEvent(screen: .statisticProfile, item: .screen, event: .close)
+    }
 }
 
 extension StatisticUserViewController {

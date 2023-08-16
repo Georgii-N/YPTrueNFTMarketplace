@@ -47,6 +47,16 @@ final class StatisticNFTCollectionViewController: UIViewController {
         bind()
         blockUI()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AnalyticsService.instance.sentEvent(screen: .statisticСollectionNFT, item: .screen, event: .open)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AnalyticsService.instance.sentEvent(screen: .statisticСollectionNFT, item: .screen, event: .close)
+    }
 }
 
 // MARK: - Private Functions
