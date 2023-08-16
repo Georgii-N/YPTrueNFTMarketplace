@@ -26,6 +26,7 @@ enum Screens: String {
 enum Items: String {
     case screen = "Screen"
     case collectionCell = "CollectionCell"
+    case tableViewCell = "TableViewCell"
     case buttonSorting = "ButtonSorting"
     case buttonSortingByName = "ButtonSortingByName"
     case buttonSortingByRating = "ButtonSortingByRating"
@@ -36,7 +37,7 @@ enum Items: String {
     case buttonGoToUserCollection = "ButtonGoToUserCollection"
     case buttonAddToCard = "ButtonAddToCard"
     case buttonLike = "ButtonLike"
-    case pullToRefresh = "BullToRefresh"
+    case pullToRefresh = "PullToRefresh"
     case swipeNFTCard = "SwipeNFTCard"
     case scaleNFTCard = "ScaleNFTCard"
 }
