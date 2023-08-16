@@ -36,37 +36,19 @@ class EditProfileViewController: UIViewController {
     private lazy var editAvatarButton: UIButton = {
         let editAvatarButton = UIButton()
         editAvatarButton.setImage(UIImage(named: "profileMockImage"), for: .normal)
+        editAvatarButton.backgroundColor = UIColor(red: 0.1, green: 0.11, blue: 0.13, alpha: 0.6)
         editAvatarButton.layer.cornerRadius = 35
+        editAvatarButton.setTitle(L10n.Profile.EditScreen.changePhoto, for: .normal)
+        editAvatarButton.titleLabel?.numberOfLines = 0
+        editAvatarButton.titleLabel?.font = .systemFont(ofSize: 10)
+        editAvatarButton.setTitleColor(.white, for: .normal)
+        editAvatarButton.titleLabel?.textAlignment = .center
         editAvatarButton.clipsToBounds = true
-        
-        let changeAvatarLabel = UILabel()
-        changeAvatarLabel.text = "Сменить фото"
-        changeAvatarLabel.font = .systemFont(ofSize: 10)
-//        editAvatarButton.addSubview(upperView)
-//        upperView.addSubview(changeAvatarLabel)
+        editAvatarButton.layer.zPosition = 2
+        editAvatarButton.addTarget(self, action: #selector(editAvatarButtonTapped), for: .touchUpInside)
         editAvatarButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(editAvatarButton)
         return editAvatarButton
-    }()
-    
-    private lazy var editAvatarButtonLayer: UIView = {
-        let editAvatarButtonLayer = UIView()
-        editAvatarButtonLayer.backgroundColor = UIColor(red: 0.1, green: 0.11, blue: 0.13, alpha: 0.6)
-        editAvatarButtonLayer.translatesAutoresizingMaskIntoConstraints = false
-        editAvatarButton.addSubview(editAvatarButtonLayer)
-        return editAvatarButtonLayer
-    }()
-    
-    private lazy var editAvatarLabel: UILabel = {
-        let editAvatarLabel = UILabel()
-        editAvatarLabel.text = L10n.Profile.EditScreen.changePhoto
-        editAvatarLabel.textColor = .whiteDay
-        editAvatarLabel.tintColor = .blackDay
-        editAvatarLabel.font = .systemFont(ofSize: 10)
-        editAvatarLabel.numberOfLines = 2
-        editAvatarLabel.translatesAutoresizingMaskIntoConstraints = false
-        editAvatarButtonLayer.addSubview(editAvatarLabel)
-        return editAvatarLabel
     }()
     
     private lazy var nameLabel: UILabel = {
@@ -90,6 +72,7 @@ class EditProfileViewController: UIViewController {
     private lazy var nameTextField: UITextField = {
         let nameTextField = UITextField()
         nameTextField.font = .bodyRegular
+        nameTextField.textAlignment = .left
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameUnderView.addSubview(nameTextField)
         return nameTextField
@@ -116,6 +99,9 @@ class EditProfileViewController: UIViewController {
     private lazy var descriptionTextField: UITextField = {
         let descriptionTextField = UITextField()
         descriptionTextField.font = .bodyRegular
+        descriptionTextField.textAlignment = .left
+        descriptionTextField.contentVerticalAlignment = .top
+        
         descriptionTextField.translatesAutoresizingMaskIntoConstraints = false
         descriptionUnderView.addSubview(descriptionTextField)
         return descriptionTextField
@@ -161,14 +147,6 @@ class EditProfileViewController: UIViewController {
             editAvatarButton.heightAnchor.constraint(equalToConstant: 70),
             editAvatarButton.widthAnchor.constraint(equalToConstant: 70),
             
-            editAvatarButtonLayer.leadingAnchor.constraint(equalTo: editAvatarButton.leadingAnchor),
-            editAvatarButtonLayer.trailingAnchor.constraint(equalTo: editAvatarButton.trailingAnchor),
-            editAvatarButtonLayer.topAnchor.constraint(equalTo: editAvatarButton.topAnchor),
-            editAvatarButtonLayer.bottomAnchor.constraint(equalTo: editAvatarButton.bottomAnchor),
-            
-            editAvatarLabel.centerXAnchor.constraint(equalTo: editAvatarButtonLayer.centerXAnchor),
-            editAvatarLabel.centerYAnchor.constraint(equalTo: editAvatarButtonLayer.centerYAnchor),
-            
             // Name
             nameLabel.topAnchor.constraint(equalTo: editAvatarButton.bottomAnchor, constant: 24),
             nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -193,7 +171,7 @@ class EditProfileViewController: UIViewController {
             
             descriptionTextField.leadingAnchor.constraint(equalTo: descriptionUnderView.leadingAnchor, constant: 16),
             descriptionTextField.trailingAnchor.constraint(equalTo: descriptionUnderView.trailingAnchor, constant: -16),
-            descriptionTextField.topAnchor.constraint(equalTo: descriptionUnderView.topAnchor, constant: -11),
+            descriptionTextField.topAnchor.constraint(equalTo: descriptionUnderView.topAnchor, constant: 11),
             descriptionTextField.bottomAnchor.constraint(equalTo: descriptionUnderView.bottomAnchor, constant: 11),
             
             // Site
@@ -211,9 +189,59 @@ class EditProfileViewController: UIViewController {
         ])
     }
     
+    private func showURLInputAlert() {
+        let alert = UIAlertController(
+            title: "Добавить изображение",
+            message: "Укажите ссылку на фото",
+            preferredStyle: .alert)
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Введите ссылку"
+        }
+        let okAction = UIAlertAction(
+            title: "Ок",
+            style: .default
+        )
+        
+        let cancelAction = UIAlertAction(
+            title: "Отмена",
+            style: .cancel
+        )
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func isValidURL(urlString: String) -> Bool {
+        guard let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) else {
+            return false
+        }
+        return true
+    }
+    
+    private func showInvalidURLAlert() {
+        let alert = UIAlertController(
+            title: NSLocalizedString("profile.photo.invalidURLTitle", comment: ""),
+            message: NSLocalizedString("profile.photo.invalidURLMessage", comment: ""),
+            preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(
+            title: NSLocalizedString("profile.photo.okButton", comment: ""),
+            style: .cancel
+        )
+        alert.addAction(okAction)
+        
+        self.present(alert, animated: true)
+    }
+    
     // MARK: - Actions
     
     @objc private func closeButtonTapped() {
         dismiss(animated: true)
+    }
+    
+    @objc private func editAvatarButtonTapped() {
+        showURLInputAlert()
     }
 }

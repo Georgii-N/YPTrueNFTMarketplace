@@ -55,7 +55,7 @@ class MyNFTCollectionViewCell: UICollectionViewCell {
     private lazy var priceTitleLabel: UILabel = {
         let priceTitleLabel = UILabel()
         priceTitleLabel.font = .caption2
-        priceTitleLabel.text = "Цена"
+        priceTitleLabel.text = L10n.General.price
         return priceTitleLabel
     }()
     

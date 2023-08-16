@@ -8,9 +8,9 @@
 import UIKit
 
 struct MyNFTCellViewModel {
-    let NFTImage: UIImage
-    let NFTName: String
-    let NFTRateImage: UIImage
-    let NFTFromName: String
-    let NFTPrice: String
+    let nftImage: UIImage
+    let nftName: String
+    let nftRateImage: UIImage
+    let nftFromName: String
+    let nftPrice: String
 }

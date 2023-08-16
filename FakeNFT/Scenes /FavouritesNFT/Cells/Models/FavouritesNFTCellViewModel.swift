@@ -1,4 +1,4 @@
- //
+//
 //  FavouritesNFTCellViewModel.swift
 //  FakeNFT
 //
@@ -8,8 +8,8 @@
 import UIKit
 
 struct FavouritesNFTCellViewModel {
-    let NFTImage: UIImage
-    let NFTName: String
-    let NFTRateImage: UIImage
-    let NFTPrice: String
+    let nftImage: UIImage
+    let nftName: String
+    let nftRateImage: UIImage
+    let nftPrice: String
 }

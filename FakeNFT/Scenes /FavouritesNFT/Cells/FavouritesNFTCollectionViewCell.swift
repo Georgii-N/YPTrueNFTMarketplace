@@ -31,6 +31,12 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         return imageView
     }()
     
+    private lazy var likeButton: UIButton = {
+        let likeButton = UIButton()
+        likeButton.setImage(UIImage(named: "liked"), for: .normal)
+        return likeButton
+    }()
+    
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.font = .bodyBold
@@ -50,6 +56,7 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
     private func setupViews() {
         [imageView, nameLabel, rateImage, priceLabel].forEach(contentView.setupView(_:))
+        imageView.setupView(likeButton)
     }
     
     private func setupConstraints() {
@@ -59,6 +66,11 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 80),
+            
+            likeButton.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 5),
+            likeButton.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -5),
+            likeButton.widthAnchor.constraint(equalToConstant: 21),
+            likeButton.heightAnchor.constraint(equalToConstant: 18),
             
             nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
             nameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 12),

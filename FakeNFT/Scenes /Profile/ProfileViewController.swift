@@ -53,6 +53,7 @@ class ProfileViewController: UIViewController {
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.07
         profileNameLabel.attributedText = NSMutableAttributedString(string: "Joaquin Phoenix", attributes: [NSAttributedString.Key.kern: 1, NSAttributedString.Key.paragraphStyle: paragraphStyle])
+        profileNameLabel.numberOfLines = 2
         profileNameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profileNameLabel)
         return profileNameLabel
@@ -143,7 +144,8 @@ class ProfileViewController: UIViewController {
     // MARK: - Actions
     
     @objc func presentEditVC() {
-        present(EditProfileViewController(), animated: true)
+        let editProfileViewController = EditProfileViewController()
+        present(editProfileViewController, animated: true)
     }
 
     // MARK: - Functions
@@ -207,11 +209,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = .clear
         switch indexPath.row {
         case 0:
-            cell.textLabel?.text = "Мои NFT (\(profile?.nfts.count ?? 0))"
+            cell.textLabel?.text = L10n.Profile.MainScreen.myNFT + " (\(profile?.nfts.count ?? 0))"
         case 1:
-            cell.textLabel?.text = "Избранные NFT (\(profile?.likes.count ?? 0))"
+            cell.textLabel?.text = L10n.Profile.MainScreen.favouritesNFT + " (\(profile?.likes.count ?? 0))"
         case 2:
-            cell.textLabel?.text = "О разработчике"
+            cell.textLabel?.text = L10n.Profile.MainScreen.aboutDeveloper
         default:
             cell.textLabel?.text =  ""
         }

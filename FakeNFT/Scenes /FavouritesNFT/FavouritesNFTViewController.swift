@@ -27,7 +27,7 @@ class FavouritesNFTViewController: UIViewController {
         view.backgroundColor = .whiteDay
         view.tintColor = .blackDay
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "goBack"), style: .plain, target: self, action: #selector(goBackButtonTapped))
-        title = "Избранные NFT"
+        title = L10n.Profile.MainScreen.favouritesNFT
     }
     
     private lazy var collectionView: UICollectionView = {

@@ -32,8 +32,8 @@ class MyNFTViewController: UIViewController {
         view.backgroundColor = .whiteDay
         view.tintColor = .blackDay
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "goBack"), style: .plain, target: self, action: #selector(goBackButtonTapped))
-        title = "Мои NFT"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(sortButtonTapped))
+        title = L10n.Profile.MainScreen.myNFT
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Resources.Images.NavBar.sortIcon, style: .plain, target: self, action: #selector(sortButtonTapped))
     }
     
     private lazy var collectionView: UICollectionView = {
