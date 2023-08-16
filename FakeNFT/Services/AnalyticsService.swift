@@ -25,6 +25,7 @@ enum Screens: String {
 
 enum Items: String {
     case screen = "Screen"
+    case collectionCell = "CollectionCell"
     case buttonSorting = "ButtonSorting"
     case buttonSortingByName = "ButtonSortingByName"
     case buttonSortingByRating = "ButtonSortingByRating"
