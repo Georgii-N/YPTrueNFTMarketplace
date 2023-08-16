@@ -14,6 +14,7 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     
     // MARK: - Private Classes:
     private let userDefaultService = UserDefaultsService.shared
+    private let analyticsService = AnalyticsService.instance
     
     // MARK: - Constants and Variables:
     var provider: DataProviderProtocol {
@@ -48,8 +49,10 @@ final class CatalogViewModel: CatalogViewModelProtocol {
         switch option {
         case .byTitle:
             collection = nftCollections.sorted(by: { $0.name < $1.name })
+            analyticsService.sentEvent(screen: .catalogMain, item: .buttonSortingByTitle, event: .click)
         case .byQuantity:
             collection = nftCollections.sorted(by: { $0.nfts.count > $1.nfts.count })
+            analyticsService.sentEvent(screen: .catalogMain, item: .buttonSortingByNumber, event: .click)
         default:
             break
         }
