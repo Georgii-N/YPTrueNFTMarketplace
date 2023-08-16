@@ -107,12 +107,6 @@ final class CatalogViewController: UIViewController {
         ])
     }
     
-    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
-        DispatchQueue.main.async {
-            method(argument)
-        }
-    }
-    
     // MARK: - Objc Methods:
     @objc private func sortButtonTarget() {
         alertService = UniversalAlertService()
