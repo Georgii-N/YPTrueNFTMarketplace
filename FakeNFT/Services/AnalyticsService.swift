@@ -44,6 +44,7 @@ enum Events: String {
     case click = "Click"
     case open = "Open"
     case close = "Close"
+    case pull = "Pull"
 }
 
 final class AnalyticsService {
