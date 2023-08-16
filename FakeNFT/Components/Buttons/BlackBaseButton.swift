@@ -1,8 +1,11 @@
 import UIKit
 
 final class BaseBlackButton: UIButton {
-    let labelText: String
     
+    // MARK: - Constants and Variables:
+    private let labelText: String
+    
+    // MARK: - Lifecycle:
     init(with title: String) {
         self.labelText = title
         super.init(frame: .zero)
@@ -13,6 +16,7 @@ final class BaseBlackButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Override Methods:
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
@@ -28,6 +32,7 @@ final class BaseBlackButton: UIButton {
         transform = .identity
     }
     
+    // MARK: - Private Methods:
     private func setupUI() {
         self.backgroundColor = .blackDay
         self.setTitle(labelText, for: .normal)

@@ -2,6 +2,7 @@ import UIKit
 
 final class NFTCollectionView: UICollectionView {
     
+    // MARK: - Lifecycle:
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 8
@@ -17,6 +18,7 @@ final class NFTCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Private Methods:
     private func commonInit() {
         self.backgroundColor = .whiteDay
         
