@@ -65,6 +65,7 @@ extension StatisticNFTCollectionViewController {
     @objc private func refreshNFTCatalog() {
         blockUI()
         statisticNFTViewModel.fetchUsersNFT()
+        AnalyticsService.instance.sentEvent(screen: .statisticСollectionNFT, item: .screen, event: .pull)
     }
     
     private func bind() {
@@ -101,12 +102,6 @@ extension StatisticNFTCollectionViewController {
     private func endRefreshing() {
         self.refreshControl.endRefreshing()
         self.unblockUI()
-    }
-    
-    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
-        DispatchQueue.main.async {
-            method(argument)
-        }
     }
     
     private func changeCellStatus(isLike: Bool) {
@@ -194,6 +189,7 @@ extension StatisticNFTCollectionViewController: NFTCollectionCellDelegate {
         
         statisticNFTViewModel.changeNFTFavouriteStatus(isLiked: model.isLiked, id: modelID)
         indexPathToUpdateNFTCell = indexPath
+        AnalyticsService.instance.sentEvent(screen: .statisticСollectionNFT, item: .buttonLike, event: .click)
     }
     
     func addToCardButtonDidTapped(cell: NFTCollectionCell) {
@@ -204,5 +200,6 @@ extension StatisticNFTCollectionViewController: NFTCollectionCellDelegate {
         
         statisticNFTViewModel.changeNFTCartStatus(isAddedToCart: model.isAddedToCard, id: modelID)
         indexPathToUpdateNFTCell = indexPath
+        AnalyticsService.instance.sentEvent(screen: .statisticСollectionNFT, item: .buttonAddToCard, event: .click)
     }
 }

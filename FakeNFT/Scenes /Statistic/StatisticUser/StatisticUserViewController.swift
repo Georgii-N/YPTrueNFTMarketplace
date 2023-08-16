@@ -95,6 +95,7 @@ extension StatisticUserViewController {
         let webViewViewModel = WebViewViewModel()
         let url = URL(string: statisticUserViewModel.profile.website)
         let webViewViewController = WebViewViewController(viewModel: webViewViewModel, url: url)
+        AnalyticsService.instance.sentEvent(screen: .statisticProfile, item: .buttonGoToUserSite, event: .click)
         navigationController?.pushViewController(webViewViewController, animated: true)
     }
     
@@ -181,6 +182,7 @@ extension StatisticUserViewController: UITableViewDelegate {
         let dataProvider = appDelegate.dataProvider
         let statisticNFTCollectionViewModel = StatisticNFTCollectionViewModel(nftsId: statisticUserViewModel.profile.nfts, dataProvider: dataProvider)
         let statisticNFTCollectionViewController = StatisticNFTCollectionViewController(statisticNFTViewModel: statisticNFTCollectionViewModel)
+        AnalyticsService.instance.sentEvent(screen: .statisticProfile, item: .buttonGoToUserCollection, event: .click)
         navigationController?.pushViewController(statisticNFTCollectionViewController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
