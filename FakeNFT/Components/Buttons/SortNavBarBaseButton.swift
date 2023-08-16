@@ -2,6 +2,7 @@ import UIKit
 
 final class SortNavBarBaseButton: UIButton {
     
+    // MARK: - Lifecycle:
     init() {
         super.init(frame: .zero)
         setupUI()
@@ -11,6 +12,7 @@ final class SortNavBarBaseButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Override Methods:
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
@@ -26,6 +28,7 @@ final class SortNavBarBaseButton: UIButton {
         transform = .identity
     }
     
+    // MARK: - Private Methods:
     private func setupUI() {
         self.setImage(Resources.Images.NavBar.sortIcon, for: .normal)
     }

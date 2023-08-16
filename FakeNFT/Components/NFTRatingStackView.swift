@@ -9,6 +9,7 @@ import UIKit
 
 final class NFTRatingStackView: UIStackView {
     
+    // MARK: - Lifecycle:
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupStackView()
@@ -18,6 +19,7 @@ final class NFTRatingStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public Methods:
     func setupNFTRating(with rating: Int) {
         (1...5).forEach { [weak self] number in
             guard let self = self else { return }
@@ -33,6 +35,7 @@ final class NFTRatingStackView: UIStackView {
     }
 }
 
+// MARK: - Setup Views:
 extension NFTRatingStackView {
     private func setupStackView() {
        axis = .horizontal
