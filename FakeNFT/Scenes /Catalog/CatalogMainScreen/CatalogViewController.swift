@@ -71,6 +71,7 @@ final class CatalogViewController: UIViewController {
     private func bind() {
         viewModel?.nftCollectionsObservable.bind { [weak self] _ in
             guard let self else { return }
+            self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.catalogNFTTableView.reloadData, with: ())
         }
