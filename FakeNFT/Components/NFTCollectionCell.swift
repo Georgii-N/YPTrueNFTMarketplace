@@ -7,6 +7,8 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
     weak var delegate: NFTCollectionCellDelegate?
     
     // MARK: - Constants and Variables:
+    static var defaultReuseIdentifier = "NFTCollectionViewCell"
+    
     private var nftModel: NFTCell? {
         didSet {
             guard let nftModel = nftModel else { return }
@@ -86,8 +88,6 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
     }()
     
     private lazy var ratingStackView = NFTRatingStackView()
-
-    static var defaultReuseIdentifier = "NFTCollectionViewCell"
     
     // MARK: - Lifecycle:
     override init(frame: CGRect) {

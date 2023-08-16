@@ -9,7 +9,8 @@ final class BaseWhiteButton: UIButton {
     init(with title: String) {
         self.labelText = title
         super.init(frame: .zero)
-        setupUI()
+        setupViews()
+        setupConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -38,7 +39,14 @@ final class BaseWhiteButton: UIButton {
     }
 
     // MARK: - Private Methods:
-    private func setupUI() {
+    private func setupColor() {
+        self.layer.borderColor = UIColor.blackDay.cgColor
+    }
+}
+
+// MARK: - Setup Views:
+extension BaseWhiteButton {
+    private func setupViews() {
         self.backgroundColor = .whiteDay
         self.setTitle(labelText, for: .normal)
         self.setTitleColor(.blackDay, for: .normal)
@@ -49,13 +57,14 @@ final class BaseWhiteButton: UIButton {
         
         self.titleLabel?.textAlignment = .center
         self.titleLabel?.font = .captionSmallRegular
+    }
+}
 
+// MARK: - Setup Views:
+extension BaseWhiteButton {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             self.heightAnchor.constraint(equalToConstant: 40)
         ])
-    }
-    
-    private func setupColor() {
-        self.layer.borderColor = UIColor.blackDay.cgColor
     }
 }

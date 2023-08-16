@@ -16,16 +16,7 @@ final class OnboardingViewController: UIViewController {
         
         return scrollView
     }()
-    
-    private lazy var pageControl: UIPageControl = {
-        let pageControl = UIPageControl()
-        pageControl.numberOfPages = 3
-        pageControl.currentPageIndicatorTintColor = .whiteUniversal
-        pageControl.pageIndicatorTintColor = .lightGrayDay
         
-        return pageControl
-    }()
-    
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Resources.Images.Onboarding.cancelButton, for: .normal)
@@ -51,6 +42,8 @@ final class OnboardingViewController: UIViewController {
         return label
     }()
     
+    private lazy var pageControlView = CustomPageControlView()
+    
     // MARK: - Lifecycle:
     init(viewModel: OnboardingViewModelProtocol, delegate: OnboardingViewControllerDelegate) {
         self.viewModel = viewModel
@@ -68,6 +61,16 @@ final class OnboardingViewController: UIViewController {
         setupConstraints()
         setupScrollView()
         setupTargets()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AnalyticsService.instance.sentEvent(screen: .onboardingMain, item: .screen, event: .open)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AnalyticsService.instance.sentEvent(screen: .onboardingMain, item: .screen, event: .close)
     }
 
     // MARK: - Private Methods:
@@ -147,8 +150,8 @@ final class OnboardingViewController: UIViewController {
     
     private func makeGradient(view: UIView) -> UIView {
         let gradient = CAGradientLayer()
-        let firstColor = UIColor(red: 26.0/255.0, green: 27.0/255.0, blue: 34.0/255.0, alpha: 1.0).cgColor
-        let secondColor = UIColor(red: 26.0/255.0, green: 27.0/255.0, blue: 34.0/255.0, alpha: 0.0).cgColor
+        let firstColor = UIColor.onboardingTopGradientColor
+        let secondColor = UIColor.onboardingBottomGradientColor
         
         gradient.colors = [firstColor, secondColor]
         gradient.startPoint = CGPoint(x: 1, y: 0)
@@ -179,7 +182,7 @@ extension OnboardingViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = round(scrollView.contentOffset.x / view.frame.width)
         
-        pageControl.currentPage = Int(page)
+        pageControlView.setCurrentState(currentPage: Int(page), isOnboarding: true)
     }
 }
 
@@ -187,8 +190,10 @@ extension OnboardingViewController: UIScrollViewDelegate {
 extension OnboardingViewController {
     private func setupViews() {
         view.backgroundColor = .blackDay
-        [onboardingScrollView, pageControl, cancelButton, screenTitleLabel,
+        [onboardingScrollView, pageControlView, cancelButton, screenTitleLabel,
          screenDescriptionLabel].forEach(view.setupView)
+        
+        pageControlView.setCurrentState(currentPage: 0, isOnboarding: true)
     }
 }
 
@@ -201,14 +206,14 @@ extension OnboardingViewController {
             onboardingScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             onboardingScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            pageControl.heightAnchor.constraint(equalToConstant: 28),
-            pageControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            pageControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            pageControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 16),
+            pageControlView.heightAnchor.constraint(equalToConstant: 28),
+            pageControlView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            pageControlView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pageControlView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             cancelButton.heightAnchor.constraint(equalToConstant: 42),
             cancelButton.widthAnchor.constraint(equalToConstant: 42),
-            cancelButton.topAnchor.constraint(equalTo: pageControl.bottomAnchor),
+            cancelButton.topAnchor.constraint(equalTo: pageControlView.bottomAnchor),
             cancelButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }

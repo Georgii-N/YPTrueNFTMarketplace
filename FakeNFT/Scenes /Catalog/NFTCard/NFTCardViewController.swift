@@ -202,7 +202,7 @@ final class NFTCardViewController: UIViewController {
         nftNameLabel.text = nftModel.name
         priceValueLabel.text = "\(nftModel.price) ETH"
         
-        coverNFTPageControlView.setCurrentState(currentPage: 0)
+        coverNFTPageControlView.setCurrentState(currentPage: 0, isOnboarding: false)
         setupCoverScrollView(imagesURL: nftModel.images)
     }
     
@@ -233,9 +233,7 @@ final class NFTCardViewController: UIViewController {
     private func setupCoverScrollView(imagesURL: [String]) {
         let imageWidht = view.frame.width
         var images = [UIImageView]()
-        
-        coverNFTPageControlView.setCurrentState(currentPage: 0)
-        
+                
         for (index, imageURLString) in imagesURL.enumerated() {
             guard let url = URL(string: imageURLString) else { return }
             let size = CGRect(x: 0, y: 0, width: view.frame.width, height: 375)
@@ -381,7 +379,7 @@ extension NFTCardViewController: NFTCollectionCellDelegate {
 extension NFTCardViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = round(scrollView.contentOffset.x / view.frame.width)
-        coverNFTPageControlView.setCurrentState(currentPage: Int(page))
+        coverNFTPageControlView.setCurrentState(currentPage: Int(page), isOnboarding: false)
         
         analyticsService.sentEvent(screen: .nftCard, item: .swipeNFTCard, event: .click)
     }

@@ -99,6 +99,16 @@ final class RegistrationViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AnalyticsService.instance.sentEvent(screen: .authRegistration, item: .screen, event: .open)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AnalyticsService.instance.sentEvent(screen: .authRegistration, item: .screen, event: .close)
+    }
+    
     // MARK: - Private Methods:
     private func bind() {
         viewModel.isInputPasswordCorrectObservable.bind { [weak self] newValue in
@@ -124,9 +134,11 @@ final class RegistrationViewController: UIViewController {
             self.unblockUI()
             if newValue == true {
                 self.switchToOnboardingViewController()
+                AnalyticsService.instance.sentEvent(screen: .authRegistration, item: .registration, event: .success)
             } else {
                 self.showLoginPasswordMistake()
                 self.loginPasswordMistakeLabel.text = viewModel.errorDiscription
+                AnalyticsService.instance.sentEvent(screen: .authRegistration, item: .registration, event: .unsuccess)
             }
         }
         

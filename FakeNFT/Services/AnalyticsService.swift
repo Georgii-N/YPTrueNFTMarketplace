@@ -14,13 +14,19 @@ enum Screens: String {
     // Cart screens:
     case cartMain = "CartMain"
     
-    // Pforile screens:
+    // Profile screens:
     case profileMain = "ProfileMain"
     
     // Statistic screens:
     case statisticMain = "StatisticMain"
     case statisticProfile = "StatisticProfile"
     case statisticСollectionNFT = "StatisticСollectionNFT"
+    
+    // Auth screens
+    case authMain = "authMain"
+    case authRegistration = "authRegistration"
+    case authDemo = "authDemo"
+    case onboardingMain = "onboardingMain"
 }
 
 enum Items: String {
@@ -37,9 +43,13 @@ enum Items: String {
     case buttonGoToUserCollection = "ButtonGoToUserCollection"
     case buttonAddToCard = "ButtonAddToCard"
     case buttonLike = "ButtonLike"
+    case buttonDemo = "buttonDemo"
+    case buttonRegistration = "buttonRegistration"
     case pullToRefresh = "PullToRefresh"
     case swipeNFTCard = "SwipeNFTCard"
     case scaleNFTCard = "ScaleNFTCard"
+    case authorization = "authorization"
+    case registration = "registration"
 }
 
 enum Events: String {
@@ -47,6 +57,8 @@ enum Events: String {
     case open = "Open"
     case close = "Close"
     case pull = "Pull"
+    case success = "success"
+    case unsuccess = "unsuccess"
 }
 
 final class AnalyticsService {
