@@ -46,14 +46,13 @@ final class CatalogViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        blockUI()
-
         setupViews()
         setupConstraints()
         setupTargets()
         
         bind()
         
+        blockUI()
         viewModel?.fetchCollections()
     }
     

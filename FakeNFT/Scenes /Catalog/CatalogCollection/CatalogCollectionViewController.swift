@@ -103,8 +103,6 @@ final class CatalogCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        blockUI()
-        
         setupViews()
         setupConstraints()
         setupTargets()
@@ -112,6 +110,7 @@ final class CatalogCollectionViewController: UIViewController {
         setupCollectionInfo()
         bind()
         
+        blockUI()
         viewModel?.updateNFTCardModels()
     }
     
@@ -376,6 +375,8 @@ extension CatalogCollectionViewController {
          collectionInformationLabel, nftCollection].forEach(collectionScrollView.setupView)
         
         collectionScrollView.refreshControl = refreshControl
+        
+        isNavigationBarClear(true)
     }
 }
 
@@ -390,20 +391,22 @@ extension CatalogCollectionViewController {
             static let cellHeightPlusInset = 204
         }
         
+        let topOffset = calculateNavigationHeight()
+        
         let collectionItems = viewModel?.collectionObservable.wrappedValue.nfts.count ?? 0
         let collectionHeight = collectionItems % ConstantsAnchor.cellInRow == 0 ?
         (collectionItems / ConstantsAnchor.cellInRow * ConstantsAnchor.cellHeight) +
         ConstantsAnchor.topInset : (collectionItems / ConstantsAnchor.cellInRow * ConstantsAnchor.cellHeight) +
         ConstantsAnchor.cellHeightPlusInset
-        
+
         NSLayoutConstraint.activate([
-            collectionScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionScrollView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             coverNFTImageView.heightAnchor.constraint(equalToConstant: 310),
-            coverNFTImageView.topAnchor.constraint(equalTo: collectionScrollView.topAnchor),
+            coverNFTImageView.topAnchor.constraint(equalTo: collectionScrollView.topAnchor, constant: -topOffset),
             coverNFTImageView.leadingAnchor.constraint(equalTo: collectionScrollView.leadingAnchor),
             coverNFTImageView.trailingAnchor.constraint(equalTo: collectionScrollView.trailingAnchor),
             

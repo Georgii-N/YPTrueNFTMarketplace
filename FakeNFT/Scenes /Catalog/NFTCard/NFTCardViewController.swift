@@ -470,6 +470,8 @@ extension NFTCardViewController {
         
         setupCartButton()
         allScreenScrollView.refreshControl = refreshControl
+        
+        isNavigationBarClear(true)
     }
 }
 
@@ -482,13 +484,13 @@ extension NFTCardViewController {
             allScreenScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             allScreenScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            contentView.topAnchor.constraint(equalTo: allScreenScrollView.topAnchor),
+            contentView.topAnchor.constraint(equalTo: allScreenScrollView.topAnchor, constant: -calculateNavigationHeight()),
             contentView.leadingAnchor.constraint(equalTo: allScreenScrollView.leadingAnchor),
             contentView.bottomAnchor.constraint(equalTo: allScreenScrollView.bottomAnchor),
             contentView.trailingAnchor.constraint(equalTo: allScreenScrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: allScreenScrollView.widthAnchor),
             
-            coverNFTScrollView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            coverNFTScrollView.topAnchor.constraint(equalTo: contentView.topAnchor),
             coverNFTScrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             coverNFTScrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             coverNFTScrollView.heightAnchor.constraint(equalToConstant: 375),
