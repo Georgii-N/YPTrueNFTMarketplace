@@ -9,7 +9,8 @@ final class BaseBlackButton: UIButton {
     init(with title: String) {
         self.labelText = title
         super.init(frame: .zero)
-        setupUI()
+        setupViews()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -31,16 +32,23 @@ final class BaseBlackButton: UIButton {
         super.touchesCancelled(touches, with: event)
         transform = .identity
     }
-    
-    // MARK: - Private Methods:
-    private func setupUI() {
+}
+
+// MARK: - Setup Views:
+extension BaseBlackButton {
+    private func setupViews() {
         self.backgroundColor = .blackDay
         self.setTitle(labelText, for: .normal)
         self.setTitleColor(.whiteDay, for: .normal)
         self.layer.cornerRadius = 16
         self.titleLabel?.textAlignment = .center
         self.titleLabel?.font = .captionMediumBold
-        
+    }
+}
+
+// MARK: - Setup Views:
+extension BaseBlackButton {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             self.heightAnchor.constraint(equalToConstant: 60)
         ])

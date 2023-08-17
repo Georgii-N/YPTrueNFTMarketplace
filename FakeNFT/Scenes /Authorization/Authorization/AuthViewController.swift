@@ -122,6 +122,16 @@ final class AuthViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AnalyticsService.instance.sentEvent(screen: .authMain, item: .screen, event: .open)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AnalyticsService.instance.sentEvent(screen: .authMain, item: .screen, event: .close)
+    }
+    
     // MARK: - Private Methods:
     private func bind() {
         viewModel.loginPasswordMistakeObservable.bind { [weak self] newValue in
@@ -140,8 +150,10 @@ final class AuthViewController: UIViewController {
             if newValue == false {
                 print(L10n.Alert.Authorization.title)
                 print(L10n.Alert.Authorization.message)
+                AnalyticsService.instance.sentEvent(screen: .authMain, item: .authorization, event: .unsuccess)
             } else {
                 self.switchToTabBarController()
+                AnalyticsService.instance.sentEvent(screen: .authMain, item: .authorization, event: .success)
             }
         }
     }
@@ -208,6 +220,7 @@ final class AuthViewController: UIViewController {
     @objc private func switchToRegistrateVC() {
         let viewModel = RegistrationViewModel()
         let viewController = RegistrationViewController(viewModel: viewModel)
+        AnalyticsService.instance.sentEvent(screen: .authMain, item: .buttonRegistration, event: .click)
         viewController.modalPresentationStyle = .overFullScreen
         
         present(viewController, animated: true)
@@ -216,6 +229,7 @@ final class AuthViewController: UIViewController {
     @objc private func switchToDemoVC() {
         let viewModel = DemoViewModel()
         let viewController = DemoViewController(demoViewModel: viewModel)
+        AnalyticsService.instance.sentEvent(screen: .authMain, item: .buttonDemo, event: .click)
         viewController.modalPresentationStyle = .overFullScreen
         
         present(viewController, animated: true)
