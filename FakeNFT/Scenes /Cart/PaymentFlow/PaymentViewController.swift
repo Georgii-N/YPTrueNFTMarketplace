@@ -1,4 +1,3 @@
-
 import UIKit
 
 final class PaymentViewController: UIViewController {
@@ -15,6 +14,13 @@ final class PaymentViewController: UIViewController {
     private lazy var bottomView: UIView = {
         let bottomView = UIView()
         bottomView.backgroundColor = .lightGrayDay
+        let maskPath = UIBezierPath(roundedRect: view.bounds,
+                                    byRoundingCorners: [.topLeft, .topRight],
+                                    cornerRadii: CGSize(width: 12, height: 12))
+
+        let shape = CAShapeLayer()
+        shape.path = maskPath.cgPath
+        bottomView.layer.mask = shape
         return bottomView
     }()
     
@@ -129,10 +135,10 @@ extension PaymentViewController {
                 switch result {
                 case true:
                     
-                    let successViewController = SuccessfulPaymentViewController()
+                    let successViewController = SuccessfulPaymentViewController(isSuccess: true)
                     self.navigationController?.pushViewController(successViewController, animated: true)
                 case false:
-                    let unsuccessViewController = UnsuccessfulPaymentViewController()
+                    let unsuccessViewController = SuccessfulPaymentViewController(isSuccess: false)
                     self.navigationController?.pushViewController(unsuccessViewController, animated: true)
                 }
             }

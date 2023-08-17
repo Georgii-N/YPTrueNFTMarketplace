@@ -1,14 +1,16 @@
-
 import UIKit
 
 final class SuccessfulPaymentViewController: UIViewController {
+    
+    //MARK: Dependencies
+    var isSuccess: Bool
     
     // MARK: UI constants and variables
     private let returnInCatalogButton = BaseBlackButton(with: L10n.Cart.SuccessfulPayment.toBackCatalogButton)
     
     private lazy var successefulImage: UIImageView = {
         let successefulImage = UIImageView()
-        successefulImage.image = UIImage(named: "success")
+       // successefulImage.image = UIImage(named: "success")
         return successefulImage
     }()
     
@@ -18,7 +20,7 @@ final class SuccessfulPaymentViewController: UIViewController {
         successefulLabel.textAlignment = .center
         successefulLabel.textColor = .blackDay
         successefulLabel.font = UIFont.boldSystemFont(ofSize: 22)
-        successefulLabel.text = L10n.Cart.SuccessfulPayment.successful
+      //  successefulLabel.text = L10n.Cart.SuccessfulPayment.successful
         return successefulLabel
     }()
     
@@ -26,8 +28,18 @@ final class SuccessfulPaymentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        setSuccessViews()
         setupConstraints()
         setTargets()
+    }
+    
+    init(isSuccess: Bool) {
+        self.isSuccess = isSuccess
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -37,6 +49,17 @@ extension SuccessfulPaymentViewController {
     private func setupViews() {
         view.backgroundColor = .whiteDay
         [successefulImage, successefulLabel, returnInCatalogButton].forEach(view.setupView)
+    }
+    
+    private func setSuccessViews() {
+        if isSuccess {
+            successefulImage.image = UIImage(named: "success")
+            successefulLabel.text = L10n.Cart.SuccessfulPayment.successful
+        } else {
+            successefulImage.image = UIImage(named: "unsuccess")
+            successefulLabel.text = L10n.Cart.UnsuccessfulPayment.unsuccessful
+            returnInCatalogButton.setTitle(L10n.Cart.UnsuccessfulPayment.tryAgain, for: .normal)
+        }
     }
     
     private func setupConstraints() {
@@ -53,11 +76,22 @@ extension SuccessfulPaymentViewController {
     }
     
     private func setTargets() {
-        returnInCatalogButton.addTarget(self, action: #selector(backToCatalog), for: .touchUpInside)
+        if isSuccess {
+            returnInCatalogButton.addTarget(self, action: #selector(backToCatalog), for: .touchUpInside)
+        } else {
+            returnInCatalogButton.addTarget(self, action: #selector(tryLoadOrderPay), for: .touchUpInside)
+        }
+        
     }
     
     @objc
    private func backToCatalog() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    func tryLoadOrderPay() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationController?.popViewController(animated: true)
     }
 }

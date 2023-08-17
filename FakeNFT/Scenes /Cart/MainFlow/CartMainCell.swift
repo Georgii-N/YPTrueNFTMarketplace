@@ -1,4 +1,3 @@
-
 import UIKit
 import Kingfisher
 
@@ -51,6 +50,13 @@ final class CartMainCell: UICollectionViewCell {
         let deleteCartButton = UIButton()
         deleteCartButton.setImage(Resources.Images.NFTCollectionCell.removeFromBasket, for: .normal)
         return deleteCartButton
+    }()
+    
+    private lazy var formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.decimalSeparator = ","
+        return formatter
     }()
     
     // MARK: - Lifecycle:
@@ -106,7 +112,10 @@ extension CartMainCell {
         let size = CGSize(width: 115, height: 115)
         let resizingProcessor = ResizingImageProcessor(referenceSize: size)
         nameNFT.text = model.name
-        priceCountNFT.text = "\(String(model.price)) ETH"
+        if let formattedString = formatter.string(from: NSNumber(value: model.price)) {
+            priceCountNFT.text = "\(String(formattedString)) ETH"
+        }
+       // priceCountNFT.text = "\(String(model.price)) ETH"
         imageNFT.kf.setImage(with: imageUrl, options: [.processor(resizingProcessor)])
         setRating(rating: model.rating)
         idNft = model.id

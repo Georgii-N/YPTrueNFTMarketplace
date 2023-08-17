@@ -1,4 +1,3 @@
-
 import UIKit
 import Kingfisher
 
@@ -16,6 +15,13 @@ final class CartViewControler: UIViewController {
         let totalView = UIView()
         totalView.backgroundColor = .lightGrayDay
         totalView.isHidden = false
+        let maskPath = UIBezierPath(roundedRect: view.bounds,
+                                    byRoundingCorners: [.topLeft, .topRight],
+                                    cornerRadii: CGSize(width: 12, height: 12))
+
+        let shape = CAShapeLayer()
+        shape.path = maskPath.cgPath
+        totalView.layer.mask = shape
         return totalView
     }()
     
@@ -91,7 +97,7 @@ final class CartViewControler: UIViewController {
                 return self.resumeMethodOnMainThread(self.endRefreshing, with: ())
             }
             self.resumeMethodOnMainThread(self.endRefreshing, with: ())
-            self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText ?? "")
+            self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
         }
     }
 }
@@ -233,7 +239,8 @@ extension CartViewControler: CartMainCellDelegate {
 
 extension CartViewControler: DeleteViewControllerDelegate {
     func deleteNft(itemId: String) {
-        cartViewModel.sendDeleteNft(id: itemId) {result in
+        cartViewModel.sendDeleteNft(id: itemId) {[weak self] result in
+            guard let self = self else { return }
             if result {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()

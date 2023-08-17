@@ -1,4 +1,3 @@
-
 import Foundation
 
 protocol CartViewModelProtocol: AnyObject {
@@ -6,7 +5,7 @@ protocol CartViewModelProtocol: AnyObject {
     var networkErrorObservable: Observable<String?> {get}
     func sendDeleteNft(id: String, completion: @escaping (Bool) -> Void)
     func additionNFT() -> Int
-    func additionPriceNFT() -> Float
+    func additionPriceNFT() -> String
     func sortNFT(_ sortOptions: SortingOption)
     func unwrappedCartNftViewModel() -> [NFTCard]
 }
@@ -19,12 +18,18 @@ final class CartViewModel: CartViewModelProtocol {
     }
     
     var networkErrorObservable: Observable<String?> {
-            $networkError
-        }
+        $networkError
+    }
     
     private let dataProvider = DataProvider()
     private var idNfts: [String] = []
     private let userDefaults = UserDefaultsService.shared
+    private lazy var formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.decimalSeparator = ","
+        return formatter
+    }()
     
     // MARK: Dependencies
     private var orderID: String?
@@ -102,9 +107,13 @@ final class CartViewModel: CartViewModelProtocol {
         return cartNFT.count
     }
     
-    func additionPriceNFT() -> Float {
+    func additionPriceNFT() -> String {
         let cartNFT = unwrappedCartNftViewModel()
-        return Float(cartNFT.reduce(0) {$0 + $1.price})
+        let number = Float(cartNFT.reduce(0) {$0 + $1.price})
+        if let formattedString = formatter.string(from: NSNumber(value: number)) {
+            return formattedString
+        }
+        return String(cartNFT.reduce(0) {$0 + $1.price})
     }
     
     func sortNFT(_ sortOptions: SortingOption) {
@@ -115,6 +124,7 @@ final class CartViewModel: CartViewModelProtocol {
         case .byPrice: newNftCart = cartNFT.sorted(by: {$0.price > $1.price})
         case .byRating: newNftCart = cartNFT.sorted(by: {$0.rating > $1.rating})
         case .byTitle: newNftCart = cartNFT.sorted(by: {$0.name < $1.name})
+        case .close: break //to do
         default: break
         }
         self.cartNFT = newNftCart
