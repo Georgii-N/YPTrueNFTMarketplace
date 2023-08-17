@@ -27,13 +27,14 @@ final class AuthViewController: UIViewController {
         let textField = UITextField()
         textField.layer.cornerRadius = 12
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
+        textField.textAlignment = Locale.current.languageCode == "ar" ? .right : .left
         textField.leftViewMode = .always
         textField.autocapitalizationType = .none
         textField.textColor = .blackDay
         textField.backgroundColor = .lightGrayDay
-        textField.placeholder = "Email"
+        textField.placeholder = L10n.General.email
         textField.delegate = self
-        
+                
         return textField
     }()
     
@@ -41,6 +42,7 @@ final class AuthViewController: UIViewController {
         let textField = UITextField()
         textField.layer.cornerRadius = 12
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
+        textField.textAlignment = Locale.current.languageCode == "ar" ? .right : .left
         textField.leftViewMode = .always
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
@@ -86,9 +88,10 @@ final class AuthViewController: UIViewController {
     
     private lazy var loginPasswordMistakeLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = Locale.current.languageCode == "ar" ? .right : .center
         label.font = .bodySmallerRegular
         label.textColor = .redUniversal
-        label.textAlignment = .left
         label.text = L10n.Authorization.Error.loginPasswordMistake
         
         return label
@@ -119,6 +122,16 @@ final class AuthViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        AnalyticsService.instance.sentEvent(screen: .authMain, item: .screen, event: .open)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AnalyticsService.instance.sentEvent(screen: .authMain, item: .screen, event: .close)
+    }
+    
     // MARK: - Private Methods:
     private func bind() {
         viewModel.loginPasswordMistakeObservable.bind { [weak self] newValue in
@@ -137,8 +150,10 @@ final class AuthViewController: UIViewController {
             if newValue == false {
                 print(L10n.Alert.Authorization.title)
                 print(L10n.Alert.Authorization.message)
+                AnalyticsService.instance.sentEvent(screen: .authMain, item: .authorization, event: .unsuccess)
             } else {
                 self.switchToTabBarController()
+                AnalyticsService.instance.sentEvent(screen: .authMain, item: .authorization, event: .success)
             }
         }
     }
@@ -179,7 +194,7 @@ final class AuthViewController: UIViewController {
             NSLayoutConstraint.activate([
                 self.loginPasswordMistakeLabel.topAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: 16),
                 self.loginPasswordMistakeLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-                self.loginPasswordMistakeLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 16)
+                self.loginPasswordMistakeLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16)
             ])
         }
     }
@@ -205,6 +220,7 @@ final class AuthViewController: UIViewController {
     @objc private func switchToRegistrateVC() {
         let viewModel = RegistrationViewModel()
         let viewController = RegistrationViewController(viewModel: viewModel)
+        AnalyticsService.instance.sentEvent(screen: .authMain, item: .buttonRegistration, event: .click)
         viewController.modalPresentationStyle = .overFullScreen
         
         present(viewController, animated: true)
@@ -213,6 +229,7 @@ final class AuthViewController: UIViewController {
     @objc private func switchToDemoVC() {
         let viewModel = DemoViewModel()
         let viewController = DemoViewController(demoViewModel: viewModel)
+        AnalyticsService.instance.sentEvent(screen: .authMain, item: .buttonDemo, event: .click)
         viewController.modalPresentationStyle = .overFullScreen
         
         present(viewController, animated: true)

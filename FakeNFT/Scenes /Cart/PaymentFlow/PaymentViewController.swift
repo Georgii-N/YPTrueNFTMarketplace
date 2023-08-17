@@ -153,11 +153,11 @@ extension PaymentViewController {
         navigationController?.pushViewController(webViewController, animated: true)
     }
     
-    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
-        DispatchQueue.main.async {
-            method(argument)
-        }
-    }
+//     func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
+//        DispatchQueue.main.async {
+//            method(argument)
+//        }
+//    }
     
     private func endRefreshing() {
         self.refreshControl.endRefreshing()

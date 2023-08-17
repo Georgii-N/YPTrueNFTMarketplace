@@ -1,16 +1,32 @@
 import UIKit
+import StoreKit
 
 final class TabBarController: UITabBarController {
-
+    
+    // MARK: - Private properties:
+    var randomBoolWithProbability: Bool {
+        let trueProbability = 0.3
+        return Double.random(in: 0..<1) < trueProbability
+    }
+    
+    // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabBar()
         selectedIndex = 2
     }
-
-    func setTabBar() {
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if randomBoolWithProbability {
+            SKStoreReviewController.requestReview()
+        }
+    }
+    
+    // MARK: - Private func
+    private func setTabBar() {
         let appearance = UITabBarAppearance()
-
+        
         tabBar.standardAppearance = appearance
         tabBar.backgroundColor = .white
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
@@ -19,12 +35,12 @@ final class TabBarController: UITabBarController {
         }
         
         let dataProvider = appDelegate.dataProvider
-
+        
         let profileViewController = CustomNavigationController(rootViewController: UIViewController())
         let catalogViewController = CustomNavigationController(rootViewController: UIViewController())
         let cartViewController = CustomNavigationController(rootViewController: CartViewControler(cartViewModel: CartViewModel()))
         let statisticViewController = CustomNavigationController(rootViewController: UIViewController())
-
+        
         profileViewController.tabBarItem = UITabBarItem(
             title: L10n.Profile.title,
             image: Resources.Images.TabBar.profileImage,
@@ -41,8 +57,8 @@ final class TabBarController: UITabBarController {
             title: L10n.Statistic.title,
             image: Resources.Images.TabBar.statisticImage,
             selectedImage: Resources.Images.TabBar.statisticImageSelected)
-
+        
         self.viewControllers = [profileViewController, catalogViewController,
-                                cartViewController, statisticViewController]        
+                                cartViewController, statisticViewController]
     }
 }

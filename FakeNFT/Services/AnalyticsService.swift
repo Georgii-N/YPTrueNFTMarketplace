@@ -2,31 +2,63 @@ import Foundation
 import YandexMobileMetrica
 
 enum Screens: String {
-        case catalogMain = "CatalogMain"
-        case cartMain = "CartMain"
+    // Catalog screens:
+    case catalogMain = "CatalogMain"
+    case catalogCollection = "CatalogCollection"
+    case catalogAboutAuthor = "CatalogAboutAuthor"
+    case nftCard = "CatalogNFTCard"
+    case catalogAboutAuthorFromNFTCard = "CatalogAboutAuthorFromNFTCard"
+    case aboutCurrency = "CatalogAboutCurrency"
+    case browsingNFTCard = "CatalogBrowsingNFTCard"
     
-        case profileMain = "ProfileMain"
+    // Cart screens:
+    case cartMain = "CartMain"
     
-        case statisticMain = "StatisticMain"
-        case statisticProfile = "StatisticProfile"
-        case statisticСollectionNFT = "StatisticСollectionNFT"
+    // Profile screens:
+    case profileMain = "ProfileMain"
+    
+    // Statistic screens:
+    case statisticMain = "StatisticMain"
+    case statisticProfile = "StatisticProfile"
+    case statisticСollectionNFT = "StatisticСollectionNFT"
+    
+    // Auth screens
+    case authMain = "authMain"
+    case authRegistration = "authRegistration"
+    case authDemo = "authDemo"
+    case onboardingMain = "onboardingMain"
 }
 
-enum Items {
-    case screen
-    case buttonSorting
-    case buttonSortingByName
-    case buttonSortingByRating
-    case buttonGoToUserSite
-    case buttonGoToUserCollection
-    case buttonAddToCard
-    case buttonLike
+enum Items: String {
+    case screen = "Screen"
+    case collectionCell = "CollectionCell"
+    case tableViewCell = "TableViewCell"
+    case buttonSorting = "ButtonSorting"
+    case buttonSortingByName = "ButtonSortingByName"
+    case buttonSortingByRating = "ButtonSortingByRating"
+    case buttonSortingByTitle = "buttonSortingByTitle"
+    case buttonSortingByNumber = "buttonSortingByNumber"
+    case buttonSortingByPrice = "buttonSortingByPrice"
+    case buttonGoToUserSite = "ButtonGoToUserSite"
+    case buttonGoToUserCollection = "ButtonGoToUserCollection"
+    case buttonAddToCard = "ButtonAddToCard"
+    case buttonLike = "ButtonLike"
+    case buttonDemo = "buttonDemo"
+    case buttonRegistration = "buttonRegistration"
+    case pullToRefresh = "PullToRefresh"
+    case swipeNFTCard = "SwipeNFTCard"
+    case scaleNFTCard = "ScaleNFTCard"
+    case authorization = "authorization"
+    case registration = "registration"
 }
 
-enum Events {
-    case click
-    case open
-    case close
+enum Events: String {
+    case click = "Click"
+    case open = "Open"
+    case close = "Close"
+    case pull = "Pull"
+    case success = "success"
+    case unsuccess = "unsuccess"
 }
 
 final class AnalyticsService {
@@ -37,7 +69,7 @@ final class AnalyticsService {
     
     func sentEvent(screen: Screens, item: Items, event: Events) {
         var parameters: [AnyHashable: Any] = [:]
-        parameters = [item: event]
+        parameters = [item.rawValue: event.rawValue]
         
         YMMYandexMetrica.reportEvent(screen.rawValue, parameters: parameters) { error in
             print("REPORT ERROR: %@", error.localizedDescription)

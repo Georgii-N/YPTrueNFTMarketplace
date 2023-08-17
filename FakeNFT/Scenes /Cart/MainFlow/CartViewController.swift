@@ -189,11 +189,11 @@ extension CartViewControler {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: sortButton)
     }
     
-    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
-            DispatchQueue.main.async {
-                method(argument)
-            }
-        }
+//    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
+//            DispatchQueue.main.async {
+//                method(argument)
+//            }
+//        }
     
     private func endRefreshing() {
             self.refreshControl.endRefreshing()
