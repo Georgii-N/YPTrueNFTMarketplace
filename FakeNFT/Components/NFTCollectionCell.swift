@@ -203,8 +203,8 @@ extension NFTCollectionCell {
             nftLikeImageView.topAnchor.constraint(equalTo: nftImageView.topAnchor),
             nftLikeImageView.trailingAnchor.constraint(equalTo: nftImageView.trailingAnchor),
             
-            nftLikeButton.heightAnchor.constraint(equalToConstant: 18),
-            nftLikeButton.widthAnchor.constraint(equalToConstant: 22),
+            nftLikeButton.heightAnchor.constraint(equalToConstant: 22),
+            nftLikeButton.widthAnchor.constraint(equalToConstant: 26),
             nftLikeButton.centerXAnchor.constraint(equalTo: nftLikeImageView.centerXAnchor),
             nftLikeButton.centerYAnchor.constraint(equalTo: nftLikeImageView.centerYAnchor),
             

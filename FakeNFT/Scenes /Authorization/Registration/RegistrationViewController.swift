@@ -36,6 +36,7 @@ final class RegistrationViewController: UIViewController {
         textField.layer.cornerRadius = 12
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
         textField.textAlignment = Locale.current.languageCode == "ar" ? .right : .left
+        textField.textContentType = .none
         textField.leftViewMode = .always
         textField.autocapitalizationType = .none
         textField.textColor = .blackDay
@@ -51,6 +52,7 @@ final class RegistrationViewController: UIViewController {
         textField.layer.cornerRadius = 12
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
         textField.textAlignment = Locale.current.languageCode == "ar" ? .right : .left
+        textField.textContentType = .none
         textField.leftViewMode = .always
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
