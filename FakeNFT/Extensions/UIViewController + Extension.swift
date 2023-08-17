@@ -7,6 +7,33 @@ extension UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
+    func isNavigationBarClear(_ isTrue: Bool) {
+        if isTrue {
+            navigationController?.navigationBar.backgroundColor = .clear
+            navigationController?.navigationBar.isTranslucent = true
+            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController?.navigationBar.shadowImage = UIImage()
+        } else {
+            navigationController?.navigationBar.backgroundColor = .whiteDay
+            navigationController?.navigationBar.isTranslucent = false
+        }
+    }
+    
+    func calculateNavigationHeight() -> CGFloat {
+        let statusBarHeight: CGFloat
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let statusBarManager = windowScene.statusBarManager {
+            statusBarHeight = statusBarManager.statusBarFrame.size.height
+        } else {
+            statusBarHeight = 0
+        }
+        
+        let navigationBarHeight = navigationController?.navigationBar.frame.height ?? statusBarHeight
+        let topOffset = statusBarHeight + navigationBarHeight
+
+        return topOffset
+    }
+    
     // MARK: - Resume On Main Thread
     func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
         DispatchQueue.main.async {
