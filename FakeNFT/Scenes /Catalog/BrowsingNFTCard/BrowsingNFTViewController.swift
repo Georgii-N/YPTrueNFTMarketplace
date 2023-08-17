@@ -26,23 +26,15 @@ final class BrowsingNFTViewController: UIViewController {
         
         return scrollView
     }()
-    
-    private lazy var pageControll: UIPageControl = {
-        let pageControl = UIPageControl()
-        pageControl.currentPage = 0
-        pageControl.numberOfPages = 3
-        pageControl.currentPageIndicatorTintColor = .blackDay
-        pageControl.pageIndicatorTintColor = .lightGrayDay
         
-        return pageControl
-    }()
-    
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Resources.Images.NFTBrowsing.cancellButton, for: .normal)
         
         return button
     }()
+    
+    private lazy var pageControllView = CustomPageControlView()
     
     // MARK: - Lifecycle
     init(urlStrings: [String]) {
@@ -119,22 +111,21 @@ final class BrowsingNFTViewController: UIViewController {
 extension BrowsingNFTViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = round(scrollView.contentOffset.x / view.frame.width)
-        pageControll.currentPage = Int(page)
-        
+        pageControllView.setCurrentState(currentPage: Int(page), isOnboarding: false)
+
         analyticsService.sentEvent(screen: .browsingNFTCard, item: .swipeNFTCard, event: .click)
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         let page = round(scrollView.contentOffset.x / view.frame.width)
-        pageControll.currentPage = Int(page)
         
         analyticsService.sentEvent(screen: .browsingNFTCard, item: .scaleNFTCard, event: .click)
         
         return imageScrollView.subviews[Int(page)]
     }
     
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+
     }
 }
 
@@ -143,8 +134,10 @@ extension BrowsingNFTViewController {
     private func setupViews() {
         view.backgroundColor = .whiteDay
         view.setupView(imageScrollView)
-        view.setupView(pageControll)
+        view.setupView(pageControllView)
         view.setupView(cancelButton)
+        
+        pageControllView.setCurrentState(currentPage: 0, isOnboarding: false)
     }
 }
 
@@ -157,9 +150,9 @@ extension BrowsingNFTViewController {
             imageScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             imageScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            pageControll.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -28),
-            pageControll.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            pageControll.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            pageControllView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -28),
+            pageControllView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            pageControllView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             cancelButton.widthAnchor.constraint(equalToConstant: 42),
             cancelButton.heightAnchor.constraint(equalToConstant: 42),

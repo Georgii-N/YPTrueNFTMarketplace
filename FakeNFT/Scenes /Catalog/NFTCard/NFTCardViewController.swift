@@ -37,7 +37,7 @@ final class NFTCardViewController: UIViewController {
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.delegate = self
-        scrollView.backgroundColor = .lightGrayDay
+        scrollView.backgroundColor = .whiteDay
         
         return scrollView
     }()
@@ -238,7 +238,8 @@ final class NFTCardViewController: UIViewController {
             guard let url = URL(string: imageURLString) else { return }
             let size = CGRect(x: 0, y: 0, width: view.frame.width, height: 375)
             let imageView = UIImageView(frame: CGRect(x: imageWidht * CGFloat(index), y: 0, width: view.frame.width, height: 375))
-            let processor = DownsamplingImageProcessor(size: CGSize(width: size.width, height: size.height))
+            let processor = DownsamplingImageProcessor(size: CGSize(width: size.width, height: size.height)) |>
+            RoundCornerImageProcessor(cornerRadius: 40)
             
             images.append(imageView)
             coverNFTScrollView.addSubview(images[index])
