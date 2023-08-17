@@ -1,18 +1,32 @@
 import UIKit
+import StoreKit
 
 final class TabBarController: UITabBarController {
-
+    
+    // MARK: - Private properties:
+    var randomBoolWithProbability: Bool {
+        let trueProbability = 0.3
+        return Double.random(in: 0..<1) < trueProbability
+    }
+    
     // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabBar()
         selectedIndex = 1
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if randomBoolWithProbability {
+            SKStoreReviewController.requestReview()
+        }
+    }
+    
     // MARK: - Private func
     private func setTabBar() {
         let appearance = UITabBarAppearance()
-
+        
         tabBar.standardAppearance = appearance
         tabBar.backgroundColor = .whiteDay
         
@@ -33,7 +47,7 @@ final class TabBarController: UITabBarController {
         let catalogNavigationController = CustomNavigationController(rootViewController: catalogViewController)
         let cartViewController = CustomNavigationController(rootViewController: UIViewController())
         let statisticViewController = CustomNavigationController(rootViewController: UIViewController())
-
+        
         profileViewController.tabBarItem = UITabBarItem(
             title: L10n.Profile.title,
             image: Resources.Images.TabBar.profileImage,
@@ -52,6 +66,6 @@ final class TabBarController: UITabBarController {
             selectedImage: Resources.Images.TabBar.statisticImageSelected)
 
         self.viewControllers = [profileViewController, catalogNavigationController,
-                                cartViewController, statisticViewController]        
+                                cartViewController, statisticViewController]
     }
 }
