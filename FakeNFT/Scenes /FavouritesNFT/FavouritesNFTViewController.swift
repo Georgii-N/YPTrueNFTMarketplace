@@ -8,9 +8,12 @@
 import UIKit
 
 class FavouritesNFTViewController: UIViewController {
+
     // MARK: - Properties
 
-    var nftCards = [NFTCard]()
+    var likesIds: [String]?
+
+    private var viewModel: FavouritesNFTViewModelProtocol?
     
     // MARK: - Lifecycle
     
@@ -19,6 +22,28 @@ class FavouritesNFTViewController: UIViewController {
         setupUI()
         setupViews() 
         setupConstraints()
+        viewModel?.fetchNtfCards(likes: likesIds ?? [])
+        viewModel?.usersObservable.bind(action: { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        })
+        viewModel?.nftCardsObservable.bind(action: { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        })
+    }
+
+    // MARK: - Init
+
+    init(viewModel: FavouritesNFTViewModelProtocol?) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - SetupUI
@@ -59,18 +84,20 @@ class FavouritesNFTViewController: UIViewController {
 
 extension FavouritesNFTViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        nftCards.count
+       return viewModel?.nftCardsObservable.wrappedValue?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: FavouritesNFTCollectionViewCell = collectionView.dequeueReusableCell(indexPath: indexPath)
         cell.backgroundColor = .clear
-        let nft = nftCards[indexPath.row]
+        guard let nft = viewModel?.nftCardsObservable.wrappedValue?[indexPath.row],
+              let users = viewModel?.usersObservable.wrappedValue else { return cell }
+
         cell.setupCellData(.init(name: nft.name,
                                  images: nft.images,
                                  rating: nft.rating,
                                  price: nft.price,
-                                 author: nft.author,
+                                 author: users.first(where: { $0.id == nft.author })?.name ?? "",
                                  id: nft.id,
                                  isLiked: true,
                                  isAddedToCard: false))

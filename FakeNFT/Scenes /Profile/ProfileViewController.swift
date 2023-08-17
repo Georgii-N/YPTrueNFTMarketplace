@@ -7,14 +7,15 @@
 
 import UIKit
 
+protocol ProfileViewControllerDelegate: AnyObject {
+    func updateProfile(profile: Profile)
+}
+
 class ProfileViewController: UIViewController {
 
     // MARK: - Properties
 
-    private lazy var dataProvider = DataProvider()
-    private var profile: Profile?
-    private var userNFTs = [NFTCard]()
-    private var likesNFTs = [NFTCard]()
+    private var viewModel: ProfileViewModelProtocol?
     
     // MARK: - Lifecycle
     
@@ -23,7 +24,20 @@ class ProfileViewController: UIViewController {
         setupBackground()
         setupNavBar()
         setupConstrains()
-        fetchProfile()
+        viewModel?.profileObservable.bind(action: { [weak self] _ in
+            self?.setupProfile()
+        })
+    }
+
+    // MARK: - Init
+
+    init(viewModel: ProfileViewModelProtocol?) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - SetupUI
@@ -131,7 +145,7 @@ class ProfileViewController: UIViewController {
 
     private func setupProfile() {
         DispatchQueue.main.async { [weak self] in
-            guard let profile = self?.profile,
+            guard let profile = self?.viewModel?.profileObservable.wrappedValue,
             let avatarUrl = URL(string: profile.avatar) else { return }
             self?.profileNameLabel.text = profile.name
             self?.profileDescriptionLabel.text = profile.description
@@ -145,50 +159,9 @@ class ProfileViewController: UIViewController {
     
     @objc func presentEditVC() {
         let editProfileViewController = EditProfileViewController()
+        editProfileViewController.profile = viewModel?.profileObservable.wrappedValue
+        editProfileViewController.delegate = self
         present(editProfileViewController, animated: true)
-    }
-
-    // MARK: - Functions
-
-    private func fetchProfile() {
-        dataProvider.fetchProfile { [weak self] result in
-            switch result {
-            case .success(let profile):
-                self?.profile = profile
-                self?.setupProfile()
-                self?.fetchNFTs()
-                self?.fetchLikeNFTs()
-                print("/n MY LOG: \(profile)")
-            case .failure(let failure):
-                print(failure.localizedDescription)
-            }
-        }
-    }
-    
-    private func fetchNFTs() {
-        guard let profile = profile else { return }
-        
-        dataProvider.fetchUsersNFT(userId: nil, nftsId: profile.nfts) { [weak self] result in
-            switch result {
-            case .success(let nftCards):
-                self?.userNFTs = nftCards
-            case .failure(let failure):
-                print(failure)
-            }
-        }
-    }
-    
-    private func fetchLikeNFTs() {
-        guard let profile = profile else { return }
-        
-        dataProvider.fetchUsersNFT(userId: nil, nftsId: profile.likes) { [weak self] result in
-            switch result {
-            case .success(let nftCards):
-                self?.likesNFTs = nftCards
-            case .failure(let failure):
-                print(failure)
-            }
-        }
     }
 }
 
@@ -207,6 +180,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.font = .bodyBold
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
+        let profile = viewModel?.profileObservable.wrappedValue
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = L10n.Profile.MainScreen.myNFT + " (\(profile?.nfts.count ?? 0))"
@@ -223,14 +197,16 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            let myNFTVC = MyNFTViewController()
-            myNFTVC.nftCards = userNFTs
-            myNFTVC.likeNFTIds = likesNFTs.map({ $0.id })
+            let myNFTViewModel = MyNFTViewModel(dataProvider: DataProvider())
+            let myNFTVC = MyNFTViewController(viewModel: myNFTViewModel)
+            myNFTVC.nftIds = viewModel?.profileObservable.wrappedValue?.nfts ?? []
+            myNFTVC.likeNFTIds = viewModel?.profileObservable.wrappedValue?.likes ?? []
             myNFTVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(myNFTVC, animated: true)
         case 1:
-            let favouritesNFT = FavouritesNFTViewController()
-            favouritesNFT.nftCards = likesNFTs
+            let favouritesNFTViewModel = FavouritesNFTViewModel(dataProvider: DataProvider())
+            let favouritesNFT = FavouritesNFTViewController(viewModel: favouritesNFTViewModel)
+            favouritesNFT.likesIds = viewModel?.profileObservable.wrappedValue?.likes
             favouritesNFT.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(favouritesNFT, animated: true)
         case 2:
@@ -245,5 +221,13 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 55
+    }
+}
+
+// MARK: - ProfileViewControllerDelegate
+
+extension ProfileViewController: ProfileViewControllerDelegate {
+    func updateProfile(profile: Profile) {
+        viewModel?.changeProfile(profile: profile)
     }
 }

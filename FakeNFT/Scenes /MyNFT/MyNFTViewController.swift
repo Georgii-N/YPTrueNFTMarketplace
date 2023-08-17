@@ -11,9 +11,10 @@ class MyNFTViewController: UIViewController {
 
     // MARK: - Properties
 
-    var nftCards = [NFTCard]()
     var likeNFTIds = [String]()
+    var nftIds = [String]()
 
+    private var viewModel: MyNFTViewModelProtocol?
     private var alertService: AlertServiceProtocol?
     private lazy var dataProvider = DataProvider()
     
@@ -24,6 +25,23 @@ class MyNFTViewController: UIViewController {
         setupUI()
         setupViews()
         setupConstraints()
+        viewModel?.fetchNtfCards(nftIds: nftIds)
+        viewModel?.nftCardsObservable.bind(action: { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
+        })
+    }
+
+    // MARK: - Init
+
+    init(viewModel: MyNFTViewModel?) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - SetupUI
@@ -59,17 +77,8 @@ class MyNFTViewController: UIViewController {
     }
     
     private func sortNFT(_ sortOptions: SortingOption) {
-        switch sortOptions {
-        case .byPrice:
-            print("price")
-        case .byRating:
-            print("rating")
-        case .byName:
-            print("name")
-        default:
-            break
-        }
         alertService = nil
+        viewModel?.sortNFTCollection(option: sortOptions)
     }
     
     // MARK: - Actions
@@ -94,18 +103,19 @@ class MyNFTViewController: UIViewController {
 extension MyNFTViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return nftCards.count
+        return viewModel?.nftCardsObservable.wrappedValue?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MyNFTCollectionViewCell = collectionView.dequeueReusableCell(indexPath: indexPath)
         cell.backgroundColor = .clear
-        let nft = nftCards[indexPath.row]
+        guard let nft = viewModel?.nftCardsObservable.wrappedValue?[indexPath.row],
+              let users = viewModel?.usersObservable.wrappedValue else { return cell }
         cell.setupCellData(.init(name: nft.name,
                                  images: nft.images,
                                  rating: nft.rating,
                                  price: nft.price,
-                                 author: nft.author,
+                                 author: users.first(where: { $0.id == nft.author })?.name ?? "",
                                  id: nft.id,
                                  isLiked: likeNFTIds.contains(nft.id),
                                  isAddedToCard: false))
