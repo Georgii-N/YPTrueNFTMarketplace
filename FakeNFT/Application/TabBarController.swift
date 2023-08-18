@@ -22,7 +22,7 @@ final class TabBarController: UITabBarController {
             SKStoreReviewController.requestReview()
         }
         
-        checkMetriaAgreement()
+        checkMetriсaAgreement()
     }
     
     // MARK: - Private func
