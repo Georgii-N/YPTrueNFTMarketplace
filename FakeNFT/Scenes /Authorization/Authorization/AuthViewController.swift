@@ -28,6 +28,7 @@ final class AuthViewController: UIViewController {
         textField.layer.cornerRadius = 12
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
         textField.textAlignment = Locale.current.languageCode == "ar" ? .right : .left
+        textField.textContentType = .none
         textField.leftViewMode = .always
         textField.autocapitalizationType = .none
         textField.textColor = .blackDay
@@ -43,6 +44,7 @@ final class AuthViewController: UIViewController {
         textField.layer.cornerRadius = 12
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
         textField.textAlignment = Locale.current.languageCode == "ar" ? .right : .left
+        textField.textContentType = .none
         textField.leftViewMode = .always
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
@@ -53,9 +55,7 @@ final class AuthViewController: UIViewController {
         
         return textField
     }()
-    
-    private lazy var enterButton = BaseBlackButton(with: L10n.Authorization.entering)
-    
+        
     private lazy var forgetPasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .clear
@@ -96,6 +96,8 @@ final class AuthViewController: UIViewController {
         
         return label
     }()
+    
+    private lazy var enterButton = BaseButton(with: L10n.Authorization.entering, color: .blackDay)
     
     // MARK: - Lifecycle:
     init(viewModel: AuthViewModelProtocol) {

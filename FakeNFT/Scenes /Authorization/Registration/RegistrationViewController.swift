@@ -36,6 +36,7 @@ final class RegistrationViewController: UIViewController {
         textField.layer.cornerRadius = 12
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
         textField.textAlignment = Locale.current.languageCode == "ar" ? .right : .left
+        textField.textContentType = .none
         textField.leftViewMode = .always
         textField.autocapitalizationType = .none
         textField.textColor = .blackDay
@@ -51,6 +52,7 @@ final class RegistrationViewController: UIViewController {
         textField.layer.cornerRadius = 12
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: textField.frame.height))
         textField.textAlignment = Locale.current.languageCode == "ar" ? .right : .left
+        textField.textContentType = .none
         textField.leftViewMode = .always
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
@@ -61,9 +63,7 @@ final class RegistrationViewController: UIViewController {
         
         return textField
     }()
-    
-    private lazy var registrationButton = BaseBlackButton(with: L10n.Authorization.registration)
-    
+        
     private lazy var loginPasswordMistakeLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = Locale.current.languageCode == "ar" ? .right : .center
@@ -73,6 +73,8 @@ final class RegistrationViewController: UIViewController {
         
         return label
     }()
+    
+    private lazy var registrationButton = BaseButton(with: L10n.Authorization.registration, color: .blackDay)
     
     // MARK: - Lifecycle
     init(viewModel: RegistrationViewModelProtocol) {

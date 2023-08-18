@@ -21,8 +21,7 @@
 		3F6806D729CBC50A00B4F915 /* Cells + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6806D629CBC50A00B4F915 /* Cells + Extension.swift */; };
 		3FC8C39129D2453B0081F015 /* NetworkRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC8C39029D2453B0081F015 /* NetworkRequestModel.swift */; };
 		4005316E2A73DDFC008CAF3B /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */; };
-		400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531762A73EB4D008CAF3B /* BlackBaseButton.swift */; };
-		400531792A73EC58008CAF3B /* BaseWhiteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531782A73EC58008CAF3B /* BaseWhiteButton.swift */; };
+		400531772A73EB4D008CAF3B /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400531762A73EB4D008CAF3B /* BaseButton.swift */; };
 		406414662A8A247F00EBBE39 /* DemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406414652A8A247F00EBBE39 /* DemoCell.swift */; };
 		406414682A8A250100EBBE39 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406414672A8A250100EBBE39 /* DemoViewController.swift */; };
 		4064146A2A8A254800EBBE39 /* DemoViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406414692A8A254800EBBE39 /* DemoViewModelProtocol.swift */; };
@@ -122,8 +121,7 @@
 		3F6806D629CBC50A00B4F915 /* Cells + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cells + Extension.swift"; sourceTree = "<group>"; };
 		3FC8C39029D2453B0081F015 /* NetworkRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestModel.swift; sourceTree = "<group>"; };
 		4005316D2A73DDFC008CAF3B /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
-		400531762A73EB4D008CAF3B /* BlackBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackBaseButton.swift; sourceTree = "<group>"; };
-		400531782A73EC58008CAF3B /* BaseWhiteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWhiteButton.swift; sourceTree = "<group>"; };
+		400531762A73EB4D008CAF3B /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		406414652A8A247F00EBBE39 /* DemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoCell.swift; sourceTree = "<group>"; };
 		406414672A8A250100EBBE39 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		406414692A8A254800EBBE39 /* DemoViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -453,8 +451,7 @@
 		7EB78A662A78EAB200BE892B /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				400531762A73EB4D008CAF3B /* BlackBaseButton.swift */,
-				400531782A73EC58008CAF3B /* BaseWhiteButton.swift */,
+				400531762A73EB4D008CAF3B /* BaseButton.swift */,
 				4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */,
 			);
 			path = Buttons;
@@ -941,12 +938,11 @@ sourceTree = "<group>";
 				7EB78AE12A7BFBC300BE892B /* NFTCollection.swift in Sources */,
 				7EFB26452A86012C001901B6 /* OnboardingViewModelProtocol.swift in Sources */,
 				7EC0B5392A766ABA00688EC9 /* DataProvider.swift in Sources */,
-				400531792A73EC58008CAF3B /* BaseWhiteButton.swift in Sources */,
 				4005316E2A73DDFC008CAF3B /* UIView + Extension.swift in Sources */,
 				7E71E3B32A73CBF500B0073D /* Strings+Generated.swift in Sources */,
 				7EF440042A8B402E00444684 /* NFTRatingStackView.swift in Sources */,
 				3F6806D529CBBEC700B4F915 /* NetworkTask.swift in Sources */,
-				400531772A73EB4D008CAF3B /* BlackBaseButton.swift in Sources */,
+				400531772A73EB4D008CAF3B /* BaseButton.swift in Sources */,
 				7EE68D092A839EE600CAE2AC /* AuthViewController.swift in Sources */,
 				407340E82A838C44008E0C1E /* UserDefaultsService.swift in Sources */,
 				409EEFE92A7A711A00B23FF8 /* UsersResponse.swift in Sources */,
