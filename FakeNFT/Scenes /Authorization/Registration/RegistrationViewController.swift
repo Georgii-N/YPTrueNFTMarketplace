@@ -64,7 +64,7 @@ final class RegistrationViewController: UIViewController {
         return textField
     }()
     
-    private lazy var registrationButton = BaseBlackButton(with: L10n.Authorization.registration)
+    private lazy var registrationButton = BaseButton(with: L10n.Authorization.registration, color: .blackDay)
     
     private lazy var loginPasswordMistakeLabel: UILabel = {
         let label = UILabel()

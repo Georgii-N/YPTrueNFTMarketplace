@@ -1,18 +1,20 @@
 import UIKit
 
-final class BaseWhiteButton: UIButton {
+final class BaseButton: UIButton {
     
     // MARK: - Constants and Variables:
     private let labelText: String
-
+    private let color: UIColor
+    
     // MARK: - Lifecycle:
-    init(with title: String) {
+    init(with title: String, color: UIColor) {
         self.labelText = title
+        self.color = color
         super.init(frame: .zero)
         setupViews()
         setupConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -37,34 +39,45 @@ final class BaseWhiteButton: UIButton {
         super.touchesCancelled(touches, with: event)
         transform = .identity
     }
-
+    
     // MARK: - Private Methods:
     private func setupColor() {
-        self.layer.borderColor = UIColor.blackDay.cgColor
+        if color == .whiteDay {
+            layer.borderColor = UIColor.blackDay.cgColor
+        }
     }
 }
 
 // MARK: - Setup Views:
-extension BaseWhiteButton {
+extension BaseButton {
     private func setupViews() {
-        self.backgroundColor = .whiteDay
-        self.setTitle(labelText, for: .normal)
-        self.setTitleColor(.blackDay, for: .normal)
-
-        self.layer.cornerRadius = 16
-        self.layer.borderWidth = 1.0
-        setupColor()
-        
-        self.titleLabel?.textAlignment = .center
-        self.titleLabel?.font = .captionSmallRegular
+        if color == .blackDay {
+           backgroundColor = .blackDay
+           setTitle(labelText, for: .normal)
+           setTitleColor(.whiteDay, for: .normal)
+           layer.cornerRadius = 16
+           titleLabel?.textAlignment = .center
+           titleLabel?.font = .captionMediumBold
+        } else if color == .whiteDay {
+           backgroundColor = .whiteDay
+           setTitle(labelText, for: .normal)
+           setTitleColor(.blackDay, for: .normal)
+           layer.cornerRadius = 16
+           layer.borderWidth = 1.0
+           titleLabel?.textAlignment = .center
+           titleLabel?.font = .captionSmallRegular
+            
+            setupColor()
+        }
     }
 }
 
 // MARK: - Setup Views:
-extension BaseWhiteButton {
+extension BaseButton {
     private func setupConstraints() {
+        let height = color == .whiteDay ? 40 : 60
         NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: 40)
+            self.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
 }
