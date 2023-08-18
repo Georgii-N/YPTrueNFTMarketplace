@@ -63,9 +63,7 @@ final class RegistrationViewController: UIViewController {
         
         return textField
     }()
-    
-    private lazy var registrationButton = BaseButton(with: L10n.Authorization.registration, color: .blackDay)
-    
+        
     private lazy var loginPasswordMistakeLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = Locale.current.languageCode == "ar" ? .right : .center
@@ -75,6 +73,8 @@ final class RegistrationViewController: UIViewController {
         
         return label
     }()
+    
+    private lazy var registrationButton = BaseButton(with: L10n.Authorization.registration, color: .blackDay)
     
     // MARK: - Lifecycle
     init(viewModel: RegistrationViewModelProtocol) {
