@@ -288,13 +288,6 @@ extension CatalogCollectionViewController: NFTCardViewControllerDelegate {
         indexPathToUpdateNFTCell = index
         changeCellStatus(isLike: isLike)
     }
-    
-    func addIndexToUpdateCell(index: IndexPath, isAddedToCart: Bool) {
-        guard let cell = nftCollection.cellForItem(at: index) as? NFTCollectionCell else { return }
-        
-        indexPathToUpdateNFTCell = index
-        addToCardButtonDidTapped(cell: cell)
-    }
 }
 
 // MARK: - UITextViewDelegate

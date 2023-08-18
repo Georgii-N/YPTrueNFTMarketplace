@@ -162,15 +162,18 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
         tokenPaths[index]
     }
     
-    func setNewCurrentModel() {
+    func setNewCurrentModel(isLike: Bool) {
+        let isLiked = isLike ? !currentNFT.isLiked: currentNFT.isLiked
+        let isAddedToCart = isLike ? currentNFT.isAddedToCard : !currentNFT.isAddedToCard
+        
         let newModel = NFTCell(name: currentNFT.name,
                                images: currentNFT.images,
                                rating: currentNFT.rating,
                                price: currentNFT.price,
                                author: currentNFT.author,
                                id: currentNFT.id,
-                               isLiked: currentNFT.isLiked,
-                               isAddedToCard: !currentNFT.isAddedToCard)
+                               isLiked: isLiked,
+                               isAddedToCard: isAddedToCart)
         currentNFT = newModel
     }
     

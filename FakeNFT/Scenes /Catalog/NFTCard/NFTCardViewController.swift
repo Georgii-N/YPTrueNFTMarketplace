@@ -24,12 +24,11 @@ final class NFTCardViewController: UIViewController {
     // MARK: - UI:
     private lazy var allScreenScrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.delegate = self
         scrollView.showsVerticalScrollIndicator = false
         
         return scrollView
     }()
-    
-    private lazy var contentView = UIView()
     
     private lazy var coverNFTScrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
@@ -87,7 +86,7 @@ final class NFTCardViewController: UIViewController {
         
         return tableView
     }()
-    
+        
     private lazy var addToCartButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 16
@@ -110,6 +109,8 @@ final class NFTCardViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var contentView = UIView()
+    private lazy var likeButton = UIButton(type: .system)
     private lazy var sellerWebsiteButton = BaseWhiteButton(with: L10n.Catalog.NftCard.Button.goToSellerSite)
     private lazy var nftRatingStackView = NFTRatingStackView()
     private lazy var refreshStubLabel = RefreshStubLabel()
@@ -137,7 +138,7 @@ final class NFTCardViewController: UIViewController {
         setupNFTInfo()
         bind()
         
-        viewModel?.updateNFTCardModels()
+        viewModel?.updateNFTCardModels()        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -190,7 +191,7 @@ final class NFTCardViewController: UIViewController {
         }
     }
     
-    // Controll NFT info and status:
+    // Setup UI State:
     private func setupNFTInfo() {
         guard let viewModel else { return }
         
@@ -249,6 +250,15 @@ final class NFTCardViewController: UIViewController {
         }
     }
     
+    private func setupLikeButton() {
+        let nftModel = viewModel?.getCurrentNFTModel()
+        
+        if let isLiked = nftModel?.isLiked {
+            let image = isLiked ? Resources.Images.NFTCollectionCell.likedButton : Resources.Images.NFTCollectionCell.unlikedButton
+            likeButton.setImage(image, for: .normal)
+        }
+    }
+    
     private func setupCartButton() {
         let nftModel = viewModel?.getCurrentNFTModel()
         
@@ -258,25 +268,36 @@ final class NFTCardViewController: UIViewController {
         }
     }
     
-    private func synchronizeCartButtons(id: String, fromCartButton: Bool) {
+    private func setupStubLabel() {
+        view.setupView(refreshStubLabel)
+
+        NSLayoutConstraint.activate([
+        refreshStubLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        refreshStubLabel.topAnchor.constraint(equalTo: addToCartButton.bottomAnchor, constant: 100)
+        ])
+    }
+    
+    // Synchronize UI States after actions:
+    private func synchronizeButtonWithCell(id: String, fromCartButton: Bool) {
         let cells = viewModel?.nftsObservable.wrappedValue
         let index = cells?.firstIndex(where: { $0.id == id }) ?? 0
         
-        guard let cell = nftColectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? NFTCollectionCell else { return }
+        guard let cell = nftColectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? NFTCollectionCell,
+              let model = cell.getNFTModel() else { return }
         
-        if fromCartButton {
-            guard let model = cell.getNFTModel() else { return }
-            cell.setupNFTModel(model: NFTCell(name: model.name,
-                                              images: model.images,
-                                              rating: model.rating,
-                                              price: model.price,
-                                              author: model.author,
-                                              id: model.id,
-                                              isLiked: model.isLiked,
-                                              isAddedToCard: !model.isAddedToCard))
-        } else {
-            viewModel?.setNewCurrentModel()
-        }
+        let isLiked = fromCartButton ? model.isLiked : !model.isLiked
+        let isAddedToCard = fromCartButton ? !model.isAddedToCard : model.isAddedToCard
+        let newModel = NFTCell(name: model.name,
+                               images: model.images,
+                               rating: model.rating,
+                               price: model.price,
+                               author: model.author,
+                               id: model.id,
+                               isLiked: isLiked,
+                               isAddedToCard: isAddedToCard)
+        
+        cell.setupNFTModel(model: newModel)
+        setupLikeButton()
         setupCartButton()
     }
     
@@ -293,16 +314,31 @@ final class NFTCardViewController: UIViewController {
         analyticsService.sentEvent(screen: .aboutCurrency, item: .screen, event: .open)
     }
     
-    private func setupStubLabel() {
-        view.setupView(refreshStubLabel)
-
-        NSLayoutConstraint.activate([
-        refreshStubLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-        refreshStubLabel.topAnchor.constraint(equalTo: addToCartButton.bottomAnchor, constant: 100)
-        ])
+    // MARK: Objc Methods:
+    @objc private func changeNFTLikeStatus() {
+        guard let nftModel = viewModel?.getCurrentNFTModel(),
+              let index = viewModel?.nftsObservable.wrappedValue?.firstIndex(
+                    where: { $0.id == nftModel.id }) else { return }
+        
+        blockUI()
+        viewModel?.changeNFTFavouriteStatus(isLiked: nftModel.isLiked, id: nftModel.id)
+        delegate?.addIndexToUpdateCell(index: IndexPath(row: index, section: 0), isLike: true)
+        viewModel?.setNewCurrentModel(isLike: true)
+        synchronizeButtonWithCell(id: nftModel.id, fromCartButton: false)
     }
     
-    // MARK: Objc Methods:
+    @objc private func changeNFTCartStatus() {
+        guard let nftModel = viewModel?.getCurrentNFTModel(),
+              let index = viewModel?.nftsObservable.wrappedValue?.firstIndex(
+                    where: { $0.id == nftModel.id }) else { return }
+        
+        blockUI()
+        viewModel?.changeNFTCartStatus(isAddedToCart: nftModel.isAddedToCard, id: nftModel.id)
+        delegate?.addIndexToUpdateCell(index: IndexPath(row: index, section: 0), isLike: false)
+        viewModel?.setNewCurrentModel(isLike: false)
+        synchronizeButtonWithCell(id: nftModel.id, fromCartButton: true)
+    }
+    
     @objc private func goToSellerWebSite() {
         let author = viewModel?.getAuthorCollection()
         
@@ -314,18 +350,6 @@ final class NFTCardViewController: UIViewController {
         
         analyticsService.sentEvent(screen: .nftCard, item: .buttonGoToUserSite, event: .open)
         analyticsService.sentEvent(screen: .catalogAboutAuthorFromNFTCard, item: .screen, event: .open)
-    }
-    
-    @objc private func changeNFTCartStatus() {
-        let nftModel = viewModel?.getCurrentNFTModel()
-        
-        guard let isAddedToCard = nftModel?.isAddedToCard,
-              let index = viewModel?.nftsObservable.wrappedValue?.firstIndex(
-                where: { $0.id == nftModel?.id }) else { return }
-        
-        delegate?.addIndexToUpdateCell(index: IndexPath(row: index, section: 0), isAddedToCart: !isAddedToCard)
-        viewModel?.setNewCurrentModel()
-        synchronizeCartButtons(id: nftModel?.id ?? "", fromCartButton: true)
     }
     
     @objc private func refreshNFTCardScreen() {
@@ -356,6 +380,8 @@ extension NFTCardViewController: NFTCollectionCellDelegate {
         viewModel?.changeNFTFavouriteStatus(isLiked: model.isLiked, id: modelID)
         indexPathToUpdateNFTCell = indexPath
         delegate?.addIndexToUpdateCell(index: indexPath, isLike: true)
+        viewModel?.setNewCurrentModel(isLike: true)
+        setupLikeButton()
         
         analyticsService.sentEvent(screen: .nftCard, item: .buttonLike, event: .click)
     }
@@ -367,10 +393,11 @@ extension NFTCardViewController: NFTCollectionCellDelegate {
         
         let modelID = model.id
         
-        synchronizeCartButtons(id: modelID, fromCartButton: false)
         viewModel?.changeNFTCartStatus(isAddedToCart: model.isAddedToCard, id: modelID)
         indexPathToUpdateNFTCell = indexPath
         delegate?.addIndexToUpdateCell(index: indexPath, isLike: false)
+        viewModel?.setNewCurrentModel(isLike: false)
+        setupCartButton()
         
         analyticsService.sentEvent(screen: .nftCard, item: .buttonAddToCard, event: .click)
     }
@@ -379,10 +406,18 @@ extension NFTCardViewController: NFTCollectionCellDelegate {
 // MARK: - UIScrollViewDelegate
 extension NFTCardViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let page = round(scrollView.contentOffset.x / view.frame.width)
-        coverNFTPageControlView.setCurrentState(currentPage: Int(page), isOnboarding: false)
-        
-        analyticsService.sentEvent(screen: .nftCard, item: .swipeNFTCard, event: .click)
+        if scrollView == coverNFTScrollView {
+            let page = round(scrollView.contentOffset.x / view.frame.width)
+            coverNFTPageControlView.setCurrentState(currentPage: Int(page), isOnboarding: false)
+            
+            analyticsService.sentEvent(screen: .nftCard, item: .swipeNFTCard, event: .click)
+        } else if scrollView == allScreenScrollView {
+            if scrollView.contentOffset.y > 30 {
+                likeButton.isHidden = true
+            } else {
+                likeButton.isHidden = false
+            }
+        }
     }
 }
 
@@ -458,6 +493,7 @@ extension NFTCardViewController {
     private func setupViews() {
         view.backgroundColor = .whiteDay
         navigationController?.navigationBar.backgroundColor = .clear
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: likeButton)
         tabBarController?.tabBar.isHidden = true
         
         setupBackButtonItem()
@@ -469,6 +505,7 @@ extension NFTCardViewController {
          priceLabel, priceValueLabel, nftCollectionNameLabel, addToCartButton,
          nftTableView, sellerWebsiteButton, nftColectionView].forEach(contentView.setupView)
         
+        setupLikeButton()
         setupCartButton()
         allScreenScrollView.refreshControl = refreshControl
         
@@ -548,6 +585,7 @@ extension NFTCardViewController {
 private extension NFTCardViewController {
     func setupTargets() {
         sellerWebsiteButton.addTarget(self, action: #selector(goToSellerWebSite), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(changeNFTLikeStatus), for: .touchUpInside)
         addToCartButton.addTarget(self, action: #selector(changeNFTCartStatus), for: .touchUpInside)
         refreshControl.addTarget(self, action: #selector(refreshNFTCardScreen), for: .valueChanged)
     }
