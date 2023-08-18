@@ -65,7 +65,7 @@ final class TabBarController: UITabBarController {
     }
     
     // MARK: - Private Methods:
-    private func checkMetriaAgreement() {
+    private func checkMetriсaAgreement() {
         if UserDefaultsService.shared.getAgreement() == false {
             UniversalAlertService().showMetricaAlert(controller: self)
         }
