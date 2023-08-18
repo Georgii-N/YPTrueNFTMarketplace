@@ -115,7 +115,6 @@ extension CartMainCell {
         if let formattedString = formatter.string(from: NSNumber(value: model.price)) {
             priceCountNFT.text = "\(String(formattedString)) ETH"
         }
-       // priceCountNFT.text = "\(String(model.price)) ETH"
         imageNFT.kf.setImage(with: imageUrl, options: [.processor(resizingProcessor)])
         setRating(rating: model.rating)
         idNft = model.id

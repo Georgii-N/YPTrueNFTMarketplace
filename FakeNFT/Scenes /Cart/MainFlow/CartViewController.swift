@@ -102,8 +102,6 @@ final class CartViewControler: UIViewController {
             }
         }
         
-        print("---------\(cartViewModel.networkErrorObservable.wrappedValue)")
-        
         cartViewModel.networkErrorObservable.bind {[weak self] errorText in
             guard let self = self else { return }
             guard let errorText = errorText else {

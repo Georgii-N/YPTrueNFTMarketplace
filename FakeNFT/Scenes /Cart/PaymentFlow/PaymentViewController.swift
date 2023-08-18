@@ -6,7 +6,7 @@ final class PaymentViewController: UIViewController {
     private let paymentViewModel: PaymentViewModelProtocol
     
     // MARK: UI constants and variables
-    private let payButton = BaseBlackButton(with: L10n.Cart.PayScreen.payButton)
+    private let payButton = BaseButton(with: L10n.Cart.PayScreen.payButton, color: .blackDay)
     private let url = URL(string: "https://yandex.ru/legal/practicum_termsofuse/")
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private lazy var refreshControl = UIRefreshControl()

@@ -41,12 +41,7 @@ final class CartViewModel: CartViewModelProtocol {
     
     @Observable
     private(set) var networkError: String?
-    
-    // MARK: Init
-    init() {
-       // getOrder()
-    }
-    
+        
     // MARK: Methods
     func getOrder() {
         dataProvider.fetchOrder {[weak self] result in
@@ -82,6 +77,24 @@ final class CartViewModel: CartViewModelProtocol {
                 self.orderID = data.id
                 self.getNfts()
                 completion(true)
+            case .failure(let error):
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
+            }
+        }
+    }
+    
+    func sendDeleteAllNft() {
+        guard let orderId = orderID else { return }
+        let emptyNFT: [String] = []
+        let newOrder = Order(nfts: emptyNFT, id: orderId)
+        dataProvider.putNewOrder(order: newOrder) {[weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
+                self.idNfts = []
+                self.cartNFT = []
+                self.orderID = data.id
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.networkError = errorString
@@ -125,7 +138,7 @@ final class CartViewModel: CartViewModelProtocol {
         case .byPrice: newNftCart = cartNFT.sorted(by: {$0.price > $1.price})
         case .byRating: newNftCart = cartNFT.sorted(by: {$0.rating > $1.rating})
         case .byTitle: newNftCart = cartNFT.sorted(by: {$0.name < $1.name})
-        case .close: break //to do
+        case .close: sendDeleteAllNft()
         default: break
         }
         self.cartNFT = newNftCart
