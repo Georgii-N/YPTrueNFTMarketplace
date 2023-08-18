@@ -10,7 +10,6 @@ final class SuccessfulPaymentViewController: UIViewController {
     
     private lazy var successefulImage: UIImageView = {
         let successefulImage = UIImageView()
-       // successefulImage.image = UIImage(named: "success")
         return successefulImage
     }()
     
@@ -20,7 +19,6 @@ final class SuccessfulPaymentViewController: UIViewController {
         successefulLabel.textAlignment = .center
         successefulLabel.textColor = .blackDay
         successefulLabel.font = UIFont.boldSystemFont(ofSize: 22)
-      //  successefulLabel.text = L10n.Cart.SuccessfulPayment.successful
         return successefulLabel
     }()
     
@@ -55,10 +53,12 @@ extension SuccessfulPaymentViewController {
         if isSuccess {
             successefulImage.image = UIImage(named: "success")
             successefulLabel.text = L10n.Cart.SuccessfulPayment.successful
+            AnalyticsService.instance.sentEvent(screen: .cartMain, item: .screen, event: .success)
         } else {
             successefulImage.image = UIImage(named: "unsuccess")
             successefulLabel.text = L10n.Cart.UnsuccessfulPayment.unsuccessful
             returnInCatalogButton.setTitle(L10n.Cart.UnsuccessfulPayment.tryAgain, for: .normal)
+            AnalyticsService.instance.sentEvent(screen: .cartMain, item: .screen, event: .unsuccess)
         }
     }
     

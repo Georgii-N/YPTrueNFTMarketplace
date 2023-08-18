@@ -3,6 +3,7 @@ import Foundation
 protocol CartViewModelProtocol: AnyObject {
     var cartNft: Observable<[NFTCard]?> {get}
     var networkErrorObservable: Observable<String?> {get}
+    func getOrder()
     func sendDeleteNft(id: String, completion: @escaping (Bool) -> Void)
     func additionNFT() -> Int
     func additionPriceNFT() -> String
@@ -18,7 +19,7 @@ final class CartViewModel: CartViewModelProtocol {
     }
     
     var networkErrorObservable: Observable<String?> {
-        $networkError
+       return $networkError
     }
     
     private let dataProvider = DataProvider()
@@ -39,15 +40,15 @@ final class CartViewModel: CartViewModelProtocol {
     private(set) var cartNFT: [NFTCard]?  = []
     
     @Observable
-        private(set) var networkError: String?
+    private(set) var networkError: String?
     
     // MARK: Init
     init() {
-        getOrder()
+       // getOrder()
     }
     
     // MARK: Methods
-   private func getOrder() {
+    func getOrder() {
         dataProvider.fetchOrder {[weak self] result in
             guard let self = self else { return }
             switch result {

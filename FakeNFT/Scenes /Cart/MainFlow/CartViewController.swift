@@ -71,6 +71,7 @@ final class CartViewControler: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cartViewModel.getOrder()
         setupViews()
         setupConstraints()
         setTargets()
@@ -78,6 +79,16 @@ final class CartViewControler: UIViewController {
         bind()
         blockUI()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+        AnalyticsService.instance.sentEvent(screen: .cartMain, item: .screen, event: .open)
+        }
+        
+        override func viewDidDisappear(_ animated: Bool) {
+            super.viewDidDisappear(animated)
+            AnalyticsService.instance.sentEvent(screen: .cartMain, item: .screen, event: .close)
+        }
     
     private func bind() {
         cartViewModel.cartNft.bind {[weak self] _ in
@@ -90,6 +101,8 @@ final class CartViewControler: UIViewController {
                 self.unblockUI()
             }
         }
+        
+        print("---------\(cartViewModel.networkErrorObservable.wrappedValue)")
         
         cartViewModel.networkErrorObservable.bind {[weak self] errorText in
             guard let self = self else { return }
@@ -188,12 +201,6 @@ extension CartViewControler {
     private func makeSortButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: sortButton)
     }
-    
-//    private func resumeMethodOnMainThread<T>(_ method: @escaping ((T) -> Void), with argument: T) {
-//            DispatchQueue.main.async {
-//                method(argument)
-//            }
-//        }
     
     private func endRefreshing() {
             self.refreshControl.endRefreshing()
