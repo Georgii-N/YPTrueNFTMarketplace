@@ -56,7 +56,7 @@ final class AuthViewController: UIViewController {
         return textField
     }()
     
-    private lazy var enterButton = BaseBlackButton(with: L10n.Authorization.entering)
+    private lazy var enterButton = BaseButton(with: L10n.Authorization.entering, color: .blackDay)
     
     private lazy var forgetPasswordButton: UIButton = {
         let button = UIButton(type: .system)

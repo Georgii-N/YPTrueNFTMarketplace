@@ -24,7 +24,7 @@ final class OnboardingViewController: UIViewController {
         return button
     }()
     
-    private lazy var enterButton = BaseBlackButton(with: L10n.Onboarding.isWhatInside)
+    private lazy var enterButton = BaseButton(with: L10n.Onboarding.isWhatInside, color: .blackDay)
     
     private lazy var screenTitleLabel: UILabel = {
         let label = UILabel()

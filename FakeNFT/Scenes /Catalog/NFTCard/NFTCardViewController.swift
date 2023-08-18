@@ -111,7 +111,7 @@ final class NFTCardViewController: UIViewController {
     
     private lazy var contentView = UIView()
     private lazy var likeButton = UIButton(type: .system)
-    private lazy var sellerWebsiteButton = BaseWhiteButton(with: L10n.Catalog.NftCard.Button.goToSellerSite)
+    private lazy var sellerWebsiteButton = BaseButton(with: L10n.Catalog.NftCard.Button.goToSellerSite, color: .whiteDay)
     private lazy var nftRatingStackView = NFTRatingStackView()
     private lazy var refreshStubLabel = RefreshStubLabel()
     private lazy var coverNFTPageControlView = CustomPageControlView()
