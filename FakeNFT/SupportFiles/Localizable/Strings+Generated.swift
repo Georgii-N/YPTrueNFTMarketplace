@@ -122,6 +122,18 @@ internal enum L10n {
     /// Return
     internal static let `return` = L10n.tr("Localizable", "general.return", fallback: "Return")
   }
+  internal enum Metrica {
+    /// Agree
+    internal static let agree = L10n.tr("Localizable", "metrica.agree", fallback: "Agree")
+    /// Don't agree
+    internal static let disagree = L10n.tr("Localizable", "metrica.disagree", fallback: "Don't agree")
+    /// Information about the use of the application in an impersonal form will be transmitted to Yandex.
+    /// Yandex will process this information to provide statistics on your use of the application,
+    /// compile reports on the operation of the application for us, and provide other services
+    internal static let message = L10n.tr("Localizable", "metrica.message", fallback: "Information about the use of the application in an impersonal form will be transmitted to Yandex.\nYandex will process this information to provide statistics on your use of the application,\ncompile reports on the operation of the application for us, and provide other services")
+    /// Warning about data collection
+    internal static let warning = L10n.tr("Localizable", "metrica.warning", fallback: "Warning about data collection")
+  }
   internal enum NetworkError {
     /// Data could not be retrieved
     internal static let anotherError = L10n.tr("Localizable", "networkError.anotherError", fallback: "Data could not be retrieved")

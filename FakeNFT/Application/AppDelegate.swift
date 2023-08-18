@@ -12,6 +12,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let configuration = YMMYandexMetricaConfiguration.init(apiKey: Resources.Network.metricaAPIKey)
         if let configuration = configuration {
+            configuration.statisticsSending = UserDefaultsService.shared.getAgreement()
             YMMYandexMetrica.activate(with: configuration)
         }
         return true
