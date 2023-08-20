@@ -46,7 +46,6 @@ final class TabBarController: UITabBarController {
         let cartViewController = CustomNavigationController(rootViewController: UIViewController())
         let statisticViewController = CustomNavigationController(rootViewController: StatisticViewController(statisticViewModel: statisticViewModel))
 
-
         profileViewController.tabBarItem = UITabBarItem(
             title: L10n.Profile.title,
             image: Resources.Images.TabBar.profileImage,

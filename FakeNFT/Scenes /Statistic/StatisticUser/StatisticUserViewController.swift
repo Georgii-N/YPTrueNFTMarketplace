@@ -41,7 +41,7 @@ final class StatisticUserViewController: UIViewController {
         return label
     }()
     
-    private lazy var profileButton = BaseWhiteButton(with: L10n.Statistic.Profile.ButtonUser.title)
+    private lazy var profileButton = BaseButton(with: .white, title: L10n.Statistic.Profile.ButtonUser.title)
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
