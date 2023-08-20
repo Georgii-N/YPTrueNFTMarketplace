@@ -55,9 +55,7 @@ final class AuthViewController: UIViewController {
         
         return textField
     }()
-    
-    private lazy var enterButton = BaseBlackButton(with: L10n.Authorization.entering)
-    
+        
     private lazy var forgetPasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .clear
@@ -98,6 +96,8 @@ final class AuthViewController: UIViewController {
         
         return label
     }()
+    
+    private lazy var enterButton = BaseButton(with: .black, title: L10n.Authorization.entering)
     
     // MARK: - Lifecycle:
     init(viewModel: AuthViewModelProtocol) {

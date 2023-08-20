@@ -7,7 +7,6 @@
 "onboarding.competit.text" = "اطلع على إحصائيات الآخرين وأظهر للجميع أن لديك المجموعة الأكثر قيمة";
 "onboarding.isWhatInside" = "ما في الداخل?";
 
-
 // MARK: - TabBar
 "profile.title" = "الملف الشخصي";
 "catalog.title" = "كتالوج";
@@ -111,3 +110,11 @@
 "networkError.anotherError" = "تعذر استرداد البيانات";
 "networkError.requestError" = "خطأ في تنفيذ الطلب";
 "networkError.tryLater" = "يرجى المحاولة مرة أخرى في وقت لاحق";
+
+// MARK: - Metrica Agreement:
+"metrica.warning" = "تحذير حول جمع البيانات";
+"metrica.message" = "سيتم نقل المعلومات حول استخدام التطبيق في شكل غير شخصي إلى ياندكس.
+سوف ياندكس معالجة هذه المعلومات لتوفير إحصاءات عن استخدامك للتطبيق,
+تجميع تقارير عن تشغيل التطبيق بالنسبة لنا ، وتقديم خدمات أخرى";
+"metrica.agree" = "توافق";
+"metrica.disagree" = "لا توافق";

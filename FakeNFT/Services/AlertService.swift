@@ -1,4 +1,5 @@
 import UIKit
+import YandexMobileMetrica
 
 enum SortingOption: CaseIterable {
     case byName
@@ -83,5 +84,22 @@ class UniversalAlertService: AlertServiceProtocol {
             }
         }
         viewController.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showMetricaAlert(controller: UIViewController) {
+        let alertController = UIAlertController(
+            title: L10n.Metrica.warning,
+            message: L10n.Metrica.message,
+            preferredStyle: .alert)
+        let agreeAction = UIAlertAction(title: L10n.Metrica.agree, style: .cancel) { _ in
+            UserDefaultsService.shared.setNewAgreement(isAgree: true)
+            YMMYandexMetrica.setStatisticsSending(true)
+        }
+        let cancelAction = UIAlertAction(title: L10n.Metrica.disagree, style: .default)
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(agreeAction)
+        
+        controller.present(alertController, animated: true)
     }
 }
