@@ -17,8 +17,8 @@ final class BaseButton: UIButton {
         self.typeOfButton = type
         self.labelText = title
         super.init(frame: .zero)
-        setupConstraints()
         setupUI()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {

@@ -74,7 +74,7 @@ final class RegistrationViewController: UIViewController {
         return label
     }()
     
-    private lazy var registrationButton = BaseButton(with: L10n.Authorization.registration, color: .blackDay)
+    private lazy var registrationButton = BaseButton(with: .black, title: L10n.Authorization.registration)
     
     // MARK: - Lifecycle
     init(viewModel: RegistrationViewModelProtocol) {

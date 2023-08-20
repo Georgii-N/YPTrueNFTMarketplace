@@ -97,7 +97,7 @@ final class AuthViewController: UIViewController {
         return label
     }()
     
-    private lazy var enterButton = BaseButton(with: L10n.Authorization.entering, color: .blackDay)
+    private lazy var enterButton = BaseButton(with: .black, title: L10n.Authorization.entering)
     
     // MARK: - Lifecycle:
     init(viewModel: AuthViewModelProtocol) {
