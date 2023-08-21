@@ -6,7 +6,7 @@ final class SuccessfulPaymentViewController: UIViewController {
     var isSuccess: Bool
     
     // MARK: UI constants and variables
-    private let returnInCatalogButton = BaseButton(with: L10n.Cart.SuccessfulPayment.toBackCatalogButton, color: .blackDay)
+    private let returnInCatalogButton = BaseButton(with: .black, title: L10n.Cart.SuccessfulPayment.toBackCatalogButton)
     
     private lazy var successefulImage: UIImageView = {
         let successefulImage = UIImageView()
