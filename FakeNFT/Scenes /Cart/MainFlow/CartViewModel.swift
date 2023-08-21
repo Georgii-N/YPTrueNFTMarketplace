@@ -84,23 +84,6 @@ final class CartViewModel: CartViewModelProtocol {
         }
     }
     
-    func sendDeleteAllNft() {
-        guard let orderId = orderID else { return }
-        let emptyNFT: [String] = []
-        let newOrder = Order(nfts: emptyNFT, id: orderId)
-        dataProvider.putNewOrder(order: newOrder) {[weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let data):
-                self.idNfts = []
-                self.cartNFT = []
-                self.orderID = data.id
-            case .failure(let error):
-                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
-                self.networkError = errorString
-            }
-        }
-    }
     
     private func getNfts() {
         dataProvider.fetchUsersNFT(userId: nil, nftsId: idNfts) {[weak self] result in
@@ -138,7 +121,7 @@ final class CartViewModel: CartViewModelProtocol {
         case .byPrice: newNftCart = cartNFT.sorted(by: {$0.price > $1.price})
         case .byRating: newNftCart = cartNFT.sorted(by: {$0.rating > $1.rating})
         case .byTitle: newNftCart = cartNFT.sorted(by: {$0.name < $1.name})
-        case .close: sendDeleteAllNft()
+        case .close: newNftCart = cartNFT
         default: break
         }
         self.cartNFT = newNftCart
