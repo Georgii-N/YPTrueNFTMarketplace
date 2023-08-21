@@ -1,17 +1,23 @@
 import UIKit
 
+enum TypeOfButton {
+    case white
+    case black
+}
+
 final class BaseButton: UIButton {
     
     // MARK: - Constants and Variables:
-    private let labelText: String
-    private let color: UIColor
+    private let labelText: String?
+    private let typeOfButton: TypeOfButton?
+    private var heightOfButton: CGFloat?
     
     // MARK: - Lifecycle:
-    init(with title: String, color: UIColor) {
+    init(with type: TypeOfButton, title: String) {
+        self.typeOfButton = type
         self.labelText = title
-        self.color = color
         super.init(frame: .zero)
-        setupViews()
+        setupUI()
         setupConstraints()
     }
     
@@ -42,7 +48,7 @@ final class BaseButton: UIButton {
     
     // MARK: - Private Methods:
     private func setupColor() {
-        if color == .whiteDay {
+        if typeOfButton == .white {
             layer.borderColor = UIColor.blackDay.cgColor
         }
     }
@@ -50,34 +56,38 @@ final class BaseButton: UIButton {
 
 // MARK: - Setup Views:
 extension BaseButton {
-    private func setupViews() {
-        if color == .blackDay {
-           backgroundColor = .blackDay
-           setTitle(labelText, for: .normal)
-           setTitleColor(.whiteDay, for: .normal)
-           layer.cornerRadius = 16
-           titleLabel?.textAlignment = .center
-           titleLabel?.font = .captionMediumBold
-        } else if color == .whiteDay {
-           backgroundColor = .whiteDay
-           setTitle(labelText, for: .normal)
-           setTitleColor(.blackDay, for: .normal)
-           layer.cornerRadius = 16
-           layer.borderWidth = 1.0
-           titleLabel?.textAlignment = .center
-           titleLabel?.font = .captionSmallRegular
-            
+    private func setupUI() {
+        switch typeOfButton {
+        case .black:
+            backgroundColor = .blackDay
+            setTitle(labelText, for: .normal)
+            setTitleColor(.whiteDay, for: .normal)
+            layer.cornerRadius = 16
+            titleLabel?.textAlignment = .center
+            titleLabel?.font = .captionMediumBold
+            self.heightOfButton = 60
+        case .white:
+            backgroundColor = .whiteDay
+            setTitle(labelText, for: .normal)
+            setTitleColor(.blackDay, for: .normal)
+            layer.cornerRadius = 16
+            layer.borderWidth = 1.0
+            titleLabel?.textAlignment = .center
+            titleLabel?.font = .captionSmallRegular
+            self.heightOfButton = 40
             setupColor()
+        case .none:
+            break
         }
     }
 }
 
-// MARK: - Setup Views:
+// MARK: - Setup Constraints:
 extension BaseButton {
     private func setupConstraints() {
-        let height = color == .whiteDay ? 40 : 60
+        guard let heightOfButton = heightOfButton else { return }
         NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: 60)
+            self.heightAnchor.constraint(equalToConstant: heightOfButton)
         ])
     }
 }

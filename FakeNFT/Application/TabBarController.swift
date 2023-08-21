@@ -21,6 +21,8 @@ final class TabBarController: UITabBarController {
         if randomBoolWithProbability {
             SKStoreReviewController.requestReview()
         }
+        
+        checkMetriсaAgreement()
     }
     
     // MARK: - Private func
@@ -60,5 +62,12 @@ final class TabBarController: UITabBarController {
         
         self.viewControllers = [profileViewController, catalogViewController,
                                 cartViewController, statisticViewController]
+    }
+    
+    // MARK: - Private Methods:
+    private func checkMetriсaAgreement() {
+        if UserDefaultsService.shared.getAgreement() == false {
+            UniversalAlertService().showMetricaAlert(controller: self)
+        }
     }
 }
