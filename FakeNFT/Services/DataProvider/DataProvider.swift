@@ -20,29 +20,17 @@ final class DataProvider: DataProviderProtocol {
     }
     
     // MARK: - Public Functions
-    func fetchUsersRating(sortingOption: SortingOption, page: Int, completion: @escaping (Result<[User], Error>) -> Void) {
-        
-        var queryItems = [URLQueryItem(name: "p", value: "\(page)"),
-                          URLQueryItem(name: "l", value: "10")]
-        
-        switch sortingOption {
-        case .byName:
-            queryItems.append(contentsOf: [URLQueryItem(name: "sortBy", value: "name"),
-                                           URLQueryItem(name: "order", value: "asc")])
-        default:
-            break
-        }
+    func fetchUsersRating(completion: @escaping (Result<UsersResponse, Error>) -> Void) {
         
         let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.users,
-                                                 queryItems: queryItems)
+                                                 queryItems: nil)
         
         let request = NetworkRequestModel(endpoint: url,
                                           httpMethod: .get,
                                           dto: nil)
         networkClient.send(request: request, type: UsersResponse.self) { result in
             switch result {
-            case .success(let usersResponse):
-                let users = usersResponse.map { $0.convert() }
+            case .success(let users):
                 completion(.success(users))
             case .failure(let error):
                 completion(.failure(error))
@@ -143,6 +131,45 @@ final class DataProvider: DataProviderProtocol {
             switch result {
             case .success(let currencies):
                 completion(.success(currencies))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchOrder(completion: @escaping (Result<Order, Error>) -> Void) {
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.orders, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: Order.self) { result in
+            switch result {
+            case .success(let order):
+                completion(.success(order))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func putNewProfile(profile: Profile, completion: @escaping (Result<Void, Error>) -> Void) {
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.profile, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .put, dto: profile)
+        networkClient.send(request: request) { result in
+            switch result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func putNewOrder(order: Order, completion: @escaping (Result<Void, Error>) -> Void) {
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.orders, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .put, dto: order)
+        networkClient.send(request: request) { result in
+            switch result {
+            case .success:
+                completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))
             }

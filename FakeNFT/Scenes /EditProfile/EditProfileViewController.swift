@@ -27,7 +27,8 @@ class EditProfileViewController: UIViewController {
             case .success(let imageResult):
                 self?.editAvatarButton.setImage(imageResult.image, for: .normal)
             case .failure(let error):
-                print(error.localizedDescription)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self?.showErrorAlert(message: errorString ?? "")
             }
         }
     }
@@ -82,7 +83,7 @@ class EditProfileViewController: UIViewController {
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = L10n.Profile.EditScreen.name
-        nameLabel.font = .headline3
+        nameLabel.font = .captionLargeBold
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nameLabel)
         return nameLabel
@@ -99,7 +100,7 @@ class EditProfileViewController: UIViewController {
     
     private lazy var nameTextField: UITextField = {
         let nameTextField = UITextField()
-        nameTextField.font = .bodyRegular
+        nameTextField.font = .bodyMediumRegular
         nameTextField.textAlignment = .left
         nameTextField.text = profile?.name
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -110,7 +111,7 @@ class EditProfileViewController: UIViewController {
     private lazy var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.text = L10n.Profile.EditScreen.description
-        descriptionLabel.font = .headline3
+        descriptionLabel.font = .captionLargeBold
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(descriptionLabel)
         return descriptionLabel
@@ -127,7 +128,7 @@ class EditProfileViewController: UIViewController {
     
     private lazy var descriptionTextField: UITextField = {
         let descriptionTextField = UITextField()
-        descriptionTextField.font = .bodyRegular
+        descriptionTextField.font = .bodyMediumRegular
         descriptionTextField.textAlignment = .left
         descriptionTextField.contentVerticalAlignment = .top
         descriptionTextField.text = profile?.description
@@ -139,7 +140,7 @@ class EditProfileViewController: UIViewController {
     private lazy var siteLabel: UILabel = {
         let siteLabel = UILabel()
         siteLabel.text = L10n.Profile.EditScreen.site
-        siteLabel.font = .headline3
+        siteLabel.font = .captionLargeBold
         siteLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(siteLabel)
         return siteLabel
@@ -156,7 +157,7 @@ class EditProfileViewController: UIViewController {
     
     private lazy var siteTextField: UITextField = {
         let siteTextField = UITextField()
-        siteTextField.font = .bodyRegular
+        siteTextField.font = .bodyMediumRegular
         siteTextField.text = profile?.website
         siteTextField.translatesAutoresizingMaskIntoConstraints = false
         siteUnderView.addSubview(siteTextField)
@@ -217,6 +218,16 @@ class EditProfileViewController: UIViewController {
             siteTextField.trailingAnchor.constraint(equalTo: siteUnderView.trailingAnchor, constant: -16),
             siteTextField.centerYAnchor.constraint(equalTo: siteUnderView.centerYAnchor)
         ])
+    }
+    
+    // MARK: - Alert
+    
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+
+        present(alert, animated: true, completion: nil)
     }
     
     private func showURLInputAlert() {

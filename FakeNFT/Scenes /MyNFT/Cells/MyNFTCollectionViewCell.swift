@@ -7,7 +7,15 @@
 
 import UIKit
 
+protocol MyNFTCollectionViewCellDelegate: AnyObject {
+    func didTapLikeButton(id: String)
+}
+
 class MyNFTCollectionViewCell: UICollectionViewCell {
+    
+    private var model: NFTCell?
+
+    weak var delegate: MyNFTCollectionViewCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -22,6 +30,7 @@ class MyNFTCollectionViewCell: UICollectionViewCell {
     // MARK: - SetupUI
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.isUserInteractionEnabled = true
         imageView.layer.cornerRadius = 12
         imageView.kf.indicatorType = .activity
         imageView.clipsToBounds = true
@@ -37,7 +46,7 @@ class MyNFTCollectionViewCell: UICollectionViewCell {
     
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.font = .bodyBold
+        nameLabel.font = .bodyMediumBold
         return nameLabel
     }()
     
@@ -48,20 +57,20 @@ class MyNFTCollectionViewCell: UICollectionViewCell {
     
     private lazy var fromLabel: UILabel = {
         let fromLabel = UILabel()
-        fromLabel.font = .caption2
+        fromLabel.font = .bodySmallRegular
         return fromLabel
     }()
     
     private lazy var priceTitleLabel: UILabel = {
         let priceTitleLabel = UILabel()
-        priceTitleLabel.font = .caption2
+        priceTitleLabel.font = .bodySmallerRegular
         priceTitleLabel.text = L10n.General.price
         return priceTitleLabel
     }()
     
     private lazy var priceLabel: UILabel = {
         let priceLabel = UILabel()
-        priceLabel.font = .bodyBold
+        priceLabel.font = .headlineSmall
         return priceLabel
     }()
     
@@ -112,8 +121,8 @@ class MyNFTCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func likeButtonTapped() {
-        likeButton.setImage(UIImage(named: "liked"), for: .normal)
-        print("like")
+        guard let id = model?.id else { return }
+        delegate?.didTapLikeButton(id: id)
     }
     
     private func setRateImage(_ number: Int) {
@@ -138,10 +147,18 @@ class MyNFTCollectionViewCell: UICollectionViewCell {
     // MARK: - Methods
     
     func setupCellData(_ model: NFTCell) {
+        self.model = model
         nameLabel.text = model.name
         setRateImage(model.rating)
         fromLabel.text = model.author
         priceLabel.text = "\(model.price) ETH"
+        
+        if let isLiked = model.isLiked, isLiked {
+            likeButton.setImage(UIImage(named: "liked"), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(named: "unliked"), for: .normal)
+        }
+        
         guard let firstImage = model.images.first,
               let imageUrl = URL(string: firstImage) else { return }
         imageView.kf.setImage(with: imageUrl)

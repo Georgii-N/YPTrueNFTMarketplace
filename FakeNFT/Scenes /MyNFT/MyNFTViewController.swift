@@ -25,12 +25,25 @@ class MyNFTViewController: UIViewController {
         setupUI()
         setupViews()
         setupConstraints()
-        viewModel?.fetchNtfCards(nftIds: nftIds)
         viewModel?.nftCardsObservable.bind(action: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
             }
         })
+        viewModel?.profileObservable.bind(action: { [weak self] profile in
+            self?.nftIds = profile?.nfts ?? []
+            self?.likeNFTIds = profile?.likes ?? []
+            self?.viewModel?.fetchNtfCards(nftIds: self?.nftIds ?? [])
+        })
+        viewModel?.showErrorAlert = { [weak self] message in
+            DispatchQueue.main.async {
+                self?.showErrorAlert(message: message)
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
 
     // MARK: - Init
@@ -81,6 +94,16 @@ class MyNFTViewController: UIViewController {
         viewModel?.sortNFTCollection(option: sortOptions)
     }
     
+    // MARK: - Alert
+    
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+
+        present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: - Actions
     
     @objc private func goBackButtonTapped() {
@@ -89,7 +112,7 @@ class MyNFTViewController: UIViewController {
     
     @objc private func sortButtonTapped() {
         alertService = UniversalAlertService()
-        alertService?.showActionSheet(title: L10n.Alert.sortTitle,
+        alertService?.showActionSheet(title: L10n.Sorting.title,
                                       sortingOptions: [.byPrice, .byRating, .byName, .close],
                                       on: self,
                                       completion: { [weak self] options in
@@ -111,6 +134,7 @@ extension MyNFTViewController: UICollectionViewDelegate, UICollectionViewDataSou
         cell.backgroundColor = .clear
         guard let nft = viewModel?.nftCardsObservable.wrappedValue?[indexPath.row],
               let users = viewModel?.usersObservable.wrappedValue else { return cell }
+        cell.delegate = self
         cell.setupCellData(.init(name: nft.name,
                                  images: nft.images,
                                  rating: nft.rating,
@@ -131,5 +155,18 @@ extension MyNFTViewController: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 32
+    }
+}
+
+extension MyNFTViewController: MyNFTCollectionViewCellDelegate {
+    func didTapLikeButton(id: String) {
+        if likeNFTIds.contains(id) {
+            likeNFTIds.removeAll { $0 == id }
+        } else {
+            likeNFTIds.append(id)
+        }
+
+        collectionView.reloadData()
+        viewModel?.changeProfile(likesIds: likeNFTIds)
     }
 }

@@ -12,6 +12,7 @@ final class ProfileViewModel: ProfileViewModelProtocol {
 
     @Observable
     private(set) var profile: Profile?
+    var showErrorAlert: ((String) -> Void)?
 
     // MARK: - Lifecycle:
     init(dataProvider: DataProviderProtocol?) {
@@ -21,13 +22,14 @@ final class ProfileViewModel: ProfileViewModelProtocol {
 
     // MARK: - Private Methods:
 
-    private func fetchProfile() {
+    func fetchProfile() {
         dataProvider?.fetchProfile(completion: { [weak self] result in
             switch result {
             case .success(let profile):
                 self?.profile = profile
             case .failure(let failure):
-                print(failure)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
+                self?.showErrorAlert?(errorString ?? "")
             }
         })
     }
@@ -40,7 +42,8 @@ final class ProfileViewModel: ProfileViewModelProtocol {
             case .success(let profile):
                 self?.profile = profile
             case .failure(let failure):
-                print(failure)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
+                self?.showErrorAlert?(errorString ?? "")
             }
         })
     }

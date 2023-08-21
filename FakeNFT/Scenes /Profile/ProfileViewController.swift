@@ -27,6 +27,17 @@ class ProfileViewController: UIViewController {
         viewModel?.profileObservable.bind(action: { [weak self] _ in
             self?.setupProfile()
         })
+        
+        viewModel?.showErrorAlert = { [weak self] message in
+            DispatchQueue.main.async {
+                self?.showErrorAlert(message: message)
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.fetchProfile()
     }
 
     // MARK: - Init
@@ -63,7 +74,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileNameLabel: UILabel = {
         let profileNameLabel = UILabel()
-        profileNameLabel.font = .headline3
+        profileNameLabel.font = .captionLargeBold
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.07
         profileNameLabel.attributedText = NSMutableAttributedString(string: "Joaquin Phoenix", attributes: [NSAttributedString.Key.kern: 1, NSAttributedString.Key.paragraphStyle: paragraphStyle])
@@ -75,7 +86,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileDescriptionLabel: UILabel = {
         let profileDescriptionLabel = UILabel()
-        profileDescriptionLabel.font = .caption2
+        profileDescriptionLabel.font = .bodySmallerRegular
         profileDescriptionLabel.text = "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям."
         let attributedText = NSMutableAttributedString(string: profileDescriptionLabel.text ?? "")
         let paragrapthStyle = NSMutableParagraphStyle()
@@ -91,7 +102,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileSite: UILabel = {
         let profileSite = UILabel()
-        profileSite.font = .caption1
+        profileSite.font = .bodySmallRegular
         profileSite.text = "JoaquinPhoenix.com"
         profileSite.textColor = UIColor(red: 0.039, green: 0.518, blue: 1, alpha: 1)
         profileSite.translatesAutoresizingMaskIntoConstraints = false
@@ -155,6 +166,16 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    // MARK: - Alert
+    
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+
+        present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: - Actions
     
     @objc func presentEditVC() {
@@ -177,7 +198,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.accessoryType = .disclosureIndicator
         cell.accessoryView = UIImageView(image: UIImage(named: "disclosureCell"))
-        cell.textLabel?.font = .bodyBold
+        cell.textLabel?.font = .bodyMediumBold
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
         let profile = viewModel?.profileObservable.wrappedValue
@@ -199,14 +220,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             let myNFTViewModel = MyNFTViewModel(dataProvider: DataProvider())
             let myNFTVC = MyNFTViewController(viewModel: myNFTViewModel)
-            myNFTVC.nftIds = viewModel?.profileObservable.wrappedValue?.nfts ?? []
-            myNFTVC.likeNFTIds = viewModel?.profileObservable.wrappedValue?.likes ?? []
             myNFTVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(myNFTVC, animated: true)
         case 1:
             let favouritesNFTViewModel = FavouritesNFTViewModel(dataProvider: DataProvider())
             let favouritesNFT = FavouritesNFTViewController(viewModel: favouritesNFTViewModel)
-            favouritesNFT.likesIds = viewModel?.profileObservable.wrappedValue?.likes
             favouritesNFT.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(favouritesNFT, animated: true)
         case 2:

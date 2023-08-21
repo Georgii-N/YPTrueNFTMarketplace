@@ -11,7 +11,7 @@ class FavouritesNFTViewController: UIViewController {
 
     // MARK: - Properties
 
-    var likesIds: [String]?
+    private var likesIds = [String]()
 
     private var viewModel: FavouritesNFTViewModelProtocol?
     
@@ -22,17 +22,21 @@ class FavouritesNFTViewController: UIViewController {
         setupUI()
         setupViews() 
         setupConstraints()
-        viewModel?.fetchNtfCards(likes: likesIds ?? [])
-        viewModel?.usersObservable.bind(action: { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
-        })
+        
         viewModel?.nftCardsObservable.bind(action: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
             }
         })
+        viewModel?.profileObservable.bind(action: { [weak self] profile in
+            self?.likesIds = profile?.likes ?? []
+            self?.viewModel?.fetchNtfCards(likes: self?.likesIds ?? [])
+        })
+        viewModel?.showErrorAlert = { [weak self] message in
+            DispatchQueue.main.async {
+                self?.showErrorAlert(message: message)
+            }
+        }
     }
 
     // MARK: - Init
@@ -77,6 +81,17 @@ class FavouritesNFTViewController: UIViewController {
         ])
     }
     
+    // MARK: - Alert
+    
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Actions
     @objc private func goBackButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
@@ -92,14 +107,14 @@ extension FavouritesNFTViewController: UICollectionViewDataSource, UICollectionV
         cell.backgroundColor = .clear
         guard let nft = viewModel?.nftCardsObservable.wrappedValue?[indexPath.row],
               let users = viewModel?.usersObservable.wrappedValue else { return cell }
-
+        cell.delegate = self
         cell.setupCellData(.init(name: nft.name,
                                  images: nft.images,
                                  rating: nft.rating,
                                  price: nft.price,
                                  author: users.first(where: { $0.id == nft.author })?.name ?? "",
                                  id: nft.id,
-                                 isLiked: true,
+                                 isLiked: likesIds.contains(nft.id),
                                  isAddedToCard: false))
         return cell
     }
@@ -108,5 +123,18 @@ extension FavouritesNFTViewController: UICollectionViewDataSource, UICollectionV
 extension FavouritesNFTViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: (collectionView.frame.width - 15) / 2, height: 80)
+    }
+}
+
+extension FavouritesNFTViewController: FavouritesNFTCollectionViewCellDelegate {
+    func didTapLikeButton(id: String) {
+        if likesIds.contains(id) {
+            likesIds.removeAll { $0 == id }
+        } else {
+            likesIds.append(id)
+        }
+
+        collectionView.reloadData()
+        viewModel?.changeProfile(likesIds: likesIds)
     }
 }

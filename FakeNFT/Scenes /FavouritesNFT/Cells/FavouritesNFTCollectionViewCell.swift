@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol FavouritesNFTCollectionViewCellDelegate: AnyObject {
+    func didTapLikeButton(id: String)
+}
+
 class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
     static var defaultReuseIdentifier: String = "FavouritesNFTCell"
+    
+    private var model: NFTCell?
+
+    weak var delegate: FavouritesNFTCollectionViewCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -28,18 +36,20 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
         imageView.kf.indicatorType = .activity
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
     private lazy var likeButton: UIButton = {
         let likeButton = UIButton()
         likeButton.setImage(UIImage(named: "liked"), for: .normal)
+        likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         return likeButton
     }()
     
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.font = .bodyBold
+        nameLabel.font = .headlineSmall
         return nameLabel
     }()
     
@@ -50,7 +60,7 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
     private lazy var priceLabel: UILabel = {
         let priceLabel = UILabel()
-        priceLabel.font = .caption1
+        priceLabel.font = .captionSmallRegular
         return priceLabel
     }()
     
@@ -105,10 +115,23 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         }
     }
     
+    @objc func likeButtonTapped() {
+        guard let id = model?.id else { return }
+        delegate?.didTapLikeButton(id: id)
+    }
+    
     func setupCellData(_ model: NFTCell) {
+        self.model = model
         nameLabel.text = model.name
         setRateImage(model.rating)
         priceLabel.text = "\(model.price) ETH"
+        
+        if let isLiked = model.isLiked, isLiked {
+            likeButton.setImage(UIImage(named: "liked"), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(named: "unliked"), for: .normal)
+        }
+        
         guard let firstImage = model.images.first,
               let imageUrl = URL(string: firstImage) else { return }
         imageView.kf.setImage(with: imageUrl)
