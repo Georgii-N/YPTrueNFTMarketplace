@@ -40,7 +40,7 @@ final class OnboardingViewController: UIViewController {
         return label
     }()
     
-    private lazy var enterButton = BaseButton(with: L10n.Onboarding.isWhatInside, color: .blackDay)
+    private lazy var enterButton = BaseButton(with: .black, title: L10n.Onboarding.isWhatInside)
     private lazy var pageControlView = CustomPageControlView()
     
     // MARK: - Lifecycle:
