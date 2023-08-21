@@ -65,6 +65,7 @@
 		7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B53C2A766C1C00688EC9 /* Observable.swift */; };
 		7EC0B5422A76958500688EC9 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B5412A76958500688EC9 /* CustomNavigationController.swift */; };
 		7EDC34ED2A8D4EB1005A6EF9 /* CustomPageControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC34EC2A8D4EB1005A6EF9 /* CustomPageControlView.swift */; };
+		7EDF11C32A93354200402CFE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7EDF11C22A93354200402CFE /* FirebaseAuth */; };
 		7EE68CFA2A7FCB8A00CAE2AC /* NFTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68CF92A7FCB8A00CAE2AC /* NFTCell.swift */; };
 		7EE68CFF2A80099B00CAE2AC /* NFTCollectionCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68CFE2A80099B00CAE2AC /* NFTCollectionCellDelegate.swift */; };
 		7EE68D092A839EE600CAE2AC /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE68D082A839EE600CAE2AC /* AuthViewController.swift */; };
@@ -211,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4148673F01BE7568ED7BBCB7 /* Pods_FakeNFTTests.framework in Frameworks */,
+				7EDF11C32A93354200402CFE /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +691,9 @@
 				3F6806AB29CBBAF200B4F915 /* PBXTargetDependency */,
 			);
 			name = FakeNFTTests;
+			packageProductDependencies = (
+				7EDF11C22A93354200402CFE /* FirebaseAuth */,
+			);
 			productName = FakeNFTTests;
 			productReference = 3F6806A929CBBAF200B4F915 /* FakeNFTTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1385,6 +1390,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7EB552D72A896CFC0046EA33 /* XCRemoteSwiftPackageReference "NotificationBanner" */;
 			productName = NotificationBannerSwift;
+		};
+		7EDF11C22A93354200402CFE /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7EFB26342A84F341001901B6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 		7EFB26352A84F341001901B6 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
