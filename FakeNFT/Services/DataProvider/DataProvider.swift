@@ -132,16 +132,33 @@ final class DataProvider: DataProviderProtocol {
         }
     }
     
-    func putNewOrder(order: Order, completion: @escaping (Result<Void, Error>) -> Void) {
+    func putNewOrder(order: Order, completion: @escaping (Result<Order, Error>) -> Void) {
         let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.orders, queryItems: nil)
         let request = NetworkRequestModel(endpoint: url, httpMethod: .put, dto: order)
-        networkClient.send(request: request) { result in
+        networkClient.send(request: request, type: Order.self) { result in
             switch result {
-            case .success:
-                completion(.success(()))
+            case .success(let order):
+                completion(.success(order))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
+    
+        func fetchPaymentCurrency(currencyId: Int, completion: @escaping (Result<OrderPayment, Error>) -> Void) {
+             
+            let path = Resources.Network.MockAPI.Paths.orderPayment + "/\(currencyId)"
+            let url = createURLWithPathAndQueryItems(path: path, queryItems: nil)
+            let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+             // let request = GetOrderPaymentRequest(currencyId: currencyId)
+              networkClient.send(request: request, type: OrderPayment.self) { result in
+                  switch result {
+                  case .success(let orderPayment):
+                      completion(.success(orderPayment))
+                  case .failure(let error):
+                      completion(.failure(error))
+                  }
+              }
+          }
+
 }

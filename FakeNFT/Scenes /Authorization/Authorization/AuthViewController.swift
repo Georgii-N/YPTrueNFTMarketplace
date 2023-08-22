@@ -187,7 +187,7 @@ final class AuthViewController: UIViewController {
         
         UIView.animate(withDuration: 0.5) { [weak self] in
             guard let self = self else { return }
-            self.view.setupView(loginPasswordMistakeLabel)
+            self.view.setupView(self.loginPasswordMistakeLabel)
             self.emailTextField.layer.borderWidth = 1
             self.emailTextField.layer.borderColor = UIColor.redUniversal.cgColor
             self.passwordTextField.layer.borderWidth = 1
@@ -244,7 +244,7 @@ final class AuthViewController: UIViewController {
         
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self = self else { return }
-            self.authScrollView.contentSize.height = authScrollView.frame.height + keyboardFrameSize.height
+            self.authScrollView.contentSize.height = self.authScrollView.frame.height + keyboardFrameSize.height
             self.authScrollView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrameSize.height, right: 0)
         }
     }
@@ -252,7 +252,7 @@ final class AuthViewController: UIViewController {
     @objc private func keyboardDidHide() {
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self = self else { return }
-            self.authScrollView.contentSize.height = authScrollView.frame.height
+            self.authScrollView.contentSize.height = self.authScrollView.frame.height
         }
     }
     

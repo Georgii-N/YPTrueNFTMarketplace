@@ -8,5 +8,6 @@ protocol DataProviderProtocol {
     func fetchCurrencies(completion: @escaping (Result<Currencies, Error>) -> Void)
     func fetchOrder(completion: @escaping (Result<Order, Error>) -> Void)
     func putNewProfile(profile: Profile, completion: @escaping (Result<Void, Error>) -> Void)
-    func putNewOrder(order: Order, completion: @escaping (Result<Void, Error>) -> Void)
+    func putNewOrder(order: Order, completion: @escaping (Result<Order, Error>) -> Void)
+    func fetchPaymentCurrency(currencyId: Int, completion: @escaping (Result<OrderPayment, Error>) -> Void)
 }

@@ -13,7 +13,6 @@ final class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabBar()
-        selectedIndex = 3
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,8 +29,7 @@ final class TabBarController: UITabBarController {
         let appearance = UITabBarAppearance()
         
         tabBar.standardAppearance = appearance
-        tabBar.backgroundColor = .whiteDay
-        
+        tabBar.backgroundColor = .white
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             assertionFailure("appDelegate not found")
             return
@@ -43,9 +41,9 @@ final class TabBarController: UITabBarController {
 
         let profileViewController = CustomNavigationController(rootViewController: UIViewController())
         let catalogViewController = CustomNavigationController(rootViewController: UIViewController())
-        let cartViewController = CustomNavigationController(rootViewController: UIViewController())
         let statisticViewController = CustomNavigationController(rootViewController: StatisticViewController(statisticViewModel: statisticViewModel))
-
+        let cartViewController = CustomNavigationController(rootViewController: CartViewControler(cartViewModel: CartViewModel()))
+        
         profileViewController.tabBarItem = UITabBarItem(
             title: L10n.Profile.title,
             image: Resources.Images.TabBar.profileImage,
