@@ -10,8 +10,10 @@ import UIKit
 
 final class CatalogViewModelStub: CatalogViewModelProtocol {
     
+    // MARK: - Public Dependencies:
     var provider: FakeNFT.DataProviderProtocol
     
+    // MARK: - Observable Values:
     var nftCollectionsObservable: FakeNFT.Observable<FakeNFT.NFTCollections?> {
         $nftCollections
     }
@@ -26,9 +28,12 @@ final class CatalogViewModelStub: CatalogViewModelProtocol {
     @Observable
     private(set) var networkError: String?
     
+    // MARK: - Lifecycle:
     init(provider: DataProviderProtocol) {
         self.provider = provider
     }
+    
+    // MARK: - Public Methods:
     func sortNFTCollection(option: FakeNFT.SortingOption) {
         guard let nftCollections else { return }
         
@@ -46,7 +51,8 @@ final class CatalogViewModelStub: CatalogViewModelProtocol {
     }
     
     func fetchCollections() {
-        provider.fetchNFTCollection { result in
+        provider.fetchNFTCollection { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let collection):
                 self.nftCollections = collection

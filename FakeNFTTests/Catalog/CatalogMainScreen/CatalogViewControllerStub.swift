@@ -10,8 +10,10 @@ import UIKit
 
 final class CatalogViewControllerStub: UIViewController {
     
+    // MARK: - UI:
     let tableView = UITableView()
     
+    // MARK: - Lifecycle:
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(CatalogTableViewCell.self)
@@ -19,6 +21,7 @@ final class CatalogViewControllerStub: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension CatalogViewControllerStub: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1

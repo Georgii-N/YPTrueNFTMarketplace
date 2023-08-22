@@ -13,10 +13,20 @@ final class DataProviderStub: DataProviderProtocol {
     
     func fetchNFTCollection(completion: @escaping (Result<FakeNFT.NFTCollections, Error>) -> Void) {
         if !isError {
-            let firstCollection = NFTCollection(createdAt: "", name: "BCollection", cover: "", nfts: [""],
-                                                description: "", author: "", id: "")
-            let secondCollection = NFTCollection(createdAt: "", name: "ACollection", cover: "", nfts: ["", ""],
-                                                 description: "", author: "", id: "")
+            let firstCollection = NFTCollection(createdAt: "",
+                                                name: "BCollection",
+                                                cover: "",
+                                                nfts: [""],
+                                                description: "",
+                                                author: "",
+                                                id: "")
+            let secondCollection = NFTCollection(createdAt: "",
+                                                 name: "ACollection",
+                                                 cover: "",
+                                                 nfts: ["", ""],
+                                                 description: "",
+                                                 author: "",
+                                                 id: "")
             completion(.success([firstCollection, secondCollection]))
         } else {
             completion(.failure(NetworkClientError.httpStatusCode(404)))
@@ -36,7 +46,19 @@ final class DataProviderStub: DataProviderProtocol {
     }
     
     func fetchUsersNFT(userId: String?, nftsId: [String]?, completion: @escaping (Result<FakeNFT.NFTCards, Error>) -> Void) {
-        
+        if !isError {
+            let NFTCard = NFTCard(createdAt: "",
+                                  name: "TestNFTCard",
+                                  images: [],
+                                  rating: 5,
+                                  description: "",
+                                  price: 5,
+                                  author: "",
+                                  id: "")
+            completion(.success([NFTCard]))
+        } else {
+            completion(.failure(NetworkClientError.httpStatusCode(404)))
+        }
     }
     
     func fetchCurrencies(completion: @escaping (Result<FakeNFT.Currencies, Error>) -> Void) {

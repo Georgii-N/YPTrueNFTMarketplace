@@ -62,6 +62,7 @@
 		7EB78AE72A7BFE0700BE892B /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78AE62A7BFE0700BE892B /* Order.swift */; };
 		7EB78AE92A7BFE7200BE892B /* OrderPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78AE82A7BFE7200BE892B /* OrderPayment.swift */; };
 		7EB78AEB2A7BFEEE00BE892B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB78AEA2A7BFEEE00BE892B /* Profile.swift */; };
+		7EBE03232A94807500212666 /* CatalogCollectionViewModelStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBE03222A94807500212666 /* CatalogCollectionViewModelStub.swift */; };
 		7EC0B5352A76678100688EC9 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B5342A76678100688EC9 /* AlertService.swift */; };
 		7EC0B5392A766ABA00688EC9 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B5382A766ABA00688EC9 /* DataProvider.swift */; };
 		7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC0B53C2A766C1C00688EC9 /* Observable.swift */; };
@@ -171,6 +172,7 @@
 		7EB78AE62A7BFE0700BE892B /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		7EB78AE82A7BFE7200BE892B /* OrderPayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPayment.swift; sourceTree = "<group>"; };
 		7EB78AEA2A7BFEEE00BE892B /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		7EBE03222A94807500212666 /* CatalogCollectionViewModelStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCollectionViewModelStub.swift; sourceTree = "<group>"; };
 		7EC0B5342A76678100688EC9 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertService.swift; path = FakeNFT/Services/AlertService.swift; sourceTree = SOURCE_ROOT; };
 		7EC0B5382A766ABA00688EC9 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		7EC0B53C2A766C1C00688EC9 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -546,6 +548,23 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		7EBE03212A94805700212666 /* CatalogMainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7EDF11C72A9353C200402CFE /* CatalogViewModelStub.swift */,
+				7EAD510E2A93AF6400A5FADC /* CatalogViewControllerStub.swift */,
+			);
+			path = CatalogMainScreen;
+			sourceTree = "<group>";
+		};
+		7EBE03242A94807800212666 /* CatalogCollection */ = {
+			isa = PBXGroup;
+			children = (
+				7EBE03222A94807500212666 /* CatalogCollectionViewModelStub.swift */,
+			);
+			path = CatalogCollection;
+			sourceTree = "<group>";
+		};
 		7EC0B5312A7666C600688EC9 /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
@@ -593,8 +612,8 @@
 		7EDF11C42A93533C00402CFE /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
-				7EDF11C72A9353C200402CFE /* CatalogViewModelStub.swift */,
-				7EAD510E2A93AF6400A5FADC /* CatalogViewControllerStub.swift */,
+				7EBE03212A94805700212666 /* CatalogMainScreen */,
+				7EBE03242A94807800212666 /* CatalogCollection */,
 				7EDF11C52A93536300402CFE /* CatalogUnitTests.swift */,
 			);
 			path = Catalog;
@@ -1061,6 +1080,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EBE03232A94807500212666 /* CatalogCollectionViewModelStub.swift in Sources */,
 				7EDF11CA2A935E9C00402CFE /* DataProviderStub.swift in Sources */,
 				7EAD510F2A93AF6400A5FADC /* CatalogViewControllerStub.swift in Sources */,
 				3F6806AE29CBBAF200B4F915 /* ExampleUnitTests.swift in Sources */,
