@@ -28,6 +28,16 @@
 		406DEE2B2A7FED5D008E2227 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */; };
 		407047572A88B86400067E68 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407047562A88B86400067E68 /* UIFont + Extension.swift */; };
 		4070B1182A76CADF00CF6E74 /* SortNavBarBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */; };
+		4071F5C42A7CFF8400ADA546 /* StatisticViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5C02A7CFF8400ADA546 /* StatisticViewModelProtocol.swift */; };
+		4071F5C52A7CFF8400ADA546 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5C12A7CFF8400ADA546 /* StatisticViewController.swift */; };
+		4071F5C62A7CFF8400ADA546 /* StatisticViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5C22A7CFF8400ADA546 /* StatisticViewModel.swift */; };
+		4071F5C72A7CFF8400ADA546 /* StatisticCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5C32A7CFF8400ADA546 /* StatisticCollectionViewCell.swift */; };
+		4071F5CD2A7D001800ADA546 /* StatisticUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5C92A7D001800ADA546 /* StatisticUserViewController.swift */; };
+		4071F5CF2A7D001800ADA546 /* StatisticUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5CB2A7D001800ADA546 /* StatisticUserTableViewCell.swift */; };
+		4071F5D02A7D001800ADA546 /* StatisticUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5CC2A7D001800ADA546 /* StatisticUserViewModel.swift */; };
+		4071F5D52A7D002000ADA546 /* StatisticNFTCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5D22A7D002000ADA546 /* StatisticNFTCollectionViewController.swift */; };
+		4071F5D62A7D002000ADA546 /* StatisticNFTCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5D32A7D002000ADA546 /* StatisticNFTCollectionViewModel.swift */; };
+		4071F5D72A7D002000ADA546 /* StatisticNFTCollectionViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4071F5D42A7D002000ADA546 /* StatisticNFTCollectionViewModelProtocol.swift */; };
 		407340E82A838C44008E0C1E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407340E72A838C44008E0C1E /* UserDefaultsService.swift */; };
 		409EEFE32A7A707700B23FF8 /* DataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */; };
 		409EEFE72A7A710D00B23FF8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE62A7A710D00B23FF8 /* User.swift */; };
@@ -120,6 +130,16 @@
 		406DEE2A2A7FED5D008E2227 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		407047562A88B86400067E68 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		4070B1172A76CADF00CF6E74 /* SortNavBarBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortNavBarBaseButton.swift; sourceTree = "<group>"; };
+		4071F5C02A7CFF8400ADA546 /* StatisticViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewModelProtocol.swift; sourceTree = "<group>"; };
+		4071F5C12A7CFF8400ADA546 /* StatisticViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
+		4071F5C22A7CFF8400ADA546 /* StatisticViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticViewModel.swift; sourceTree = "<group>"; };
+		4071F5C32A7CFF8400ADA546 /* StatisticCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticCollectionViewCell.swift; sourceTree = "<group>"; };
+		4071F5C92A7D001800ADA546 /* StatisticUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticUserViewController.swift; sourceTree = "<group>"; };
+		4071F5CB2A7D001800ADA546 /* StatisticUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticUserTableViewCell.swift; sourceTree = "<group>"; };
+		4071F5CC2A7D001800ADA546 /* StatisticUserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticUserViewModel.swift; sourceTree = "<group>"; };
+		4071F5D22A7D002000ADA546 /* StatisticNFTCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticNFTCollectionViewController.swift; sourceTree = "<group>"; };
+		4071F5D32A7D002000ADA546 /* StatisticNFTCollectionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticNFTCollectionViewModel.swift; sourceTree = "<group>"; };
+		4071F5D42A7D002000ADA546 /* StatisticNFTCollectionViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticNFTCollectionViewModelProtocol.swift; sourceTree = "<group>"; };
 		407340E72A838C44008E0C1E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderProtocol.swift; sourceTree = "<group>"; };
 		409EEFE62A7A710D00B23FF8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -338,6 +358,37 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		4071F5BF2A7CFF8400ADA546 /* StatisticRating */ = {
+			isa = PBXGroup;
+			children = (
+				4071F5C02A7CFF8400ADA546 /* StatisticViewModelProtocol.swift */,
+				4071F5C12A7CFF8400ADA546 /* StatisticViewController.swift */,
+				4071F5C22A7CFF8400ADA546 /* StatisticViewModel.swift */,
+				4071F5C32A7CFF8400ADA546 /* StatisticCollectionViewCell.swift */,
+			);
+			path = StatisticRating;
+			sourceTree = "<group>";
+		};
+		4071F5C82A7D001800ADA546 /* StatisticUser */ = {
+			isa = PBXGroup;
+			children = (
+				4071F5C92A7D001800ADA546 /* StatisticUserViewController.swift */,
+				4071F5CB2A7D001800ADA546 /* StatisticUserTableViewCell.swift */,
+				4071F5CC2A7D001800ADA546 /* StatisticUserViewModel.swift */,
+			);
+			path = StatisticUser;
+			sourceTree = "<group>";
+		};
+		4071F5D12A7D002000ADA546 /* StatisticNFTCollection */ = {
+			isa = PBXGroup;
+			children = (
+				4071F5D22A7D002000ADA546 /* StatisticNFTCollectionViewController.swift */,
+				4071F5D32A7D002000ADA546 /* StatisticNFTCollectionViewModel.swift */,
+				4071F5D42A7D002000ADA546 /* StatisticNFTCollectionViewModelProtocol.swift */,
+			);
+			path = StatisticNFTCollection;
+            sourceTree = "<group>";
+        };
 		406414642A8A246000EBBE39 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +409,9 @@
 		408616C32A765882004CA07E /* Statistic */ = {
 			isa = PBXGroup;
 			children = (
+				4071F5BF2A7CFF8400ADA546 /* StatisticRating */,
+				4071F5C82A7D001800ADA546 /* StatisticUser */,
+				4071F5D12A7D002000ADA546 /* StatisticNFTCollection */,
 			);
 			path = Statistic;
 			sourceTree = "<group>";
@@ -894,12 +948,17 @@
 				7EFB262E2A841ECB001901B6 /* RegistrationViewModel.swift in Sources */,
 				7EFB26302A841EE5001901B6 /* RegistrationViewModelProtocol.swift in Sources */,
 				7EB78A972A7A5C7D00BE892B /* WebViewViewController.swift in Sources */,
+				4071F5D72A7D002000ADA546 /* StatisticNFTCollectionViewModelProtocol.swift in Sources */,
+				4071F5C42A7CFF8400ADA546 /* StatisticViewModelProtocol.swift in Sources */,
+				4071F5D62A7D002000ADA546 /* StatisticNFTCollectionViewModel.swift in Sources */,
+				4071F5CD2A7D001800ADA546 /* StatisticUserViewController.swift in Sources */,
 				7EFB26202A840C30001901B6 /* AuthViewModelProtocol.swift in Sources */,
 				7EE68CFA2A7FCB8A00CAE2AC /* NFTCell.swift in Sources */,
 				7EF4C5D12A73F86C001E8C67 /* UIColor + Extension.swift in Sources */,
 				7EB78AE12A7BFBC300BE892B /* NFTCollection.swift in Sources */,
 				7EFB26452A86012C001901B6 /* OnboardingViewModelProtocol.swift in Sources */,
 				7EC0B5392A766ABA00688EC9 /* DataProvider.swift in Sources */,
+				4071F5CF2A7D001800ADA546 /* StatisticUserTableViewCell.swift in Sources */,
 				4005316E2A73DDFC008CAF3B /* UIView + Extension.swift in Sources */,
 				7E71E3B32A73CBF500B0073D /* Strings+Generated.swift in Sources */,
 				7EF440042A8B402E00444684 /* NFTRatingStackView.swift in Sources */,
@@ -913,10 +972,14 @@
 				7EDC34ED2A8D4EB1005A6EF9 /* CustomPageControlView.swift in Sources */,
 				7EB78A682A78EAD000BE892B /* NFTCollectionView.swift in Sources */,
 				7E71E3B52A73F10A00B0073D /* TabBarController.swift in Sources */,
+				4071F5D52A7D002000ADA546 /* StatisticNFTCollectionViewController.swift in Sources */,
 				7EC0B53D2A766C1C00688EC9 /* Observable.swift in Sources */,
+				4071F5C72A7CFF8400ADA546 /* StatisticCollectionViewCell.swift in Sources */,
 				3F68069729CBBAF100B4F915 /* AppDelegate.swift in Sources */,
 				7EB78AD32A7AB8F800BE892B /* WebViewViewModelProtocol.swift in Sources */,
 				7EB78AD12A7AB4F800BE892B /* WebViewViewModel.swift in Sources */,
+				4071F5D02A7D001800ADA546 /* StatisticUserViewModel.swift in Sources */,
+				4071F5C52A7CFF8400ADA546 /* StatisticViewController.swift in Sources */,
 				7EFB26262A8416FD001901B6 /* RegistrationViewController.swift in Sources */,
 				7EB78A6A2A78EEC100BE892B /* NFTCollectionCell.swift in Sources */,
 				3F68069929CBBAF100B4F915 /* SceneDelegate.swift in Sources */,
@@ -942,6 +1005,7 @@
 				406414682A8A250100EBBE39 /* DemoViewController.swift in Sources */,
 				7EB78AE32A7BFCFF00BE892B /* NFTCard.swift in Sources */,
 				406DEE2B2A7FED5D008E2227 /* UIViewController + Extension.swift in Sources */,
+				4071F5C62A7CFF8400ADA546 /* StatisticViewModel.swift in Sources */
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
