@@ -99,17 +99,17 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     private func setRateImage(_ number: Int) {
         switch number {
         case 0:
-            rateImage.image = UIImage(named: "rateZero")
+            rateImage.image = RateImages.rateZero
         case 1:
-            rateImage.image = UIImage(named: "rateOne")
+            rateImage.image = RateImages.rateOne
         case 2:
-            rateImage.image = UIImage(named: "rateTwo")
+            rateImage.image = RateImages.rateTwo
         case 3:
-            rateImage.image = UIImage(named: "rateThree")
+            rateImage.image = RateImages.rateThree
         case 4:
-            rateImage.image = UIImage(named: "rateFour")
+            rateImage.image = RateImages.rateFour
         case 5:
-            rateImage.image = UIImage(named: "rateFive")
+            rateImage.image = RateImages.rateFive
         default:
             break
         }
