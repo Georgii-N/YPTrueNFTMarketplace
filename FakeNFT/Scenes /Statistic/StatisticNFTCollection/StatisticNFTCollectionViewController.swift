@@ -45,7 +45,7 @@ final class StatisticNFTCollectionViewController: UIViewController {
         setupConstraints()
         setupUI()
         bind()
-        blockUI()
+        blockUI(withBlur: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,7 +63,7 @@ final class StatisticNFTCollectionViewController: UIViewController {
 extension StatisticNFTCollectionViewController {
     
     @objc private func refreshNFTCatalog() {
-        blockUI()
+        blockUI(withBlur: false)
         statisticNFTViewModel.fetchUsersNFT()
         AnalyticsService.instance.sentEvent(screen: .statisticСollectionNFT, item: .screen, event: .pull)
     }

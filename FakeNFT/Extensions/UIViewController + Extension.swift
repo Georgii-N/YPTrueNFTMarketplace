@@ -43,12 +43,16 @@ extension UIViewController {
     
     // MARK: - ActivityIndicatior and Blocking UI:
     private var activityIndicator: UIActivityIndicatorView? {
-        return view.subviews.first { $0 is UIActivityIndicatorView } as? UIActivityIndicatorView
+        view.subviews.first { $0 is UIActivityIndicatorView } as? UIActivityIndicatorView
     }
     
-    func blockUI() {
+    private var blurVisualView: UIView? {
+        view.subviews.first { $0 is UIVisualEffectView }
+    }
+    
+    func blockUI(withBlur: Bool) {
         view.isUserInteractionEnabled = false
-        showActivityIndicator()
+        showActivityIndicator(blur: withBlur)
     }
     
     func unblockUI() {
@@ -56,11 +60,17 @@ extension UIViewController {
         hideActivityIndicator()
     }
     
-    private func showActivityIndicator() {
+    private func showActivityIndicator(blur: Bool) {
         if activityIndicator == nil {
             let indicator = UIActivityIndicatorView(style: .large)
             indicator.color = .darkGray
+            
+            if blur {
+               setupBlur()
+            }
+            
             view.setupView(indicator)
+            
             NSLayoutConstraint.activate([
                 indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -72,8 +82,30 @@ extension UIViewController {
     }
     
     private func hideActivityIndicator() {
-        activityIndicator?.stopAnimating()
-        activityIndicator?.removeFromSuperview()
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            guard let self = self else { return }
+            self.activityIndicator?.stopAnimating()
+            self.activityIndicator?.removeFromSuperview()
+            
+            self.blurVisualView?.alpha = 0
+        } completion: { [weak self] _ in
+            guard let self = self else { return }
+            blurVisualView?.removeFromSuperview()
+        }
+    }
+    
+    private func setupBlur() {
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        
+        view.setupView(blurEffectView)
+       
+        NSLayoutConstraint.activate([
+            blurEffectView.topAnchor.constraint(equalTo: view.topAnchor),
+            blurEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            blurEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ])
     }
     
     // MARK: - Notification Banner:

@@ -121,7 +121,6 @@ final class NFTCardViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.delegate = delegate
         self.viewModel = viewModel
-        blockUI()
     }
     
     required init?(coder: NSCoder) {
@@ -137,13 +136,23 @@ final class NFTCardViewController: UIViewController {
         
         setupNFTInfo()
         bind()
-        
-        viewModel?.updateNFTCardModels()        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+        blockUI(withBlur: true)
+        viewModel?.updateNFTCardModels()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         analyticsService.sentEvent(screen: .nftCard, item: .screen, event: .open)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -186,6 +195,10 @@ final class NFTCardViewController: UIViewController {
                 
                 if self.indexPathToUpdateNFTCell != nil {
                     self.saveCellModelAfterError()
+                }
+                
+                if self.viewModel?.currenciesObservable.wrappedValue == nil {
+                    self.setupStubLabel()
                 }
             }
         }
@@ -320,7 +333,7 @@ final class NFTCardViewController: UIViewController {
               let index = viewModel?.nftsObservable.wrappedValue?.firstIndex(
                     where: { $0.id == nftModel.id }) else { return }
         
-        blockUI()
+        blockUI(withBlur: false)
         viewModel?.changeNFTFavouriteStatus(isLiked: nftModel.isLiked, id: nftModel.id)
         delegate?.addIndexToUpdateCell(index: IndexPath(row: index, section: 0), isLike: true)
         viewModel?.setNewCurrentModel(isLike: true)
@@ -332,7 +345,7 @@ final class NFTCardViewController: UIViewController {
               let index = viewModel?.nftsObservable.wrappedValue?.firstIndex(
                     where: { $0.id == nftModel.id }) else { return }
         
-        blockUI()
+        blockUI(withBlur: false)
         viewModel?.changeNFTCartStatus(isAddedToCart: nftModel.isAddedToCard, id: nftModel.id)
         delegate?.addIndexToUpdateCell(index: IndexPath(row: index, section: 0), isLike: false)
         viewModel?.setNewCurrentModel(isLike: false)
@@ -373,8 +386,8 @@ extension NFTCardViewController: NFTCollectionCellDelegate {
     func likeButtonDidTapped(cell: NFTCollectionCell) {
         guard let model = cell.getNFTModel(),
               let indexPath = nftColectionView.indexPath(for: cell) else { return }
-        blockUI()
-        
+        blockUI(withBlur: false)
+
         let modelID = model.id
         
         viewModel?.changeNFTFavouriteStatus(isLiked: model.isLiked, id: modelID)
@@ -389,7 +402,7 @@ extension NFTCardViewController: NFTCollectionCellDelegate {
     func addToCardButtonDidTapped(cell: NFTCollectionCell) {
         guard let model = cell.getNFTModel(),
               let indexPath = nftColectionView.indexPath(for: cell) else { return }
-        blockUI()
+        blockUI(withBlur: false)
         
         let modelID = model.id
         
@@ -424,13 +437,13 @@ extension NFTCardViewController: UIScrollViewDelegate {
 // MARK: - UITableViewDataSource
 extension NFTCardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if viewModel?.currenciesObservable.wrappedValue == nil {
-            setupStubLabel()
-        } else {
+        guard let currencies = viewModel?.currenciesObservable.wrappedValue?.count else { return 0 }
+        
+        if currencies > 0 {
             refreshStubLabel.removeFromSuperview()
         }
         
-        return viewModel?.currenciesObservable.wrappedValue?.count ?? 0
+        return currencies
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -440,8 +453,9 @@ extension NFTCardViewController: UITableViewDataSource {
         
         if let currency = viewModel.currenciesObservable.wrappedValue?[indexPath.row] {
             cell.setupСurrencyModel(model: currency)
+            
         }
-        
+
         return cell
     }
 }
@@ -494,7 +508,6 @@ extension NFTCardViewController {
         view.backgroundColor = .whiteDay
         navigationController?.navigationBar.backgroundColor = .clear
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: likeButton)
-        tabBarController?.tabBar.isHidden = true
         
         setupBackButtonItem()
         

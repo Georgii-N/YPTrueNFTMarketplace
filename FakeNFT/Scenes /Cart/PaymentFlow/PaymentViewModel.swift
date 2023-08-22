@@ -4,6 +4,7 @@ protocol PaymentViewModelProtocol: AnyObject {
     var currencieID: Int? {get set}
     var currencieNfts: Observable<[Currency]?> {get}
     var networkErrorObservable: Observable<String?> {get}
+    func getData()
     func makePay(completion: @escaping (Bool) -> Void)
     func unwrappedPaymentViewModel() -> [Currency]
 }
@@ -30,14 +31,9 @@ final class PaymentViewModel: PaymentViewModelProtocol {
     var networkErrorObservable: Observable<String?> {
             $networkError
         }
-    
-    // MARK: Init
-    init() {
-        getData()
-    }
-    
+
     // MARK: Methods
-   private func getData () {
+    func getData() {
        dataProvider.fetchCurrencies {[weak self] result in
            guard let self = self else { return }
             switch result {

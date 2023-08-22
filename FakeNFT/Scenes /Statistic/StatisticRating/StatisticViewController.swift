@@ -35,8 +35,13 @@ final class StatisticViewController: UIViewController {
         setupUI()
         setupTargets()
         setupNavBar()
-        blockUI()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        blockUI(withBlur: true)
+        statisticViewModel.fetchUsersRating()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -95,7 +100,7 @@ extension StatisticViewController {
     }
     
     @objc private func refreshNFTCatalog() {
-        blockUI()
+        blockUI(withBlur: false)
         statisticViewModel.fetchUsersRating()
         AnalyticsService.instance.sentEvent(screen: .statisticMain, item: .buttonSorting, event: .pull)
     }

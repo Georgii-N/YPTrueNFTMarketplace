@@ -109,8 +109,11 @@ final class CatalogCollectionViewController: UIViewController {
         
         setupCollectionInfo()
         bind()
-        
-        blockUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        blockUI(withBlur: true)
         viewModel?.updateNFTCardModels()
     }
     
@@ -139,28 +142,28 @@ final class CatalogCollectionViewController: UIViewController {
         viewModel?.nftsObservable.bind { [weak self] _ in
             guard let self else { return }
             self.resumeMethodOnMainThread(self.nftCollection.reloadData, with: ())
-            self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
         }
         
         viewModel?.likeStatusDidChangeObservable.bind { [weak self] _ in
             guard let self else { return }
-            self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: true)
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
         }
         
         viewModel?.cartStatusDidChangeObservable.bind { [weak self] _ in
             guard let self else { return }
-            self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.changeCellStatus, with: false)
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
         }
         
         viewModel?.networkErrorObservable.bind { [weak self] errorText in
             guard let self else { return }
             if let errorText {
-                self.resumeMethodOnMainThread(self.unblockUI, with: ())
                 self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
                 self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
+                self.resumeMethodOnMainThread(self.unblockUI, with: ())
                 
                 if self.indexPathToUpdateNFTCell != nil {
                     self.saveCellModelAfterError()
@@ -258,7 +261,7 @@ extension CatalogCollectionViewController: NFTCollectionCellDelegate {
     func likeButtonDidTapped(cell: NFTCollectionCell) {
         guard let model = cell.getNFTModel(),
               let indexPath = nftCollection.indexPath(for: cell) else { return }
-        blockUI()
+        blockUI(withBlur: false)
         
         let modelID = model.id
         
@@ -271,7 +274,7 @@ extension CatalogCollectionViewController: NFTCollectionCellDelegate {
     func addToCardButtonDidTapped(cell: NFTCollectionCell) {
         guard let model = cell.getNFTModel(),
               let indexPath = nftCollection.indexPath(for: cell) else { return }
-        blockUI()
+        blockUI(withBlur: false)
         
         let modelID = model.id
         
@@ -308,16 +311,13 @@ extension CatalogCollectionViewController: UITextViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension CatalogCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let collection = viewModel?.collectionObservable.wrappedValue
-        let nfts = viewModel?.nftsObservable.wrappedValue
+        guard let collectionCount = viewModel?.collectionObservable.wrappedValue.nfts.count else { return 0 }
         
-        if nfts == nil {
-            setupStubLabel()
-            return 0
-        } else {
+        if collectionCount > 0 {
             refreshStubLabel.removeFromSuperview()
-            return collection?.nfts.count ?? 0
         }
+        
+        return collectionCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

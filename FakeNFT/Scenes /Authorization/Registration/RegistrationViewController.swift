@@ -208,7 +208,7 @@ final class RegistrationViewController: UIViewController {
     
     // MARK: - Objc Methods:
     @objc private func registrateUser() {
-        blockUI()
+        blockUI(withBlur: false)
         viewModel.registrateNewAccount()
     }
     

@@ -122,7 +122,7 @@ final class DemoViewController: UIViewController {
         setTargets()
         makeCollectionView()
         bind()
-        blockUI()
+        blockUI(withBlur: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {

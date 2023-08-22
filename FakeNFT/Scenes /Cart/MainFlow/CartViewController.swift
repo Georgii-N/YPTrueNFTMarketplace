@@ -18,7 +18,7 @@ final class CartViewControler: UIViewController {
         let maskPath = UIBezierPath(roundedRect: view.bounds,
                                     byRoundingCorners: [.topLeft, .topRight],
                                     cornerRadii: CGSize(width: 12, height: 12))
-
+        
         let shape = CAShapeLayer()
         shape.path = maskPath.cgPath
         totalView.layer.mask = shape
@@ -71,24 +71,29 @@ final class CartViewControler: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cartViewModel.getOrder()
         setupViews()
         setupConstraints()
         setTargets()
         makeCollectionView()
         bind()
-        blockUI()
+        blockUI(withBlur: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        blockUI(withBlur: true)
+        cartViewModel.getOrder()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
+        super.viewDidAppear(animated)
         AnalyticsService.instance.sentEvent(screen: .cartMain, item: .screen, event: .open)
-        }
-        
-        override func viewDidDisappear(_ animated: Bool) {
-            super.viewDidDisappear(animated)
-            AnalyticsService.instance.sentEvent(screen: .cartMain, item: .screen, event: .close)
-        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        AnalyticsService.instance.sentEvent(screen: .cartMain, item: .screen, event: .close)
+    }
     
     private func bind() {
         cartViewModel.cartNft.bind {[weak self] _ in
@@ -201,9 +206,9 @@ extension CartViewControler {
     }
     
     private func endRefreshing() {
-            self.refreshControl.endRefreshing()
-            self.unblockUI()
-        }
+        self.refreshControl.endRefreshing()
+        self.unblockUI()
+    }
 }
 
 // MARK: Collection View

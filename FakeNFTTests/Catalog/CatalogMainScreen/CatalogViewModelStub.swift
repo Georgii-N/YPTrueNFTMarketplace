@@ -6,7 +6,6 @@
 //
 
 @testable import FakeNFT
-import UIKit
 
 final class CatalogViewModelStub: CatalogViewModelProtocol {
     

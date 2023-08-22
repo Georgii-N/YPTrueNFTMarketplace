@@ -109,6 +109,7 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.networkError = errorString
+                self.networkError = nil
             }
         }
     }
@@ -135,6 +136,7 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.networkError = errorString
+                self.networkError = nil
             }
         }
     }
@@ -188,6 +190,7 @@ final class NFTCardViewModel: NFTCardViewModelProtocol {
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.networkError = errorString
+                self.networkError = nil
             }
         }
     }

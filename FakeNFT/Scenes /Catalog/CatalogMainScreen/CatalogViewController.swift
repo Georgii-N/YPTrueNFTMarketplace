@@ -51,8 +51,11 @@ final class CatalogViewController: UIViewController {
         setupTargets()
         
         bind()
-        
-        blockUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        blockUI(withBlur: true)
         viewModel?.fetchCollections()
     }
     
@@ -71,8 +74,8 @@ final class CatalogViewController: UIViewController {
         viewModel?.nftCollectionsObservable.bind { [weak self] _ in
             guard let self else { return }
             self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
-            self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.catalogNFTTableView.reloadData, with: ())
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
         }
         
         viewModel?.networkErrorObservable.bind { [weak self] errorText in
@@ -81,6 +84,10 @@ final class CatalogViewController: UIViewController {
                 self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
                 self.resumeMethodOnMainThread(self.unblockUI, with: ())
                 self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
+                
+                if self.viewModel?.nftCollectionsObservable.wrappedValue?.count == nil {
+                    self.resumeMethodOnMainThread(self.setupStubLabel, with: ())
+                }
             }
         }
     }
@@ -123,7 +130,7 @@ final class CatalogViewController: UIViewController {
     }
     
     @objc private func refreshNFTCatalog() {
-        blockUI()
+        blockUI(withBlur: false)
         viewModel?.fetchCollections()
         analyticsService.sentEvent(screen: .catalogMain, item: .pullToRefresh, event: .click)
     }
@@ -132,15 +139,13 @@ final class CatalogViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension CatalogViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let collections = viewModel?.nftCollectionsObservable.wrappedValue
-
-        if collections == nil {
-            setupStubLabel()
-        } else {
+        let collectionsCount = viewModel?.nftCollectionsObservable.wrappedValue?.count ?? 0
+        
+        if collectionsCount > 0 {
             refreshStubLabel.removeFromSuperview()
         }
         
-        return collections?.count ?? 0
+        return collectionsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

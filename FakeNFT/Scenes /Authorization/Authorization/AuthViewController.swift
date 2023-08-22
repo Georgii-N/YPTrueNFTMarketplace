@@ -215,7 +215,7 @@ final class AuthViewController: UIViewController {
     
     // MARK: - Objc Methods:
     @objc private func authorizeUser() {
-        blockUI()
+        blockUI(withBlur: false)
         viewModel.authorize()
     }
     

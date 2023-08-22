@@ -27,7 +27,6 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     init(dataProvider: DataProviderProtocol) {
         self.dataProvider = dataProvider
         getSortingOption()
-        fetchUsersRating()
     }
     
     // MARK: - Public Functions
