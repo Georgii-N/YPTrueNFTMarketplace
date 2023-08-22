@@ -1,6 +1,7 @@
 import Foundation
 
 protocol DataProviderProtocol {
+    func fetchNFTCollection(completion: @escaping (Result<NFTCollections, Error>) -> Void)
     func fetchUsersRating(completion: @escaping (Result<UsersResponse, Error>) -> Void)
     func fetchUserID(userId: String, completion: @escaping (Result<UserResponse, Error>) -> Void)
     func fetchProfile(completion: @escaping (Result<Profile, Error>) -> Void)

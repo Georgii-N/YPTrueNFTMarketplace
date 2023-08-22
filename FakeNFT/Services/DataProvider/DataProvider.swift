@@ -38,6 +38,21 @@ final class DataProvider: DataProviderProtocol {
         }
     }
     
+    func fetchNFTCollection(completion: @escaping (Result<[NFTCollection], Error>) -> Void) {
+        
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.nftCollection, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get, dto: nil)
+        
+        networkClient.send(request: request, type: [NFTCollection].self) { result in
+            switch result {
+            case .success(let collections):
+                completion(.success(collections))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func fetchUserID(userId: String, completion: @escaping (Result<UserResponse, Error>) -> Void) {
         
         let path = Resources.Network.MockAPI.Paths.users + "/\(userId)"

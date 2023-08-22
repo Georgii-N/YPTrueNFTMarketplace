@@ -25,8 +25,8 @@ enum Resources {
             static let catalogImage = UIImage(systemName: "rectangle.stack.fill")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
             static let catalogImageSelected = UIImage(systemName: "rectangle.stack.fill")?.withTintColor(.blueUniversal, renderingMode: .alwaysOriginal)
             
-            static let cartImage = UIImage(named: "cartBasket")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
-            static let cartImageSelected = UIImage(named: "cartBasket")?.withTintColor(.blueUniversal, renderingMode: .alwaysOriginal)
+            static let cartImage = UIImage(named: "TrashBasket")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
+            static let cartImageSelected = UIImage(named: "TrashBasket")?.withTintColor(.blueUniversal, renderingMode: .alwaysOriginal)
             
             static let statisticImage = UIImage(systemName: "flag.2.crossed.fill")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
             static let statisticImageSelected = UIImage(systemName: "flag.2.crossed.fill")?.withTintColor(.blueUniversal, renderingMode: .alwaysOriginal)
@@ -44,6 +44,13 @@ enum Resources {
             static let putInBasket = UIImage(named: "emptyCart")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
             static let removeFromBasket = UIImage(named: "removeBasket")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
         }
+        
+        static let unlikedButton = UIImage(systemName: "heart.fill")?.withTintColor(.whiteUniversal, renderingMode: .alwaysOriginal)
+        static let likedButton = UIImage(systemName: "heart.fill")?.withTintColor(.redUniversal, renderingMode: .alwaysOriginal)
+        static let grayRatingStar = UIImage(systemName: "star.fill")?.withTintColor(.lightGrayDay, renderingMode: .alwaysOriginal)
+        static let goldRatingStar = UIImage(systemName: "star.fill")?.withTintColor(.yellowUniversal, renderingMode: .alwaysOriginal)
+        static let putInBasket = UIImage(named: "emptyCart")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
+        static let removeFromBasket = UIImage(named: "removeBasket")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
         
         enum NFTBrowsing {
             static let cancellButton = UIImage(systemName: "xmark")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
