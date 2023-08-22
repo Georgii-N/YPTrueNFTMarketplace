@@ -73,7 +73,11 @@ final class DataProviderStub: DataProviderProtocol {
         
     }
     
-    func putNewOrder(order: FakeNFT.Order, completion: @escaping (Result<Void, Error>) -> Void) {
+    func putNewOrder(order: FakeNFT.Order, completion: @escaping (Result<FakeNFT.Order, Error>) -> Void) {
+        
+    }
+    
+    func fetchPaymentCurrency(currencyId: Int, completion: @escaping (Result<FakeNFT.OrderPayment, Error>) -> Void) {
         
     }
 }
