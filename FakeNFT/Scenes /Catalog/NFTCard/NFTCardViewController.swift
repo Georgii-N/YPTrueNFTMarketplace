@@ -21,6 +21,13 @@ final class NFTCardViewController: UIViewController {
     private var indexPathToUpdateNFTCell: IndexPath?
     private lazy var refreshControl = UIRefreshControl()
     
+    private lazy var formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.decimalSeparator = ","
+        return formatter
+    }()
+    
     // MARK: - UI:
     private lazy var allScreenScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -216,7 +223,10 @@ final class NFTCardViewController: UIViewController {
         nftCollectionNameLabel.text = collection.name
         nftRatingStackView.setupNFTRating(with: nftModel.rating)
         nftNameLabel.text = nftModel.name
-        priceValueLabel.text = "\(nftModel.price) ETH"
+        
+        if let formattedString = formatter.string(from: NSNumber(value: nftModel.price)) {
+            priceValueLabel.text = "\(String(formattedString)) ETH"
+        }
         
         coverNFTPageControlView.setCurrentState(currentPage: 0, isOnboarding: false)
         setupCoverScrollView(imagesURL: nftModel.images)
