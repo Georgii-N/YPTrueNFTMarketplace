@@ -36,6 +36,5 @@ final class StatisticRatingUnitTests: XCTestCase {
         XCTAssertEqual(usersSorted[0].name, "Alice")
         XCTAssertEqual(usersSorted[1].name, "Bob")
         XCTAssertEqual(usersSorted[2].name, "Eve")
-        
     }
 }

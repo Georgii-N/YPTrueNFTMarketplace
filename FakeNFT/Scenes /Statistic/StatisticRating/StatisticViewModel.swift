@@ -38,7 +38,7 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     }
     
     func sortUsersbyType(by type: SortingOption, usersList: UsersResponse) -> UsersResponse {
-        var users = usersList
+        let users = usersList
         switch type {
         case .byName:
             return users.sorted { $1.name > $0.name }
