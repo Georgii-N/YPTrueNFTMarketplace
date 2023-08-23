@@ -24,7 +24,7 @@ final class NFTCardTableViewCell: UITableViewCell, ReuseIdentifying {
                 let name = сurrency?.name ?? ""
                 let title = сurrency?.title ?? ""
                 nftNameLabel.text = title + " (\(name))"
-                nftDepositLabel.text = "0.1 (\(name))"
+                nftDepositLabel.text = "0,1 (\(name))"
             }
         }
     }
@@ -52,7 +52,7 @@ final class NFTCardTableViewCell: UITableViewCell, ReuseIdentifying {
         let label = UILabel()
         label.font = .captionSmallRegular
         label.textColor = .blackDay
-        label.text = "$18.11"
+        label.text = "$18,11"
         
         return label
     }()
