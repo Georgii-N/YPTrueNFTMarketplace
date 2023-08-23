@@ -22,7 +22,7 @@ final class CartViewModel: CartViewModelProtocol {
        return $networkError
     }
     
-    private let dataProvider = DataProvider()
+   // private let dataProvider = DataProvider()
     private var idNfts: [String] = []
     private let userDefaults = UserDefaultsService.shared
     private lazy var formatter: NumberFormatter = {
@@ -41,6 +41,12 @@ final class CartViewModel: CartViewModelProtocol {
     
     @Observable
     private(set) var networkError: String?
+    
+    private let dataProvider: DataProviderProtocol
+    
+    init(dataProvider: DataProviderProtocol) {
+        self.dataProvider = dataProvider
+    }
         
     // MARK: Methods
     func getOrder() {
@@ -72,7 +78,6 @@ final class CartViewModel: CartViewModelProtocol {
             switch result {
             case .success(let data):
                 self.idNfts = []
-                self.cartNFT = []
                 data.nfts.forEach { self.idNfts.append($0) }
                 self.orderID = data.id
                 self.getNfts()
@@ -85,11 +90,13 @@ final class CartViewModel: CartViewModelProtocol {
     }
         
     private func getNfts() {
+        var newNft: [NFTCard] = []
         dataProvider.fetchUsersNFT(userId: nil, nftsId: idNfts) {[weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                data.forEach {self.cartNFT?.append($0)}
+                data.forEach {newNft.append($0)}
+                self.cartNFT = newNft
                 self.getSort()
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)

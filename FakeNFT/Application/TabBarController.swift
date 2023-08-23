@@ -41,6 +41,7 @@ final class TabBarController: UITabBarController {
         // Initialize dependencies:
         let catalogViewModel = CatalogViewModel(dataProvider: dataProvider)
         let statisticViewModel = StatisticViewModel(dataProvider: dataProvider)
+        let cartViewModel = CartViewModel(dataProvider: dataProvider)
         
         // Initizialize ViewControllers:
         let catalogViewController = CatalogViewController(viewModel: catalogViewModel)
@@ -48,7 +49,7 @@ final class TabBarController: UITabBarController {
         let profileViewController = CustomNavigationController(rootViewController: UIViewController())
         let catalogNavigationController = CustomNavigationController(rootViewController: catalogViewController)
         let statisticViewController = CustomNavigationController(rootViewController: StatisticViewController(statisticViewModel: statisticViewModel))
-        let cartViewController = CustomNavigationController(rootViewController: CartViewControler(cartViewModel: CartViewModel()))
+        let cartViewController = CustomNavigationController(rootViewController: CartViewControler(cartViewModel: cartViewModel))
 
         profileViewController.tabBarItem = UITabBarItem(
             title: L10n.Profile.title,
