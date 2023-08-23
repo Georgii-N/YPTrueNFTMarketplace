@@ -12,6 +12,7 @@ final class StatisticViewController: UIViewController {
     // MARK: - UI
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = .whiteDay
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(StatisticCollectionViewCell.self)
