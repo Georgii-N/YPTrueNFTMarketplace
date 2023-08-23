@@ -153,7 +153,7 @@ class MyNFTCollectionViewCell: UICollectionViewCell {
         fromLabel.text = model.author
         priceLabel.text = "\(model.price) ETH"
         
-        if let isLiked = model.isLiked, isLiked {
+        if model.isLiked {
             likeButton.setImage(UIImage(named: "liked"), for: .normal)
         } else {
             likeButton.setImage(UIImage(named: "unliked"), for: .normal)

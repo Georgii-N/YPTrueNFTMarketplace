@@ -126,7 +126,7 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         setRateImage(model.rating)
         priceLabel.text = "\(model.price) ETH"
         
-        if let isLiked = model.isLiked, isLiked {
+        if model.isLiked {
             likeButton.setImage(UIImage(named: "liked"), for: .normal)
         } else {
             likeButton.setImage(UIImage(named: "unliked"), for: .normal)

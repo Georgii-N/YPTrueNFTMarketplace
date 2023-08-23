@@ -59,7 +59,7 @@ final class CartViewModel: CartViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                data.nfts.forEach { self.idNfts.append($0) }
+                self.idNfts = data.nfts
                 self.orderID = data.id
                 self.getNfts()
             case .failure(let error):
