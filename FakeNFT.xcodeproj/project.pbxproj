@@ -42,6 +42,7 @@
 		409EEFE32A7A707700B23FF8 /* DataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */; };
 		409EEFE72A7A710D00B23FF8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE62A7A710D00B23FF8 /* User.swift */; };
 		409EEFE92A7A711A00B23FF8 /* UsersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409EEFE82A7A711A00B23FF8 /* UsersResponse.swift */; };
+		40C606052A950DF4008DE83F /* StatisticRatingUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C606042A950DF4008DE83F /* StatisticRatingUnitTests.swift */; };
 		40EEA7CF2A768BE700A1AE93 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EEA7CE2A768BE700A1AE93 /* AnalyticsService.swift */; };
 		4148673F01BE7568ED7BBCB7 /* Pods_FakeNFTTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47E229CE37DE436884871A22 /* Pods_FakeNFTTests.framework */; };
 		7E71E3AB2A73BEFA00B0073D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E71E3AD2A73BEFA00B0073D /* Localizable.strings */; };
@@ -171,6 +172,7 @@
 		409EEFE22A7A707700B23FF8 /* DataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderProtocol.swift; sourceTree = "<group>"; };
 		409EEFE62A7A710D00B23FF8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		409EEFE82A7A711A00B23FF8 /* UsersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersResponse.swift; sourceTree = "<group>"; };
+		40C606042A950DF4008DE83F /* StatisticRatingUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticRatingUnitTests.swift; sourceTree = "<group>"; };
 		40EEA7CE2A768BE700A1AE93 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		467B0BEA5948BFFF743B054D /* Pods-FakeNFT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FakeNFT.debug.xcconfig"; path = "Target Support Files/Pods-FakeNFT/Pods-FakeNFT.debug.xcconfig"; sourceTree = "<group>"; };
 		47E229CE37DE436884871A22 /* Pods_FakeNFTTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FakeNFTTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -321,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				7EDF11C42A93533C00402CFE /* Catalog */,
+				40C606022A950D8C008DE83F /* Statistic */,
 				7EDF11C92A935E9C00402CFE /* DataProviderStub.swift */,
 				3F6806AD29CBBAF200B4F915 /* ExampleUnitTests.swift */,
 			);
@@ -490,6 +493,22 @@
 				409EEFE82A7A711A00B23FF8 /* UsersResponse.swift */,
 			);
 			path = Users;
+			sourceTree = "<group>";
+		};
+		40C606022A950D8C008DE83F /* Statistic */ = {
+			isa = PBXGroup;
+			children = (
+				40C606032A950DC4008DE83F /* StatisticRating */,
+			);
+			path = Statistic;
+			sourceTree = "<group>";
+		};
+		40C606032A950DC4008DE83F /* StatisticRating */ = {
+			isa = PBXGroup;
+			children = (
+				40C606042A950DF4008DE83F /* StatisticRatingUnitTests.swift */,
+			);
+			path = StatisticRating;
 			sourceTree = "<group>";
 		};
 		40CD98062A73954E0081B233 /* SupportFiles */ = {
@@ -1204,6 +1223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40C606052A950DF4008DE83F /* StatisticRatingUnitTests.swift in Sources */,
 				7EBE03232A94807500212666 /* CatalogCollectionViewModelStub.swift in Sources */,
 				7EDF11CA2A935E9C00402CFE /* DataProviderStub.swift in Sources */,
 				7EAD510F2A93AF6400A5FADC /* CatalogViewControllerStub.swift in Sources */,
