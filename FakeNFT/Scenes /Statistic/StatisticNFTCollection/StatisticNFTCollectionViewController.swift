@@ -45,7 +45,12 @@ final class StatisticNFTCollectionViewController: UIViewController {
         setupConstraints()
         setupUI()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         blockUI(withBlur: true)
+        statisticNFTViewModel.getData()
     }
     
     override func viewDidAppear(_ animated: Bool) {

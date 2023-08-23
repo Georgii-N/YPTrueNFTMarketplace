@@ -43,9 +43,6 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
     init(nftsId: [String], dataProvider: DataProviderProtocol) {
         self.nftsId = nftsId
         self.dataProvider = dataProvider
-        fetchOrder()
-        fetchProfile()
-        fetchUsersNFT()
     }
     
     // MARK: - Private Functions
@@ -156,5 +153,11 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
                 print(error)
             }
         })
+    }
+    
+    func getData() {
+        fetchOrder()
+        fetchProfile()
+        fetchUsersNFT()
     }
 }

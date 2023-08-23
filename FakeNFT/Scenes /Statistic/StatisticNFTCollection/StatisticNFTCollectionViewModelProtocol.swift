@@ -9,4 +9,5 @@ protocol StatisticNFTCollectionViewModelProtocol {
     func fetchUsersNFT()
     func changeNFTCartStatus(isAddedToCart: Bool, id: String)
     func changeNFTFavouriteStatus(isLiked: Bool, id: String)
+    func getData()
 }
