@@ -76,7 +76,6 @@ final class CartViewControler: UIViewController {
         setTargets()
         makeCollectionView()
         bind()
-        blockUI(withBlur: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,22 +95,28 @@ final class CartViewControler: UIViewController {
     }
     
     private func bind() {
-        cartViewModel.cartNft.bind {[weak self] _ in
+        cartViewModel.cartNft.bind { [weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.totalNFT.text = "\(self.cartViewModel.additionNFT()) NFT"
                 self.totalCost.text = "\(self.cartViewModel.additionPriceNFT()) ETH"
-                self.unblockUI()
                 self.checkEmptyNFT()
+                
+                if self.cartViewModel.isReadyToUpdateCollection == true {
+                    self.unblockUI()
+                    self.cartViewModel.lockVCToUpdate()
+                }
             }
         }
         
         cartViewModel.networkErrorObservable.bind {[weak self] errorText in
             guard let self = self else { return }
             guard let errorText = errorText else {
+                self.resumeMethodOnMainThread(self.unblockUI, with: ())
                 return self.resumeMethodOnMainThread(self.endRefreshing, with: ())
             }
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.endRefreshing, with: ())
             self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
         }
@@ -250,6 +255,7 @@ extension CartViewControler: CartMainCellDelegate {
 extension CartViewControler: DeleteViewControllerDelegate {
     
     func deleteNft(itemId: String, completion: @escaping (Bool) -> Void) {
+        blockUI(withBlur: false)
         cartViewModel.sendDeleteNft(id: itemId) {[weak self] result in
             guard let self = self else { return }
             if result {

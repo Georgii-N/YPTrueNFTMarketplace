@@ -3,9 +3,11 @@ import Foundation
 protocol CartViewModelProtocol: AnyObject {
     var cartNft: Observable<[NFTCard]?> {get}
     var networkErrorObservable: Observable<String?> {get}
+    var isReadyToUpdateCollection: Bool { get }
     func getOrder()
     func sendDeleteNft(id: String, completion: @escaping (Bool) -> Void)
     func additionNFT() -> Int
+    func lockVCToUpdate()
     func additionPriceNFT() -> String
     func sortNFT(_ sortOptions: SortingOption)
     func unwrappedCartNftViewModel() -> [NFTCard]
@@ -23,6 +25,9 @@ final class CartViewModel: CartViewModelProtocol {
     }
     
    // private let dataProvider = DataProvider()
+    
+    var isReadyToUpdateCollection = false
+    
     private var idNfts: [String] = []
     private let userDefaults = UserDefaultsService.shared
     private lazy var formatter: NumberFormatter = {
@@ -50,6 +55,8 @@ final class CartViewModel: CartViewModelProtocol {
         
     // MARK: Methods
     func getOrder() {
+        isReadyToUpdateCollection = false
+        
         dataProvider.fetchOrder {[weak self] result in
             guard let self = self else { return }
             switch result {
@@ -67,7 +74,7 @@ final class CartViewModel: CartViewModelProtocol {
     func sendDeleteNft(id: String, completion: @escaping (Bool) -> Void) {
         guard let orderId = orderID else { return }
         var newNftId: [String] = []
-        cartNFT?.filter {nft in
+        cartNFT?.filter { nft in
             nft.id != id
         }.forEach {nft in
             newNftId.append(nft.id)
@@ -95,7 +102,7 @@ final class CartViewModel: CartViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                data.forEach {newNft.append($0)}
+                data.forEach { newNft.append($0)}
                 self.cartNFT = newNft
                 self.getSort()
             case .failure(let error):
@@ -103,6 +110,10 @@ final class CartViewModel: CartViewModelProtocol {
                 self.networkError = errorString
             }
         }
+    }
+    
+    func lockVCToUpdate() {
+        isReadyToUpdateCollection = false
     }
     
     func additionNFT() -> Int {
@@ -130,6 +141,7 @@ final class CartViewModel: CartViewModelProtocol {
         case .close: newNftCart = cartNFT
         default: break
         }
+        self.isReadyToUpdateCollection = true
         self.cartNFT = newNftCart
     }
     

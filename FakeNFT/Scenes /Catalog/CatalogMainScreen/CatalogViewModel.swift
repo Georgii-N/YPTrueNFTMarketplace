@@ -42,6 +42,19 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     }
     
     // MARK: Public Methods:
+    func fetchCollections() {
+        dataProvider.fetchNFTCollection { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let collections):
+                self.sortNFTCollection(option: .close, newCollection: collections)
+            case .failure(let error):
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
+            }
+        }
+    }
+    
     func sortNFTCollection(option: SortingOption, newCollection: [NFTCollection]?) {
         if newCollection == nil {
             guard let nftCollections else { return }
@@ -61,19 +74,6 @@ final class CatalogViewModel: CatalogViewModelProtocol {
         } else {
             let option = userDefaultService.getSortingOption(for: .catalog) ?? .close
             self.nftCollections = returnSortedCollection(option: option, collection: newCollection ?? [])
-        }
-    }
-    
-    func fetchCollections() {
-        dataProvider.fetchNFTCollection { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let collections):
-                self.sortNFTCollection(option: .close, newCollection: collections)
-            case .failure(let error):
-                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
-                self.networkError = errorString
-            }
         }
     }
     
