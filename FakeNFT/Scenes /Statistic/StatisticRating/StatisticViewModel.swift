@@ -33,17 +33,20 @@ final class StatisticViewModel: StatisticViewModelProtocol {
     func sortUsers(by type: SortingOption, usersList: UsersResponse) {
         self.sortingOption = type
         saveSortingOption()
+        let users = sortUsersbyType(by: type, usersList: usersList)
+        self.usersRating = users
+    }
+    
+    func sortUsersbyType(by type: SortingOption, usersList: UsersResponse) -> UsersResponse {
         var users = usersList
         switch type {
         case .byName:
-            users.sort { $1.name > $0.name }
+            return users.sorted { $1.name > $0.name }
         case .byRating:
-            users.sort { (Int($1.rating) ?? 0) > (Int($0.rating) ?? 0) }
+            return users.sorted { (Int($1.rating) ?? 0) > (Int($0.rating) ?? 0) }
         default:
-            break
+            return []
         }
-        
-        self.usersRating = users
     }
     
     func saveSortingOption() {

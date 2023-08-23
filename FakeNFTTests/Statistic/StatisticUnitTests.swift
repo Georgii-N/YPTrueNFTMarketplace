@@ -12,31 +12,30 @@ final class StatisticRatingUnitTests: XCTestCase {
 
     func testSortingByRating() {
         // Given
-        let viewModel = StatisticViewModel(dataProvider: provider)
-        let result = viewModel.$usersRating.wrappedValue
-        let users = usersList
-
+        let statisticViewModel = StatisticViewModel(dataProvider: DataProviderStub())
+        var users = usersList
+        
         // When
-        viewModel.sortUsers(by: .byRating, usersList: users)
+        let usersSorted = statisticViewModel.sortUsersbyType(by: .byRating, usersList: users)
 
         // Then
-        XCTAssertEqual(result[0].rating, "4")
-        XCTAssertEqual(result[1].rating, "5")
-        XCTAssertEqual(result[2].rating, "6")
+        XCTAssertEqual(usersSorted[0].rating, "4")
+        XCTAssertEqual(usersSorted[1].rating, "5")
+        XCTAssertEqual(usersSorted[2].rating, "6")
     }
 
     func testSortingByName() {
         // Given
-        let viewModel = StatisticViewModel(dataProvider: provider)
-        let result = viewModel.$usersRating.wrappedValue
-        let users = usersList
-
-        // When
-        viewModel.sortUsers(by: .byName, usersList: users)
+        let statisticViewModel = StatisticViewModel(dataProvider: DataProviderStub())
+        var users = usersList
         
+        // When
+        let usersSorted = statisticViewModel.sortUsersbyType(by: .byName, usersList: users)
+
         // Then
-        XCTAssertEqual(result[0].name, "Alice")
-        XCTAssertEqual(result[1].name, "Bob")
-        XCTAssertEqual(result[2].name, "Eve")
+        XCTAssertEqual(usersSorted[0].name, "Alice")
+        XCTAssertEqual(usersSorted[1].name, "Bob")
+        XCTAssertEqual(usersSorted[2].name, "Eve")
+        
     }
 }
