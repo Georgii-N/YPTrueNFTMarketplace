@@ -49,7 +49,6 @@ final class CatalogViewController: UIViewController {
         setupViews()
         setupConstraints()
         setupTargets()
-        
         bind()
     }
     
@@ -95,9 +94,9 @@ final class CatalogViewController: UIViewController {
     private func sortNFT(_ sortOptions: SortingOption) {
         switch sortOptions {
         case .byTitle:
-            viewModel?.sortNFTCollection(option: .byTitle)
+            viewModel?.sortNFTCollection(option: .byTitle, newCollection: nil)
         case .byQuantity:
-            viewModel?.sortNFTCollection(option: .byQuantity)
+            viewModel?.sortNFTCollection(option: .byQuantity, newCollection: nil)
         default:
             break
         }

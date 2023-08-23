@@ -42,23 +42,26 @@ final class CatalogViewModel: CatalogViewModelProtocol {
     }
     
     // MARK: Public Methods:
-    func sortNFTCollection(option: SortingOption) {
-        guard let nftCollections else { return }
-        
-        var collection = NFTCollections()
-        switch option {
-        case .byTitle:
-            collection = nftCollections.sorted(by: { $0.name < $1.name })
-            analyticsService.sentEvent(screen: .catalogMain, item: .buttonSortingByTitle, event: .click)
-        case .byQuantity:
-            collection = nftCollections.sorted(by: { $0.nfts.count > $1.nfts.count })
-            analyticsService.sentEvent(screen: .catalogMain, item: .buttonSortingByNumber, event: .click)
-        default:
-            break
+    func sortNFTCollection(option: SortingOption, newCollection: [NFTCollection]?) {
+        if newCollection == nil {
+            guard let nftCollections else { return }
+            var collection = NFTCollections()
+            
+            switch option {
+            case .byTitle:
+                collection = returnSortedCollection(option: .byTitle, collection: nftCollections)
+            case .byQuantity:
+                collection = returnSortedCollection(option: .byQuantity, collection: nftCollections)
+            default:
+                collection = returnSortedCollection(option: .close, collection: nftCollections)
+            }
+            
+            userDefaultService.saveSortingOption(option, forScreen: .catalog)
+            self.nftCollections = collection
+        } else {
+            let option = userDefaultService.getSortingOption(for: .catalog) ?? .close
+            self.nftCollections = returnSortedCollection(option: option, collection: newCollection ?? [])
         }
-        
-        userDefaultService.saveSortingOption(option, forScreen: .catalog)
-        self.nftCollections = collection
     }
     
     func fetchCollections() {
@@ -66,15 +69,29 @@ final class CatalogViewModel: CatalogViewModelProtocol {
             guard let self else { return }
             switch result {
             case .success(let collections):
-                self.networkError = nil
-                self.nftCollections = collections
-                if let option = self.userDefaultService.getSortingOption(for: .catalog) {
-                    self.sortNFTCollection(option: option)
-                }
+                self.sortNFTCollection(option: .close, newCollection: collections)
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self.networkError = errorString
             }
         }
+    }
+    
+    // MARK: - Private Methods:
+    private func returnSortedCollection(option: SortingOption, collection: NFTCollections) -> NFTCollections {
+        var newCollection = NFTCollections()
+
+        switch option {
+        case .byTitle:
+            newCollection = collection.sorted(by: { $0.name < $1.name })
+            analyticsService.sentEvent(screen: .catalogMain, item: .buttonSortingByTitle, event: .click)
+        case .byQuantity:
+            newCollection = collection.sorted(by: { $0.nfts.count > $1.nfts.count })
+            analyticsService.sentEvent(screen: .catalogMain, item: .buttonSortingByNumber, event: .click)
+        default:
+            newCollection = collection
+        }
+        
+        return newCollection
     }
 }
