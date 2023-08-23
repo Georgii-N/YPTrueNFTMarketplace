@@ -100,10 +100,10 @@ final class CartViewControler: UIViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
-                self.checkEmptyNFT()
                 self.totalNFT.text = "\(self.cartViewModel.additionNFT()) NFT"
                 self.totalCost.text = "\(self.cartViewModel.additionPriceNFT()) ETH"
                 self.unblockUI()
+                self.checkEmptyNFT()
             }
         }
         
@@ -248,17 +248,19 @@ extension CartViewControler: CartMainCellDelegate {
 }
 
 extension CartViewControler: DeleteViewControllerDelegate {
-    func deleteNft(itemId: String) {
+    
+    func deleteNft(itemId: String, completion: @escaping (Bool) -> Void) {
         cartViewModel.sendDeleteNft(id: itemId) {[weak self] result in
             guard let self = self else { return }
             if result {
                 DispatchQueue.main.async {
-                    self.collectionView.reloadData()
                     self.checkEmptyNFT()
                     self.totalNFT.text = "\(self.cartViewModel.additionNFT()) NFT"
                     self.totalCost.text = "\(self.cartViewModel.additionPriceNFT()) ETH"
+                    completion(true)
                 }
             }
+            
         }
     }
 }

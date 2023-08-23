@@ -1,7 +1,7 @@
 import UIKit
 
 protocol DeleteViewControllerDelegate: AnyObject {
-    func deleteNft(itemId: String)
+    func deleteNft(itemId: String, completion: @escaping (Bool) -> Void)
 }
 
 final class DeleteItemViewControler: UIViewController {
@@ -114,7 +114,14 @@ extension DeleteItemViewControler {
     
     @objc
     private func deleteItem() {
-        dismiss(animated: true)
-        delegate?.deleteNft(itemId: itemId)
+        delegate?.deleteNft(itemId: itemId) { [weak self] result in
+            guard let self = self else { return }
+            if result {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true)
+                }
+            }
+        }
+        
     }
 }
