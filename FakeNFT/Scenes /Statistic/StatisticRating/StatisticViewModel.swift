@@ -55,7 +55,6 @@ final class StatisticViewModel: StatisticViewModelProtocol {
         dataProvider?.fetchUsersRating { [weak self] result in
             switch result {
             case .success(let users):
-                self?.networkError = nil
                 self?.sortUsers(by: self?.sortingOption ?? .byRating, usersList: users)
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)

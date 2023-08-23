@@ -54,6 +54,7 @@ final class CatalogViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isNavigationBarClear(true)
         blockUI(withBlur: true)
         viewModel?.fetchCollections()
     }

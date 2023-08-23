@@ -15,7 +15,6 @@ extension UIViewController {
             navigationController?.navigationBar.shadowImage = UIImage()
         } else {
             navigationController?.navigationBar.backgroundColor = .whiteDay
-            navigationController?.navigationBar.isTranslucent = false
         }
     }
     

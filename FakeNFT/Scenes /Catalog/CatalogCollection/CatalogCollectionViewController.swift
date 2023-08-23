@@ -113,6 +113,7 @@ final class CatalogCollectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isNavigationBarClear(true)
         blockUI(withBlur: true)
         viewModel?.updateNFTCardModels()
     }
@@ -368,8 +369,6 @@ extension CatalogCollectionViewController {
          collectionInformationLabel, nftCollection].forEach(collectionScrollView.setupView)
         
         collectionScrollView.refreshControl = refreshControl
-        
-        isNavigationBarClear(true)
     }
 }
 

@@ -40,6 +40,7 @@ final class StatisticViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isNavigationBarClear(true)
         blockUI(withBlur: true)
         statisticViewModel.fetchUsersRating()
     }
@@ -130,10 +131,8 @@ extension StatisticViewController {
     private func bind() {
         statisticViewModel.usersRatingObservable.bind { [weak self] _ in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.unblockUI()
-                self.collectionView.reloadData()
-            }
+            self.resumeMethodOnMainThread(self.endRefreshing, with: ())
+            self.resumeMethodOnMainThread(self.collectionView.reloadData, with: ())
         }
         
         statisticViewModel.networkErrorObservable.bind { [weak self] errorText in
@@ -148,12 +147,14 @@ extension StatisticViewController {
     }
     
     private func endRefreshing() {
-            self.refreshControl.endRefreshing()
-            self.unblockUI()
-        }
+        self.refreshControl.endRefreshing()
+        self.unblockUI()
+        self.isNavigationBarClear(false)
+    }
     
     private func setupViews() {
         view.setupView(collectionView)
+        setupBackButtonItem()
         collectionView.refreshControl = refreshControl
     }
     

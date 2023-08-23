@@ -40,7 +40,6 @@ final class StatisticNFTCollectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
         setupConstraints()
         setupUI()
@@ -49,6 +48,7 @@ final class StatisticNFTCollectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isNavigationBarClear(true)
         blockUI(withBlur: true)
         statisticNFTViewModel.getData()
     }
@@ -76,11 +76,9 @@ extension StatisticNFTCollectionViewController {
     private func bind() {
         statisticNFTViewModel.nftsObservable.bind { [weak self] _ in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.unblockUI()
-                self.collectionView.reloadData()
-                self.showStub()
-            }
+            self.resumeMethodOnMainThread(self.endRefreshing, with: ())
+            self.resumeMethodOnMainThread(self.collectionView.reloadData, with: ())
+            self.resumeMethodOnMainThread(self.showStub, with: ())
         }
         
         statisticNFTViewModel.likeStatusDidChangeObservable.bind { [weak self] _ in
@@ -107,6 +105,7 @@ extension StatisticNFTCollectionViewController {
     private func endRefreshing() {
         self.refreshControl.endRefreshing()
         self.unblockUI()
+        self.isNavigationBarClear(false)
     }
     
     private func changeCellStatus(isLike: Bool) {
@@ -132,6 +131,7 @@ extension StatisticNFTCollectionViewController {
     }
     
     private func setupViews() {
+        setupBackButtonItem()
         view.setupView(collectionView)
         view.setupView(stubLabel)
     }

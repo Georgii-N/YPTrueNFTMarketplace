@@ -80,6 +80,7 @@ final class CartViewControler: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isNavigationBarClear(true)
         blockUI(withBlur: true)
         cartViewModel.getOrder()
     }
@@ -106,6 +107,7 @@ final class CartViewControler: UIViewController {
                 if self.cartViewModel.isReadyToUpdateCollection == true {
                     self.unblockUI()
                     self.cartViewModel.lockVCToUpdate()
+                    self.isNavigationBarClear(false)
                 }
             }
         }

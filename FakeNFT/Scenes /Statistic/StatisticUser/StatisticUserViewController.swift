@@ -102,6 +102,7 @@ extension StatisticUserViewController {
     // MARK: - Private Functions
     
     private func setupViews() {
+        setupBackButtonItem()
         [stackProfileView,
          bioLabel,
          profileButton,

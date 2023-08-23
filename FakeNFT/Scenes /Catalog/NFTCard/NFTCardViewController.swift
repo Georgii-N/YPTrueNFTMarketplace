@@ -141,6 +141,7 @@ final class NFTCardViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = true
+        isNavigationBarClear(true)
         blockUI(withBlur: true)
         viewModel?.updateNFTCardModels()
     }
@@ -169,6 +170,7 @@ final class NFTCardViewController: UIViewController {
         
         viewModel?.nftsObservable.bind { [weak self] _ in
             guard let self else { return }
+            self.resumeMethodOnMainThread(self.setupStateLikeButton, with: false)
             self.resumeMethodOnMainThread(self.nftColectionView.reloadData, with: ())
             self.resumeMethodOnMainThread(self.unblockUI, with: ())
             self.resumeMethodOnMainThread(self.refreshControl.endRefreshing, with: ())
@@ -270,6 +272,10 @@ final class NFTCardViewController: UIViewController {
             let image = isLiked ? Resources.Images.NFTCollectionCell.likedButton : Resources.Images.NFTCollectionCell.unlikedButton
             likeButton.setImage(image, for: .normal)
         }
+    }
+    
+    private func setupStateLikeButton(isHidden: Bool) {
+        likeButton.alpha = isHidden == true ? 0 : 1
     }
     
     private func setupCartButton() {
@@ -509,6 +515,7 @@ extension NFTCardViewController {
         navigationController?.navigationBar.backgroundColor = .clear
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: likeButton)
         
+        setupStateLikeButton(isHidden: true)
         setupBackButtonItem()
         
         view.setupView(allScreenScrollView)
@@ -520,9 +527,7 @@ extension NFTCardViewController {
         
         setupLikeButton()
         setupCartButton()
-        allScreenScrollView.refreshControl = refreshControl
-        
-        isNavigationBarClear(true)
+        allScreenScrollView.refreshControl = refreshControl        
     }
 }
 

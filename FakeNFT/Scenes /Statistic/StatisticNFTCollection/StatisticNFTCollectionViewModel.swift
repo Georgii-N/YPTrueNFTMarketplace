@@ -50,7 +50,6 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
         dataProvider?.fetchUsersNFT(userId: nil, nftsId: nftsId) { [weak self] result in
             switch result {
             case .success(let result):
-                self?.networkError = nil
                 self?.NFTcards = result.map({
                     let isLiked = self?.profile?.likes.contains($0.id)
                     let isAddedToCart = self?.order?.nfts.contains($0.id)
@@ -63,7 +62,6 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
                                    isLiked: isLiked ?? false,
                                    isAddedToCard: isAddedToCart ?? false)
                 })
-                
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
                 self?.networkError = errorString
@@ -76,7 +74,6 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
             guard let self = self else { return }
             switch result {
             case .success(let profile):
-                self.networkError = nil
                 self.profile = profile
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
@@ -90,7 +87,6 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
             guard let self = self else { return }
             switch result {
             case .success(let order):
-                self.networkError = nil
                 self.order = order
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
