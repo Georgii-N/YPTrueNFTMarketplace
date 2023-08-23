@@ -24,8 +24,6 @@ final class CartViewModel: CartViewModelProtocol {
        return $networkError
     }
     
-   // private let dataProvider = DataProvider()
-    
     var isReadyToUpdateCollection = false
     
     private var idNfts: [String] = []

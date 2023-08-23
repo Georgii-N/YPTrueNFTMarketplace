@@ -56,13 +56,14 @@ final class PaymentViewController: UIViewController {
         setupConstraints()
         makeCollectionView()
         setTargets()
+        blockUI(withBlur: true)
         bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        blockUI(withBlur: true)
-        paymentViewModel.getData()
+      //  blockUI(withBlur: true)
+      //  paymentViewModel.getData()
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     

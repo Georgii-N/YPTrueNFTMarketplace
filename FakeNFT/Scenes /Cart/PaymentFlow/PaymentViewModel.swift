@@ -31,6 +31,9 @@ final class PaymentViewModel: PaymentViewModelProtocol {
     var networkErrorObservable: Observable<String?> {
             $networkError
         }
+    init() {
+        getData()
+    }
 
     // MARK: Methods
     func getData() {
