@@ -203,4 +203,6 @@
 - экран «Статистика» — по рейтингу.
 
 # Скринкасты
+## Статистика
+https://github.com/Georgii-N/YPTrueNFTMarketplace/assets/62737451/dc68f615-c2dc-45a7-bdd0-a75cbd338390
 
