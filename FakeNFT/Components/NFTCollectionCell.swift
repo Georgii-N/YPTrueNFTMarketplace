@@ -9,6 +9,13 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
     // MARK: - Constants and Variables:
     static var defaultReuseIdentifier = "NFTCollectionViewCell"
     
+    private lazy var formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.decimalSeparator = ","
+        return formatter
+    }()
+    
     private var nftModel: NFTCell? {
         didSet {
             guard let nftModel = nftModel else { return }
@@ -26,7 +33,11 @@ final class NFTCollectionCell: UICollectionViewCell, ReuseIdentifying {
                                                    .transition(.fade(1)),
                                                    .cacheOriginalImage])
                 nftNameLabel.text = nftModel.name
-                nftPriceLabel.text = "(\(nftModel.price) ETH)"
+                
+                if let formattedString = formatter.string(from: NSNumber(value: nftModel.price)) {
+                    nftPriceLabel.text = "\(String(formattedString)) ETH"
+                }
+                
                 setButtonImages()
                 if ratingStackView.subviews.count == 0 {
                     ratingStackView.setupNFTRating(with: nftModel.rating)
