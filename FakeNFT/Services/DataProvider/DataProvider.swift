@@ -53,6 +53,24 @@ final class DataProvider: DataProviderProtocol {
         }
     }
     
+    func fetchUsers(completion: @escaping (Result<[User], Error>) -> Void) {
+        
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.users, queryItems: nil)
+        
+        let request = NetworkRequestModel(endpoint: url,
+                                          httpMethod: .get,
+                                          dto: nil)
+        networkClient.send(request: request, type: UsersResponse.self) { result in
+            switch result {
+            case .success(let usersResponse):
+                let users = usersResponse.map { $0.convert() }
+                completion(.success(users))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func fetchUserID(userId: String, completion: @escaping (Result<UserResponse, Error>) -> Void) {
         
         let path = Resources.Network.MockAPI.Paths.users + "/\(userId)"
@@ -97,6 +115,19 @@ final class DataProvider: DataProviderProtocol {
         
         let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.profile, queryItems: nil)
         let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: Profile.self) { result in
+            switch result {
+            case .success(let profile):
+                completion(.success(profile))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func changeProfile(profile: Profile, completion: @escaping (Result<Profile, Error>) -> Void) {
+        let url = createURLWithPathAndQueryItems(path: Resources.Network.MockAPI.Paths.profile, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .put, dto: profile)
         networkClient.send(request: request, type: Profile.self) { result in
             switch result {
             case .success(let profile):
@@ -160,20 +191,19 @@ final class DataProvider: DataProviderProtocol {
         }
     }
     
-        func fetchPaymentCurrency(currencyId: Int, completion: @escaping (Result<OrderPayment, Error>) -> Void) {
-             
-            let path = Resources.Network.MockAPI.Paths.orderPayment + "/\(currencyId)"
-            let url = createURLWithPathAndQueryItems(path: path, queryItems: nil)
-            let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
-             // let request = GetOrderPaymentRequest(currencyId: currencyId)
-              networkClient.send(request: request, type: OrderPayment.self) { result in
-                  switch result {
-                  case .success(let orderPayment):
-                      completion(.success(orderPayment))
-                  case .failure(let error):
-                      completion(.failure(error))
-                  }
-              }
-          }
-
+    func fetchPaymentCurrency(currencyId: Int, completion: @escaping (Result<OrderPayment, Error>) -> Void) {
+        
+        let path = Resources.Network.MockAPI.Paths.orderPayment + "/\(currencyId)"
+        let url = createURLWithPathAndQueryItems(path: path, queryItems: nil)
+        let request = NetworkRequestModel(endpoint: url, httpMethod: .get)
+        networkClient.send(request: request, type: OrderPayment.self) { result in
+            switch result {
+            case .success(let orderPayment):
+                completion(.success(orderPayment))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
 }
