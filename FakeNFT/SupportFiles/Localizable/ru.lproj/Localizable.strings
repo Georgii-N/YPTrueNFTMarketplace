@@ -82,11 +82,15 @@
 "profile.mainScreen.favouritesNFT" = "Избранные NFT";
 "profile.mainScreen.aboutDeveloper" = "О разработчике";
 
+
 // EditScreen
 "profile.editScreen.changePhoto" = "Сменить фото";
 "profile.editScreen.name" = "Имя";
 "profile.editScreen.description" = "Описание";
 "profile.editScreen.site" = "Cайт";
+"profile.editScreen.addPicture" = "Добавить изображение";
+"profile.editScreen.pointLink" = "Укажите ссылку на фото";
+"profile.editScreen.enterLink" = "Введите ссылку";
 
 // MyNFTScreen
 "profile.myNFT.plug" = "У Вас еще нет NFT";
@@ -94,6 +98,7 @@
 
 // FavouritesScreen
 "profile.favouritesNFT.plug" = "У Вас еще нет избранных NFT";
+"profile.favouritesNFT.error" = "Ошибка";
 
 // MARK: - Statistic
 "statistic.profile.buttonUser.title" = "Перейти на сайт пользователя";

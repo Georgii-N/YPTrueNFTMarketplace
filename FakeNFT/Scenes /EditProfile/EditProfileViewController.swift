@@ -23,19 +23,20 @@ class EditProfileViewController: UIViewController {
         setupConstrains()
         guard let imageUrl = URL(string: profile?.avatar ?? "") else { return }
         KingfisherManager.shared.retrieveImage(with: imageUrl) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let imageResult):
-                self?.editAvatarButton.setImage(imageResult.image, for: .normal)
+                self.editAvatarButton.setImage(imageResult.image, for: .normal)
             case .failure(let error):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
-                self?.showErrorAlert(message: errorString ?? "")
+                self.showNotificationBanner(with: errorString ?? "")
             }
         }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        guard let profile = profile else { return }
+        guard let profile else { return }
         let updateProfile = Profile(name: nameTextField.text ?? "",
                                     avatar: photoLink ?? profile.avatar,
                                     description: descriptionTextField.text ?? profile.description,
@@ -55,7 +56,7 @@ class EditProfileViewController: UIViewController {
     
     private lazy var closeButton: UIButton = {
         let closeButton = UIButton()
-        closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
+        closeButton.setImage(Resources.Images.NFTBrowsing.cancellButton, for: .normal)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(closeButton)
@@ -64,8 +65,7 @@ class EditProfileViewController: UIViewController {
     
     private lazy var editAvatarButton: UIButton = {
         let editAvatarButton = UIButton()
-        editAvatarButton.setImage(UIImage(named: "profileMockImage"), for: .normal)
-        editAvatarButton.backgroundColor = UIColor(red: 0.1, green: 0.11, blue: 0.13, alpha: 0.6)
+        editAvatarButton.backgroundColor = .lightGrayDay
         editAvatarButton.layer.cornerRadius = 35
         editAvatarButton.setTitle(L10n.Profile.EditScreen.changePhoto, for: .normal)
         editAvatarButton.titleLabel?.numberOfLines = 0
@@ -92,7 +92,7 @@ class EditProfileViewController: UIViewController {
     private lazy var nameUnderView: UIView = {
         let nameUnderView = UIView()
         nameUnderView.layer.cornerRadius = 12
-        nameUnderView.backgroundColor = UIColor(red: 0.969, green: 0.969, blue: 0.973, alpha: 1)
+        nameUnderView.backgroundColor = .lightGrayDay
         nameUnderView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nameUnderView)
         return nameUnderView
@@ -120,7 +120,7 @@ class EditProfileViewController: UIViewController {
     private lazy var descriptionUnderView: UIView = {
         let descriptionUnderView = UIView()
         descriptionUnderView.layer.cornerRadius = 12
-        descriptionUnderView.backgroundColor = UIColor(red: 0.969, green: 0.969, blue: 0.973, alpha: 1)
+        descriptionUnderView.backgroundColor = .lightGrayDay
         descriptionUnderView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(descriptionUnderView)
         return descriptionUnderView
@@ -149,7 +149,7 @@ class EditProfileViewController: UIViewController {
     private lazy var siteUnderView: UIView = {
         let siteUnderView = UIView()
         siteUnderView.layer.cornerRadius = 12
-        siteUnderView.backgroundColor = UIColor(red: 0.969, green: 0.969, blue: 0.973, alpha: 1)
+        siteUnderView.backgroundColor = .lightGrayDay
         siteUnderView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(siteUnderView)
         return siteUnderView
@@ -223,8 +223,8 @@ class EditProfileViewController: UIViewController {
     // MARK: - Alert
     
     func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alert = UIAlertController(title: L10n.Profile.FavouritesNFT.error, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: L10n.General.ok, style: .default, handler: nil)
         alert.addAction(okAction)
 
         present(alert, animated: true, completion: nil)
@@ -232,49 +232,27 @@ class EditProfileViewController: UIViewController {
     
     private func showURLInputAlert() {
         let alert = UIAlertController(
-            title: "Добавить изображение",
-            message: "Укажите ссылку на фото",
+            title: L10n.Profile.EditScreen.addPicture,
+            message: L10n.Profile.EditScreen.pointLink,
             preferredStyle: .alert)
         
         alert.addTextField { textField in
-            textField.placeholder = "Введите ссылку"
+            textField.placeholder = L10n.Profile.EditScreen.enterLink
         }
         let okAction = UIAlertAction(
-            title: "Ок",
+            title: L10n.General.ok,
             style: .default) { [weak self] _ in
                 self?.photoLink = alert.textFields?.first?.text ?? ""
             }
         
         let cancelAction = UIAlertAction(
-            title: "Отмена",
+            title: L10n.General.cancel,
             style: .cancel
         )
         alert.addAction(okAction)
         alert.addAction(cancelAction)
         
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    private func isValidURL(urlString: String) -> Bool {
-        guard let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) else {
-            return false
-        }
-        return true
-    }
-    
-    private func showInvalidURLAlert() {
-        let alert = UIAlertController(
-            title: NSLocalizedString("profile.photo.invalidURLTitle", comment: ""),
-            message: NSLocalizedString("profile.photo.invalidURLMessage", comment: ""),
-            preferredStyle: .alert)
-        
-        let okAction = UIAlertAction(
-            title: NSLocalizedString("profile.photo.okButton", comment: ""),
-            style: .cancel
-        )
-        alert.addAction(okAction)
-        
-        self.present(alert, animated: true)
     }
     
     // MARK: - Actions

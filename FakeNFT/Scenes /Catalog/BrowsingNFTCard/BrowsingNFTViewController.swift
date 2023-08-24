@@ -96,8 +96,6 @@ final class BrowsingNFTViewController: UIViewController {
             imageScrollView.addSubview(imageView)
             imageView.kf.indicatorType = .activity
             imageView.kf.setImage(with: url, options: [.transition(.fade(1))])
-            
-            rescaleAndCenterImageInScrollView(image: imageView.image)
         }
     }
     

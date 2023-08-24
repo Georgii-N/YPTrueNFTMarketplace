@@ -40,12 +40,13 @@ final class FavouritesNFTViewModel: FavouritesNFTViewModelProtocol {
     // MARK: - Public Methods:
     func fetchNtfCards(likes: [String]) {
         dataProvider?.fetchUsersNFT(userId: nil, nftsId: likes) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let nftCards):
-                self?.nftCards = nftCards
+                self.nftCards = nftCards
             case .failure(let failure):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
-                self?.showErrorAlert?(errorString ?? "")
+                self.showErrorAlert?(errorString ?? "")
             }
         }
     }
@@ -60,11 +61,13 @@ final class FavouritesNFTViewModel: FavouritesNFTViewModelProtocol {
                                  likes: likesIds,
                                  id: profile.id)
         dataProvider?.changeProfile(profile: newProfile, completion: { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let profile):
-                self?.profile = profile
+                self.profile = profile
             case .failure(let failure):
-                print(failure)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
+                self.showErrorAlert?(errorString ?? "")
             }
         })
     }
@@ -73,23 +76,26 @@ final class FavouritesNFTViewModel: FavouritesNFTViewModelProtocol {
 
     private func fetchUsers() {
         dataProvider?.fetchUsers { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let users):
-                self?.users = users
+                self.users = users
             case .failure(let failure):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
-                self?.showErrorAlert?(errorString ?? "")
+                self.showErrorAlert?(errorString ?? "")
             }
         }
     }
     
     private func fetchProfile() {
         dataProvider?.fetchProfile(completion: { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let profile):
-                self?.profile = profile
+                self.profile = profile
             case .failure(let failure):
-                print(failure)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
+                self.showErrorAlert?(errorString ?? "")
             }
         })
     }

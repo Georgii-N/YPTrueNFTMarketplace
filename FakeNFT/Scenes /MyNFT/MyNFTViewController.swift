@@ -25,27 +25,24 @@ class MyNFTViewController: UIViewController {
         setupUI()
         setupViews()
         setupConstraints()
-        viewModel?.nftCardsObservable.bind(action: { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
-        })
-        viewModel?.profileObservable.bind(action: { [weak self] profile in
-            self?.nftIds = profile?.nfts ?? []
-            self?.likeNFTIds = profile?.likes ?? []
-            self?.viewModel?.fetchNtfCards(nftIds: self?.nftIds ?? [])
-        })
+        viewModel?.nftCardsObservable.bind { [weak self] _ in
+            guard let self else { return }
+            self.resumeMethodOnMainThread(self.collectionView.reloadData, with: ())
+        }
+        
+        viewModel?.profileObservable.bind { [weak self] profile in
+            guard let self else { return }
+            self.nftIds = profile?.nfts ?? []
+            self.likeNFTIds = profile?.likes ?? []
+            self.viewModel?.fetchNtfCards(nftIds: self.nftIds)
+        }
+        
         viewModel?.showErrorAlert = { [weak self] message in
-            DispatchQueue.main.async {
-                self?.showErrorAlert(message: message)
-            }
+            guard let self else { return }
+            self.resumeMethodOnMainThread(self.showNotificationBanner, with: message)
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-
     // MARK: - Init
 
     init(viewModel: MyNFTViewModel?) {
@@ -62,7 +59,6 @@ class MyNFTViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .whiteDay
         view.tintColor = .blackDay
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "goBack"), style: .plain, target: self, action: #selector(goBackButtonTapped))
         title = L10n.Profile.MainScreen.myNFT
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Resources.Images.NavBar.sortIcon, style: .plain, target: self, action: #selector(sortButtonTapped))
     }
@@ -86,6 +82,7 @@ class MyNFTViewController: UIViewController {
     }
     
     private func setupViews() {
+        setupBackButtonItem()
         view.setupView(collectionView)
     }
     
@@ -93,30 +90,15 @@ class MyNFTViewController: UIViewController {
         alertService = nil
         viewModel?.sortNFTCollection(option: sortOptions)
     }
-    
-    // MARK: - Alert
-    
-    func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okAction)
 
-        present(alert, animated: true, completion: nil)
-    }
-    
     // MARK: - Actions
-    
-    @objc private func goBackButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
-    
     @objc private func sortButtonTapped() {
         alertService = UniversalAlertService()
         alertService?.showActionSheet(title: L10n.Sorting.title,
                                       sortingOptions: [.byPrice, .byRating, .byName, .close],
                                       on: self,
                                       completion: { [weak self] options in
-            guard let self = self else { return }
+            guard let self else { return }
             self.sortNFT(options)
         })
     }

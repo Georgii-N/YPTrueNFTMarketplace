@@ -42,7 +42,7 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     
     private lazy var likeButton: UIButton = {
         let likeButton = UIButton()
-        likeButton.setImage(UIImage(named: "liked"), for: .normal)
+        likeButton.setImage(Resources.Images.NFTCollectionCell.likedButton, for: .normal)
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         return likeButton
     }()
@@ -99,17 +99,17 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     private func setRateImage(_ number: Int) {
         switch number {
         case 0:
-            rateImage.image = RateImages.rateZero
+            rateImage.image = Resources.Images.RateImages.rateZero
         case 1:
-            rateImage.image = RateImages.rateOne
+            rateImage.image = Resources.Images.RateImages.rateOne
         case 2:
-            rateImage.image = RateImages.rateTwo
+            rateImage.image = Resources.Images.RateImages.rateTwo
         case 3:
-            rateImage.image = RateImages.rateThree
+            rateImage.image = Resources.Images.RateImages.rateThree
         case 4:
-            rateImage.image = RateImages.rateFour
+            rateImage.image = Resources.Images.RateImages.rateFour
         case 5:
-            rateImage.image = RateImages.rateFive
+            rateImage.image = Resources.Images.RateImages.rateFive
         default:
             break
         }
@@ -127,9 +127,9 @@ class FavouritesNFTCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         priceLabel.text = "\(model.price) ETH"
         
         if model.isLiked {
-            likeButton.setImage(UIImage(named: "liked"), for: .normal)
+            likeButton.setImage(Resources.Images.NFTCollectionCell.likedButton, for: .normal)
         } else {
-            likeButton.setImage(UIImage(named: "unliked"), for: .normal)
+            likeButton.setImage(Resources.Images.NFTCollectionCell.unlikedButton, for: .normal)
         }
         
         guard let firstImage = model.images.first,

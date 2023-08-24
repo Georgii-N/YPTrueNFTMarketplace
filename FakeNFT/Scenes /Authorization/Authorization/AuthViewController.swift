@@ -122,6 +122,8 @@ final class AuthViewController: UIViewController {
         
         initializeHideKeyboard()
         bind()
+        
+        changeStateEnterButton(isEnabled: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -182,8 +184,7 @@ final class AuthViewController: UIViewController {
     }
     
     private func showLoginPasswordMistake() {
-        enterButton.isEnabled = false
-        enterButton.backgroundColor = .gray
+        changeStateEnterButton(isEnabled: false)
         
         UIView.animate(withDuration: 0.5) { [weak self] in
             guard let self = self else { return }
@@ -202,14 +203,23 @@ final class AuthViewController: UIViewController {
     }
     
     private func hideLoginPasswordMistake() {
-        enterButton.isEnabled = true
-        enterButton.backgroundColor = .blackDay
+        changeStateEnterButton(isEnabled: true)
         
         UIView.animate(withDuration: 0.5) { [weak self] in
             guard let self = self else { return }
             self.loginPasswordMistakeLabel.removeFromSuperview()
             self.emailTextField.layer.borderWidth = 0
             self.passwordTextField.layer.borderWidth = 0
+        }
+    }
+    
+    private func changeStateEnterButton(isEnabled: Bool) {
+        if isEnabled {
+            enterButton.isEnabled = true
+            enterButton.backgroundColor = .blackDay
+        } else {
+            enterButton.isEnabled = false
+            enterButton.backgroundColor = .gray
         }
     }
     
