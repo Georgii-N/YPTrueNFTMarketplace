@@ -6,6 +6,7 @@ final class PaymentViewController: UIViewController {
     private let paymentViewModel: PaymentViewModelProtocol
     
     // MARK: UI constants and variables
+    private var indexToDeselect: IndexPath?
     private let payButton = BaseButton(with: .black, title: L10n.Cart.PayScreen.payButton)
     private let url = URL(string: "https://yandex.ru/legal/practicum_termsofuse/")
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -56,8 +57,10 @@ final class PaymentViewController: UIViewController {
         setupConstraints()
         makeCollectionView()
         setTargets()
-        blockUI(withBlur: true)
         bind()
+        
+        blockUI(withBlur: true)
+        changeStatePayButton(isEnable: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,6 +84,16 @@ final class PaymentViewController: UIViewController {
             }
             self.resumeMethodOnMainThread(self.endRefreshing, with: ())
             self.resumeMethodOnMainThread(self.showNotificationBanner, with: errorText)
+        }
+    }
+    
+    private func changeStatePayButton(isEnable: Bool) {
+        if isEnable {
+            payButton.isEnabled = true
+            payButton.backgroundColor = .blackDay
+        } else {
+            payButton.isEnabled = false
+            payButton.backgroundColor = .gray
         }
     }
 }
@@ -144,6 +157,12 @@ extension PaymentViewController {
             }
         }
         navigationController?.setNavigationBarHidden(true, animated: true)
+        changeStatePayButton(isEnable: false)
+        
+        if let indexToDeselect {
+            guard let cell = collectionView.cellForItem(at: indexToDeselect) as? CartPaymentCell else { return }
+            cell.layer.borderWidth = 0
+        }
     }
     
     @objc
@@ -196,6 +215,9 @@ extension PaymentViewController: UICollectionViewDelegateFlowLayout {
         cell.layer.cornerRadius = 12
         let id = Int(currencieNFT[indexPath.row].id)
         paymentViewModel.currencieID = id
+        indexToDeselect = indexPath
+        
+        changeStatePayButton(isEnable: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
