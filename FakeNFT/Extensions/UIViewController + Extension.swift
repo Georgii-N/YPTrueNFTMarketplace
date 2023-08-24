@@ -94,7 +94,8 @@ extension UIViewController {
     }
     
     private func setupBlur() {
-        let blurEffect = UIBlurEffect(style: .extraLight)
+        let traitCollection = traitCollection.userInterfaceStyle
+        let blurEffect = UIBlurEffect(style: traitCollection == .light ? .extraLight : .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         
         view.setupView(blurEffectView)
