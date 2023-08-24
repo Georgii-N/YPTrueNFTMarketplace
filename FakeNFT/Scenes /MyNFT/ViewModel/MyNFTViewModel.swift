@@ -71,6 +71,8 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
             cards = nftCards.sorted { nft1, nft2 in
                 nft1.name < nft2.name
             }
+        case .close:
+            cards = nftCards
         default:
             break
         }
