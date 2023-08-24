@@ -28,20 +28,20 @@ final class CartViewControler: UIViewController {
     private lazy var totalNFT: UILabel = {
         let totalNFT = UILabel()
         totalNFT.textColor = .blackDay
-        totalNFT.font = UIFont.systemFont(ofSize: 15)
+        totalNFT.font = UIFont.captionSmallRegular
         return totalNFT
     }()
     
     private lazy var totalCost: UILabel = {
         let totalCost = UILabel()
         totalCost.textColor = .greenUniversal
-        totalCost.font = UIFont.boldSystemFont(ofSize: 17)
+        totalCost.font = UIFont.bodyMediumBold
         return totalCost
     }()
     
     private let emptyLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.font = UIFont.bodyMediumBold
         label.text = L10n.Cart.MainScreen.emptyCart
         label.isHidden = true
         return label
@@ -54,7 +54,7 @@ final class CartViewControler: UIViewController {
         toPayButton.setTitleColor(.whiteDay, for: .normal)
         toPayButton.layer.cornerRadius = 16
         toPayButton.titleLabel?.textAlignment = .center
-        toPayButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        toPayButton.titleLabel?.font = UIFont.bodyMediumBold
         toPayButton.isHidden = false
         return toPayButton
     }()

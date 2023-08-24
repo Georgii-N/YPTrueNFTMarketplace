@@ -18,7 +18,7 @@ final class SuccessfulPaymentViewController: UIViewController {
         successefulLabel.numberOfLines = 2
         successefulLabel.textAlignment = .center
         successefulLabel.textColor = .blackDay
-        successefulLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        successefulLabel.font = UIFont.bodyLargeBold
         return successefulLabel
     }()
     

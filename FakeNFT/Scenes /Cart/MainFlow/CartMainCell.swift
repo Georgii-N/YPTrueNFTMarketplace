@@ -22,7 +22,7 @@ final class CartMainCell: UICollectionViewCell {
     private lazy var nameNFT: UILabel = {
         let nameNFT = UILabel()
         nameNFT.textColor = .blackDay
-        nameNFT.font = UIFont.boldSystemFont(ofSize: 17)
+        nameNFT.font = UIFont.bodyMediumBold
         return nameNFT
     }()
     
@@ -34,7 +34,7 @@ final class CartMainCell: UICollectionViewCell {
     private lazy var priceNFT: UILabel = {
         let priceNFT = UILabel()
         priceNFT.textColor = .blackDay
-        priceNFT.font = UIFont.systemFont(ofSize: 13)
+        priceNFT.font = UIFont.captionSmallerRegular
         priceNFT.text = "Цена"
         return priceNFT
     }()
@@ -42,7 +42,7 @@ final class CartMainCell: UICollectionViewCell {
     private lazy var priceCountNFT: UILabel = {
         let priceCountNFT = UILabel()
         priceCountNFT.textColor = .blackDay
-        priceCountNFT.font = UIFont.boldSystemFont(ofSize: 17)
+        priceCountNFT.font = UIFont.bodyMediumBold
         return priceCountNFT
     }()
     

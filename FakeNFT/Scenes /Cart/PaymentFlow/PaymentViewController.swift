@@ -27,7 +27,7 @@ final class PaymentViewController: UIViewController {
     private lazy var userTerms: UILabel = {
         let userTerms = UILabel()
         userTerms.textColor = .blackDay
-        userTerms.font = UIFont.systemFont(ofSize: 13)
+        userTerms.font = UIFont.captionSmallRegular
         userTerms.text = L10n.Cart.PayScreen.userTerms
         return userTerms
     }()
@@ -36,7 +36,7 @@ final class PaymentViewController: UIViewController {
         let userTermsLink = UIButton()
         userTermsLink.setTitle(L10n.Cart.PayScreen.userTermsLink, for: .normal)
         userTermsLink.setTitleColor(.blueUniversal, for: .normal)
-        userTermsLink.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        userTermsLink.titleLabel?.font = UIFont.captionSmallRegular
         return userTermsLink
     }()
     
@@ -62,8 +62,6 @@ final class PaymentViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-      //  blockUI(withBlur: true)
-      //  paymentViewModel.getData()
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     

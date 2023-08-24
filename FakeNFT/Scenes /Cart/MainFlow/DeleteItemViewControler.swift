@@ -27,7 +27,7 @@ final class DeleteItemViewControler: UIViewController {
         alertlLabel.numberOfLines = 2
         alertlLabel.textAlignment = .center
         alertlLabel.textColor = .blackDay
-        alertlLabel.font = UIFont.systemFont(ofSize: 13)
+        alertlLabel.font = UIFont.captionSmallerRegular
         alertlLabel.text = L10n.Cart.MainScreen.deleteItemAlert
         return alertlLabel
     }()
@@ -39,7 +39,7 @@ final class DeleteItemViewControler: UIViewController {
         deleteCartButton.setTitleColor(.red, for: .normal)
         deleteCartButton.layer.cornerRadius = 12
         deleteCartButton.titleLabel?.textAlignment = .center
-        deleteCartButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        deleteCartButton.titleLabel?.font = UIFont.bodyMediumRegular
         return deleteCartButton
     }()
     
@@ -50,7 +50,7 @@ final class DeleteItemViewControler: UIViewController {
         returnToCartButton.setTitleColor(.whiteDay, for: .normal)
         returnToCartButton.layer.cornerRadius = 12
         returnToCartButton.titleLabel?.textAlignment = .center
-        returnToCartButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        returnToCartButton.titleLabel?.font = UIFont.bodyMediumRegular
         return returnToCartButton
     }()
     

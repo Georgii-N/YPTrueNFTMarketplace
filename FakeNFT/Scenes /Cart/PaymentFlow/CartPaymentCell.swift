@@ -14,7 +14,7 @@ final class CartPaymentCell: UICollectionViewCell {
    private lazy var nameCoin: UILabel = {
         let nameCoin = UILabel()
         nameCoin.textColor = .blackDay
-        nameCoin.font = UIFont.systemFont(ofSize: 13)
+        nameCoin.font = UIFont.captionSmallRegular
         return nameCoin
     }()
     
@@ -28,7 +28,7 @@ final class CartPaymentCell: UICollectionViewCell {
    private lazy var shortNameCoin: UILabel = {
         let shortNameCoin = UILabel()
         shortNameCoin.textColor = .greenUniversal
-        shortNameCoin.font = UIFont.systemFont(ofSize: 13)
+        shortNameCoin.font = UIFont.captionSmallRegular
         return shortNameCoin
     }()
     
