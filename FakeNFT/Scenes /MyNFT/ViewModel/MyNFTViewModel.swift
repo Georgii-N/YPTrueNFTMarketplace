@@ -41,21 +41,22 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
     // MARK: - Public Methods:
     func fetchNtfCards(nftIds: [String]) {
         dataProvider?.fetchUsersNFT(userId: nil, nftsId: nftIds) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let nftCards):
-                self?.nftCards = nftCards
-                if let currentSortOption = self?.currentSortOption {
-                    self?.sortNFTCollection(option: currentSortOption)
+                self.nftCards = nftCards
+                if let currentSortOption = self.currentSortOption {
+                    self.sortNFTCollection(option: currentSortOption)
                 }
             case .failure(let failure):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
-                self?.showErrorAlert?(errorString ?? "")
+                self.showErrorAlert?(errorString ?? "")
             }
         }
     }
 
     func sortNFTCollection(option: SortingOption) {
-        guard let nftCards = nftCards else { return }
+        guard let nftCards else { return }
 
         var cards = [NFTCard]()
 
@@ -79,7 +80,7 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
     }
     
     func changeProfile(likesIds: [String]) {
-        guard let profile = profile else { return }
+        guard let profile else { return }
         let newProfile = Profile(name: profile.name,
                                  avatar: profile.avatar,
                                  description: profile.description,
@@ -88,11 +89,13 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
                                  likes: likesIds,
                                  id: profile.id)
         dataProvider?.changeProfile(profile: newProfile, completion: { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let profile):
-                self?.profile = profile
+                self.profile = profile
             case .failure(let failure):
-                print(failure)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
+                self.showErrorAlert?(errorString ?? "")
             }
         })
     }
@@ -101,23 +104,26 @@ final class MyNFTViewModel: MyNFTViewModelProtocol {
 
     private func fetchUsers() {
         dataProvider?.fetchUsers { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let users):
-                self?.users = users
+                self.users = users
             case .failure(let failure):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
-                self?.showErrorAlert?(errorString ?? "")
+                self.showErrorAlert?(errorString ?? "")
             }
         }
     }
     
     private func fetchProfile() {
         dataProvider?.fetchProfile(completion: { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let profile):
-                self?.profile = profile
+                self.profile = profile
             case .failure(let failure):
-                print(failure)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
+                self.showErrorAlert?(errorString ?? "")
             }
         })
     }

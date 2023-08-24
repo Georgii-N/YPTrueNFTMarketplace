@@ -25,18 +25,24 @@ class ProfileViewController: UIViewController {
         setupNavBar()
         setupConstrains()
         viewModel?.profileObservable.bind(action: { [weak self] _ in
-            self?.setupProfile()
+            guard let self else { return }
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
+            self.resumeMethodOnMainThread(self.isNavigationBarClear, with: false)
+            self.setupProfile()
         })
         
         viewModel?.showErrorAlert = { [weak self] message in
-            DispatchQueue.main.async {
-                self?.showErrorAlert(message: message)
-            }
+            guard let self else { return }
+            self.resumeMethodOnMainThread(self.unblockUI, with: ())
+            self.resumeMethodOnMainThread(self.isNavigationBarClear, with: false)
+            self.resumeMethodOnMainThread(self.showNotificationBanner, with: message)
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isNavigationBarClear(true)
+        blockUI(withBlur: true)
         viewModel?.fetchProfile()
     }
 
@@ -59,14 +65,18 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupNavBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "editProfile"), style: .plain, target: self, action: #selector(presentEditVC))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Resources.Images.editProfile,
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(presentEditVC))
     }
     
     private lazy var profileAvatarImage: UIImageView = {
         var profileAvatarImage = UIImageView()
+        profileAvatarImage.backgroundColor = .lightGray
         profileAvatarImage.layer.cornerRadius = 35
         profileAvatarImage.clipsToBounds = true
-        profileAvatarImage.image = UIImage(named: "profileMockImage")
+        profileAvatarImage.image = Resources.Images.profileMockImage
         profileAvatarImage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profileAvatarImage)
         return profileAvatarImage
@@ -77,7 +87,6 @@ class ProfileViewController: UIViewController {
         profileNameLabel.font = .captionLargeBold
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.07
-        profileNameLabel.attributedText = NSMutableAttributedString(string: "Joaquin Phoenix", attributes: [NSAttributedString.Key.kern: 1, NSAttributedString.Key.paragraphStyle: paragraphStyle])
         profileNameLabel.numberOfLines = 2
         profileNameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profileNameLabel)
@@ -87,7 +96,6 @@ class ProfileViewController: UIViewController {
     private lazy var profileDescriptionLabel: UILabel = {
         let profileDescriptionLabel = UILabel()
         profileDescriptionLabel.font = .bodySmallerRegular
-        profileDescriptionLabel.text = "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям."
         let attributedText = NSMutableAttributedString(string: profileDescriptionLabel.text ?? "")
         let paragrapthStyle = NSMutableParagraphStyle()
         paragrapthStyle.lineSpacing = 5
@@ -103,8 +111,7 @@ class ProfileViewController: UIViewController {
     private lazy var profileSite: UILabel = {
         let profileSite = UILabel()
         profileSite.font = .bodySmallRegular
-        profileSite.text = "JoaquinPhoenix.com"
-        profileSite.textColor = UIColor(red: 0.039, green: 0.518, blue: 1, alpha: 1)
+        profileSite.textColor = .blueUniversal
         profileSite.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(profileSite)
         return profileSite
@@ -112,7 +119,6 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileTableView: UITableView = {
         let profileTableView = UITableView()
-        profileTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         profileTableView.delegate = self
         profileTableView.dataSource = self
         profileTableView.separatorStyle = .none
@@ -156,24 +162,15 @@ class ProfileViewController: UIViewController {
 
     private func setupProfile() {
         DispatchQueue.main.async { [weak self] in
-            guard let profile = self?.viewModel?.profileObservable.wrappedValue,
+            guard let self,
+                  let profile = self.viewModel?.profileObservable.wrappedValue,
             let avatarUrl = URL(string: profile.avatar) else { return }
-            self?.profileNameLabel.text = profile.name
-            self?.profileDescriptionLabel.text = profile.description
-            self?.profileSite.text = profile.website
-            self?.profileAvatarImage.kf.setImage(with: avatarUrl)
-            self?.profileTableView.reloadData()
+            self.profileNameLabel.text = profile.name
+            self.profileDescriptionLabel.text = profile.description
+            self.profileSite.text = profile.website
+            self.profileAvatarImage.kf.setImage(with: avatarUrl)
+            self.profileTableView.reloadData()
         }
-    }
-    
-    // MARK: - Alert
-    
-    func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okAction)
-
-        present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Actions
@@ -195,9 +192,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = UITableViewCell()
         cell.accessoryType = .disclosureIndicator
-        cell.accessoryView = UIImageView(image: UIImage(named: "disclosureCell"))
+        cell.accessoryView = UIImageView(image: Resources.Images.Authorization.forwardButtonImage)
         cell.textLabel?.font = .bodyMediumBold
         cell.selectionStyle = .none
         cell.backgroundColor = .clear
@@ -228,7 +225,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             favouritesNFT.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(favouritesNFT, animated: true)
         case 2:
-            guard let url = URL(string: "https://practicum.yandex.ru/ios-developer/") else { return }
+            guard let url = URL(string: profileSite.text ?? "") else { return }
             let webViewViewModel = WebViewViewModel()
             let webViewController = WebViewViewController(viewModel: webViewViewModel, url: url)
             navigationController?.pushViewController(webViewController, animated: true)

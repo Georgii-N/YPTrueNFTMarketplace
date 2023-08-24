@@ -115,7 +115,8 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
                 self.cartStatusDidChange = true
                 self.order = order
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         })
     }
@@ -146,7 +147,8 @@ final class StatisticNFTCollectionViewModel: StatisticNFTCollectionViewModelProt
                 self.likeStatusDidChange = true
                 self.profile = profile
             case .failure(let error):
-                print(error)
+                let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: error)
+                self.networkError = errorString
             }
         })
     }

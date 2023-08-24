@@ -87,6 +87,9 @@
 "profile.editScreen.name" = "Name";
 "profile.editScreen.description" = "Description";
 "profile.editScreen.site" = "Website";
+"profile.editScreen.addPicture" = "Add an image";
+"profile.editScreen.pointLink" = "Specify the link to the photo";
+"profile.editScreen.enterLink" = "Enter the link";
 
 // MyNFTScreen
 "profile.myNFT.plug" = "You don't have NFT yet";
@@ -94,6 +97,7 @@
 
 // FavouritesScreen
 "profile.favouritesNFT.plug" = "You don't have any NFT favorites yet";
+"profile.favouritesNFT.error" = "Error";
 
 // MARK: - Statistic
 "statistic.profile.buttonUser.title" = "Go to the user's website";

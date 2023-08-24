@@ -24,12 +24,13 @@ final class ProfileViewModel: ProfileViewModelProtocol {
 
     func fetchProfile() {
         dataProvider?.fetchProfile(completion: { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let profile):
-                self?.profile = profile
+                self.profile = profile
             case .failure(let failure):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
-                self?.showErrorAlert?(errorString ?? "")
+                self.showErrorAlert?(errorString ?? "")
             }
         })
     }
@@ -38,12 +39,13 @@ final class ProfileViewModel: ProfileViewModelProtocol {
 
     func changeProfile(profile: Profile) {
         dataProvider?.changeProfile(profile: profile, completion: { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let profile):
-                self?.profile = profile
+                self.profile = profile
             case .failure(let failure):
                 let errorString = HandlingErrorService().handlingHTTPStatusCodeError(error: failure)
-                self?.showErrorAlert?(errorString ?? "")
+                self.showErrorAlert?(errorString ?? "")
             }
         })
     }

@@ -87,6 +87,10 @@
 "profile.editScreen.name" = "الاسم";
 "profile.editScreen.description" = "الوصف";
 "profile.editScreen.site" = "الموقع الإلكتروني";
+"profile.editScreen.site" = "Website";
+"profile.editScreen.addPicture" = "إضافة صورة";
+"profile.editScreen.pointLink" = "حدد الرابط إلى الصورة";
+"profile.editScreen.enterLink" = "أدخل الرابط";
 
 // MyNFTScreen
 "profile.myNFT.plug" = "NFT لم يكن لديك نفت بعد";
@@ -94,6 +98,7 @@
 
 // FavouritesScreen
 "profile.favouritesNFT.plug" = "NFT ليس لديك مفضلات بعد";
+"profile.favouritesNFT.error" = "خطأ";
 
 // MARK: - Statistic
 "statistic.profile.buttonUser.title" = "انتقل إلى موقع المستخدم";

@@ -23,19 +23,20 @@ class FavouritesNFTViewController: UIViewController {
         setupViews() 
         setupConstraints()
         
-        viewModel?.nftCardsObservable.bind(action: { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
-        })
-        viewModel?.profileObservable.bind(action: { [weak self] profile in
-            self?.likesIds = profile?.likes ?? []
-            self?.viewModel?.fetchNtfCards(likes: self?.likesIds ?? [])
-        })
+        viewModel?.nftCardsObservable.bind { [weak self] _ in
+            guard let self else { return }
+            self.resumeMethodOnMainThread(self.collectionView.reloadData, with: ())
+        }
+        
+        viewModel?.profileObservable.bind { [weak self] profile in
+            guard let self else { return }
+            self.likesIds = profile?.likes ?? []
+            self.viewModel?.fetchNtfCards(likes: self.likesIds)
+        }
+        
         viewModel?.showErrorAlert = { [weak self] message in
-            DispatchQueue.main.async {
-                self?.showErrorAlert(message: message)
-            }
+            guard let self else { return }
+            self.resumeMethodOnMainThread(self.showNotificationBanner, with: message)
         }
     }
 
@@ -55,7 +56,6 @@ class FavouritesNFTViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .whiteDay
         view.tintColor = .blackDay
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "goBack"), style: .plain, target: self, action: #selector(goBackButtonTapped))
         title = L10n.Profile.MainScreen.favouritesNFT
     }
     
@@ -69,6 +69,7 @@ class FavouritesNFTViewController: UIViewController {
     }()
     
     private func setupViews() {
+        setupBackButtonItem()
         view.setupView(collectionView)
     }
     
@@ -79,21 +80,6 @@ class FavouritesNFTViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-    }
-    
-    // MARK: - Alert
-    
-    func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okAction)
-
-        present(alert, animated: true, completion: nil)
-    }
-    
-    // MARK: - Actions
-    @objc private func goBackButtonTapped() {
-        navigationController?.popViewController(animated: true)
     }
 }
 

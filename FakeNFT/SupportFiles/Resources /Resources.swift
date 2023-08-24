@@ -45,12 +45,24 @@ enum Resources {
             static let removeFromBasket = UIImage(named: "removeBasket")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
         }
         
+        enum RateImages {
+            static let rateZero = UIImage(named: "rateZero")
+            static let rateOne = UIImage(named: "rateOne")
+            static let rateTwo = UIImage(named: "rateTwo")
+            static let rateThree = UIImage(named: "rateThree")
+            static let rateFour = UIImage(named: "rateFour")
+            static let rateFive = UIImage(named: "rateFive")
+        }
+        
         static let unlikedButton = UIImage(systemName: "heart.fill")?.withTintColor(.whiteUniversal, renderingMode: .alwaysOriginal)
         static let likedButton = UIImage(systemName: "heart.fill")?.withTintColor(.redUniversal, renderingMode: .alwaysOriginal)
         static let grayRatingStar = UIImage(systemName: "star.fill")?.withTintColor(.lightGrayDay, renderingMode: .alwaysOriginal)
         static let goldRatingStar = UIImage(systemName: "star.fill")?.withTintColor(.yellowUniversal, renderingMode: .alwaysOriginal)
         static let putInBasket = UIImage(named: "emptyCart")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
         static let removeFromBasket = UIImage(named: "removeBasket")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)
+        static let editProfile = UIImage(named: "editProfile")
+        static let profileMockImage = UIImage(named: "profileMockImage")
+        static let profileDisclosureCell = UIImage(named: "disclosureCell")
         
         enum NFTBrowsing {
             static let cancellButton = UIImage(systemName: "xmark")?.withTintColor(.blackDay, renderingMode: .alwaysOriginal)

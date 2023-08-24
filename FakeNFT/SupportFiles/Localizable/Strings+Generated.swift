@@ -182,16 +182,24 @@ internal enum L10n {
     /// Profile
     internal static let title = L10n.tr("Localizable", "profile.title", fallback: "Profile")
     internal enum EditScreen {
+      /// Add an image
+      internal static let addPicture = L10n.tr("Localizable", "profile.editScreen.addPicture", fallback: "Add an image")
       /// Change photo
       internal static let changePhoto = L10n.tr("Localizable", "profile.editScreen.changePhoto", fallback: "Change photo")
       /// Description
       internal static let description = L10n.tr("Localizable", "profile.editScreen.description", fallback: "Description")
+      /// Enter the link
+      internal static let enterLink = L10n.tr("Localizable", "profile.editScreen.enterLink", fallback: "Enter the link")
       /// Name
       internal static let name = L10n.tr("Localizable", "profile.editScreen.name", fallback: "Name")
+      /// Specify the link to the photo
+      internal static let pointLink = L10n.tr("Localizable", "profile.editScreen.pointLink", fallback: "Specify the link to the photo")
       /// Website
       internal static let site = L10n.tr("Localizable", "profile.editScreen.site", fallback: "Website")
     }
     internal enum FavouritesNFT {
+      /// Error
+      internal static let error = L10n.tr("Localizable", "profile.favouritesNFT.error", fallback: "Error")
       /// You don't have any NFT favorites yet
       internal static let plug = L10n.tr("Localizable", "profile.favouritesNFT.plug", fallback: "You don't have any NFT favorites yet")
     }

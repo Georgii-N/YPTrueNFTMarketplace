@@ -53,7 +53,7 @@ final class StatisticUserViewController: UIViewController {
     }()
     
     private lazy var disclosureImageView: UIImageView = {
-        let disclosureImage = UIImage(systemName: "chevron.forward")
+        let disclosureImage = Resources.Images.Authorization.forwardButtonImage
         let disclosureImageView = UIImageView(image: disclosureImage)
         disclosureImageView.tintColor = .blackDay
         return disclosureImageView
