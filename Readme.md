@@ -206,6 +206,7 @@
 ## Статистика
 https://github.com/Georgii-N/YPTrueNFTMarketplace/assets/62737451/dc68f615-c2dc-45a7-bdd0-a75cbd338390
 ## Каталог
-https://github.com/Georgii-N/YPTrueNFTMarketplace/assets/119004420/31675b74-e229-409b-a894-4e88f4345056
+https://github.com/Georgii-N/YPTrueNFTMarketplace/assets/119004420/2b08d5ec-13b1-4001-ad94-b4f2bfcf6ff3
+
 
 
