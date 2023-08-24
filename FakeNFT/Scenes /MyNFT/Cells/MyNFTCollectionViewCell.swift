@@ -90,8 +90,8 @@ class MyNFTCollectionViewCell: UICollectionViewCell {
             // Like Button
             likeButton.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 12),
             likeButton.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -12),
-            likeButton.widthAnchor.constraint(equalToConstant: 18),
-            likeButton.heightAnchor.constraint(equalToConstant: 16),
+            likeButton.widthAnchor.constraint(equalToConstant: 26),
+            likeButton.heightAnchor.constraint(equalToConstant: 22),
             
             // Name Label
             nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 23),
