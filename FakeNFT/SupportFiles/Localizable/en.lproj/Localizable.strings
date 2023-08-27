@@ -1,0 +1,124 @@
+// MARK: - Onboarding
+"onboarding.research" = "Explore";
+"onboarding.research.text" = "Join us and discover a new world of unique NFT for collectors";
+"onboarding.collect" = "Collect";
+"onboarding.collect.text" = "Replenish your collection with exclusive pictures created by the neural network!";
+"onboarding.competit" = "Compete";
+"onboarding.competit.text" = "See the statistics of others and show everyone that you have the most valuable collection";
+"onboarding.isWhatInside" = "What's inside?";
+
+// MARK: - TabBar
+"profile.title" = "Profile";
+"catalog.title" = "Catalog";
+"basket.title" = "Cart";
+"statistic.title" = "Statistics";
+
+// MARK: - General
+"general.cancel" = "Cancel";
+"general.delete" = "Remove";
+"general.return" = "Return";
+"general.close" = "Close";
+"general.email" = "Email";
+"general.price" = "Price";
+"general.OK" = "OK";
+"general.refreshStub" = "It seems that there is nothing\npull down to update";
+
+// MARK: - Authorization
+"authorization.enter" = "Entrance";
+"authorization.password" = "Password";
+"authorization.entering" = "Enter";
+"authorization.forgetPassword" = "Forgot your password?";
+"authorization.demo" = "Demo";
+"authorization.registration" = "Register";
+"authorization.registrate" = "Registration";
+"authorization.error.loginIsBusy" = "This username is busy";
+"authorization.error.loginPasswordMistake" = "Invalid username or password entered";
+"authorization.error.passwordMistake" = "The password must have at least 6 characters";
+"authorization.error.mailMistake" = "Enter email";
+
+// MARK: - Alerts
+"alert.authorization.title" = "Something went wrong :(";
+"alert.authorization.message" = "Failed to log in";
+
+// MARK: - Sorting
+"sorting.title" = "Sorting";
+"sorting.byName" = "By name";
+"sorting.byTitle" = "By title";
+"sorting.byPrice" = "By price";
+"sorting.byNFTCount" = "By the number of NFT";
+"sorting.byRating" = "By rating";
+
+// MARK: - Catalog
+"catalog.currentCollection.author" = "Author of the collection";
+"catalog.nftCard.button.addToCart" = "Add to Cart";
+"catalog.nftCard.button.removeFromCart" = "Remove from Cart";
+"catalog.nftCard.button.goToSellerSite" = "Go to the seller's website";
+
+// MARK: - Cart
+// Main Screen
+"cart.mainScreen.emptyCart" = "The cart is empty";
+"cart.mainScreen.toPayButton" = "To be paid";
+"cart.mainScreen.deleteItemAlert" = "Are you sure you want to delete an object from the cart?";
+"cart.mainScreen.deleteItemButton" = "Delete";
+"cart.mainScreen.returnButton" = "Return";
+
+// Pay Screen
+"cart.payScreen.paymentChoice" = "Choose a payment method";
+"cart.payScreen.userTerms" = "By making a purchase, you agree to the terms and conditions";
+"cart.payScreen.userTermsLink" = "User Agreement";
+"cart.payScreen.payButton" = "Pay";
+
+// Successful Payment Screen
+"cart.successfulPayment.successful" = "Success! The payment has passed, congratulations on your purchase!";
+"cart.successfulPayment.toBackCatalogButton" = "Return to the catalog";
+
+// Unuccessful Payment Screen
+"cart.unsuccessfulPayment.unsuccessful" = "Oops! Something went wrong :(\nTry again!";
+"cart.unsuccessfulPayment.tryAgain" = "Try again";
+
+// MARK: - Profile
+// MainScreen
+"profile.mainScreen.myNFT" = "My NFT";
+"profile.mainScreen.favouritesNFT" = "Favorites NFT";
+"profile.mainScreen.aboutDeveloper" = "About developer";
+
+// EditScreen
+"profile.editScreen.changePhoto" = "Change photo";
+"profile.editScreen.name" = "Name";
+"profile.editScreen.description" = "Description";
+"profile.editScreen.site" = "Website";
+"profile.editScreen.addPicture" = "Add an image";
+"profile.editScreen.pointLink" = "Specify the link to the photo";
+"profile.editScreen.enterLink" = "Enter the link";
+
+// MyNFTScreen
+"profile.myNFT.plug" = "You don't have NFT yet";
+"profile.myNFT.from" = "From";
+
+// FavouritesScreen
+"profile.favouritesNFT.plug" = "You don't have any NFT favorites yet";
+"profile.favouritesNFT.error" = "Error";
+
+// MARK: - Statistic
+"statistic.profile.buttonUser.title" = "Go to the user's website";
+"statistic.profile.buttonCollection.title" = "NFT collection";
+"statistic.profile.userCollection.stub" = "The user does not have an NFT yet";
+
+// MARK: - Netword Errors:
+"networkError.http.404" = "Nothing was found on the request";
+"networkError.http.409" = "Resource update error";
+"networkError.http.410" = "The requested resource is no longer available";
+"networkError.http.5хх" = "Server-side error";
+"networkError.URLSessionError" = "Check your internet connection";
+"networkError.parsingError" = "Failed to convert the received data";
+"networkError.anotherError" = "Data could not be retrieved";
+"networkError.requestError" = "Request execution error";
+"networkError.tryLater" = "Please try again later";
+
+// MARK: - Metrica Agreement:
+"metrica.warning" = "Warning about data collection";
+"metrica.message" = "Information about the use of the application in an impersonal form will be transmitted to Yandex.
+Yandex will process this information to provide statistics on your use of the application,
+compile reports on the operation of the application for us, and provide other services";
+"metrica.agree" = "Agree";
+"metrica.disagree" = "Don't agree";

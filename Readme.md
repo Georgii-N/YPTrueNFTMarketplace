@@ -201,3 +201,19 @@
 - экран «Корзина» — по названию;
 - экран «Мои NFT» — по рейтингу;
 - экран «Статистика» — по рейтингу.
+
+# Скринкасты
+## Статистика
+https://github.com/Georgii-N/YPTrueNFTMarketplace/assets/62737451/dc68f615-c2dc-45a7-bdd0-a75cbd338390
+## Каталог
+https://github.com/Georgii-N/YPTrueNFTMarketplace/assets/119004420/83a01cea-edea-4193-91cd-79a03676a305
+## Профиль
+https://github.com/Georgii-N/YPTrueNFTMarketplace/assets/95555373/a1804f26-551d-4d85-8b29-9c6bbc1873e1
+## Корзина
+https://github.com/Georgii-N/YPTrueNFTMarketplace/assets/116825348/781b8856-9954-4069-af9c-4b03871b3a8e
+
+
+
+
+
+

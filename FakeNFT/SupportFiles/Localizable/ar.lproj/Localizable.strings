@@ -1,0 +1,125 @@
+// MARK: - Onboarding
+"onboarding.research" = "استكشاف";
+"onboarding.research.text" = "انضم إلينا واكتشف عالما جديدا من التوكنات غير القابلة للاستبدال الفريدة لهواة الجمع";
+"onboarding.collect" = "جمع";
+"onboarding.collect.text" = "تجديد مجموعتك مع الصور الحصرية التي أنشأتها الشبكة العصبية!";
+"onboarding.competit" = "تنافس";
+"onboarding.competit.text" = "اطلع على إحصائيات الآخرين وأظهر للجميع أن لديك المجموعة الأكثر قيمة";
+"onboarding.isWhatInside" = "ما في الداخل?";
+
+// MARK: - TabBar
+"profile.title" = "الملف الشخصي";
+"catalog.title" = "كتالوج";
+"basket.title" = "سلة";
+"statistic.title" = "الإحصاءات";
+
+// MARK: - General
+"general.cancel" = "إلغاء";
+"general.delete" = "إزالة";
+"general.return" = "للعودة";
+"general.close" = "لإغلاق";
+"general.email" = "Email";
+"general.price" = "السعر";
+"general.OK" = "حسنا";
+"general.refreshStub" = "يبدو أنه لا يوجد شيء \nهدم لتحديث";
+
+// MARK: - Authorization
+"authorization.enter" = "مدخل";
+"authorization.password" = "كلمة المرور";
+"authorization.entering" = "أدخل";
+"authorization.forgetPassword" = "نسيت كلمة المرور?";
+"authorization.demo" = "عرض";
+"authorization.registration" = "التسجيل";
+"authorization.registrate" = "التسجيل";
+"authorization.error.loginIsBusy" = "اسم المستخدم هذا مشغول";
+"authorization.error.loginPasswordMistake" = "تم إدخال اسم مستخدم أو كلمة مرور غير صالحة";
+"authorization.error.passwordMistake" = "يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل";
+"authorization.error.mailMistake" = "أدخل البريد الإلكتروني";
+
+// MARK: - Alerts
+"alert.authorization.title" = "حدث خطأ ما";
+"alert.authorization.message" = "فشل في تسجيل الدخول";
+
+// MARK: - Sorting
+"sorting.title" = "الفرز";
+"sorting.byName" = "بالاسم";
+"sorting.byTitle" = "بالاسم";
+"sorting.byPrice" = "حسب السعر";
+"sorting.byNFTCount" = "من خلال عدد من نفت";
+"sorting.byRating" = "حسب التصنيف";
+
+// MARK: - Catalog
+"catalog.currentCollection.author" = "مؤلف المجموعة";
+"catalog.nftCard.button.addToCart" = "أضف إلى السلة";
+"catalog.nftCard.button.removeFromCart" = "إزالة من القمامة";
+"catalog.nftCard.button.goToSellerSite" = "انتقل إلى موقع البائع";
+
+// MARK: - Cart
+// Main Screen
+"cart.mainScreen.emptyCart" = "السلة فارغة";
+"cart.mainScreen.toPayButton" = "تدفع";
+"cart.mainScreen.deleteItemAlert" = "هل أنت متأكد أنك تريد حذف كائن من سلة المهملات?";
+"cart.mainScreen.deleteItemButton" = "إزالة";
+"cart.mainScreen.returnButton" = "للعودة";
+
+// Pay Screen
+"cart.payScreen.paymentChoice" = "اختر طريقة الدفع";
+"cart.payScreen.userTerms" = "من خلال إجراء عملية شراء ، فإنك توافق على الشروط والأحكام";
+"cart.payScreen.userTermsLink" = "اتفاقية المستخدم";
+"cart.payScreen.payButton" = "على الدفع";
+
+// Successful Payment Screen
+"cart.successfulPayment.successful" = "النجاح! لقد مر الدفع ، تهانينا على الشراء!";
+"cart.successfulPayment.toBackCatalogButton" = "العودة إلى الكتالوج";
+
+// Unuccessful Payment Screen
+"cart.unsuccessfulPayment.unsuccessful" = "عفوا! حدث خطأ ما \n حاول مرة أخرى!";
+"cart.unsuccessfulPayment.tryAgain" = "حاول مرة أخرى";
+
+// MARK: - Profile
+// MainScreen
+"profile.mainScreen.myNFT" = "بلدي نفت";
+"profile.mainScreen.favouritesNFT" = "NFT بلدي";
+"profile.mainScreen.aboutDeveloper" = "عن المطور";
+
+// EditScreen
+"profile.editScreen.changePhoto" = "تغيير الصورة";
+"profile.editScreen.name" = "الاسم";
+"profile.editScreen.description" = "الوصف";
+"profile.editScreen.site" = "الموقع الإلكتروني";
+"profile.editScreen.site" = "Website";
+"profile.editScreen.addPicture" = "إضافة صورة";
+"profile.editScreen.pointLink" = "حدد الرابط إلى الصورة";
+"profile.editScreen.enterLink" = "أدخل الرابط";
+
+// MyNFTScreen
+"profile.myNFT.plug" = "NFT لم يكن لديك نفت بعد";
+"profile.myNFT.from" = "من عند";
+
+// FavouritesScreen
+"profile.favouritesNFT.plug" = "NFT ليس لديك مفضلات بعد";
+"profile.favouritesNFT.error" = "خطأ";
+
+// MARK: - Statistic
+"statistic.profile.buttonUser.title" = "انتقل إلى موقع المستخدم";
+"statistic.profile.buttonCollection.title" = "مجموعة التوكنات غير القابلة للاستبدال";
+"statistic.profile.userCollection.stub" = "NFT المستخدم لم يفعل ذلك بعد";
+
+// MARK: - Netword Errors:
+"networkError.http.404" = "لم يتم العثور على شيء على الطلب";
+"networkError.http.409" = "خطأ في تحديث الموارد";
+"networkError.http.410" = "لم يعد المورد المطلوب متاحا";
+"networkError.http.5хх" = "خطأ من جانب الخادم";
+"networkError.URLSessionError" = "تحقق من اتصالك بالإنترنت";
+"networkError.parsingError" = "فشل في تحويل البيانات المستلمة";
+"networkError.anotherError" = "تعذر استرداد البيانات";
+"networkError.requestError" = "خطأ في تنفيذ الطلب";
+"networkError.tryLater" = "يرجى المحاولة مرة أخرى في وقت لاحق";
+
+// MARK: - Metrica Agreement:
+"metrica.warning" = "تحذير حول جمع البيانات";
+"metrica.message" = "سيتم نقل المعلومات حول استخدام التطبيق في شكل غير شخصي إلى ياندكس.
+سوف ياندكس معالجة هذه المعلومات لتوفير إحصاءات عن استخدامك للتطبيق,
+تجميع تقارير عن تشغيل التطبيق بالنسبة لنا ، وتقديم خدمات أخرى";
+"metrica.agree" = "توافق";
+"metrica.disagree" = "لا توافق";
